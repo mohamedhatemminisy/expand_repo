@@ -45,10 +45,10 @@
                                             @endforeach
                                         </select>
                                         </optgroup>
-                                        <div class="input-group-append" onclick="QuickAdd(23,'brand','Brand')">
-                                            <span class="input-group-text input-group-text2">
-                                                <i class="fa fa-external-link-alt"></i>
-                                            </span>
+                                        <div class="input-group-append" onclick="QuickAdd(12,'PositionID','Position')">
+                                        <span class="input-group-text input-group-text2">
+                                            <i class="fa fa-external-link"></i>
+                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -66,10 +66,10 @@
                                             @endforeach
                                         </select>
                                         </optgroup>
-                                        <div class="input-group-append" onclick="QuickAdd(24,'Eqtype','Equipment Type')">
-                                            <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link-alt"></i>
-                                            </span>
+                                        <div class="input-group-append" onclick="QuickAdd(24,'PositionID','Position')">
+                                        <span class="input-group-text input-group-text2">
+                                            <i class="fa fa-external-link"></i>
+                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -94,10 +94,10 @@
                                             @endforeach
                                         </select>
                                         </optgroup>
-                                        <div class="input-group-append" onclick="QuickAdd(50,'EqtStatus','حالة الجهاز')">
-                                            <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link-alt"></i>
-                                            </span>
+                                        <div class="input-group-append" onclick="QuickAdd(50,'PositionID','Position')">
+                                        <span class="input-group-text input-group-text2">
+                                            <i class="fa fa-external-link"></i>
+                                        </span>
                                         </div>
                                     </div>
                                 </div>

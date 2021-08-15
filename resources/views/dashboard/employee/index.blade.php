@@ -228,10 +228,10 @@
                                                         <option value="{{$title->id}}">  {{$title->name}}  </option>
                                                         @endforeach
                                                     </select>
-                                                    <div class="input-group-append" onclick="QuickAdd(5,'Position','Position')" style="cursor:pointer">
-                                                        <span class="input-group-text input-group-text2">
-                                                            <i class="fa fa-external-link-alt"></i>
-                                                        </span>
+                                                    <div class="input-group-append" onclick="QuickAdd(17,'PositionID','Position')">
+                                                    <span class="input-group-text input-group-text2">
+                                                        <i class="fa fa-external-link"></i>
+                                                    </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -294,10 +294,10 @@
                                                         <option value="{{$type->id}}"> {{$type->name}} </option>
                                                         @endforeach
                                                     </select>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text input-group-text2">
-                                                            <i class="fa fa-external-link-alt" onclick="QuickAdd(6,'JobType','Job Type')" style="cursor:pointer"></i>
-                                                        </span>
+                                                    <div class="input-group-append" onclick="QuickAdd(6,'PositionID','Position')">
+                                                    <span class="input-group-text input-group-text2">
+                                                        <i class="fa fa-external-link"></i>
+                                                    </span>
                                                     </div>
                                                 </div>
                                             </div>
