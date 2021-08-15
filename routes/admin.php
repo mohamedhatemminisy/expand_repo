@@ -94,6 +94,12 @@ Route::group([
         ->name('vehicle_auto_complete');
         Route::get('vehcile_info', 'vehicleController@vehcile_info')->name('vehcile_info');
         
+        Route::post('getConstantChildren', 'ExtentionsController@getConstantChildren')->name('getConstantChildren');
+        Route::post('deleteSubConstant', 'ExtentionsController@deleteSubConstant')->name('deleteSubConstant');
+        Route::post('store_model', 'ExtentionsController@store_model')->name('store_model');
+
+        
+        
         
         Route::group(['prefix' => 'profile'], function () {
             Route::get('edit', 'ProfileController@editProfile')->name('edit.profile');

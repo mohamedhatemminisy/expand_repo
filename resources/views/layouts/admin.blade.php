@@ -323,22 +323,56 @@ aria-hidden="true">
 			<div class="form-group" style="color:#EB844C">
 				New <span id="ModalTitle1"></span>:
 			</div>
-		  <div class="form-group">
+			<form method="post" id="store-modal" ">
+                @csrf
+			<div class="form-group">
+
 			  <input type="text" id="s_name_ar1" class="form-control" placeholder="" name="s_name_ar1">
 			  <input type="hidden" id="s_name_en1" class="form-control" placeholder="" name="s_name_en1">
 			  <input type="hidden" id="fk_i_constant_id1" class="form-control" placeholder="Label (En)" name="fk_i_constant_id1">
 			  <input type="hidden" id="fk_i_constantdet_id1" class="form-control" placeholder="Label (En)" name="fk_i_constantdet_id1">
+			  <input type="hidden" id="pj_i_id" class="form-control" placeholder="Label (En)" name="pj_i_id">
+			  
 			  <input type="hidden" id="ctrlToRefresh" class="form-control" placeholder="Label (En)" name="ctrlToRefresh">
 		  </div>
 		  <div class="form-group" style="text-align:center">
-				  <button type="button" class="btn btn-info modalBtn" onclick="addConstant()">حفظ </button>
+			  <button type="submit" class="btn btn-info modalBtn" >حفظ</button>
 			  </div>
+		</form>
 		  </div>
 		</div>
 	  </div>
 	</div>
 </div>
+<script>
 
+$('#store-modal').submit(function(e) {
+       e.preventDefault();
+	   $( "#NationalID" ).removeClass( "error" );
+
+       let formData = new FormData(this);
+
+       $.ajax({
+          type:'POST',
+          url: "store_model",
+           data: formData,
+           contentType: false,
+           processData: false,
+           success: (response) => {
+             if (response) {
+				location.reload();
+
+             }
+           },
+           error: function(response){
+            if(response.responseJSON.errors.s_name_ar1){
+                $( "#s_name_ar1" ).addClass( "error" );
+            }
+          
+           }
+       });
+  });
+</script>
 
 <div class="modal fade text-left" id="addLingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
 	 aria-hidden="true">
@@ -445,8 +479,11 @@ $(".loader").addClass('hide');
 }
 
 function DrawTable(id){
-	var formData = {'pk_i_id':id};
-	console.log(formData);
+	var formData = {
+		'pk_i_id':id,
+		_token: '{{csrf_token()}}',
+	};
+
 	$.ajax({
 		url:'getConstantChildren',
 		type: 'POST',
@@ -456,17 +493,17 @@ function DrawTable(id){
 		success: function (data) {
 			i=1;
 			row='';
-			for(j=0; j<data.length;j++) {
+			for(j=0; j<data['data'].length;j++) {
 				row += '<tr>'
 					+ '<td width="20px">'
 					+ i
 					+ '</td>'
 					+ '<td>'
-					+ data[j].s_name_ar
+					+ data['data'][j].name
 					+ '</td>'
 					+ '<td width="40px">'
-					+ '<i class="fa fa-edit" id="trash" aria-hidden="true" style="color:#1E9FF2;padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="editConstant('+data[j].pk_i_id+',\''+data[j].s_name_ar+'\')"></i>'
-					+ '<i class="fa fa-trash" id="trash" aria-hidden="true" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="deleteConstant('+data[j].pk_i_id+')"></i>'
+					+ '<i class="fa fa-edit" id="trash" aria-hidden="true" style="color:#1E9FF2;padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="editConstant('+data['data'][j].id+',\''+data['data'][j].name+'\',\''+data['pj_i_id']+'\')"></i>'
+					+ '<i class="fa fa-trash" id="trash" aria-hidden="true" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="deleteConstant('+data['data'][j].id+')"></i>'
 					+ '</td>'
 					+ '</tr>'
 				i++
@@ -476,7 +513,7 @@ function DrawTable(id){
 		},
 		error:function(){
 			$(".alert-success").addClass("hide");
-			$(".alert-danger").removeClass('hide');
+			// $(".alert-danger").removeClass('hide');
 			$("#errMsg").text(data.status.msg)
 			$(".loader").addClass('hide');
 			//$(".form-actions").removeClass('hide');
@@ -486,9 +523,12 @@ function DrawTable(id){
 		 processData: false*/
 	});
 }
-function editConstant(id,title){
+function editConstant(id,title,pj_i_id){
+	console.log(id,title,pj_i_id);
 	$("#s_name_ar1").val(title);
-	$("#fk_i_constantdet_id1").val(id)
+	$("#pj_i_id").val(pj_i_id);
+	$("#fk_i_constantdet_id1").val(id);
+
 	$(".modalBtn").text('update')
 }
 function deleteConstant(id){
@@ -499,10 +539,12 @@ function deleteConstant(id){
 	var formData = {
 		'pk_i_id': id,
 		'fk_i_constant_id': $("#fk_i_constant_id1").val(),
+		_token: '{{csrf_token()}}',
+
 	};
 	console.log(formData);
 	$.ajax({
-		url: realPath + 'deleteSubConstant',
+		url:  'deleteSubConstant',
 		type: 'POST',
 		data: formData,
 		dataType: "json",
@@ -526,7 +568,7 @@ function deleteConstant(id){
 		error: function () {
 			$(".alert-success").addClass("hide");
 			$(".alert-danger").removeClass('hide');
-			$("#errMsg").text(data.status.msg)
+			// $("#errMsg").text(data.status.msg)
 			$(".loader").addClass('hide');
 		},
 		/*cache: false,
