@@ -8,14 +8,7 @@
 <section class="horizontal-grid " id="horizontal-grid">
 
     <form id="ajaxform">
-        <div id="success">
-        <div class="row mr-2 ml-2 success_alert">
-            <button type="text" class="btn btn-lg btn-block btn-outline-success mb-2" id="type-error">
-                {{trans('admin.employee_added')}}
-           </button></div>
-
-        </div>
-
+        
                 <div class="row white-row">
                     
                     <div class="col-sm-12 col-md-6">
@@ -717,7 +710,70 @@ function SavePer(){
 	<script src="https://template.expand.ps/assets/pages/scripts/components-multi-select.min.js" type="text/javascript"></script>
 
 <script>
+$( function() {
+    $( ".ac" ).autocomplete({
+		source: 'emp_auto_complete',
+		minLength: 2,
+		
+        select: function( event, ui ) {
+            let emp_id = ui.item.id
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "emp_info",
+            data: {
+                emp_id: emp_id,
+            },
+            success:function(response){
+            $('#employee_id').val(response.info.id);
+            $('#Name').val(response.info.name);
+            $('#NationalID').val(response.info.identification);
+            $('#JobNumber').val(response.info.job_Number);
+            $('#MobileNo1').val(response.info.phone_one);
+            $('#MobileNo2').val(response.info.phone_two);
+            $('#NickName').val(response.info.nick_name);
+            $('#InternalPhone').val(response.info.InternalPhone);
+            $('#EmailAddress').val(response.info.email);
+            $("#DepartmentID").val(response.info.department_id);
+            $("select#Position option")
+                 .each(function() { this.selected = (this.text == response.job_title); 
+            });
+            $("select#JobType option")
+                 .each(function() { this.selected = (this.text == response.job_type); 
+            });
 
+            $("select#DirectManager option")
+                 .each(function() { this.selected = (this.text == response.DirectManager); 
+            });
+            $("select#DepartmentID option")
+                 .each(function() { this.selected = (this.text == response.department_id); 
+            });
+            $("select#CurrencyID option")
+                 .each(function() { this.selected = (this.text == response.Currency); 
+            });
+            $('#HiringDate').val(response.info.start_date);
+            $('#Salary').val(response.info.salary);
+            $('#vac_year').val(response.details.year);
+            $('#vac_annual').val(response.details.balance);
+            $('#emr_blanace').val(response.details.emergency);
+            $('#username').val(response.info.username);
+            $('#AddressDetails').val(response.address.details);
+            $('#Note').val(response.address.notes);
+            $("select#CityID option")
+                 .each(function() { this.selected = (this.text == response.city); 
+            });
+            $("select#TownID option")
+                 .each(function() { this.selected = (this.text == response.area); 
+            });
+            $("select#region_data option")
+                 .each(function() { this.selected = (this.text == response.region); 
+            });
+                    },
+                    });
+        }
+	});
+} );
+
+/*
 $(".ui-autocomplete-input").keyup(function () {
             if ($(this).val().length >= 1) {
                 // auto complete with Ajax Function :-
@@ -796,7 +852,7 @@ $(".ui-autocomplete-input").keyup(function () {
                     });
         });
 
-
+*/
 
 $("#CityID").change(function () {
         $("#area_data").empty();
@@ -847,6 +903,7 @@ $.ajax({
     });
 
      $(".save-data").click(function(event){
+        $(".loader").removeClass('hide');
             $( "#Name" ).removeClass( "error" );
             $( "#NationalID" ).removeClass( "error" );
             $( "#NickName" ).removeClass( "error" );
@@ -924,16 +981,26 @@ $.ajax({
          },
 
         success:function(response){
-            $('.success_alert').css('visibility', 'visible');
+            
+            $(".loader").addClass('hide');
+            $(".alert-success").removeClass('hide');
+            $("#succMsg").text('{{trans('admin.employee_added')}}')
+            setTimeout(function(){
+                $(".alert-success").addClass("hide");
+            },2000)
 
-            setTimeout(function() {
-            $('.success_alert').fadeOut();
-            }, 3000 ); 
+            
             
             $("#ajaxform")[0].reset();          
         },
         error: function(response) {
-
+            $(".loader").addClass('hide');
+            $(".alert-success").addClass("hide");
+			$(".alert-danger").removeClass('hide');
+            $("#errMsg").text(' حطأ في الحفظ ')
+            setTimeout(function(){
+                $(".alert-danger").addClass("hide");
+            },2000)
             if(response.responseJSON.errors.Name){
                 $( "#Name" ).addClass( "error" );
             }

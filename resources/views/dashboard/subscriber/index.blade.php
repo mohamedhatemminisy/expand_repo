@@ -466,6 +466,65 @@
 @stop
 @section('script')
 <script>
+
+$( function() {
+    $( ".ac" ).autocomplete({
+		source: 'subscribe_auto_complete',
+		minLength: 2,
+		
+        select: function( event, ui ) {
+            let subscribe_id = (ui.item.id)
+            console.log(subscribe_id);
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "subscribe_info",
+            data: {
+                subscribe_id: subscribe_id,
+            },
+            success:function(response){
+                console.log(response);
+            $('#subscriber_id').val(response.info.id);
+            $('#formDataNameAR').val(response.info.name);
+            $('#formDataNationalID').val(response.info.national_id);
+            $('#formDataMobileNo1').val(response.info.phone_one);
+            $('#formDataMobileNo2').val(response.info.phone_two);
+            $('#formDataCutomerNo').val(response.info.cutomer_num);
+            $('#formDataEmailAddress').val(response.info.email);
+            $('#formDataBussniessName').val(response.info.bussniess_name);
+
+            
+            
+            $("select#formDataProfessionID option")
+                 .each(function() { this.selected = (this.text == response.job_title); 
+            });
+            $("select#formDataIndustryID option")
+                 .each(function() { this.selected = (this.text == response.group); 
+            });
+            $('#username').val(response.info.username);
+            $('#AddressDetails').val(response.address.details);
+            $('#Note').val(response.address.notes);
+            $("select#CityID option")
+                 .each(function() { this.selected = (this.text == response.city); 
+            });
+            
+            $("select#area_data option")
+                 .each(function() { this.selected = (this.text == response.area); 
+            });
+                        console.log( response.region);
+
+            $("select#region_data option")
+                 .each(function() { this.selected = (this.text == response.region); 
+            });
+
+        
+
+			},
+			});
+        }
+	});
+} );
+
+/*
     $(".ui-autocomplete-input").keyup(function () {
         if ($(this).val().length >= 1) {
             // auto complete with Ajax Function :-
@@ -540,7 +599,7 @@
 			},
 			});
         });
-
+*/
 
     $("#CityID").change(function () {
         $("#area_data").empty();
@@ -592,6 +651,7 @@
 
 
     $(".save-data").click(function(event){
+        $(".loader").removeClass('hide');
      $( "#formDataNameAR" ).removeClass( "error" );
       event.preventDefault();
 
@@ -639,15 +699,24 @@
          },
 
         success:function(response){
-            $('.success_alert').css('visibility', 'visible');
+            $(".loader").addClass('hide');
+            $(".alert-success").removeClass('hide');
+            $("#succMsg").text('{{trans('admin.employee_added')}}')
+            setTimeout(function(){
+                $(".alert-success").addClass("hide");
+            },2000)
 
-            setTimeout(function() {
-            $('.success_alert').fadeOut();
-            }, 3000 ); 
-            
             $("#ajaxform")[0].reset();          
         },
         error: function(response) {
+            $(".loader").addClass('hide');
+            $(".alert-success").addClass("hide");
+			$(".alert-danger").removeClass('hide');
+            $("#errMsg").text(' حطأ في الحفظ ')
+            setTimeout(function(){
+                $(".alert-danger").addClass("hide");
+            },2000)
+            
             if(response.responseJSON.errors.formDataNameAR){
                 $( "#formDataNameAR" ).addClass( "error" );
             }
