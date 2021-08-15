@@ -271,10 +271,10 @@ th{
     
 	<div class="lds-dual-ring"></div>
 </div>
-<div class="alert alert-danger mb-2 hide" onclick="$(this).toggle()" style="cursor:pointer" role="alert">
+<div class="alert alert-danger mb-2 hide" style="bottom: 50%; " onclick="$(this).toggle()" style="cursor:pointer" role="alert">
   <span id="errMsg"></span>
 </div>
-<div class="alert alert-success mb-2 hide" onclick="$(this).toggle()" style="cursor:pointer" role="alert">
+<div class="alert alert-success mb-2 hide" style="bottom: 50%; " onclick="$(this).toggle()" style="cursor:pointer" role="alert">
   <span id="succMsg"></span>
 </div>
 
@@ -420,6 +420,8 @@ aria-hidden="true">
   <script src="{{asset('assets/vendors/js/timeline/horizontal-timeline.js')}}" type="text/javascript"></script>
   <!-- END PAGE VENDOR JS-->
   <!-- BEGIN MODERN JS-->
+  <script src="{{asset('assets/js/scripts/ui/jquery-ui/jquery.colorbox-min.js')}}" type="text/javascript"></script>
+  <script src="{{asset('assets/js/scripts/ui/jquery-ui/jquery-ui.js')}}" type="text/javascript"></script>
   <script src="{{asset('assets/js/core/app-menu.js')}}" type="text/javascript"></script>
   <script src="{{asset('assets/js/core/app.js')}}" type="text/javascript"></script>
   <script src="{{asset('assets/js/scripts/customizer.js')}}" type="text/javascript"></script>
@@ -442,8 +444,96 @@ $("#QuickAdd").modal('show');
 $(".loader").addClass('hide');
 }
 
+function DrawTable(id){
+	var formData = {'pk_i_id':id};
+	console.log(formData);
+	$.ajax({
+		url:'getConstantChildren',
+		type: 'POST',
+		data: formData,
+		dataType:"json",
+		async: true,
+		success: function (data) {
+			i=1;
+			row='';
+			for(j=0; j<data.length;j++) {
+				row += '<tr>'
+					+ '<td width="20px">'
+					+ i
+					+ '</td>'
+					+ '<td>'
+					+ data[j].s_name_ar
+					+ '</td>'
+					+ '<td width="40px">'
+					+ '<i class="fa fa-edit" id="trash" aria-hidden="true" style="color:#1E9FF2;padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="editConstant('+data[j].pk_i_id+',\''+data[j].s_name_ar+'\')"></i>'
+					+ '<i class="fa fa-trash" id="trash" aria-hidden="true" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="deleteConstant('+data[j].pk_i_id+')"></i>'
+					+ '</td>'
+					+ '</tr>'
+				i++
+			}
 
+			$("#subTaskpop").html(row);
+		},
+		error:function(){
+			$(".alert-success").addClass("hide");
+			$(".alert-danger").removeClass('hide');
+			$("#errMsg").text(data.status.msg)
+			$(".loader").addClass('hide');
+			//$(".form-actions").removeClass('hide');
+		},
+		/*cache: false,
+		 contentType: false,
+		 processData: false*/
+	});
+}
+function editConstant(id,title){
+	$("#s_name_ar1").val(title);
+	$("#fk_i_constantdet_id1").val(id)
+	$(".modalBtn").text('update')
+}
+function deleteConstant(id){
+	//deleteSubConstant
+	fillIn=$("#ctrlToRefresh").val();
+	if(!confirm('Are you sure you want to delete this record?'))
+		return
+	var formData = {
+		'pk_i_id': id,
+		'fk_i_constant_id': $("#fk_i_constant_id1").val(),
+	};
+	console.log(formData);
+	$.ajax({
+		url: realPath + 'deleteSubConstant',
+		type: 'POST',
+		data: formData,
+		dataType: "json",
+		async: true,
+		success: function (data) {
+			$("#" + fillIn).html(new Option(" Select ", ''));
+			if (data.constList.length > 0) {
+				for (i = 0; i < data.constList.length; i++)
+					$("#" + fillIn).append(new Option(data.constList[i].s_name_ar, data.constList[i].pk_i_id));
+			}
+			else {
+				//$("#"+fillIn).append(new Option(data.constList[0].s_name_ar, data.currNode[0].pk_i_id));
+			}
 
+			$(".loader").addClass('hide');
+
+			//$("#QuickAdd").modal('hide');
+			DrawTable($("#fk_i_constant_id1").val())
+			$("#fk_i_constantdet_id1").val('0')
+		},
+		error: function () {
+			$(".alert-success").addClass("hide");
+			$(".alert-danger").removeClass('hide');
+			$("#errMsg").text(data.status.msg)
+			$(".loader").addClass('hide');
+		},
+		/*cache: false,
+		 contentType: false,
+		 processData: false*/
+	});
+}	
   $(document).ready(function() {
     
   //$(".sticky-wrapper").css("display", "none");

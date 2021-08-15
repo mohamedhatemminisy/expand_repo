@@ -460,6 +460,59 @@
 @stop
 @section('script')
 <script>
+
+$( function() {
+    $( ".ac" ).autocomplete({
+		source: 'dept_auto_complete',
+		minLength: 2,
+		
+        select: function( event, ui ) {
+			let dep_id = ui.item.id
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "dep_info",
+            data: {
+                dep_id: dep_id,
+            },
+            success:function(response){
+            $('#department_id').val(response.info.id);
+            $('#departmentName').val(response.info.name);
+            $('#email').val(response.info.email);
+            $('#phone').val(response.info.phone);
+            $('#extphone').val(response.info.extphone);
+            $('#inChargeLink').val(response.dep_parent_manager);
+            $("select#LinkDept option")
+                 .each(function() { this.selected = (this.text == response.dep_parent); 
+            });
+            $("select#Incharge option")
+                 .each(function() { this.selected = (this.text == response.admin); 
+            });
+
+			var len = response.employees.length;
+        for(var i=0; i<len; i++){
+			    var index = i+1;
+                var name = response.employees[i].name;
+                var start_date = response.employees[i].start_date;
+                var job_title = response.job_title[i];
+				
+				var start = new Date(start_date).getFullYear();
+				var end   = new Date().getFullYear();
+                var years = end - start;
+
+                    var employees_data = '<tr><td>'+index +'</td><td>'
+                    +name+'</td><td>'+job_title+'</td><td>'+start_date+'</td><td style="text-align:center">'
+					+years+'</td></tr>'
+                    $("#employees_data").append(employees_data);
+            }
+
+
+			},
+			});
+        }
+	});
+} );
+/*
+
 $(".ui-autocomplete-input").keyup(function () {
 	if ($(this).val().length >= 1) {
 		// auto complete with Ajax Function :-
@@ -481,20 +534,6 @@ $(".ui-autocomplete-input").keyup(function () {
 });
 
 
-$("#LinkDept").change(function () {
-        var val = $(this).val();
-$.ajax({
-   type: 'post', // the method (could be GET btw)
-   url: "depart_manger",
-   data: {
-        val: val,
-        _token: '{{csrf_token()}}',
-   },
-   success:function(response){
-	$('#inChargeLink').val(response);
-         },
-        });
-    });
 
 	$(document).on('click', '.select_name', function () {
 		$("#employees_data").empty();
@@ -546,10 +585,25 @@ $.ajax({
         });
 
 
-
+*/
+$("#LinkDept").change(function () {
+        var val = $(this).val();
+$.ajax({
+   type: 'post', // the method (could be GET btw)
+   url: "depart_manger",
+   data: {
+        val: val,
+        _token: '{{csrf_token()}}',
+   },
+   success:function(response){
+	$('#inChargeLink').val(response);
+         },
+        });
+    });
 
 
 $(".save-data").click(function(event){
+	$(".loader").removeClass('hide');
      $( "#departmentName" ).removeClass( "error" );
       event.preventDefault();
 
@@ -577,15 +631,22 @@ $(".save-data").click(function(event){
          },
 
         success:function(response){
-            $('.success_alert').css('visibility', 'visible');
-
-            setTimeout(function() {
-            $('.success_alert').fadeOut();
-            }, 3000 ); 
-            
+			$(".loader").addClass('hide');
+            $(".alert-success").removeClass('hide');
+            $("#succMsg").text(' تمت العملية بنجاح ')
+            setTimeout(function(){
+                $(".alert-success").addClass("hide");
+            },2000)
             $("#ajaxform")[0].reset();          
         },
         error: function(response) {
+			$(".loader").addClass('hide');
+            $(".alert-success").addClass("hide");
+			$(".alert-danger").removeClass('hide');
+            $("#errMsg").text(' حطأ في الحفظ ')
+            setTimeout(function(){
+                $(".alert-danger").addClass("hide");
+            },2000)
 
             if(response.responseJSON.errors.departmentName){
                 $( "#departmentName" ).addClass( "error" );
