@@ -282,7 +282,7 @@
                             </div>
                             <div class="col-md-2 w-s-50" style="padding: 0px;">
                                 <div class="form-group">
-                                    <img src="https://db.expand.ps/images/msg.png" onclick="ShowCertModal('formData')" style="cursor:pointer">
+                                    <img src="{{asset('assets/images/ico/msg.png')}}" onclick="ShowCertModal('formData')" style="cursor:pointer">
                                     <div class="form-group">
                                         <a onclick="ShowCertModal('formData')" style="color:#000000"> الأرشيف 
                                             <span id="certListCnt" style="color: #1e9ff2">(0)</span>
