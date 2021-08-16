@@ -9,7 +9,7 @@
         <div class="card rightSide" style="min-height:485.375px">
             <div class="card-header">
                 <h4 class="card-title">
-                    <img src="https://db.expand.ps/images/park.png" width="32" height="32">
+                    <img src="{{asset('assets/images/ico/park.png')}}" width="32" height="32">
                     معلومات الحدائق والأراضي
 
                     </h4>
@@ -48,9 +48,9 @@
                                               <option value="{{$admin->id}}"> {{$admin->name}} </option>
                                             @endforeach
                                         </select>
-                                    <div class="input-group-append">
+                                    <div class="input-group-append" style="visibility: hidden;">
                                         <a class="input-group-text input-group-text2">
-                                        <i class="fa fa-external-link-alt" style="color:#ffffff"></i>
+                                        <i class="fa fa-external-link" style="color:#ffffff"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                         </select>
                                     <div class="input-group-append" onclick="QuickAdd(49,'ownType','نوع الملكية')">
                                         <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link-alt"></i>
+                                            <i class="fa fa-external-link"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@
                         </div>
                         <div class="col-lg-4 col-md-12">
                             <div class="col-lg-12">
-                                <img id="wareHouseImg" src="https://db.expand.ps/images/park.png" style="cursor: pointer;" width="150" height="100" onclick="document.getElementById('formDataimgPic5').click(); return false">
+                                <img id="wareHouseImg" src="{{asset('assets/images/ico/park.png')}}" style="cursor: pointer;" width="150" height="100" onclick="document.getElementById('formDataimgPic5').click(); return false">
 
 
                                 <input type="hidden" id="warehouseimgpath" name="warehouseimgpath">
@@ -848,7 +848,7 @@
 
                     <div class="card-header" style="padding-top:0px;">
                         <h4 class="card-title">
-                            <img src="/images/msg.png" width="32" height="32"> 
+                            <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
                         الأرشيف
                     </h4>
                         <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
@@ -867,7 +867,7 @@
                             <div class="row" style="text-align: center">
                                 <div class="col-md-2 w-s-50" style="padding: 0px;">
                                     <div class="form-group">
-                                        <img src="/images/msg.png" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
+                                        <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
                                         <div class="form-group">
                                             <a onclick="$('#msgModal').modal('show')" style="color:#000000">الأرشيف
                                             <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
