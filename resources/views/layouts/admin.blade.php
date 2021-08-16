@@ -464,7 +464,7 @@ $('#store-modal').submit(function(e) {
   <script src="{{asset('assets/js/scripts/pages/dashboard-ecommerce.js')}}" type="text/javascript"></script>
 <script>
   function QuickAdd(contid,ctrl,title){
-
+alert(ctrl);
 $(".loader").removeClass('hide');
 //$(".form-actions").addClass('hide');
 
@@ -550,6 +550,7 @@ function deleteConstant(id){
 		dataType: "json",
 		async: true,
 		success: function (data) {
+			location.reload();
 			$("#" + fillIn).html(new Option(" Select ", ''));
 			if (data.constList.length > 0) {
 				for (i = 0; i < data.constList.length; i++)

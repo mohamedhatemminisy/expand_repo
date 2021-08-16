@@ -46,7 +46,7 @@
                                         </select>
                                         </optgroup>
 
-                                        <div class="input-group-append" onclick="QuickAdd(23,'brand','Brand')">
+                                        <div class="input-group-append" onclick="QuickAdd(12,'brand','Brand')">
                                             <span class="input-group-text input-group-text2">
                                                 <i class="fa fa-external-link"></i>
                                             </span>

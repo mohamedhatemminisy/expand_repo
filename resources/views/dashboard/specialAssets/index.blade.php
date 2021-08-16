@@ -68,11 +68,11 @@
                                               <option value="{{$status->id}}"> {{$status->name}} </option>
                                             @endforeach
                                         </select>
-                                    <div class="input-group-append" onclick="QuickAdd(49,'ownType','نوع الملكية')">
-                                        <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link-alt"></i>
-                                        </span>
-                                    </div>
+                                        <div class="input-group-append" onclick="QuickAdd(30,'ownType','Own type')">
+                                            <span class="input-group-text input-group-text2">
+                                                <i class="fa fa-external-link"></i>
+                                            </span>
+                                        </div>
                                 </div>
                             </div>
                             <div class="form-group" style="display: none;" id="fixedassetdvtext1">

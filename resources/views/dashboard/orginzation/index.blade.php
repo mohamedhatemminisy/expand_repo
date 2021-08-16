@@ -303,7 +303,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="input-group-append col-2" onclick="QuickAdd(17,'PositionID','Position')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                                <div class="input-group-append col-2" onclick="QuickAdd(10,'PositionID','City')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
                                     <span class="input-group-text input-group-text2">
                                         <i class="fa fa-external-link"></i>
                                     </span>
@@ -317,7 +317,7 @@
                                         <option disabled>   {{trans('admin.area')}} </option>
                                     </select>
                                 </div>
-                                <div class="input-group-append col-2" onclick="QuickAdd(17,'PositionID','Position')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                                <div class="input-group-append col-2" onclick="QuickAdd(33,$('#CityID').find(':selected').val(),'Area')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
                                     <span class="input-group-text input-group-text2">
                                         <i class="fa fa-external-link"></i>
                                     </span>
@@ -335,7 +335,7 @@
                                             </select>
                                     </div>
                                 </div>
-                                <div class="input-group-append col-2" onclick="QuickAdd(17,'PositionID','Position')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                                <div class="input-group-append col-2" onclick="QuickAdd(77,$('#area_data').find(':selected').val(),'Resion')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
                                     <span class="input-group-text input-group-text2">
                                         <i class="fa fa-external-link"></i>
                                     </span>
