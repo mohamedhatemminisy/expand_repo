@@ -59,6 +59,7 @@
                                                 <i class="fa fa-external-link"></i>
                                             </span>
                                         </div>
+
                                         </div>
                                     </div>
                             </div>
@@ -89,6 +90,7 @@
                                         <div class="input-group-append" onclick="QuickAdd(26,'Vehciletype','Vehcile type')">
                                             <span class="input-group-text input-group-text2">
                                                 <i class="fa fa-external-link"></i>
+
                                             </span>
                                         </div>
                                     </div>
@@ -761,7 +763,7 @@
                     
                         <div class="card-header" style="padding-top:0px;">
                             <h4 class="card-title">
-                                <img src="/images/msg.png" width="32" height="32"> 
+                                <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
                             الأرشيف
                         </h4>
                             <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
@@ -780,7 +782,7 @@
                                 <div class="row" style="text-align: center">
                                     <div class="col-md-2 w-s-50" style="padding: 0px;">
                                         <div class="form-group">
-                                            <img src="/images/msg.png" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
+                                            <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
                                             <div class="form-group">
                                                 <a onclick="$('#msgModal').modal('show')" style="color:#000000">الأرشيف
                                                 <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
@@ -809,6 +811,73 @@
 
 @section('script')
 <script>
+$( function() {
+    $( ".ac" ).autocomplete({
+            source: 'vehicle_auto_complete',
+            minLength: 1,
+            
+            select: function( event, ui ) {
+                let vehcile_id = (ui.item.id);
+                $.ajax({
+                type: 'get', // the method (could be GET btw)
+                url: "vehcile_info",
+                data: {
+                    vehcile_id: vehcile_id,
+                },
+                success:function(response){
+                $('#vehicle_id').val(response.info.id);
+
+                $('#Vehiclename').val(response.info.name);
+                $('#plateNo').val(response.info.serial_number);
+                $('#dateinput21').val(response.info.selling_date);
+                $('#Wdateinput22').val(response.info.wdateinput);
+                $('#licensedate').val(response.info.licensedate);
+                $('#OrgSalary3').val(response.info.price);
+                $('#Inshurencedate').val(response.info.Inshurencedate);
+                $("#PHnum2").val(response.info.sponsor_phone);
+                $("#PHnum1").val(response.info.supply_phone);
+
+                $("select#vehiclebrand option")
+                    .each(function() { this.selected = (this.text == response.brand); 
+                });
+                $("select#vehicletype option")
+                    .each(function() { this.selected = (this.text == response.type); 
+                });
+
+                $("select#EqtStatus option")
+                    .each(function() { this.selected = (this.text == response.status); 
+                });
+                $("select#Department option")
+                    .each(function() { this.selected = (this.text == response.department); 
+                });
+                $("select#pinc2 option")
+                    .each(function() { this.selected = (this.text == response.admin); 
+                });
+                $("select#pinc3 option")
+                    .each(function() { this.selected = (this.text == response.admin_two); 
+                });
+                $("select#OrgCurrencyID3 option")
+                    .each(function() { this.selected = (this.text == response.Currency); 
+                });
+                $("select#oiltype option")
+                    .each(function() { this.selected = (this.text == response.oiltype); 
+                });
+                
+
+                $("select#Supplier option")
+                    .each(function() { this.selected = (this.text == response.supplyer); 
+                });
+                $("select#SponsorName option")
+                    .each(function() { this.selected = (this.text == response.sponser); 
+                });
+
+            },
+        });
+            }
+        });
+} );
+
+/*
 $(".ui-autocomplete-input").keyup(function () {
 	if ($(this).val().length >= 1) {
 		// auto complete with Ajax Function :-
@@ -892,7 +961,7 @@ $(".ui-autocomplete-input").keyup(function () {
      });
 
     });
-
+*/
 
 $('#vehicle-form').submit(function(e) {
        e.preventDefault();

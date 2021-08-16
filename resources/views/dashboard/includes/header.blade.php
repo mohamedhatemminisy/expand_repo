@@ -2,7 +2,7 @@
   <div class="navbar-wrapper">
     <div class="navbar-header">
       <ul class="nav navbar-nav flex-row">
-        <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="fa fa-large font-large-1"></i></a></li>
+        <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" ><i class="fa fa-large font-large-1"></i></a></li>
         <li class="nav-item">
           <a class="apperOnMob " href="<?php //echo base_url()?>">
             <span >
@@ -24,7 +24,7 @@
     <div class="navbar-container container center-layout">
       <div class="collapse navbar-collapse" id="navbar-mobile">
         <ul class="nav navbar-nav mr-auto float-left">
-          <li class="nav-item d-none d-md-block"><a id="nav_hover" class="nav-link nav-menu-main hidden-xs" href="#" onclick="
+          <li class="nav-item d-none d-md-block"><a id="nav_hover" class="nav-link nav-menu-main hidden-xs" onclick="
             if($('.navbar-expand-sm').hasClass('hide')) 
               $('.navbar-expand-sm').removeClass('hide');
             else 
