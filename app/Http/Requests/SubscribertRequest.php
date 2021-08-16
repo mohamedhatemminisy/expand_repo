@@ -27,4 +27,11 @@ class SubscribertRequest extends FormRequest
             'formDataNameAR' => 'required|string',
         ];
     }
+    
+    public function messages()
+    {
+        return [
+            'formDataNameAR.required'     => trans('error_messages.name_required'),
+        ];
+    }
 }

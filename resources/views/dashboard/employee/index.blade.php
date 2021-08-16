@@ -997,7 +997,7 @@ $.ajax({
             $(".loader").addClass('hide');
             $(".alert-success").addClass("hide");
 			$(".alert-danger").removeClass('hide');
-            $("#errMsg").text(' حطأ في الحفظ ')
+            $("#errMsg").text('{{trans('admin.error_save')}}')
             setTimeout(function(){
                 $(".alert-danger").addClass("hide");
             },2000)

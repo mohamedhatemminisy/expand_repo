@@ -470,10 +470,12 @@
 $( function() {
     $( ".ac" ).autocomplete({
 		source: 'subscribe_auto_complete',
-		minLength: 2,
+		minLength: 1,
 		
         select: function( event, ui ) {
             let subscribe_id = (ui.item.id)
+            
+
             console.log(subscribe_id);
             $.ajax({
             type: 'get', // the method (could be GET btw)
@@ -712,13 +714,14 @@ $( function() {
             $(".loader").addClass('hide');
             $(".alert-success").addClass("hide");
 			$(".alert-danger").removeClass('hide');
-            $("#errMsg").text(' حطأ في الحفظ ')
+            $("#errMsg").text('{{trans('admin.error_save')}}')
             setTimeout(function(){
                 $(".alert-danger").addClass("hide");
             },2000)
             
             if(response.responseJSON.errors.formDataNameAR){
                 $( "#formDataNameAR" ).addClass( "error" );
+                alert(response.responseJSON.errors.formDataNameAR);
             }
            
 

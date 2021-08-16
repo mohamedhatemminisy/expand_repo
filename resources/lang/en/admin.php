@@ -64,7 +64,7 @@ return [
     'user_name' => 'User name',
     'password' => 'Password',
     'employee_added' => 'Employee Added sucessfully',
-
+    'error_save' => ' error in save ',
 
     'dept_info'  => 'Department information',
     'department' => 'Department',
