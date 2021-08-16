@@ -47,7 +47,7 @@
                                         </optgroup>
                                         <div class="input-group-append" onclick="QuickAdd(23,'brand','Brand')">
                                             <span class="input-group-text input-group-text2">
-                                                <i class="fa fa-external-link-alt"></i>
+                                                <i class="fa fa-external-link"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                         </optgroup>
                                         <div class="input-group-append" onclick="QuickAdd(24,'Eqtype','Equipment Type')">
                                             <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link-alt"></i>
+                                            <i class="fa fa-external-link"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@
                                         </optgroup>
                                         <div class="input-group-append" onclick="QuickAdd(50,'EqtStatus','حالة الجهاز')">
                                             <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link-alt"></i>
+                                            <i class="fa fa-external-link"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -562,7 +562,7 @@
                     
                         <div class="card-header" style="padding-top:0px;">
                             <h4 class="card-title">
-                                <img src="/images/msg.png" width="32" height="32"> 
+                                <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
                             الأرشيف
                         </h4>
                             <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
@@ -581,7 +581,7 @@
                                 <div class="row" style="text-align: center">
                                     <div class="col-md-2 w-s-50" style="padding: 0px;">
                                         <div class="form-group">
-                                            <img src="/images/msg.png" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
+                                            <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
                                             <div class="form-group">
                                                 <a onclick="$('#msgModal').modal('show')" style="color:#000000">الأرشيف
                                                 <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
@@ -597,9 +597,9 @@
                             <span class="attach-header">مرفقات
                             <span id="attach-required">*</span>
                             <span class="attach-icons">
-                                <a href="#" onclick="document.getElementById('formData1upload-file[]').click(); return false" class="attach-icon"><i class="fas fa-paperclip"></i></a>
-                                <a href="#" onclick="document.getElementById('formData1upload-image[]').click(); return false" class="attach-icon"><i class="far fa-image"></i></a>
-                                <a onclick="showLinkModal('formData1')" class="attach-icon"><i class="fas fa-link"></i></a>
+                                <a href="#" onclick="document.getElementById('formData1upload-file[]').click(); return false" class="attach-icon"><i class="fa fa-paperclip"></i></a>
+                                <a href="#" onclick="document.getElementById('formData1upload-image[]').click(); return false" class="attach-icon"><i class="fa fa-image"></i></a>
+                                <a onclick="showLinkModal('formData1')" class="attach-icon"><i class="fa fa-link"></i></a>
                             </span>
                         </span>
                         </div>

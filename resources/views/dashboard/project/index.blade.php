@@ -30,7 +30,7 @@
                 <div class="card-body" style="padding-bottom: 0px;">
                     <div class="form-body">
                         <div class="row">
-                            <div class="col-lg-7 col-md-12 pr-0 pr-s-12">
+                            <div class="col-lg-7 col-md-12 pr-0 pr-s-12" style="padding-left: 15px !important;">
                                 <div class="form-group">
                                     <div class="input-group" style=" width: 100% !important;">
                                         <div class="input-group-prepend">
@@ -128,7 +128,7 @@
                             </div>
 
                             <div class="row">
-                            <div class="col-lg-12 col-md-12 pr-s-12">
+                            <div class="col-lg-12 col-md-12 pr-s-12" style="padding-left: 27px;">
                                 <div class="form-group user_subscriber">
                                     <div class="input-group w-s-87 mt-s-6" style="width: 100% !important;">
                                         <div class="input-group-prepend">
@@ -225,7 +225,7 @@
                         </div>
                         <div class="card-header" style="padding-top:0px;">
                             <h4 class="card-title">
-                                <img src="/images/msg.png" width="32" height="32"> 
+                                <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
                                 {{trans('admin.archieve')}}
                             </h4>
                             <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
@@ -244,7 +244,7 @@
                     <div class="row" style="text-align: center">
                         <div class="col-md-2 w-s-50" style="padding: 0px;">
                             <div class="form-group">
-                                <img src="/images/msg.png" onclick="$('#OrgArchModal').modal('show')" style="cursor:pointer">
+                                <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#OrgArchModal').modal('show')" style="cursor:pointer">
                                 <div class="form-group">
                                     <a onclick="$('#OrgArchModal').modal('show')" style="color:#000000"> {{trans('admin.archieve')}} 
                                     <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
@@ -267,7 +267,7 @@
                 </div>
             <div class="card-content collapse show">
                 <div class="card-body">
-                <div class="row">
+                <div class="row" style="padding-left: 5px;">
                                     <div class="col-md-4">
                                         <div class="form-group">
  
@@ -379,7 +379,7 @@
                                     </td>
                                     <td>
 
-                                        <i class="fas fa-plus-circle" id="plusElement" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color: #1E9FF2;font-size: 15pt;"></i>
+                                        <i class="fa fa-plus-circle" id="plusElement" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color: #1E9FF2;font-size: 15pt;"></i>
 
                                     </td>
                                 </tr>
@@ -422,7 +422,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <i class="fas fa-plus-circle" id="plusElement3" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color: #1E9FF2;font-size: 15pt;"></i>
+                                    <i class="fa fa-plus-circle" id="plusElement3" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color: #1E9FF2;font-size: 15pt;"></i>
                                 </td>
                             </tr>
 

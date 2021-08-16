@@ -99,10 +99,10 @@
                                             </div>
                                             <input type="text" id="LisenceNo" class="form-control " placeholder=" {{trans('admin.ZIP_code')}} " name="LisenceNo">
 
-                                            <div class="input-group-append hidden-sm hidden-xs">
-                                            <span class="input-group-text input-group-text2" style="color:#ffffff">
-                                                <i class="fa fa-external-link-alt"></i>
-                                            </span>
+                                            <div class="input-group-append hide hidden-xs hidden-sm">
+                                                <span class="input-group-text input-group-text2" style="color:#ffffff">
+                                                    <i class="fa fa-external-link"></i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -180,9 +180,9 @@
                                             </div>
                                             <input type="text" id="faxNo" name="faxNo" maxlength="9" class="form-control noleft numFeild" placeholder="000000000" aria-describedby="basic-addon1">
 
-                                            <div class="input-group-append hidden-xs hidden-sm">
+                                            <div class="input-group-append hide hidden-xs hidden-sm">
                                     <span class="input-group-text input-group-text2" style="color:#ffffff">
-                                        <i class="fa fa-external-link-alt"></i>
+                                        <i class="fa fa-external-link"></i>
                                     </span>
                                             </div>
                                         </div>
@@ -251,7 +251,7 @@
                 </div>
                 <div class="card-header" style="padding-top:0px;">
                         <h4 class="card-title">
-                            <img src="/images/detalies.png" width="32" height="32"> 
+                            <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
                             {{trans('admin.details')}}
                         </h4>
                         <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
@@ -271,7 +271,7 @@
                         <div class="row" style="text-align: center">
                                 <div class="col-md-2 w-s-50" style="padding: 0px;">
                                     <div class="form-group">
-                                        <img src="/images/msg.png" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
+                                        <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
                                         <div class="form-group">
                                             <a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}} 
                                             <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
@@ -387,13 +387,13 @@
 
                             <div class="row">
                                 <div class="col-md attachs-section">
-                                    <img src="https://db.expand.ps/images/upload.png" width="40" height="40">
+                                    <img src="{{asset('assets/images/ico/upload.png')}}" width="40" height="40">
                                     <span class="attach-header">{{trans('admin.attachments')}} 
                                         <span id="attach-required">*</span>
                                         <span class="attach-icons">
-                                            <a href="#" onclick="document.getElementById('formDataupload-file[]').click(); return false" class="attach-icon"><i class="fas fa-paperclip"></i></a>
-                                            <a href="#" onclick="document.getElementById('formDataupload-image[]').click(); return false" class="attach-icon"><i class="far fa-image"></i></a>
-                                            <a onclick="showLinkModal('formData')" class="attach-icon"><i class="fas fa-link"></i></a>
+                                            <a href="#" onclick="document.getElementById('formDataupload-file[]').click(); return false" class="attach-icon"><i class="fa fa-paperclip"></i></a>
+                                            <a href="#" onclick="document.getElementById('formDataupload-image[]').click(); return false" class="attach-icon"><i class="fa fa-picture-o"></i></a>
+                                            <a onclick="showLinkModal('formData')" class="attach-icon"><i class="fa fa-link"></i></a>
                                         </span>
                                     </span>
                                 </div>
