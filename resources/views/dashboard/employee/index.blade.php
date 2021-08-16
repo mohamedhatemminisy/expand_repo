@@ -204,10 +204,10 @@
 
                                               
                                                     </select>
-                                                    <div class="input-group-append hide">
+                                                    <div class="input-group-append" style="visibility: hidden;">
                                                         <span class="input-group-text input-group-text2">
                                                             <a href="https://db.expand.ps/addDepartment" target="_blank"> 
-															<i class="fa fa-external-link-alt"></i>
+															<i class="fa fa-external-link"></i>
 															</a>
                                                         </span>
                                                     </div>
@@ -228,10 +228,11 @@
                                                         <option value="{{$title->id}}">  {{$title->name}}  </option>
                                                         @endforeach
                                                     </select>
-                                                    <div class="input-group-append" onclick="QuickAdd(17,'PositionID','Position')">
-                                                    <span class="input-group-text input-group-text2">
-                                                        <i class="fa fa-external-link"></i>
-                                                    </span>
+
+                                                    <div class="input-group-append" onclick="QuickAdd(17,'formDataProfessionID','Profession')">
+                                                        <span class="input-group-text input-group-text2">
+                                                            <i class="fa fa-external-link"></i>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -253,9 +254,11 @@
                                                         <option value="{{$adm->id}}"> {{$adm->name}}  </option>
                                                         @endforeach
                                                     </select>
-                                                    <div class="input-group-append">
+                                                    <div class="input-group-append" style="visibility: hidden;">
                                                         <span class="input-group-text input-group-text2">
-                                                            <i class="fa fa-external-link-alt" style="color: #ffffff"></i>
+                                                            <a href="https://db.expand.ps/addDepartment" target="_blank"> 
+															<i class="fa fa-external-link"></i>
+															</a>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -270,9 +273,11 @@
                                                         </span>
                                                     </div>
                                                     <input id="HiringDate" type="date" name="HiringDate" data-mask="00/00/0000" maxlength="10" class="form-control eng-sm singledate valid" placeholder="dd/mm/yyyy" autocomplete="off">
-                                                    <div class="input-group-append">
+                                                    <div class="input-group-append" style="visibility: hidden;">
                                                         <span class="input-group-text input-group-text2">
-                                                            <i class="fa fa-external-link-alt" style="color: #ffffff"></i>
+                                                            <a href="https://db.expand.ps/addDepartment" target="_blank"> 
+															<i class="fa fa-external-link"></i>
+															</a>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -294,10 +299,11 @@
                                                         <option value="{{$type->id}}"> {{$type->name}} </option>
                                                         @endforeach
                                                     </select>
-                                                    <div class="input-group-append" onclick="QuickAdd(6,'PositionID','Position')">
-                                                    <span class="input-group-text input-group-text2">
-                                                        <i class="fa fa-external-link"></i>
-                                                    </span>
+
+                                                    <div class="input-group-append" onclick="QuickAdd(6,'formDataProfessionID','Profession')">
+                                                        <span class="input-group-text input-group-text2">
+                                                            <i class="fa fa-external-link"></i>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -319,6 +325,7 @@
                                                                 <option value="dinar">{{trans('admin.dinar')}}  </option>
                                                                 <option value="euro">{{trans('admin.euro')}}  </option>
                                                             </select>
+                                                            
                                                         </div>
                                             </div>
                                         </div>
@@ -707,8 +714,8 @@ function SavePer(){
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 	<script src="https://template.expand.ps/app-assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
-	<script src="https://template.expand.ps/assets/pages/scripts/components-multi-select.min.js" type="text/javascript"></script>
-
+	<!--<script src="https://template.expand.ps/assets/pages/scripts/components-multi-select.min.js" type="text/javascript"></script>
+    -->
 <script>
 $( function() {
     $( ".ac" ).autocomplete({
@@ -1032,6 +1039,30 @@ $.ajax({
 
        });
   });
+
+/*
+   $('#Position').select2({
+    width: '100%',
+    placeholder: "Select an Option",
+    allowClear: true
+  }); 
+
+  $('#DepartmentID').select2({
+    width: '100%',
+    placeholder: "Select an Option",
+    allowClear: true
+  }); 
+  $('#DirectManager').select2({
+    width: '100%',
+    placeholder: "Select an Option",
+    allowClear: true
+  }); 
+  $('#JobType').select2({
+    width: '100%',
+    placeholder: "Select an Option",
+    allowClear: true
+  }); 
+*/
 
   
 $(document).ready(function () {

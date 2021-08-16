@@ -12,7 +12,6 @@
                     <h4 class="card-title"><img src="{{asset('assets/images/ico/info.png')}}" width="32" height="32">
                     {{trans('admin.setting')}}</h4>
                 </div>
-                <hr>
                 <div class="card-content collapse show">
                     <div class="card-body" style="padding-bottom: 0px;">
                         <div class="form-body">
@@ -20,8 +19,7 @@
                                 <div class="col-sm-12 col-md-12 col-lg-8">
                                     <div class="form-group" style="margin-left: -15px;">
 
-                                            </div>
-
+                                           
 <!-- 
                                             @foreach (config('translatable.locales') as $key => $locale)
  
@@ -42,28 +40,28 @@
  
                                             <div class="input-group w-s-87">
                                                     <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        {{trans('admin.municipality_name_ar')}}
-                                                    </span>                                            
-
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            {{trans('admin.municipality_name_ar')}}
+                                                        </span>                                            
+                                                    </div>
                                                     <input type="text" id="name_ar" class="form-control"
                                                         placeholder="{{trans('admin.municipality_name_ar')}}" 
-                                                        name="name_ar" value="{{$setting->name_ar}}"><br>
-                                                        </div><br>
-                                            </div><br>
+                                                        name="name_ar" value="{{$setting->name_ar}}">
+                                                        </div>
+                                            </div>
 
-
+                                        <div class="form-group" style="margin-left: -15px;">
                                             <div class="input-group w-s-87">
-                                                    <div class="input-group-prepend">
+                                                <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         {{trans('admin.municipality_name_en')}}
                                                     </span>                                            
-
-                                                    <input type="text" id="name_en" class="form-control"
-                                                        placeholder="{{trans('admin.municipality_name_en')}}" 
-                                                        name="name_en" value="{{$setting->name_en}}"><br>
-                                                        </div><br>
-                                            </div><br>
+                                                </div>
+                                                <input type="text" id="name_en" class="form-control"
+                                                    placeholder="{{trans('admin.municipality_name_en')}}" 
+                                                    name="name_en" value="{{$setting->name_en}}">
+                                                    </div>
+                                        </div>
 
 
                                     <div class="row">
@@ -96,6 +94,7 @@
                                     </div>
 
                                 </div>
+
                                 <div class="col-sm-12 col-md-12 col-lg-4">
                                     <!-- <img src="https://db.expand.ps/uploads/16232479351317.png" id="userProfileImg" style="width:100%;cursor:pointer;max-height: 150px;" onclick="document.getElementById('formDataimgPic').click(); return false"> -->
                                     <input type="file" id="userimgpath" name="userimgpath" value="">
@@ -245,7 +244,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="alert alert-icon-right alert-warning alert-dismissible mb-2" 
-                                        role="alert">
+                                        role="alert"
+                                        style="position: static;margin-right: 0px;margin-left: 0px;width: 100%;border-right-width: 0px;z-index: 1;">
                             
                                             <strong>ملاحظة !</strong> الحضور من  <a class="alert-link">08:00 صباحا</a> حتى <a class="alert-link">02:00 ظهرا </a> عدا يوم الخميس <a class="alert-link">01:00 ظهرا </a>.<br> إظغط <a class="alert-link" onclick="$('#timeTable').toggle()"> هنا </a> لتغيير الإعدادات
                                         </div>

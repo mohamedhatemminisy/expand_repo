@@ -411,13 +411,13 @@
 									</div>
 									<div class="row">
 										<div class="col-md attachs-section">
-											<img src="https://db.expand.ps/images/upload.png" width="40" height="40">
+											<img src="{{asset('assets/images/ico/upload.png')}}" width="40" height="40">
 											<span class="attach-header">{{trans('admin.attachements')}}
 			                              <span id="attach-required">*</span>
 			                              <span class="attach-icons">
-	                                        <a href="#" onclick="document.getElementById('formDataupload-file[]').click(); return false" class="attach-icon"><i class="fas fa-paperclip"></i></a>
-	                                        <a href="#" onclick="document.getElementById('formDataupload-image[]').click(); return false" class="attach-icon"><i class="far fa-image"></i></a>
-	                						<a onclick="showLinkModal('formData')" class="attach-icon"><i class="fas fa-link"></i></a>
+	                                        <a href="#" onclick="document.getElementById('formDataupload-file[]').click(); return false" class="attach-icon"><i class="fa fa-paperclip"></i></a>
+	                                        <a href="#" onclick="document.getElementById('formDataupload-image[]').click(); return false" class="attach-icon"><i class="fa fa-image"></i></a>
+	                						<a onclick="showLinkModal('formData')" class="attach-icon"><i class="fa fa-link"></i></a>
 	                  						</span>
                     					</span>
 										</div>
