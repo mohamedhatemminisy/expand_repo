@@ -56,7 +56,7 @@ class DepartmentController extends Controller
 
     public function dept_auto_complete(Request $request)
     {
-        $emp_data = $request->get('department');
+        $emp_data = $request['term'];
         $names = Department::where('name', 'like', '%' . $emp_data . '%')->select('*','name as label')->get();
         //$html = view('dashboard.component.auto_complete', compact('names'))->render();
         return response()->json($names);

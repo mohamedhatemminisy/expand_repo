@@ -93,7 +93,7 @@ return [
     'dinar' => 'دينار',
     'euro' => 'يورو',
     'department_added' => 'تم حفظ القسم ',   
-
+    'error_save' => 'خطأ في عملية الحفظ ',
 
     'subscribers' => 'المشتركين',
     'subscriber_info' => 'معلومات المشتركين',

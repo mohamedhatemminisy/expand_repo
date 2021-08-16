@@ -125,7 +125,7 @@ class EmployeeController extends Controller
 
     public function emp_auto_complete(Request $request)
     {
-        $emp_data = $request->get('employee');
+        $emp_data = $request['term'];
         $names = Admin::where('name', 'like', '%' . $emp_data . '%')->select('*','name as label')->get();
         //$html = view('dashboard.component.auto_complete', compact('names'))->render();
         return response()->json($names);

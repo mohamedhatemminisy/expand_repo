@@ -75,9 +75,10 @@ class SubscriberController extends Controller
     }
 
     public function subscribe_auto_complete(Request $request){
-        $subscriber_data = $request->get('subscriber');
-        $names = User::where('name', 'like', '%' . $subscriber_data . '%')->select('*','name as label')->get();
+        $subscriber_data = $request['term'];
+        $names = User::where('name', 'like', '%' . $subscriber_data . '%')->select('*', 'name as label')->get();
         //$html = view('dashboard.component.auto_complete', compact('names'))->render();
+        //dd($names);
         return response()->json($names);
     }
 

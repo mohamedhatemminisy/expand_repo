@@ -633,7 +633,7 @@ $(".save-data").click(function(event){
         success:function(response){
 			$(".loader").addClass('hide');
             $(".alert-success").removeClass('hide');
-            $("#succMsg").text(' تمت العملية بنجاح ')
+            $("#succMsg").text('{{trans('admin.department_added')}}')
             setTimeout(function(){
                 $(".alert-success").addClass("hide");
             },2000)
@@ -643,7 +643,7 @@ $(".save-data").click(function(event){
 			$(".loader").addClass('hide');
             $(".alert-success").addClass("hide");
 			$(".alert-danger").removeClass('hide');
-            $("#errMsg").text(' حطأ في الحفظ ')
+            $("#errMsg").text('{{trans('admin.error_save')}}')
             setTimeout(function(){
                 $(".alert-danger").addClass("hide");
             },2000)
