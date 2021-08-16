@@ -81,9 +81,17 @@ class ExtentionsController extends Controller
             $data['pj_i_id'] = $request->pk_i_id;
             return response()->json($data);
         }
- 
-       
-
+        elseif($request->pk_i_id == '33'){
+            $data['data'] = Area::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        elseif($request->pk_i_id == '77'){
+            $data['data'] = Region::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        
     }
 
 
@@ -126,6 +134,15 @@ class ExtentionsController extends Controller
         }
         elseif($request->fk_i_constant_id == '10'){
             $data = City::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        
+        elseif($request->fk_i_constant_id == '33'){
+            $data = Area::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '77'){
+            $data = Region::findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
         }
         
@@ -285,8 +302,61 @@ class ExtentionsController extends Controller
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
+        elseif($request->fk_i_constant_id1 == '33'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new Area();
+                $job->name = $request->s_name_ar1;
+                $job->city_id  = $request->ctrlToRefresh;
+                $job->save();
+            }else{
+                $job = Area::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->city_id  = $request->ctrlToRefresh;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+        elseif($request->fk_i_constant_id1 == '33'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new Area();
+                $job->name = $request->s_name_ar1;
+                $job->city_id  = $request->ctrlToRefresh;
+                $job->save();
+            }else{
+                $job = Area::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->city_id  = $request->ctrlToRefresh;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+        elseif($request->fk_i_constant_id1 == '77'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new Region();
+                $job->name = $request->s_name_ar1;
+                $job->area_id   = $request->ctrlToRefresh;
+                $job->save();
+            }else{
+                $job = Region::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->area_id   = $request->ctrlToRefresh;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+
+
         
-        
+
     }
 
 }

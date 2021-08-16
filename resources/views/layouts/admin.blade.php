@@ -464,7 +464,7 @@ $('#store-modal').submit(function(e) {
   <script src="{{asset('assets/js/scripts/pages/dashboard-ecommerce.js')}}" type="text/javascript"></script>
 <script>
   function QuickAdd(contid,ctrl,title){
-alert(ctrl);
+
 $(".loader").removeClass('hide');
 //$(".form-actions").addClass('hide');
 
