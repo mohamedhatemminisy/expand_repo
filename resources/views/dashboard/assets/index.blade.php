@@ -45,6 +45,7 @@
                                             @endforeach
                                         </select>
                                         </optgroup>
+
                                         <div class="input-group-append" onclick="QuickAdd(23,'brand','Brand')">
                                             <span class="input-group-text input-group-text2">
                                                 <i class="fa fa-external-link"></i>
@@ -66,6 +67,7 @@
                                             @endforeach
                                         </select>
                                         </optgroup>
+
                                         <div class="input-group-append" onclick="QuickAdd(24,'Eqtype','Equipment Type')">
                                             <span class="input-group-text input-group-text2">
                                             <i class="fa fa-external-link"></i>

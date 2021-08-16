@@ -54,7 +54,7 @@
                                                 </span>
                                             </div>
                                             <input type="text" id="formDataNationalID" maxlength="9" class="form-control numFeild" placeholder="{{trans('admin.emp_id')}}" name="formDataNationalID">
-                                            <div class="input-group-append" style="visibility: hidden;" onclick="QuickAdd(9,'formDataProfessionID','Profession')">
+                                            <div class="input-group-append" style="visibility: hidden;" onclick="QuickAdd(17,'formDataProfessionID','Profession')">
                                                 <span class="input-group-text input-group-text2">
                                                     <i class="fa fa-external-link"></i>
     
@@ -138,7 +138,7 @@
                                             <option value="{{$job->id}}"> {{$job->name}} </option>
                                             @endforeach
                                         </select>
-                                        <div class="input-group-append" onclick="QuickAdd(9,'formDataProfessionID','Profession')">
+                                        <div class="input-group-append" onclick="QuickAdd(17,'formDataProfessionID','Profession')">
                                             <span class="input-group-text input-group-text2">
                                                 <i class="fa fa-external-link"></i>
 

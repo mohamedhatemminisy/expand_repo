@@ -228,10 +228,10 @@
                                                         <option value="{{$title->id}}">  {{$title->name}}  </option>
                                                         @endforeach
                                                     </select>
-                                                    <div class="input-group-append" onclick="QuickAdd(9,'formDataProfessionID','Profession')">
+
+                                                    <div class="input-group-append" onclick="QuickAdd(17,'formDataProfessionID','Profession')">
                                                         <span class="input-group-text input-group-text2">
                                                             <i class="fa fa-external-link"></i>
-                
                                                         </span>
                                                     </div>
                                                 </div>
@@ -299,10 +299,10 @@
                                                         <option value="{{$type->id}}"> {{$type->name}} </option>
                                                         @endforeach
                                                     </select>
-                                                    <div class="input-group-append" onclick="QuickAdd(9,'formDataProfessionID','Profession')">
+
+                                                    <div class="input-group-append" onclick="QuickAdd(6,'formDataProfessionID','Profession')">
                                                         <span class="input-group-text input-group-text2">
                                                             <i class="fa fa-external-link"></i>
-                
                                                         </span>
                                                     </div>
                                                 </div>
@@ -1039,6 +1039,7 @@ $.ajax({
 
        });
   });
+
 /*
    $('#Position').select2({
     width: '100%',
@@ -1062,6 +1063,7 @@ $.ajax({
     allowClear: true
   }); 
 */
+
   
 $(document).ready(function () {
 

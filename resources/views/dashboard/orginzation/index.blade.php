@@ -141,6 +141,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <div class="col-lg-7 col-md-12 pr-0 pr-s-12">
                                     <div class="row">
