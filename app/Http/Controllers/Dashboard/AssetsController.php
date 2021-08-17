@@ -98,10 +98,9 @@ class AssetsController extends Controller
 
     public function equip_auto_complete(Request $request)
     {
-        $emp_data = $request->get('equipment');
-        $names = Equpment::where('name', 'like', '%' . $emp_data . '%')->get();
-        $html = view('dashboard.component.auto_complete', compact('names'))->render();
-        return response()->json($html);
+        $emp_data = $request['term'];
+        $names = Equpment::where('name', 'like', '%' . $emp_data . '%')->select('*', 'name as label')->get();
+        return response()->json($names);
     }  
     public function equip_info(Request $request)
     {

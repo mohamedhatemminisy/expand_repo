@@ -94,11 +94,10 @@ class SpecialAssetsController extends Controller
 
     public function asset_auto_complete(Request $request)
     {
-        $asset_data = $request->get('asset');
-        $type = $request->get('type');
-        $names = SpecialAsset::where('name', 'like', '%' . $asset_data . '%')->where('type',$type)->get();
-        $html = view('dashboard.component.auto_complete', compact('names'))->render();
-        return response()->json($html);
+        $asset_data = $request['request']['term'];
+        $type = $request['type'];
+        $names = SpecialAsset::where('name', 'like', '%' . $asset_data . '%')->where('type',$type)->select('*','name as label')->get();
+        return response()->json($names);
     } 
     public function asset_info(Request $request)
     {

@@ -9,7 +9,7 @@
             <div class="card rSide">
                 <div class="card-header">
                     <h4 class="card-title"><img src="https://db.expand.ps/images/Office_Equipment_-_088_-_Printer-512.png" height="32">
-                    معلومات المعدات
+                        {{trans('assets.equp_header')}}
                     </h4>
                 </div>
                 <div class="card-body">
@@ -20,7 +20,7 @@
                                     <div class="input-group w-s-87">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                اسم الجهاز
+                                                {{trans('assets.equp_name')}}
                                             </span>
                                         </div>
                                         <input type="text" id="Equipment" 
@@ -35,7 +35,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                العلامة التجارية 
+                                                {{trans('assets.brand')}} 
                                             </span>
                                         </div>
                                         <select type="text" id="brand" name="brand" class="form-control">
@@ -57,7 +57,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                نوع المعدات
+                                                {{trans('assets.equp_type')}}
                                             </span>
                                         </div>
                                         <select type="text" id="Eqtype" name="Eqtype" class="form-control">
@@ -86,7 +86,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                حالة الجهاز
+                                                {{trans('assets.equp_status')}}
                                             </span>
                                         </div>
                                         <select type="text" id="EqtStatus" name="EqtStatus" class="form-control" onchange="if($(this).val()==2128)$('.failDate').show();else $('.failDate').hide();">
@@ -96,7 +96,7 @@
                                             @endforeach
                                         </select>
                                         </optgroup>
-                                        <div class="input-group-append" onclick="QuickAdd(50,'EqtStatus','حالة الجهاز')">
+                                        <div class="input-group-append" onclick="QuickAdd(50,'EqtStatus','{{trans('assets.equp_status')}}')">
                                             <span class="input-group-text input-group-text2">
                                             <i class="fa fa-external-link"></i>
                                             </span>
@@ -121,7 +121,7 @@
                                     <div class="input-group w-s-87">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                الرقم التسلسلي
+                                                {{trans('assets.serial_No')}}
                                             </span>
                                         </div>
                                         <input type="text" id="SerialNo" class="form-control " placeholder="" name="SerialNo">
@@ -133,7 +133,7 @@
                                     <div class="input-group w-s-87" style="width: 100% !important;">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                الرقم الداخلي .
+                                                {{trans('assets.internal_No')}} 
                                             </span>
                                         </div>
                                         <input type="text" id="InternalNo" class="form-control " placeholder="" name="InternalNo">
@@ -145,7 +145,7 @@
                                     <div class="input-group w-s-87" style="width: 100% !important;">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                العدد
+                                                {{trans('assets.count')}}
                                             </span>
                                         </div>
                                         <input type="text" id="PiceCnt" class="form-control " placeholder="" name="PiceCnt">
@@ -158,7 +158,7 @@
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">
-                                                    القسم
+                                                    {{trans('assets.dept')}}
                                                 </span>
                                             </div>
                                             <select type="text" id="Department" name="Department" class="form-control">
@@ -177,7 +177,7 @@
                                         <div class="input-group w-s-87" style="width: 100% !important;">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">
-                                                    الشخص المسؤول
+                                                    {{trans('assets.manager')}}
                                                 </span>
                                             </div>
                                             <select type="text" id="pinc3" name="pinc3" class="form-control">
@@ -193,186 +193,24 @@
                                 </div>
                         </div>
                         
-                        <div class="row" style="margin-left: 0">
-                            <div class="form-group col-md-4 mb-2" id="equipmentdvtext5" style="display:none">
-                                <label class="sr-only" for="dateinput1"></label>
-                                    تاريخ بدء الايجار<br>
-                                <input type="text" id="dateinput1" name="dateinput1" data-mask="00/00/0000" maxlength="10" class="form-control singledate1 valid" placeholder="dd/mm/yyyy" autocomplete="off" aria-required="true" style="border-radius: 3px !important;height:36px;
-">
-                            </div>
-                            <div class="form-group col-md-4 mb-2" id="equipmentdvtext6" style="display:none">
-                                <label class="sr-only" for="dateinput2"></label>
-                                تاريخ نهاية الايجار :<br>
-                                <input type="text" id="dateinput2" onblur="SubtractDates($('#dateinput1').val(),$(this).val(),'dateinpute3')" name="dateinput2" data-mask="00/00/0000" maxlength="10" class="form-control singledate valid" placeholder="dd/mm/yyyy" autocomplete="off" aria-required="true" style="border-radius: 3px !important;height:36px;">
-                            </div>
-                            <div class="form-group col-md-4 mb-2" id="equipmentdvtext7" style="display:none">
-                                <label class="sr-only" for="dateinput3"> </label>
-                                مدة التأجير<br>
-                                <input type="text" id="dateinpute3" name="dateinput3" class="form-control numFeild" style="border-radius: 3px !important;height:36px;">
-                            </div>
-                        </div>
-
-                        <div class="row" style="margin-left: 0">
-                            <div class="form-group col-md-4 mb-2" id="equipmentdvtext8" style="display:none">
-                                <label class="sr-only" for="dateinput1"></label>
-                                تكلفة التأجير<br>
-                                <div class="row">
-                                    <div class="col-lg-6" style="padding-right: 0px !important;">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-
-                                                <input id="Cost" name="cost" class="form-control numFeild" placeholder="00.00" style="height: 34px;border-radius: 3px !important;width: 95px;">
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                            <select id="CurrencyID" name="CurrencyID" type="text" class="form-control" style="width: 85px;margin-left: 6%;height: 33px !important;">
-                                                                <option> - </option>
-                                                                <option value="shekel" selected=""> {{trans('admin.shekel')}} </option>
-                                                                <option value="dollar"> {{trans('admin.dollar')}} </option>
-                                                                <option value="dinar">{{trans('admin.dinar')}}  </option>
-                                                                <option value="euro">{{trans('admin.euro')}}  </option>
-                                                            </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-4 mb-2" id="equipmentdvtext9" style="display:none">
-                                <label class="sr-only" for="dateinput2"></label>
-                                دورية كل :<br>
-                                <select type="text" id="periodinput1" name="periodinput1" class="form-control" style="border-radius: 3px !important;">
-                                    <option>  -  </option>
-                                                                                            <option value="131">يوميا </option>
-                                                                                            <option value="132">اسبوعي</option>
-                                                                                            <option value="133">شهري</option>
-                                                                                            <option value="134" selected="">سنوي</option>
-                                    
-                                </select>
-                            </div>
-                            <div class="form-group col-md-4 mb-2" id="equipmentdvtext10" style="display:none">
-                                <label class="sr-only" for="dateinput4"> </label>
-                                يدفع كل :<br>
-                                <select type="text" id="paymentinput3" name="paymentinput3" class="form-control" style="border-radius: 3px !important;">
-                                    <option>  -  </option>
-                                                                                            <option value="135">يوميا</option>
-                                                                                            <option value="136">اسبوعيا</option>
-                                                                                            <option value="137">شهريا</option>
-                                                                                            <option value="138">نصف سنوي</option>
-                                                                                            <option value="139">سنوي</option>
-                                                                                            <option value="140">كل 10 ايام </option>
-                                                                                    </select>
-
-                            </div>
-                        </div>
-                        <div class="row" style="   margin-left: 0px;">
-                            <div class="form-group col-lg-12" id="equipmentdvtext11" style="display:none">
-                                <div class="input-group" style="width:100% !important;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">
-                                        الشخص المسؤول عن الدفع
-                                        </span>
-                                    </div>
-                                    <select type="text" id="pinc4" name="pinc4" class="form-control">
-                                        <option> - </option>
-                                                                                                    <option value="63">EMP</option>
-                                                                                                    <option value="76">hfsfdsfsd</option>
-                                                                                                    <option value="62">م. احمد حج حمد</option>
-                                                                                                    <option value="28">احمد بشير </option>
-                                                                                                    <option value="22">اديب فرج الله</option>
-                                                                                                    <option value="39">اسحاق نمر</option>
-                                                                                                    <option value="57">Anas</option>
-                                                                                                    <option value="41">انس طميزة</option>
-                                                                                                    <option value="9">ايمن</option>
-                                                                                                    <option value="34">ايمن طميزة</option>
-                                                                                                    <option value="50">م. ايهاب العمري</option>
-                                                                                                    <option value="8">أ. بلال عساف</option>
-                                                                                                    <option value="15">تامر غالب</option>
-                                                                                                    <option value="61">تامر العلي </option>
-                                                                                                    <option value="59">ثابت علي</option>
-                                                                                                    <option value="71">جهاد حمد </option>
-                                                                                                    <option value="75">حاتم حمد</option>
-                                                                                                    <option value="29">حازم عمر</option>
-                                                                                                    <option value="67">حسام مصطفى </option>
-                                                                                                    <option value="11">حسن سليميه</option>
-                                                                                                    <option value="65">حسن علاونة</option>
-                                                                                                    <option value="13">م. حسين البزور</option>
-                                                                                                    <option value="21">حمزة فراجيين</option>
-                                                                                                    <option value="12">خليل عمر</option>
-                                                                                                    <option value="6">ربيع الشرفا</option>
-                                                                                                    <option value="31">زينات طميزة</option>
-                                                                                                    <option value="73">سامي حمد </option>
-                                                                                                    <option value="18">شحاده فرج الله</option>
-                                                                                                    <option value="66">شيماء عامر</option>
-                                                                                                    <option value="23">طارق طميزة</option>
-                                                                                                    <option value="72">طلال حمد </option>
-                                                                                                    <option value="32">طلعت عواد</option>
-                                                                                                    <option value="27">عبد الرحمن شوبكي</option>
-                                                                                                    <option value="10">عبد الرحمن طميزة</option>
-                                                                                                    <option value="35">عبد الفتاح طميزة</option>
-                                                                                                    <option value="33">عبد اللطيف فواز</option>
-                                                                                                    <option value="46">علي طميزة</option>
-                                                                                                    <option value="60">عمر عبد السلام </option>
-                                                                                                    <option value="26">غسان طميزة</option>
-                                                                                                    <option value="58">فادي عبد الغني</option>
-                                                                                                    <option value="69">فراس حمد </option>
-                                                                                                    <option value="70">كمال حمد </option>
-                                                                                                    <option value="49">مجد عامر</option>
-                                                                                                    <option value="55">مجلس عورتا </option>
-                                                                                                    <option value="54">مجلس مجدل بني فاضل</option>
-                                                                                                    <option value="68">م. محمد منسوب</option>
-                                                                                                    <option value="42">محمد خالد</option>
-                                                                                                    <option value="44">م.محمد الصوايفه</option>
-                                                                                                    <option value="24">محمد ابو اسعد</option>
-                                                                                                    <option value="17">محمود ابوزلطه</option>
-                                                                                                    <option value="56">ابو عمر</option>
-                                                                                                    <option value="36">مسلم طميزة</option>
-                                                                                                    <option value="52">مصطفى ابو صقر </option>
-                                                                                                    <option value="74">معتدل دويكات</option>
-                                                                                                    <option value="7">م. معتز كميل </option>
-                                                                                                    <option value="45">معتز العسود</option>
-                                                                                                    <option value="43">منار عوض</option>
-                                                                                                    <option value="38">منال عواد</option>
-                                                                                                    <option value="51">Muna</option>
-                                                                                                    <option value="19">موسى طميزة</option>
-                                                                                                    <option value="20">ميساء مطر</option>
-                                                                                                    <option value="25">ناصر خلاوي</option>
-                                                                                                    <option value="40">نيفين نمر </option>
-                                                                                                    <option value="14">م . هاني العمري</option>
-                                                                                                    <option value="53">علي ابو حسن </option>
-                                                                                                    <option value="30">يوسف نصار</option>
-                                                                                                    <option value="37">يونس ابو عمر</option>
-                                                                                            </select>
-                                    <div class="input-group-append">
-                                        <a class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link-alt" style="color:#ffffff"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <div class="EnabledItem" style="direction: rtl;border:1px solid #ff0000; color:#ff0000; text-align: center;display: none">UserDisable</div>
                         
                         <div class="row" style="margin-left: 0">
                             <div class="form-group col-md-4 mb-2" id="equipmentdvtext1" style="display: block">
-                                <label class="sr-only" for="dateinput">تاريخ الشراء</label>
-                                تاريخ الشراء<br>
+                                <label class="sr-only" for="dateinput">{{trans('assets.date_sale')}}</label>
+                                {{trans('assets.date_sale')}}<br>
                                 <input type="text" id="dateinput" name="dateinput" data-mask="00/00/0000" maxlength="10" class="form-control singledate valid" placeholder="dd/mm/yyyy" autocomplete="off" aria-required="true" style="border-radius:3px !important;height:38px;">
                             </div>
                             <div class="form-group col-md-4 mb-2" id="equipmentdvtext2" style="display: block">
-                                <label class="sr-only" for="Wdateinput">تاريخ انتهاء الكفالة</label>
-                                تاريخ انتهاء الكفالة<br>
+                                <label class="sr-only" for="Wdateinput">{{trans('assets.date_end')}}</label>
+                                {{trans('assets.date_end')}}<br>
                                 <input type="text" name="Wdateinput" id="Wdateinput" data-mask="00/00/0000" maxlength="10" class="form-control singledate valid" placeholder="dd/mm/yyyy" autocomplete="off" aria-required="true" style="border-radius:3px !important;height:38px;">
                             </div>
                             <div class="form-group col-md-4 mb-2" id="equipmentdvtext3" style="display: block">
                                 <label class="sr-only" for="CW">السعر الأصلي</label>
-                                التكلفة الكلية<br>
+                                {{trans('assets.all_price')}}<br>
                                 <div class="row">
                                     <div class="col-md-12" style="padding-right: 0px !important;">
                                         <div class="input-group" style=" width: 106% !important;">
@@ -398,10 +236,10 @@
                                     <div class="input-group w-s-87" style="width:100% !important">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                ملاحظات الصيانة
+                                                {{trans('assets.note_repair')}}
                                             </span>
                                         </div>
-                                        <textarea type="text" id="MantinanceNote" class="form-control" placeholder="ملاحظات الصيانة" name="MantinanceNote" style="border-radius:3px !important;height: 35px;" aria-invalid="false"></textarea>
+                                        <textarea type="text" id="MantinanceNote" class="form-control" placeholder="{{trans('assets.note_repair')}}" name="MantinanceNote" style="border-radius:3px !important;height: 35px;" aria-invalid="false"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -416,7 +254,7 @@
                 <div class="card-header">
                     <h4 class="card-title">
                         <img src="https://db.expand.ps/images/sponsor.png" width="32" height="32">
-                        مانح / مورد
+                        {{trans('assets.suplier_header')}}
                     </h4>
                 </div>
                 <div class="card-body">
@@ -426,10 +264,10 @@
                                 <div class="input-group" style="width: 99% !important;">
                                     <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">
-                                    تفاصيل العنوان
+                                        {{trans('assets.address_detail')}}
                                     </span>
                                     </div>
-                                    <textarea type="text" id="AddressDetailsAR" class="form-control" placeholder="تفاصيل العنوان" name="AddressDetailsAR" style="height: 35px;"></textarea>
+                                    <textarea type="text" id="AddressDetailsAR" class="form-control" placeholder="{{trans('assets.address_detail')}}" name="AddressDetailsAR" style="height: 35px;"></textarea>
 
                                 </div>
                             </div>
@@ -441,7 +279,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
-                                        الشركة الموردة
+                                            {{trans('assets.company_s')}}
                                         </span>
                                     </div>
 
@@ -460,44 +298,7 @@
 
                                 </div>
                             </div>
-                            <div class="form-group" id="equipmentdvtext13" style="display:none;">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">
-                                        المؤجر
-                                        </span>
-                                    </div>
-
-                                        <select onchange="getSupplierInfo($(this).val(),'formData1 #PHnum1')" type="text" id="Lessor" name="Lessor" class="form-control">
-                                            <option> - </option>
-                                                                                                            <option value="1">بلدية اذنا</option>
-                                                                                                            <option value="2">شركة اكسباند </option>
-                                                                                                            <option value="3">شركة طميزكوللمحروقات</option>
-                                                                                                            <option value="4">دفنة </option>
-                                                                                                            <option value="5">مطبعة خويرة </option>
-                                                                                                            <option value="6">بلدية بيت فوريك </option>
-                                                                                                            <option value="7">شركة المتحدون العرب للتوريدات </option>
-                                                                                                            <option value="8">شركة الفا ون للتوريدات الكهربائية </option>
-                                                                                                            <option value="9">شركة عالم المستقبل</option>
-                                                                                                            <option value="10">مجلس الخدمات المشترك للنفايات الصلبة </option>
-                                                                                                            <option value="11">ساتكو</option>
-                                                                                                            <option value="12">اوفتك </option>
-                                                                                                            <option value="13">شركة سنديان </option>
-                                                                                                            <option value="14">وزارة الزراعة </option>
-                                                                                                            <option value="15">شركة القناطر</option>
-                                                                                                            <option value="16">الفيحاء</option>
-                                                                                                            <option value="17">شركة السماح </option>
-                                                                                                            <option value="18">شركة النبراس للتكنلوجيا </option>
-                                                                                                            <option value="19">شركة الامل </option>
-                                                                                                            <option value="20">شركة bci</option>
-                                                                                                </select>
-                                    <div class="input-group-append hide">
-                                        <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link-alt" style="color: #FFFFFF;"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                           
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
@@ -521,7 +322,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">
-                                        المؤسسة المانحة
+                                        {{trans('assets.company_sp')}}
                                     </span>
                                     </div>
 
@@ -565,7 +366,7 @@
                         <div class="card-header" style="padding-top:0px;">
                             <h4 class="card-title">
                                 <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
-                            الأرشيف
+                                {{trans('assets.archive')}}
                         </h4>
                             <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
                             <div class="heading-elements" style="display: none">
@@ -585,7 +386,7 @@
                                         <div class="form-group">
                                             <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
                                             <div class="form-group">
-                                                <a onclick="$('#msgModal').modal('show')" style="color:#000000">الأرشيف
+                                                <a onclick="$('#msgModal').modal('show')" style="color:#000000"> {{trans('assets.archive')}}
                                                 <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
                                             </div>
                                         </div>
@@ -596,7 +397,7 @@
                     <div class="row" style="display: none">
                         <div class="col-md attachs-section">
                             <img src="https://db.expand.ps/images/upload.png" width="40" height="40">
-                            <span class="attach-header">مرفقات
+                            <span class="attach-header"> {{trans('assets.attach')}}
                             <span id="attach-required">*</span>
                             <span class="attach-icons">
                                 <a href="#" onclick="document.getElementById('formData1upload-file[]').click(); return false" class="attach-icon"><i class="fa fa-paperclip"></i></a>
@@ -622,9 +423,9 @@
 
                     <div class="form-actions" style="border-top:0px;">
                         <div class="text-right">
-                        <button type="submit" class="btn btn-primary">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
+                        <button type="submit" class="btn btn-primary">{{trans('assets.save')}} <i class="ft-thumbs-up position-right"></i></button>
 
-                        <button type="button" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning">إعادة تعيين <i class="ft-refresh-cw position-right"></i></button>
+                        <button type="button" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -639,6 +440,67 @@
 @section('script')
 
 <script>
+
+$( function() {
+    $( ".ac" ).autocomplete({
+		source: 'equip_auto_complete',
+		minLength: 1,
+		
+        select: function( event, ui ) {
+            let equip_id = ui.item.id
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "equip_info",
+            data: {
+                equip_id: equip_id,
+            },
+            success:function(response){
+            $('#equpiment_id').val(response.info.id);
+            $('#Equipment').val(response.info.name);
+            $('#SerialNo').val(response.info.serial_number);
+            $('#InternalNo').val(response.info.internal_number);
+            $('#PiceCnt').val(response.info.count);
+            $('#dateinput').val(response.info.selling_date);
+            $('#Wdateinput').val(response.info.wdate_input);
+            $('#OrgSalary2').val(response.info.price);
+            $('#MantinanceNote').val(response.info.notes);
+            $("#AddressDetailsAR").val(response.info.address);
+            $("#PHnum2").val(response.info.sponsor_phone);
+            $("#PHnum1").val(response.info.supply_phone);
+
+            $("select#brand option")
+                 .each(function() { this.selected = (this.text == response.brand); 
+            });
+            $("select#Eqtype option")
+                 .each(function() { this.selected = (this.text == response.type); 
+            });
+
+            $("select#EqtStatus option")
+                 .each(function() { this.selected = (this.text == response.status); 
+            });
+            $("select#Department option")
+                 .each(function() { this.selected = (this.text == response.department); 
+            });
+            $("select#pinc3 option")
+                 .each(function() { this.selected = (this.text == response.admin); 
+            });
+
+            $("select#OrgCurrencyID option")
+                 .each(function() { this.selected = (this.text == response.Currency); 
+            });
+            $("select#Supplier option")
+                 .each(function() { this.selected = (this.text == response.supplyer); 
+            });
+            $("select#SponsorName option")
+                 .each(function() { this.selected = (this.text == response.sponser); 
+            });
+
+         },
+     });
+        }
+	});
+} );
+/*
 $(".ui-autocomplete-input").keyup(function () {
 	if ($(this).val().length >= 1) {
 		// auto complete with Ajax Function :-
@@ -657,7 +519,7 @@ $(".ui-autocomplete-input").keyup(function () {
 	} else {
 		$(".ui-autocomplete").css("display", "none");
 	}
-});
+});*/
 
 
     $.ajaxSetup({
@@ -700,7 +562,7 @@ $(".ui-autocomplete-input").keyup(function () {
            }
        });
   });
-
+/*
   $(document).on('click', '.select_name', function () {
             $("#barcode").val('');
             $(".divKayUP").css("display", "none");
@@ -757,7 +619,7 @@ $(".ui-autocomplete-input").keyup(function () {
      });
         
 });
-
+*/
 
 
 </script>

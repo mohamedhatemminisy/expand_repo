@@ -292,9 +292,9 @@
                     <div class="card-content collapse show">
                         <div class="card-body">
                         <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="padding-left:0px;">
                             <div class="row">
-                                <div class="form-group col-10">
+                                <div class="form-group col-10" style="padding-left:0px;">
 
                                     <select id="CityID" name="CityID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),8,'TownID')">
                                         <option disabled> -- {{trans('admin.city')}} --</option>     
@@ -310,9 +310,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="padding-left:0px;">
                             <div class="row">
-                                <div class="form-group col-10">
+                                <div class="form-group col-10" style="padding-left:0px;">
                                     <select id="area_data" name="TownID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),9,'AreaID')">
                                         <option disabled>   {{trans('admin.area')}} </option>
                                     </select>
@@ -324,9 +324,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="padding-left:0px;">
                             <div class="row">  
-                                <div class="form-group col-10">
+                                <div class="form-group col-10" style="padding-left:0px;">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                         </div>
@@ -431,7 +431,64 @@
 @stop
 @section('script')
 <script>
-    $(".ui-autocomplete-input").keyup(function () {
+
+$( function() {
+    let type = $("input[name=type]").val();
+    $( ".ac" ).autocomplete({
+		source:  function (request, response) {
+            $.ajax({
+                    type: "get",
+                    url:"orginzation_auto_complete",
+                    data: {request, type},
+                    success: response,
+                    dataType: 'json'
+                });
+                },
+       
+		minLength: 1,
+
+        select: function( event, ui ) {
+            let orginzation_id = ui.item.id;
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "orgnization_info",
+            data: {
+                orginzation_id: orginzation_id,
+            },
+            success:function(response){
+            $('#orgnization_id').val(response.info.id); 
+            $('#SponsorName').val(response.info.name);
+            $('#MobileNo1').val(response.info.phone_one);
+            $('#MobileNo2').val(response.info.phone_two);
+            $('#LisenceNo').val(response.info.zepe_code);
+            $('#EmailAddress').val(response.info.email);
+            $('#faxNo').val(response.info.fax);
+            $('#personInCharge').val(response.info.manager_name);
+            $('#phone1').val(response.info.whatsapp_one);
+            $('#phone2').val(response.info.whatsapp_two);
+            $('#website').val(response.info.website);
+            $("select#PositionID option")
+                 .each(function() { this.selected = (this.text == response.job_title); 
+            });
+            $('#AddressDetails').val(response.address.details);
+            $('#Note').val(response.address.notes);
+            $("select#CityID option")
+                 .each(function() { this.selected = (this.text == response.city); 
+            });
+            $("select#area_data option")
+                 .each(function() { this.selected = (this.text == response.area); 
+            });
+            $("select#region_data option")
+                 .each(function() { this.selected = (this.text == response.region); 
+            });
+			},
+			});
+        }
+	});
+} );
+
+/*
+$(".ui-autocomplete-input").keyup(function () {
         if ($(this).val().length >= 1) {
             // auto complete with Ajax Function :-
             var url = 'orginzation_auto_complete';
@@ -496,7 +553,7 @@
 			},
 			});
         });
-
+*/
 $("#CityID").change(function () {
         $("#area_data").empty();
         var val = $(this).val();
