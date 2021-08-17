@@ -442,8 +442,8 @@
 									<div class="form-actions" style="border-top:0px;">
 										<div class="text-right">
 											<button type="submit" class="btn btn-primary save-data" id="saveBtn">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
-											<button type="button" class="btn btn-primary" id="updateBtn" style="display: none" onclick="UpdateForm()">{{trans('admin.update')}} <i class="ft-thumbs-up position-right"></i></button>
-											<a href="https://db.expand.ps/addDepartment" class="btn btn-warning"> {{trans('admin.reset')}} <i class="ft-refresh-cw position-right"></i></a>
+											<button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+
 										</div>
 									</div>
 								</div>

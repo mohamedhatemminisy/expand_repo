@@ -370,7 +370,7 @@
                         <div class="text-right">
                             
                         <button type="submit" class="btn btn-primary">{{trans('assets.save')}} <i class="ft-thumbs-up position-right"></i></button>
-                                                                        <button type="button" onclick="self.location='/c_assets/addCar'" class="btn btn-warning">{{trans('assets.reset')}}<i class="ft-refresh-cw position-right"></i></button>
+                        <button type="reset" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                         </div>
                     </div>
                 </div>

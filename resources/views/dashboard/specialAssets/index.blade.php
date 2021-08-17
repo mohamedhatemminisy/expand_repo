@@ -895,7 +895,7 @@
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary" id="saveBtn"> {{trans('assets.save')}} <i class="ft-thumbs-up position-right"></i></button>
                         <button type="button" class="btn btn-primary" id="updateBtn" style="display: none" onclick="UpdateForm3()">تعديل <i class="ft-thumbs-up position-right"></i></button>
-                        <button type="button" onclick="redirectURL('activeIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+                        <button type="reset" onclick="redirectURL('activeIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                     </div>
                 </div>
 
