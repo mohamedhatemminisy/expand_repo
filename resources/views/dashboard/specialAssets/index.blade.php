@@ -9,10 +9,17 @@
         <div class="card rightSide" style="min-height:485.375px">
             <div class="card-header">
                 <h4 class="card-title">
-                    <img src="{{asset('assets/images/ico/park.png')}}" width="32" height="32">
-                    معلومات الحدائق والأراضي
-
-                    </h4>
+                    @if ($type == 'Gardens_lands')
+                        <img src="{{asset('assets/images/ico/park.png')}}" width="32" height="32">
+                        {{trans('assets.Gardens_lands_header')}} 
+                    @elseif ($type == 'buildings')
+                        <img src="{{asset('assets/images/ico/park.png')}}" width="32" height="32">
+                        {{trans('assets.buildings_header')}} 
+                    @elseif ($type == 'warehouses')
+                        <img src="{{asset('assets/images/ico/park.png')}}" width="32" height="32">
+                        {{trans('assets.warehouses_header')}} 
+                    @endif
+                </h4>
             </div>
             <div class="card-body">
                 <div class="form-body">
@@ -23,10 +30,16 @@
                                 <div class="input-group w-s-87">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
-                                            الحدائق والأراضي
+                                            @if ($type == 'Gardens_lands')
+                                                {{trans('assets.Gardens_lands_name')}} 
+                                            @elseif ($type == 'buildings')
+                                            {{trans('assets.buildings_name')}} 
+                                            @elseif ($type == 'warehouses')
+                                            {{trans('assets.warehouses_name')}}  
+                                            @endif
                                         </span>
                                     </div>
-                                    <input type="text" id="BName" class="form-control ac ui-autocomplete-input" placeholder="اسم الحديقة , الأرض" name="BName" autocomplete="off">
+                                    <input type="text" id="BName" class="form-control ac ui-autocomplete-input" placeholder="@if($type == 'Gardens_lands'){{trans('assets.Gardens_lands_name')}}@elseif ($type == 'buildings'){{trans('assets.buildings_name')}}@elseif ($type == 'warehouses'){{trans('assets.warehouses_name')}}@endif" name="BName" autocomplete="off">
                                 </div>
                                 <div id="auto-complete-barcode" class="divKayUP barcode-suggestion "></div>
 
@@ -39,7 +52,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
-                                        الشخص المسؤول
+                                            {{trans('assets.manager')}}
                                         </span>
                                     </div>
                                     <select type="text" id="pich" name="pich" class="form-control">
@@ -59,7 +72,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
-                                            نوع الملكية
+                                            {{trans('assets.type_of_ownership')}}
                                         </span>
                                     </div>
                                     <select id="ownType" name="ownType" type="text" class="form-control valid" style="" aria-invalid="false">
@@ -68,11 +81,12 @@
                                               <option value="{{$status->id}}"> {{$status->name}} </option>
                                             @endforeach
                                         </select>
-                                    <div class="input-group-append" onclick="QuickAdd(49,'ownType','نوع الملكية')">
-                                        <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link"></i>
-                                        </span>
-                                    </div>
+                                        <div class="input-group-append" onclick="QuickAdd(30,'ownType','Own type')">
+                                            <span class="input-group-text input-group-text2">
+                                                <i class="fa fa-external-link"></i>
+                                            </span>
+                                        </div>
+
                                 </div>
                             </div>
                             <div class="form-group" style="display: none;" id="fixedassetdvtext1">
@@ -116,7 +130,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                التكلفة الفعلية
+                                                {{trans('assets.actual_price')}}
                                             </span>
                                         </div>
                                         <input id="OrgSalary4" name="OrgSalary" class="form-control numFeild " placeholder="00.00" style="    border-radius: 0rem !important;">
@@ -159,10 +173,10 @@
                                 <div class="input-group" style="width: 99% !important;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
-                                        ملاحظات
+                                            {{trans('assets.notes')}}
                                         </span>
                                     </div>
-                                    <textarea type="text" id="NoteAR" class="form-control" placeholder="ملاحظات" name="NoteAR" style="height: 35px;"></textarea>
+                                    <textarea type="text" id="NoteAR" class="form-control" placeholder="{{trans('assets.notes')}}" name="NoteAR" style="height: 35px;"></textarea>
 
                                 </div>
                             </div>
@@ -719,63 +733,63 @@
             <div class="card-header">
                 <h4 class="card-title">
                     <img src="https://db.expand.ps/images/maps-icon.png" width="32" height="32">
-                    العنوان
+                    {{trans('assets.address')}}
                 </h4>
             </div>
             <div class="card-body">
                 
-            <div class="row">
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="form-group col-10">
-
-                                    <select id="CityID" name="CityID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),8,'TownID')">
-                                        <option disabled> -- {{trans('admin.city')}} --</option>     
-                                        @foreach($city as $cit)
-                                            <option  value="{{$cit->id}}">  {{$cit->name}} </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="input-group-append col-2" onclick="QuickAdd(17,'PositionID','Position')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
-                                    <span class="input-group-text input-group-text2">
-                                        <i class="fa fa-external-link"></i>
-                                    </span>
-                                </div>
+                <div class="row">
+                    <div class="col-md-4" style="padding-left:0px;">
+                        <div class="row">
+                            <div class="form-group col-10" style="padding-left:0px;">
+        
+                                <select id="CityID" name="CityID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),8,'TownID')">
+                                    <option disabled> -- {{trans('admin.city')}} --</option>     
+                                    @foreach($city as $cit)
+                                        <option  value="{{$cit->id}}">  {{$cit->name}} </option>
+                                    @endforeach
+                                </select>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="form-group col-10">
-                                    <select id="area_data" name="TownID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),9,'AreaID')">
-                                        <option disabled>   {{trans('admin.area')}} </option>
-                                    </select>
-                                </div>
-                                <div class="input-group-append col-2" onclick="QuickAdd(17,'PositionID','Position')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
-                                    <span class="input-group-text input-group-text2">
-                                        <i class="fa fa-external-link"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="row">  
-                                <div class="form-group col-10">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        </div>
-                                        <select id="region_data" name="AreaID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),10,'NeighborID')">
-                                            <option value="0" disabled>   {{trans('admin.region')}}  </option>                                                                         
-                                            </select>
-                                    </div>
-                                </div>
-                                <div class="input-group-append col-2" onclick="QuickAdd(17,'PositionID','Position')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
-                                    <span class="input-group-text input-group-text2">
-                                        <i class="fa fa-external-link"></i>
-                                    </span>
-                                </div>
+                            <div class="input-group-append col-2" onclick="QuickAdd(10,'PositionID','City')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                                <span class="input-group-text input-group-text2">
+                                    <i class="fa fa-external-link"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4" style="padding-left:0px;">
+                        <div class="row">
+                            <div class="form-group col-10" style="padding-left:0px;">
+                                <select id="area_data" name="TownID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),9,'AreaID')">
+                                    <option disabled>   {{trans('admin.area')}} </option>
+                                </select>
+                            </div>
+                            <div class="input-group-append col-2" onclick="QuickAdd(33,$('#CityID').find(':selected').val(),'Area')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                                <span class="input-group-text input-group-text2">
+                                    <i class="fa fa-external-link"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding-left:0px;">
+                        <div class="row">  
+                            <div class="form-group col-10" style="padding-left:0px;">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <select id="region_data" name="AreaID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),10,'NeighborID')">
+                                        <option value="0" disabled>   {{trans('admin.region')}}  </option>                                                                         
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="input-group-append col-2" onclick="QuickAdd(77,$('#area_data').find(':selected').val(),'Resion')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                                <span class="input-group-text input-group-text2">
+                                    <i class="fa fa-external-link"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -822,7 +836,7 @@
                 <div class="row" style="display:none">
                     <div class="col-md attachs-section">
                         <img src="https://db.expand.ps/images/upload.png" width="40" height="40">
-                        <span class="attach-header">مرفقات
+                        <span class="attach-header">{{trans('assets.archive')}}
                         <span id="attach-required">*</span>
                         <span class="attach-icons">
                             <a href="#" onclick="document.getElementById('formDataupload-file[]').click(); return false" class="attach-icon"><i class="fas fa-paperclip"></i></a>
@@ -849,7 +863,7 @@
                     <div class="card-header" style="padding-top:0px;">
                         <h4 class="card-title">
                             <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
-                        الأرشيف
+                            {{trans('assets.archive')}}
                     </h4>
                         <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
                         <div class="heading-elements" style="display: none">
@@ -869,7 +883,7 @@
                                     <div class="form-group">
                                         <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
                                         <div class="form-group">
-                                            <a onclick="$('#msgModal').modal('show')" style="color:#000000">الأرشيف
+                                            <a onclick="$('#msgModal').modal('show')" style="color:#000000"> {{trans('assets.archive')}}
                                             <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
                                         </div>
                                     </div>
@@ -879,9 +893,9 @@
                     </div>
                 <div class="form-actions" style="border-top:0px;padding: 0px 0; margin-top: 0px;">
                     <div class="text-right">
-                        <button type="submit" class="btn btn-primary" id="saveBtn">حفظ <i class="ft-thumbs-up position-right"></i></button>
+                        <button type="submit" class="btn btn-primary" id="saveBtn"> {{trans('assets.save')}} <i class="ft-thumbs-up position-right"></i></button>
                         <button type="button" class="btn btn-primary" id="updateBtn" style="display: none" onclick="UpdateForm3()">تعديل <i class="ft-thumbs-up position-right"></i></button>
-                        <button type="button" onclick="redirectURL('activeIcon1-tab1')" class="btn btn-warning">إعادة تعيين <i class="ft-refresh-cw position-right"></i></button>
+                        <button type="button" onclick="redirectURL('activeIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                     </div>
                 </div>
 
@@ -898,7 +912,63 @@
 
 @section('script')
 <script>
+$( function() {
+    let type = $("input[name=type]").val();
+    $( ".ac" ).autocomplete({
+		source:  function (request, response) {
+            $.ajax({
+                    type: "get",
+                    url:"asset_auto_complete",
+                    data: {request, type},
+                    success: response,
+                    dataType: 'json'
+                });
+                },
+       
+		minLength: 1,
 
+        select: function( event, ui ) {
+            let asset_id = (ui.item.id);
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "asset_info",
+            data: {
+                asset_id: asset_id,
+            },
+            success:function(response){
+                console.log(response);
+            $('#special_id').val(response.info.id);
+            $('#BName').val(response.info.name);
+            $("select#pich option")
+                 .each(function() { this.selected = (this.text == response.admin); 
+            });
+
+            $("select#ownType option")
+                 .each(function() { this.selected = (this.text == response.asset_status); 
+            });
+
+            $("select#OrgCurrencyID option")
+                 .each(function() { this.selected = (this.text == response.Currency); 
+            });
+            $('#OrgSalary4').val(response.info.price);
+            $('#NoteAR').val(response.info.notes);
+            $('#AddressDetails').val(response.address.details);
+            $('#Note').val(response.address.notes);
+            $("select#CityID option")
+                 .each(function() { this.selected = (this.text == response.city); 
+            });
+            $("select#TownID option")
+                 .each(function() { this.selected = (this.text == response.area); 
+            });
+            $("select#region_data option")
+                 .each(function() { this.selected = (this.text == response.region); 
+            });
+                    },
+                    });
+        }
+	});
+} );
+/*
 $(".ui-autocomplete-input").keyup(function () {
             if ($(this).val().length >= 1) {
                 // auto complete with Ajax Function :-
@@ -966,7 +1036,7 @@ $(".ui-autocomplete-input").keyup(function () {
                     });
         });
 
-
+*/
 
 
 

@@ -34,7 +34,7 @@ class EmployeeController extends Controller
         DB::beginTransaction();
 
         $role = new Role();
-        $role->permissions = json_encode($request->userGroup);
+        $role->permissions = json_encode($request->my_multi_select3);
         $role->save();
         $address = new Address();
         $address->area_id = $request->area_data;
@@ -45,6 +45,15 @@ class EmployeeController extends Controller
         $address->save();
         if($request->employee_id == null){
             $admin = new Admin();
+            if ($request->file('imgPic')) {
+                $imagePath = $request->file('imgPic');
+                $imageName = $imagePath->getClientOriginalName();
+                $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
+            }else{
+                $path = '';
+            }
+
+            $admin->image  = $path;
             $admin->name = $request->Name;
             $admin->identification = $request->NationalID;
             $admin->phone_one = $request->MobileNo1;
@@ -74,6 +83,14 @@ class EmployeeController extends Controller
             $AdminDetail->save();
         }else{
             $admin = Admin::find($request->employee_id);
+            if ($request->file('imgPic')) {
+                $imagePath = $request->file('imgPic');
+                $imageName = $imagePath->getClientOriginalName();
+                $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
+            }else{
+                $path = $equpment->image;
+            }
+            $admin->image = $path;
             $admin->name = $request->Name;
             $admin->identification = $request->NationalID;
             $admin->phone_one = $request->MobileNo1;

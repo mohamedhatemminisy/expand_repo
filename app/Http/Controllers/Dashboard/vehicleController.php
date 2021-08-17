@@ -94,7 +94,7 @@ class vehicleController extends Controller
 
     public function vehicle_auto_complete(Request $request)
     {
-        $vehicle_data = $request->get('vehicle');
+        $vehicle_data = $request['term'];
         $names = Vehicle::where('name', 'like', '%' . $vehicle_data . '%')->select('*', 'name as label')->get();
         //$html = view('dashboard.component.auto_complete', compact('names'))->render();
         return response()->json($names);

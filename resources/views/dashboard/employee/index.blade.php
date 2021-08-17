@@ -7,8 +7,8 @@
 
 <section class="horizontal-grid " id="horizontal-grid">
 
-    <form id="ajaxform">
-        
+<form method="post" id="employee_form" enctype="multipart/form-data">
+        @csrf        
                 <div class="row white-row">
                     
                     <div class="col-sm-12 col-md-6">
@@ -497,43 +497,57 @@
                 <div class="card-content collapse show">
                     <div class="card-body">
                         <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
- 
-                                            <select id="CityID" name="CityID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),8,'TownID')">
-                                                <option disabled> -- {{trans('admin.city')}} --</option>     
-                                                @foreach($city as $cit)
-                                                 <option  value="{{$cit->id}}">  {{$cit->name}} </option>
-                                                @endforeach
+                            <div class="col-md-4" style="padding-left:0px;">
+                                <div class="row">
+                                    <div class="form-group col-10" style="padding-left:0px;">
+    
+                                        <select id="CityID" name="CityID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),8,'TownID')">
+                                            <option disabled> -- {{trans('admin.city')}} --</option>     
+                                            @foreach($city as $cit)
+                                                <option  value="{{$cit->id}}">  {{$cit->name}} </option>
+                                            @endforeach
                                         </select>
-                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <select id="area_data" name="TownID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),9,'AreaID')">
-                                                <option disabled>   {{trans('admin.area')}} </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <select id="region_data" name="AreaID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),10,'NeighborID')">
-                                                    <option value="0" disabled>   {{trans('admin.region')}}  </option>                                                                         
-                                                 </select>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text input-group-text2">
-                                                    <i class="fa fa-external-link-alt" style="color:#ffffff"></i>
-                                                    </span>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                    <div class="input-group-append col-2" onclick="QuickAdd(10,'PositionID','City')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                                        <span class="input-group-text input-group-text2">
+                                            <i class="fa fa-external-link"></i>
+                                        </span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-4" style="padding-left:0px;">
+                                <div class="row">
+                                    <div class="form-group col-10" style="padding-left:0px;">
+                                        <select id="area_data" name="TownID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),9,'AreaID')">
+                                            <option disabled>   {{trans('admin.area')}} </option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group-append col-2" onclick="QuickAdd(33,$('#CityID').find(':selected').val(),'Area')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                                        <span class="input-group-text input-group-text2">
+                                            <i class="fa fa-external-link"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="padding-left:0px;">
+                                <div class="row">  
+                                    <div class="form-group col-10" style="padding-left:0px;">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                            <select id="region_data" name="AreaID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),10,'NeighborID')">
+                                                <option value="0" disabled>   {{trans('admin.region')}}  </option>                                                                         
+                                                </select>
+                                        </div>
+                                    </div>
+                                    <div class="input-group-append col-2" onclick="QuickAdd(77,$('#area_data').find(':selected').val(),'Resion')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                                        <span class="input-group-text input-group-text2">
+                                            <i class="fa fa-external-link"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -620,7 +634,7 @@
                         
                         <div class="form-actions" style="border-top:0px;">
                             <div class="text-right">
-                                <button class="btn btn-primary save-data">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
+                                <button type="submit" class="btn btn-primary" id="saveBtn">{{trans('admin.save')}}  <i class="ft-thumbs-up position-right"></i></button>
                                 <button type="reset" class="btn btn-warning"> {{trans('admin.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                             </div>
                         </div>
@@ -693,25 +707,6 @@ function SavePer(){
 
 
 
-<script src="https://template.expand.ps/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
-
-
-  <script src="https://template.expand.ps/app-assets/vendors/js/forms/toggle/bootstrap-switch.min.js"
-  type="text/javascript"></script>
-  <script src="https://template.expand.ps/app-assets/vendors/js/forms/toggle/switchery.min.js" type="text/javascript"></script>
-  <script src="https://template.expand.ps/app-assets/jquery-validation/js/jquery.validate.js" type="text/javascript"></script>
-  <script src="https://template.expand.ps/app-assets/jquery-validation/js/additional-methods.js" type="text/javascript"></script>
-<!-- BEGIN (NEW) PAGE VENDOR JS-->
-<script type="text/javascript" src="https://template.expand.ps/app-assets/vendors/js/ui/jquery.sticky.js"></script>
-<!-- END (NEW) PAGE VENDOR JS-->
-<!-- END PAGE VENDOR JS-->
-<!-- BEGIN MODERN JS-->
-<script src="https://template.expand.ps/app-assets/js/core/app-menu.js" type="text/javascript"></script>
-<script src="https://template.expand.ps/app-assets/js/core/app.min.js" type="text/javascript"></script>
-<script src="https://template.expand.ps/app-assets/js/scripts/customizer.js" type="text/javascript"></script>
-<script src="https://template.expand.ps/app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
-	<script src="https://db.expand.ps/assets/js/generalScript.js"  type="text/javascript"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 	<script src="https://template.expand.ps/app-assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
 	<!--<script src="https://template.expand.ps/assets/pages/scripts/components-multi-select.min.js" type="text/javascript"></script>
@@ -909,8 +904,10 @@ $.ajax({
         });
     });
 
-     $(".save-data").click(function(event){
-        $(".loader").removeClass('hide');
+
+    $('#employee_form').submit(function(e) {
+       e.preventDefault();
+       let formData = new FormData(this);
             $( "#Name" ).removeClass( "error" );
             $( "#NationalID" ).removeClass( "error" );
             $( "#NickName" ).removeClass( "error" );
@@ -920,94 +917,18 @@ $.ajax({
             $( "#DirectManager" ).removeClass( "error" );
             $( "#JobType" ).removeClass( "error" );
 
-      event.preventDefault();
-
-      let Name = $("input[name=Name]").val();
-      let employee_id = $("input[name=employee_id]").val();
-      let NationalID = $("input[name=NationalID]").val();
-      let MobileNo1 = $("input[name=MobileNo1]").val();
-      let MobileNo2 = $("input[name=MobileNo2]").val();
-      let JobNumber = $("input[name=JobNumber]").val();
-      let NickName = $("input[name=NickName]").val();
-      let InternalPhone = $("input[name=InternalPhone]").val();
-      let EmailAddress = $("input[name=EmailAddress]").val();
-      var DepartmentID = $('#DepartmentID').find(":selected").val();
-      var Position = $('#Position').find(":selected").val();
-      var DirectManager = $('#DirectManager').find(":selected").val();
-      let HiringDate = $("input[name=HiringDate]").val();
-      var JobType = $('#JobType').find(":selected").val();
-      var CurrencyID = $('#CurrencyID').find(":selected").val();
-      let Salary = $("input[name=Salary]").val();
-      let vac_year = $("input[name=vac_year]").val();
-      let vac_annual = $("input[name=vac_annual]").val();
-      let emr_blanace = $("input[name=emr_blanace]").val();
-      var userGroup = $("#userGroup :selected").map(function(i, el) {
-    return $(el).val();
-}).get();
-      let username = $("input[name=username]").val();
-      let password = $("input[name=password]").val();
-      var CityID = $('#CityID').find(":selected").val();
-      var area_data = $('#area_data').find(":selected").val();
-      var region_data = $('#region_data').find(":selected").val();
-      var AddressDetails = $('#AddressDetails').val();
-      var Note = $('#Note').val();
-      var _token ='{{csrf_token()}}';
-
-      $.ajax({
-        url: "store_employee",
-        type:"POST",
-        data:{
-            Name:Name,
-            NationalID:NationalID,
-            MobileNo1:MobileNo1,
-            MobileNo2:MobileNo2,
-            JobNumber:JobNumber,
-            NickName:NickName,
-            InternalPhone:InternalPhone,
-            EmailAddress:EmailAddress,          
-            DepartmentID:DepartmentID,
-            Position:Position,
-            CurrencyID:CurrencyID,
-            DirectManager:DirectManager,
-            HiringDate:HiringDate,
-            JobType:JobType,
-            Salary:Salary,
-            employee_id:employee_id,
-            vac_year:vac_year,
-            vac_annual:vac_annual,
-            emr_blanace:emr_blanace,
-            userGroup:userGroup,
-            username:username,
-            password:password,
-            CityID:CityID, 
-            area_data:area_data,            
-            region_data:region_data,            
-            AddressDetails:AddressDetails,            
-            Note:Note,                       
-            _token: _token ,       
-         },
-
-        success:function(response){
-            
-            $(".loader").addClass('hide');
-            $(".alert-success").removeClass('hide');
-            $("#succMsg").text('{{trans('admin.employee_added')}}')
-            setTimeout(function(){
-                $(".alert-success").addClass("hide");
-            },2000)
-
-            
-            
-            $("#ajaxform")[0].reset();          
-        },
-        error: function(response) {
-            $(".loader").addClass('hide');
-            $(".alert-success").addClass("hide");
-			$(".alert-danger").removeClass('hide');
-            $("#errMsg").text('{{trans('admin.error_save')}}')
-            setTimeout(function(){
-                $(".alert-danger").addClass("hide");
-            },2000)
+       $.ajax({
+          type:'POST',
+          url: "store_employee",
+           data: formData,
+           contentType: false,
+           processData: false,
+           success: (response) => {
+             if (response) {
+               this.reset();
+             }
+           },
+           error: function(response){
             if(response.responseJSON.errors.Name){
                 $( "#Name" ).addClass( "error" );
             }
@@ -1034,11 +955,142 @@ $.ajax({
             }
 
            }
-
-
-
        });
   });
+
+
+
+
+//      $(".save-data").click(function(event){
+//         $(".loader").removeClass('hide');
+//             $( "#Name" ).removeClass( "error" );
+//             $( "#NationalID" ).removeClass( "error" );
+//             $( "#NickName" ).removeClass( "error" );
+//             $( "#DepartmentID" ).removeClass( "error" );
+//             $( "#Position" ).removeClass( "error" );
+//             $( "#HiringDate" ).removeClass( "error" );
+//             $( "#DirectManager" ).removeClass( "error" );
+//             $( "#JobType" ).removeClass( "error" );
+
+//       event.preventDefault();
+
+//       let Name = $("input[name=Name]").val();
+//       let employee_id = $("input[name=employee_id]").val();
+//       let NationalID = $("input[name=NationalID]").val();
+//       let MobileNo1 = $("input[name=MobileNo1]").val();
+//       let MobileNo2 = $("input[name=MobileNo2]").val();
+//       let JobNumber = $("input[name=JobNumber]").val();
+//       let NickName = $("input[name=NickName]").val();
+//       let InternalPhone = $("input[name=InternalPhone]").val();
+//       let EmailAddress = $("input[name=EmailAddress]").val();
+//       var DepartmentID = $('#DepartmentID').find(":selected").val();
+//       var Position = $('#Position').find(":selected").val();
+//       var DirectManager = $('#DirectManager').find(":selected").val();
+//       let HiringDate = $("input[name=HiringDate]").val();
+//       var JobType = $('#JobType').find(":selected").val();
+//       var CurrencyID = $('#CurrencyID').find(":selected").val();
+//       let Salary = $("input[name=Salary]").val();
+//       let vac_year = $("input[name=vac_year]").val();
+//       let vac_annual = $("input[name=vac_annual]").val();
+//       let emr_blanace = $("input[name=emr_blanace]").val();
+//       var userGroup = $("#userGroup :selected").map(function(i, el) {
+//     return $(el).val();
+// }).get();
+//       let username = $("input[name=username]").val();
+//       let password = $("input[name=password]").val();
+//       var CityID = $('#CityID').find(":selected").val();
+//       var area_data = $('#area_data').find(":selected").val();
+//       var region_data = $('#region_data').find(":selected").val();
+//       var AddressDetails = $('#AddressDetails').val();
+//       var Note = $('#Note').val();
+//       var _token ='{{csrf_token()}}';
+
+//       $.ajax({
+//         url: "store_employee",
+//         type:"POST",
+//         data:{
+//             Name:Name,
+//             NationalID:NationalID,
+//             MobileNo1:MobileNo1,
+//             MobileNo2:MobileNo2,
+//             JobNumber:JobNumber,
+//             NickName:NickName,
+//             InternalPhone:InternalPhone,
+//             EmailAddress:EmailAddress,          
+//             DepartmentID:DepartmentID,
+//             Position:Position,
+//             CurrencyID:CurrencyID,
+//             DirectManager:DirectManager,
+//             HiringDate:HiringDate,
+//             JobType:JobType,
+//             Salary:Salary,
+//             employee_id:employee_id,
+//             vac_year:vac_year,
+//             vac_annual:vac_annual,
+//             emr_blanace:emr_blanace,
+//             userGroup:userGroup,
+//             username:username,
+//             password:password,
+//             CityID:CityID, 
+//             area_data:area_data,            
+//             region_data:region_data,            
+//             AddressDetails:AddressDetails,            
+//             Note:Note,                       
+//             _token: _token ,       
+//          },
+
+//         success:function(response){
+            
+//             $(".loader").addClass('hide');
+//             $(".alert-success").removeClass('hide');
+//             $("#succMsg").text('{{trans('admin.employee_added')}}')
+//             setTimeout(function(){
+//                 $(".alert-success").addClass("hide");
+//             },2000)
+
+            
+            
+//             $("#ajaxform")[0].reset();          
+//         },
+//         error: function(response) {
+//             $(".loader").addClass('hide');
+//             $(".alert-success").addClass("hide");
+// 			$(".alert-danger").removeClass('hide');
+//             $("#errMsg").text('{{trans('admin.error_save')}}')
+//             setTimeout(function(){
+//                 $(".alert-danger").addClass("hide");
+//             },2000)
+//             if(response.responseJSON.errors.Name){
+//                 $( "#Name" ).addClass( "error" );
+//             }
+//             if(response.responseJSON.errors.NationalID){
+//                 $( "#NationalID" ).addClass( "error" );
+//             }
+//             if(response.responseJSON.errors.NickName){
+//                 $( "#NickName" ).addClass( "error" );
+//             }
+//             if(response.responseJSON.errors.DepartmentID){
+//                 $( "#DepartmentID" ).addClass( "error" );
+//             }
+//             if(response.responseJSON.errors.Position){
+//                 $( "#Position" ).addClass( "error" );
+//             }
+//             if(response.responseJSON.errors.JobType){
+//                 $( "#JobType" ).addClass( "error" );
+//             }           
+//             if(response.responseJSON.errors.HiringDate){
+//                 $( "#HiringDate" ).addClass( "error" );
+//             }
+//             if(response.responseJSON.errors.DirectManager){
+//                 $( "#DirectManager" ).addClass( "error" );
+//             }
+
+//            }
+
+
+
+//        });
+//   });
 
 /*
    $('#Position').select2({

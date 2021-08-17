@@ -99,12 +99,10 @@ class orginzationsController extends Controller
     }
 
     public function orginzation_auto_complete(Request $request){
-        $orginzation_data = $request->get('orginzation');
-        $type = $request->get('type');
-
-        $names = Orgnization::where('name', 'like', '%' . $orginzation_data . '%')->where('org_type',$type)->get();
-        $html = view('dashboard.component.auto_complete', compact('names'))->render();
-        return response()->json($html);
+        $orginzation_data = $request['request']['term'];
+        $type = $request['type'];
+        $names = Orgnization::where('name', 'like', '%' . $orginzation_data . '%')->where('org_type',$type)->select('*','name as label')->get();
+        return response()->json($names);
     }
 
     public function orgnization_info(Request $request)

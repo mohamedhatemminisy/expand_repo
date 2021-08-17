@@ -19,6 +19,10 @@ use App\Models\JobType;
 use App\Models\Brand;
 use App\Models\EqupmentType;
 use App\Models\EqupmentStatus;
+use App\Models\VehicleType;
+use App\Models\VehicleBrand;
+use App\Models\AssetStatus;
+
 
 use App\Http\Requests\ExtentionRequest;
 
@@ -56,8 +60,38 @@ class ExtentionsController extends Controller
             $data['pj_i_id'] = $request->pk_i_id;
             return response()->json($data);
         }
+        elseif($request->pk_i_id == '25'){
+            $data['data'] = VehicleBrand::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        elseif($request->pk_i_id == '26'){
+            $data['data'] = VehicleType::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        elseif($request->pk_i_id == '30'){
+            $data['data'] = AssetStatus::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
 
-
+        elseif($request->pk_i_id == '10'){
+            $data['data'] = City::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        elseif($request->pk_i_id == '33'){
+            $data['data'] = Area::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        elseif($request->pk_i_id == '77'){
+            $data['data'] = Region::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        
     }
 
 
@@ -86,6 +120,32 @@ class ExtentionsController extends Controller
             $data = EqupmentStatus::findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
         }
+        elseif($request->fk_i_constant_id == '25'){
+            $data = VehicleBrand::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '26'){
+            $data = VehicleType::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '30'){
+            $data = AssetStatus::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '10'){
+            $data = City::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        
+        elseif($request->fk_i_constant_id == '33'){
+            $data = Area::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '77'){
+            $data = Region::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        
         
     }
 
@@ -182,8 +242,121 @@ class ExtentionsController extends Controller
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
+        elseif($request->fk_i_constant_id1 == '25'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new VehicleBrand();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = VehicleBrand::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);
+        }
+        elseif($request->fk_i_constant_id1 == '26'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new VehicleType();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = VehicleType::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);
+        }
+        elseif($request->fk_i_constant_id1 == '30'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new AssetStatus();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = AssetStatus::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);
+        }
+        elseif($request->fk_i_constant_id1 == '10'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new City();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = City::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);
+        }
+        elseif($request->fk_i_constant_id1 == '33'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new Area();
+                $job->name = $request->s_name_ar1;
+                $job->city_id  = $request->ctrlToRefresh;
+                $job->save();
+            }else{
+                $job = Area::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->city_id  = $request->ctrlToRefresh;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+        elseif($request->fk_i_constant_id1 == '33'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new Area();
+                $job->name = $request->s_name_ar1;
+                $job->city_id  = $request->ctrlToRefresh;
+                $job->save();
+            }else{
+                $job = Area::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->city_id  = $request->ctrlToRefresh;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+        elseif($request->fk_i_constant_id1 == '77'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new Region();
+                $job->name = $request->s_name_ar1;
+                $job->area_id   = $request->ctrlToRefresh;
+                $job->save();
+            }else{
+                $job = Region::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->area_id   = $request->ctrlToRefresh;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+
+
         
-        
+
     }
 
 }

@@ -550,6 +550,7 @@ function deleteConstant(id){
 		dataType: "json",
 		async: true,
 		success: function (data) {
+			location.reload();
 			$("#" + fillIn).html(new Option(" Select ", ''));
 			if (data.constList.length > 0) {
 				for (i = 0; i < data.constList.length; i++)
