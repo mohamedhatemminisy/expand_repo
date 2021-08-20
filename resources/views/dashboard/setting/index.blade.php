@@ -405,7 +405,7 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                        <div class="row">
+                    <div class="row">
                             <div class="col-md-4" style="padding-left:0px;">
                                 <div class="row">
                                     <div class="form-group col-10" style="padding-left:0px;">
@@ -498,9 +498,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-actions" style="border-top:0px;">
+                        </div>                        <div class="form-actions" style="border-top:0px;">
                             <div class="text-right">
                                 <button class="btn btn-primary save-data">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
                                 <button type="reset" class="btn btn-warning"> {{trans('admin.reset')}} <i class="ft-refresh-cw position-right"></i></button>

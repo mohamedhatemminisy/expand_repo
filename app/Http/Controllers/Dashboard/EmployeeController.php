@@ -20,7 +20,6 @@ use DB;
 class EmployeeController extends Controller
 {
     public function index(){
-
         $city = City::get();
         $admin = Admin::get();
         $jobType = JobType::get();
