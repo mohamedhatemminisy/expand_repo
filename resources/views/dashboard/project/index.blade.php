@@ -503,12 +503,89 @@
 </form>
 </section>
 
-
+@include('dashboard.component.fetch_table');
 
 @stop
 @section('script')
 
 <script>
+
+$( function() {
+    $( ".ac" ).autocomplete({
+		source: 'project_auto_complete',
+		minLength: 1,
+		
+        select: function( event, ui ) {
+
+            let project_id = ui.item.id
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "project_info",
+            data: {
+                project_id: project_id,
+            },
+            success:function(response){
+            $('#project_id').val(response.info.id); 
+            $('#ProjectNo').val(response.info.ProjectNo);
+            $('#ProjectName').val(response.info.name);
+            $('#dateStart').val(response.info.dateStart);
+            $('#dateEnd').val(response.info.dateEnd);
+            $('#Projectcost').val(response.info.Projectcost);
+            $("select#CurrencyID option")
+                 .each(function() { this.selected = (this.text == response.Currency); 
+            });
+            
+            $("select#pich6 option")
+                 .each(function() { this.selected = (this.text == response.admin); 
+            });
+            $("select#Department option")
+                 .each(function() { this.selected = (this.text == response.department); 
+            });
+
+            $("select#sponsor option")
+                 .each(function() { this.selected = (this.text == response.sponsers); 
+            });
+            $('#cost1').val(response.info.cost1);
+            $('#pinc8').val(response.info.pinc8);
+
+            $("select#Contractor option")
+                 .each(function() { this.selected = (this.text == response.contract); 
+            });
+            $('#AddressDetails').val(response.address.details);
+            $('#Note').val(response.address.notes);
+            $("select#CityID option")
+                 .each(function() { this.selected = (this.text == response.city); 
+            });
+            $("select#area_data option")
+                 .each(function() { this.selected = (this.text == response.area); 
+            });
+            $("select#region_data option")
+                 .each(function() { this.selected = (this.text == response.region); 
+            });
+
+            var len = response.users.length;
+        for(var i=0; i<len; i++){
+			    var index = i+1;
+
+                var name = response.users[i].name;
+                var bussniess_name = response.users[i].bussniess_name;
+                var national_id = response.users[i].national_id;
+
+                    var userList = '<tr><td>'+index +'</td><td>'
+                    +name+'</td><td>'+bussniess_name+'</td><td>'+national_id+'</td><td></tr>'
+                    $("#userList").append(userList);
+            }
+
+
+
+			},
+			});
+
+        }
+	});
+} );
+
+/*
  $(".ui-autocomplete-input").keyup(function () {
         if ($(this).val().length >= 1) {
             // auto complete with Ajax Function :-
@@ -604,7 +681,7 @@
 			});
         });
 
-
+*/
 $("#pinc6").change(function () {
         var val = $(this).val();
 $.ajax({
@@ -733,12 +810,13 @@ $.ajax({
 
         success:function(response){
             $('.success_alert').css('visibility', 'visible');
-
+            fetchData();       
             setTimeout(function() {
             $('.success_alert').fadeOut();
             }, 3000 ); 
             
-            $("#ajaxform")[0].reset();          
+            $("#ajaxform")[0].reset();   
+            
         },
         error: function(response) {
             if(response.responseJSON.errors.ProjectName){

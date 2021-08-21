@@ -23,7 +23,8 @@ class AssetsController extends Controller
         $departments = Department::get();
         $sponsers = Orgnization::where('org_type','orginzation')->get();
         $suppliers = Orgnization::where('org_type','suppliers')->get();
-        return view('dashboard.assets.index',compact('admins','brand','equp_types','equp_status',
+        $type="equip";
+        return view('dashboard.assets.index',compact('admins','brand','equp_types','equp_status','type',
         'departments','sponsers','suppliers'));    
     }
 
@@ -116,6 +117,13 @@ class AssetsController extends Controller
         $equipment['status'] = EqupmentStatus::where('id',$equipment['info']->equpment_status_id)->first()->name;
         $equipment['Currency'] = trans('admin.'.$equipment['info']->currency);
 
+        return response()->json($equipment);
+
+    }
+    public function equip_info_all(Request $request)
+    {
+        $equipment['info'] = Equpment::all();
+        
         return response()->json($equipment);
 
     }

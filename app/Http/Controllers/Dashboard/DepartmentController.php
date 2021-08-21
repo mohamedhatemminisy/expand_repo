@@ -15,7 +15,8 @@ class DepartmentController extends Controller
     public function index(){
         $admins = Admin::get();
         $departments = Department::get();
-        return view('dashboard.department.index',compact('admins','departments'));    
+        $type='depart';
+        return view('dashboard.department.index',compact('admins','departments','type'));    
     }
 
     public function depart_manger(Request $request){
@@ -82,5 +83,11 @@ class DepartmentController extends Controller
         return response()->json($depaertment);
 
     }
+    public function dep_info_all(Request $request)
+    {
+        $depaertment['info'] = Department::all();
+        
+        return response()->json($depaertment);
 
+    }
 }

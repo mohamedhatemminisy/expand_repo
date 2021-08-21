@@ -378,12 +378,14 @@
     </div>
 </form>
 </section>
-
+@include('dashboard.component.fetch_table');
 
 
 @stop
 @section('script')
 <script>
+
+
 
 $( function() {
     $( ".ac" ).autocomplete({
@@ -521,7 +523,7 @@ $( function() {
         });
 */
 
-    $("#CityID").change(function () {
+$("#CityID").change(function () {
         $("#area_data").empty();
         var val = $(this).val();
 
@@ -543,31 +545,31 @@ $( function() {
             }
          },
         });
-    });
+});
 
 
-    $("#area_data").change(function () {
-        $("#region_data").empty();
-        var val = $(this).val();
-        $.ajax({
-        type: 'post', // the method (could be GET btw)
-        url: "area",
-        data: {
-                val: val,
-                _token: '{{csrf_token()}}',
+$("#area_data").change(function () {
+    $("#region_data").empty();
+    var val = $(this).val();
+    $.ajax({
+    type: 'post', // the method (could be GET btw)
+    url: "area",
+    data: {
+            val: val,
+            _token: '{{csrf_token()}}',
+    },
+    success:function(response){
+    var len = response.length;
+    for(var i=0; i<len; i++){
+            var name = response[i].name;
+            var id = response[i].id;
+                var region_details = '<option value="'+id +'">'
+                +name+' </option>'
+                $("#region_data").append(region_details);
+        }
         },
-     success:function(response){
-        var len = response.length;
-        for(var i=0; i<len; i++){
-                var name = response[i].name;
-                var id = response[i].id;
-                    var region_details = '<option value="'+id +'">'
-                    +name+' </option>'
-                    $("#region_data").append(region_details);
-            }
-         },
-        });
     });
+});
 
 
     $(".save-data").click(function(event){
@@ -622,11 +624,13 @@ $( function() {
             $(".loader").addClass('hide');
             $(".alert-success").removeClass('hide');
             $("#succMsg").text('{{trans('admin.employee_added')}}')
+            fetchData();     
             setTimeout(function(){
                 $(".alert-success").addClass("hide");
             },2000)
 
-            $("#ajaxform")[0].reset();          
+            $("#ajaxform")[0].reset();   
+              
         },
         error: function(response) {
             $(".loader").addClass('hide');
@@ -649,6 +653,7 @@ $( function() {
 
        });
   });
+
 
 
 </script>

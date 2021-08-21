@@ -13,14 +13,15 @@ use App\Models\Area;
 use App\Models\Region;
 use App\Http\Requests\DepartmentRequest;
 use App\Http\Requests\SubscribertRequest;
-
+use Yajra\DataTables\DataTables;
 class SubscriberController extends Controller
 {
     public function index(){
         $city = City::get();
         $groups = Group::get();
         $jobTitle = JobTitle::get();
-        return view('dashboard.subscriber.index',compact('city','groups','jobTitle'));    
+        $type="subscriber";
+        return view('dashboard.subscriber.index',compact('city','groups','jobTitle','type'));    
     }
 
     public function store_subscriber (SubscribertRequest $request){
@@ -99,6 +100,13 @@ class SubscriberController extends Controller
             $user['region'] =Region::where('id',$user['address']->region_id)->first()->name;
         }
         return response()->json($user);
+
+    }
+    public function subscribe_info_all()
+    {
+        $users['info'] = User::all();
+        
+        return response()->json($users);
 
     }
     
