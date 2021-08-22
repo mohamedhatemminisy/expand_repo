@@ -96,8 +96,8 @@
                                 </div>
 
                                 <div class="col-sm-12 col-md-12 col-lg-4">
-                                    <!-- <img src="https://db.expand.ps/uploads/16232479351317.png" id="userProfileImg" style="width:100%;cursor:pointer;max-height: 150px;" onclick="document.getElementById('formDataimgPic').click(); return false"> -->
-                                    <input type="file" id="userimgpath" name="userimgpath" value="">
+                                    <img src="https://db.expand.ps/uploads/16232479351317.png" id="userProfileImg" style="width:100%;cursor:pointer;max-height: 150px;" onclick="document.getElementById('formDataimgPic').click(); return false">
+                                    <input type="hidden" id="userimgpath" name="userimgpath" value="16232479351317.png">
                                 </div>
                                 <div class="col-lg-8 col-md-12 pr-0 pr-s-12">
                                     <div class="row">
