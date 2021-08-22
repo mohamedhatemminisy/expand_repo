@@ -62,6 +62,7 @@
                                         </div>
                                         <select type="text" id="Eqtype" name="Eqtype" class="form-control">
                                         <optgroup label=" ">
+                                            <?php $types=$type;?>
                                             @foreach($equp_types as $type)
                                               <option value="{{$type->id}}"> {{$type->name}} </option>
                                             @endforeach
@@ -434,6 +435,8 @@
     </div>
 </form>
 </section>
+<?php $type=$types;?>
+@include('dashboard.component.fetch_table');
 
 @endsection
 
@@ -542,9 +545,11 @@ $(".ui-autocomplete-input").keyup(function () {
            contentType: false,
            processData: false,
            success: (response) => {
+            fetchData();  
              if (response) {
                this.reset();
              }
+             
            },
            error: function(response){
             if(response.responseJSON.errors.Equipment){

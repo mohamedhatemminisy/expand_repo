@@ -25,7 +25,8 @@ class EmployeeController extends Controller
         $jobType = JobType::get();
         $jobTitle = JobTitle::get();
         $departments = Department::get();
-        return view('dashboard.employee.index',compact('city','admin','jobType','jobTitle','departments'));         
+        $type = 'employee';
+        return view('dashboard.employee.index',compact('type','city','admin','jobType','jobTitle','departments'));         
     }
 
     public function store_employee(EmployeeRequest $request){
@@ -167,6 +168,14 @@ class EmployeeController extends Controller
             $admin['region'] =Region::where('id',$admin['address']->region_id)->first()->name;
         }
 
+        return response()->json($admin);
+
+    }
+
+    public function emp_info_all()
+    {
+        $admin['info'] = Admin::all();
+        
         return response()->json($admin);
 
     }

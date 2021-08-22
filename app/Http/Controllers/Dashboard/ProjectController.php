@@ -24,7 +24,8 @@ class ProjectController extends Controller
         $departments = Department::get();
         $sponsers = Orgnization::where('org_type','orginzation')->get();
         $Contractor = Orgnization::where('org_type','suppliers')->get();
-        return view('dashboard.project.index',compact('city','admins','users','Contractor',
+        $type="project";
+        return view('dashboard.project.index',compact('city','admins','users','Contractor','type',
         'departments','sponsers'));    
     }
 
@@ -84,10 +85,10 @@ class ProjectController extends Controller
     }
 
     public function project_auto_complete(Request $request){
-        $project_data = $request->get('project');
-        $names = Project::where('name', 'like', '%' . $project_data . '%')->get();
-        $html = view('dashboard.component.auto_complete', compact('names'))->render();
-        return response()->json($html);
+        $project_data = $request['term'];
+        $names = Project::where('name', 'like', '%' . $project_data . '%')->select('*','name as label')->get();
+        //$html = view('dashboard.component.auto_complete', compact('names'))->render();
+        return response()->json($names);
     }
 
     public function project_info(Request $request)
@@ -113,6 +114,14 @@ class ProjectController extends Controller
         $project['Currency'] = trans('admin.'.$project['info']->currency);
 
 
+        return response()->json($project);
+
+    }
+
+    public function project_info_all(Request $request)
+    {
+        $project['info'] = Project::all();
+        
         return response()->json($project);
 
     }

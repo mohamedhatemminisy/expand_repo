@@ -21,7 +21,8 @@ class vehicleController extends Controller
         $admins = Admin::get();
         $vehicleBrands = VehicleBrand::get();
         $vehicleTypes = VehicleType::get();
-        return view('dashboard.vehicle.index',compact('departments','sponsers','suppliers'
+        $type = 'vehicle';
+        return view('dashboard.vehicle.index',compact('departments','sponsers','suppliers','type'
         ,'admins','vehicleBrands','vehicleTypes'));
     }
 
@@ -117,7 +118,13 @@ class vehicleController extends Controller
         return response()->json($vehicle);
 
     }
+    public function vehcile_info_all(Request $request)
+    {
+        $vehicle['info'] = Vehicle::all();
 
+        return response()->json($vehicle);
+
+    }
     
 
     

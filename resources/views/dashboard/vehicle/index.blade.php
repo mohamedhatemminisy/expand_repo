@@ -82,6 +82,7 @@
                                         </div>
                                         <select type="text" id="vehicletype" name="vehicletype" class="form-control">
                                         <optgroup label=" ">
+                                            <?php $types=$type;?>
                                             @foreach($vehicleTypes as $type)
                                               <option value="{{$type->id}}"> {{$type->name}} </option>
                                             @endforeach
@@ -379,7 +380,8 @@
     </div>
 </form>
 </section>
-
+<?php $type=$types;?>
+@include('dashboard.component.fetch_table');
 
 @stop
 
@@ -551,9 +553,11 @@ $('#vehicle-form').submit(function(e) {
            contentType: false,
            processData: false,
            success: (response) => {
+            fetchData();
              if (response) {
                this.reset();
              }
+              
            },
            error: function(response){
             if(response.responseJSON.errors.Vehiclename){

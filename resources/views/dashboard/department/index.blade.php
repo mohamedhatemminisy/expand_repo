@@ -456,7 +456,7 @@
 				</form>
             </section>
 
-
+@include('dashboard.component.fetch_table');
 @stop
 @section('script')
 <script>
@@ -634,10 +634,12 @@ $(".save-data").click(function(event){
 			$(".loader").addClass('hide');
             $(".alert-success").removeClass('hide');
             $("#succMsg").text('{{trans('admin.department_added')}}')
+			fetchData(); 
             setTimeout(function(){
                 $(".alert-success").addClass("hide");
             },2000)
             $("#ajaxform")[0].reset();          
+			 
         },
         error: function(response) {
 			$(".loader").addClass('hide');

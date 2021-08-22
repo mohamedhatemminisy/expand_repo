@@ -811,7 +811,7 @@
 </form>
 
 </section>
-
+@include('dashboard.component.fetch_table');
 
 @endsection
 
@@ -1014,9 +1014,11 @@ $.ajaxSetup({
            contentType: false,
            processData: false,
            success: (response) => {
+            fetchData(); 
              if (response) {
                this.reset();
              }
+              
            },
            error: function(response){
             if(response.responseJSON.errors.pich){

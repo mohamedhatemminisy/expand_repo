@@ -34,6 +34,7 @@ Route::group([
         Route::post('store_employee', 'EmployeeController@store_employee')->name('store_employee');
         Route::get('emp_auto_complete', 'EmployeeController@emp_auto_complete')->name('emp_auto_complete');
         Route::get('emp_info', 'EmployeeController@emp_info')->name('emp_info');
+        Route::get('emp_info_all', 'EmployeeController@emp_info_all')->name('emp_info_all');
 
         
         
@@ -44,18 +45,20 @@ Route::group([
         Route::post('depart_manger', 'DepartmentController@depart_manger')->name('depart_manger');
         Route::get('dept_auto_complete', 'DepartmentController@dept_auto_complete')->name('dept_auto_complete');
         Route::get('dep_info', 'DepartmentController@dep_info')->name('dep_info');
-
+        Route::get('dep_info_all', 'DepartmentController@dep_info_all')->name('dep_info_all');
         
         Route::get('subscribers', 'SubscriberController@index')->name('subscribers');
         Route::post('store_subscriber', 'SubscriberController@store_subscriber')->name('store_subscriber');
         Route::get('subscribe_auto_complete', 'SubscriberController@subscribe_auto_complete')->name('subscribe_auto_complete');
         Route::get('subscribe_info', 'SubscriberController@subscribe_info')->name('subscribe_info');
-        
+        Route::get('subscribe_info_all', 'SubscriberController@subscribe_info_all')->name('subscribe_info_all');
+
         Route::get('projects', 'ProjectController@index')->name('projects');
         Route::post('store_project', 'ProjectController@store_project')->name('store_project');
         Route::post('depart_manger_project', 'ProjectController@depart_manger_project')->name('depart_manger_project');
         Route::get('project_auto_complete', 'ProjectController@project_auto_complete')->name('project_auto_complete');
         Route::get('project_info', 'ProjectController@project_info')->name('project_info');
+        Route::get('project_info_all', 'ProjectController@project_info_all')->name('project_info_all');
 
         
 
@@ -69,6 +72,7 @@ Route::group([
         Route::get('orginzation_auto_complete', 'orginzationsController@orginzation_auto_complete')
         ->name('orginzation_auto_complete');
         Route::get('orgnization_info', 'orginzationsController@orgnization_info')->name('orgnization_info');
+        Route::get('orgnization_info_all', 'orginzationsController@orgnization_info_all')->name('orgnization_info_all');
 
 
         Route::get('dev_equp', 'AssetsController@dev_equp')->name('dev_equp');
@@ -76,7 +80,7 @@ Route::group([
         Route::get('equip_auto_complete', 'AssetsController@equip_auto_complete')
         ->name('equip_auto_complete');
         Route::get('equip_info', 'AssetsController@equip_info')->name('equip_info');
-
+        Route::get('equip_info_all', 'AssetsController@equip_info_all')->name('equip_info_all');
         
   
         Route::get('buildings', 'SpecialAssetsController@buildings')->name('buildings');
@@ -86,14 +90,16 @@ Route::group([
         Route::get('asset_auto_complete', 'SpecialAssetsController@asset_auto_complete')
         ->name('asset_auto_complete');
         Route::get('asset_info', 'SpecialAssetsController@asset_info')->name('asset_info');
-        
+        Route::get('asset_info_all', 'SpecialAssetsController@asset_info_all')->name('asset_info_all');
+
 
         Route::get('vehicles', 'vehicleController@index')->name('vehicles');
         Route::post('store_vehcile', 'vehicleController@store_vehcile')->name('store_vehcile');
         Route::get('vehicle_auto_complete', 'vehicleController@vehicle_auto_complete')
         ->name('vehicle_auto_complete');
         Route::get('vehcile_info', 'vehicleController@vehcile_info')->name('vehcile_info');
-        
+        Route::get('vehcile_info_all', 'vehicleController@vehcile_info_all')->name('vehcile_info_all');
+
         Route::post('getConstantChildren', 'ExtentionsController@getConstantChildren')->name('getConstantChildren');
         Route::post('deleteSubConstant', 'ExtentionsController@deleteSubConstant')->name('deleteSubConstant');
         Route::post('store_model', 'ExtentionsController@store_model')->name('store_model');

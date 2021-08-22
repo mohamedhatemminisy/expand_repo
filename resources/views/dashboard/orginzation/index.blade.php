@@ -332,8 +332,9 @@
     </div>
 </form>
 </section>
-
-
+<?php $types=$type; $type="org";?>
+@include('dashboard.component.fetch_table');
+<?php $type=$types;?>
 @stop
 @section('script')
 <script>
@@ -563,10 +564,12 @@ $.ajax({
             $('.success_alert').css('visibility', 'visible');
 
             setTimeout(function() {
+                fetchData();    
             $('.success_alert').fadeOut();
             }, 3000 ); 
             
-            $("#ajaxform")[0].reset();          
+            $("#ajaxform")[0].reset();    
+                
         },
         error: function(response) {
 

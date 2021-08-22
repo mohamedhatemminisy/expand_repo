@@ -293,6 +293,7 @@
                                                         {{trans('admin.JobType')}}
                                                         </span>
                                                     </div>
+                                                  <?php  $types=$type;  ?>
                                                     <select id="JobType" name="JobType" type="text" class="form-control">
                                                         <option> اختر </option>
                                                         @foreach($jobType as $type)
@@ -554,13 +555,17 @@
     
   </form>
 </section>
-
+<?php  $type=$types;  ?>
+@include('dashboard.component.fetch_table');
 
 
 @stop
 @section('script')
 
 <script>
+
+
+
 function SavePer(){
     var formData = new FormData($("#formData")[0]);
 				$.ajax({
@@ -829,9 +834,11 @@ $.ajax({
            contentType: false,
            processData: false,
            success: (response) => {
+            fetchData();  
              if (response) {
                this.reset();
              }
+             
            },
            error: function(response){
             if(response.responseJSON.errors.Name){

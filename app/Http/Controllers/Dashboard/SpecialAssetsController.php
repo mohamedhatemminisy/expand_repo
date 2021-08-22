@@ -123,6 +123,14 @@ class SpecialAssetsController extends Controller
         return response()->json($special);
 
     }
+
+    public function asset_info_all(Request $request)
+    {
+        $special['info'] = SpecialAsset::all();
+        
+        return response()->json($special);
+
+    }
     
     
 

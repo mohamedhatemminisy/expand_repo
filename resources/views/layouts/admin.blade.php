@@ -463,6 +463,20 @@ $('#store-modal').submit(function(e) {
   <!-- BEGIN PAGE LEVEL JS-->
   <script src="{{asset('assets/js/scripts/pages/dashboard-ecommerce.js')}}" type="text/javascript"></script>
 <script>
+
+// the selection for menu search
+
+$( function() {
+    $( ".ac1" ).autocomplete({
+		source: 'subscribe_auto_complete',
+		minLength: 1,
+		
+        select: function( event, ui ) {
+			
+		}
+	});
+});
+
   function QuickAdd(contid,ctrl,title){
 
 $(".loader").removeClass('hide');

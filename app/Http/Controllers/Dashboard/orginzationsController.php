@@ -124,7 +124,14 @@ class orginzationsController extends Controller
 
     }
     
+    public function orgnization_info_all(Request $request)
+    {
+        $orginzation['info'] = Orgnization::all();
+        
+        return response()->json($orginzation);
 
+    }
+    
 
 
 
