@@ -12,7 +12,38 @@
                             <div class="row" id="resultTblaa">
                                 <div class="col-xl-12 col-lg-12">
                                     <table style="width:100%; margin-top: -10px;direction: rtl;text-align: right" class="detailsTB table wtbl">
-                                        @if ($type=="subscriber")
+                                        @if ($type=="outArchive")
+                                        <thead>
+                                            <tr style="text-align:center !important;background: #00A3E8;">
+                                                <th  >
+                                                    #
+                                                </th>
+                                                <th  >
+                                                    {{trans('admin.address')}}
+                                                </th>
+                                                <th>
+                                                    {{trans('admin.type')}}
+                                                </th>
+                                                <th  >
+                                                    {{trans('admin.number')}}
+                                                </th>
+                                                <th>
+                                                    {{trans('admin.related_to')}}
+                                                </th>
+                                                <th>
+                                                    {{trans('admin.copy_to')}}
+                                                </th>
+                                                <th>
+                                                    {{trans('admin.date_con')}}
+                                                </th>
+                                                <th style="width: 300px;">
+                                                    {{trans('assets.archive')}}
+                                                </th>
+                                                
+                                            </tr>
+                                        </thead>
+                    
+                                        @elseif ($type=="subscriber")
                                         <thead>
                                             <tr style="text-align:center !important;background: #00A3E8;">
                                                 <th width="50px">
