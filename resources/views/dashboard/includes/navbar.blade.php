@@ -87,6 +87,17 @@
 
         </li>
 
+        <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><span>
+        {{trans('admin.archieve')}}</span></a>
+          <ul class="dropdown-menu">
+
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('out_archieve')}}" data-toggle="dropdown">{{trans('admin.out_archieve')}}</a>
+            </li>
+           
+          </ul>
+        </li>
+
 
       </ul>
     </div>
