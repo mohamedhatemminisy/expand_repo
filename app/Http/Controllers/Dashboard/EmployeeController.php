@@ -29,22 +29,21 @@ class EmployeeController extends Controller
         return view('dashboard.employee.index',compact('type','city','admin','jobType','jobTitle','departments'));         
     }
 
-    public function store_employee(EmployeeRequest $request){
-
+    public function store_employee(Request $request){
         DB::beginTransaction();
-
         $role = new Role();
         $role->permissions = json_encode($request->my_multi_select3);
         $role->save();
-        $address = new Address();
-        $address->area_id = $request->area_data;
-        $address->city_id = $request->CityID;
-        $address->region_id = $request->region_data;
-        $address->details = $request->AddressDetails;
-        $address->notes = $request->Note;
-        $address->save();
+
         if($request->employee_id == null){
             $admin = new Admin();
+            $address = new Address();
+            $address->area_id = $request->area_data;
+            $address->city_id = $request->CityID;
+            $address->region_id = $request->region_data;
+            $address->details = $request->AddressDetails;
+            $address->notes = $request->Note;
+            $address->save();
             if ($request->file('imgPic')) {
                 $imagePath = $request->file('imgPic');
                 $imageName = $imagePath->getClientOriginalName();
@@ -88,7 +87,7 @@ class EmployeeController extends Controller
                 $imageName = $imagePath->getClientOriginalName();
                 $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
             }else{
-                $path = $equpment->image;
+                $path = $admin->image;
             }
             $admin->image = $path;
             $admin->name = $request->Name;
@@ -113,8 +112,14 @@ class EmployeeController extends Controller
             $admin->role_id = $role->id;
             $admin->save();
             $AdminDetail = AdminDetail::where('admin_id',$admin->id)->first();
+            $address = Address::where('id',$AdminDetail->address_id)->first();
+            $address->area_id = $request->area_data;
+            $address->city_id = $request->CityID;
+            $address->region_id = $request->region_data;
+            $address->details = $request->AddressDetails;
+            $address->notes = $request->Note;
+            $address->save();
             $AdminDetail->admin_id =$admin->id; 
-            $AdminDetail->address_id =$address->id; 
             $AdminDetail->job_title_id =$request->Position; 
             $AdminDetail->job_type_id =$request->JobType; 
             $AdminDetail->department_id =$request->DepartmentID; 

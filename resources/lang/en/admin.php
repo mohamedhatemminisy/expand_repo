@@ -153,4 +153,5 @@ return [
     'number'   => 'number',
     'copy_to'   => 'copy to',
     'date_con'   => 'date of send',
+    'out_archieve' => 'Out Archieve',
 ];

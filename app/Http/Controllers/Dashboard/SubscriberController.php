@@ -25,14 +25,15 @@ class SubscriberController extends Controller
     }
 
     public function store_subscriber (SubscribertRequest $request){
-        $address = new Address();
-        $address->area_id = $request->area_data;
-        $address->city_id = $request->CityID;
-        $address->region_id = $request->region_data;
-        $address->details = $request->AddressDetails;
-        $address->notes = $request->Note;
-        $address->save();
+
         if($request->subscriber_id == null){
+            $address = new Address();
+            $address->area_id = $request->area_data;
+            $address->city_id = $request->CityID;
+            $address->region_id = $request->region_data;
+            $address->details = $request->AddressDetails;
+            $address->notes = $request->Note;
+            $address->save();
             $user = new User();
             $user->name = $request->formDataNameAR;
             $user->phone_one = $request->formDataMobileNo1;
@@ -49,6 +50,13 @@ class SubscriberController extends Controller
             $user->save();
          }else{
             $user = User::find($request->subscriber_id);
+            $address = Address::where('id',$user->addresse_id)->first();
+            $address->area_id = $request->area_data;
+            $address->city_id = $request->CityID;
+            $address->region_id = $request->region_data;
+            $address->details = $request->AddressDetails;
+            $address->notes = $request->Note;
+            $address->save();
             $user->name = $request->formDataNameAR;
             $user->phone_one = $request->formDataMobileNo1;
             $user->phone_two = $request->formDataMobileNo2;
@@ -64,7 +72,6 @@ class SubscriberController extends Controller
             }
             $user->group_id  = $request->formDataIndustryID;
             $user->job_title_id  = $request->formDataProfessionID;
-            $user->addresse_id   = $address->id;
             $user->save();
          }
          if ($user) {

@@ -468,7 +468,7 @@ $('#store-modal').submit(function(e) {
 
 $( function() {
     $( ".ac1" ).autocomplete({
-		source: 'subscribe_auto_complete',
+		source: 'full_search',
 		minLength: 1,
 		
         select: function( event, ui ) {

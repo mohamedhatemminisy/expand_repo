@@ -40,6 +40,8 @@ class SpecialAssetsController extends Controller
     }
 
     public function store_assets(AssetRequest $request){
+        if($request->special_id == null){
+            $specialAsset = new SpecialAsset();
             $address = new Address();
             $address->area_id = $request->TownID;
             $address->city_id = $request->CityID;
@@ -47,8 +49,6 @@ class SpecialAssetsController extends Controller
             $address->details = $request->AddressDetails;
             $address->notes = $request->Note;
             $address->save();
-        if($request->special_id == null){
-            $specialAsset = new SpecialAsset();
             if ($request->file('imgPic')) {
                 $imagePath = $request->file('imgPic');
                 $imageName = $imagePath->getClientOriginalName();
@@ -68,6 +68,13 @@ class SpecialAssetsController extends Controller
             $specialAsset->save();
          }else{
             $specialAsset = SpecialAsset::find($request->special_id);
+            $address = Address::where('id',$specialAsset->addresse_id)->first();
+            $address->area_id = $request->TownID;
+            $address->city_id = $request->CityID;
+            $address->region_id = $request->AreaID;
+            $address->details = $request->AddressDetails;
+            $address->notes = $request->Note;
+            $address->save();
             if ($request->file('imgPic')) {
                 $imagePath = $request->file('imgPic');
                 $imageName = $imagePath->getClientOriginalName();

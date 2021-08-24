@@ -35,15 +35,17 @@ class ProjectController extends Controller
     }
 
     public function store_project (ProjectRequest $request){
-        $address = new Address();
-        $address->area_id = $request->area_data;
-        $address->city_id = $request->CityID;
-        $address->region_id = $request->region_data;
-        $address->details = $request->AddressDetails;
-        $address->notes = $request->Note;
-        $address->save();
+
         if($request->project_id == null){
             $project = new Project();
+            $address = new Address();
+            $address->area_id = $request->area_data;
+            $address->city_id = $request->CityID;
+            $address->region_id = $request->region_data;
+            $address->details = $request->AddressDetails;
+            $address->notes = $request->Note;
+            $address->save();
+
             $project->name = $request->ProjectName;
             $project->ProjectNo = $request->ProjectNo;
             $project->dateStart = $request->dateStart;
@@ -61,6 +63,13 @@ class ProjectController extends Controller
             $project->save();
          }else{
             $project = Project::find($request->project_id);
+            $address = Address::where('id',$project->addresse_id)->first();
+            $address->area_id = $request->area_data;
+            $address->city_id = $request->CityID;
+            $address->region_id = $request->region_data;
+            $address->details = $request->AddressDetails;
+            $address->notes = $request->Note;
+            $address->save();
             $project->name = $request->ProjectName;
             $project->ProjectNo = $request->ProjectNo;
             $project->dateStart = $request->dateStart;
