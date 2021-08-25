@@ -106,6 +106,8 @@ Route::group([
 
         Route::get('full_search','SearchController@full_search')->name('full_search');
         Route::get('out_archieve','ArchieveController@out_archieve')->name('out_archieve');
+        Route::get('archive_auto_complete','ArchieveController@archive_auto_complete')
+        ->name('archive_auto_complete');
         
         
         

@@ -81,7 +81,7 @@
                                                                 نسخة إلى
                                                             </span>
                                                         </div>
-                                                        <input type="text" id="copyToText[]" class="form-control cust1" name="copyToText[]">
+                                                        <input type="text" id="copyToText[]" class="form-control cust" name="copyToText[]">
                                                         <input type="hidden" id="copyToID[]" name="copyToID[]" value="0">
                                                         <input type="hidden" id="copyToType[]" name="copyToType[]" value="0">
                                                         <div class="input-group-append" onclick="addRec()" style="cursor:pointer">
@@ -132,4 +132,71 @@
     </section>
 </div>
 @include('dashboard.component.fetch_table');
+@endsection
+
+@section('script')
+
+<script>
+
+$( function() {
+    $( ".cust" ).autocomplete({
+		source: 'archive_auto_complete',
+		minLength: 1,
+		
+        select: function( event, ui ) {
+            let equip_id = ui.item.id
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "equip_info",
+            data: {
+                equip_id: equip_id,
+            },
+            success:function(response){
+            $('#equpiment_id').val(response.info.id);
+            $('#Equipment').val(response.info.name);
+            $('#SerialNo').val(response.info.serial_number);
+            $('#InternalNo').val(response.info.internal_number);
+            $('#PiceCnt').val(response.info.count);
+            $('#dateinput').val(response.info.selling_date);
+            $('#Wdateinput').val(response.info.wdate_input);
+            $('#OrgSalary2').val(response.info.price);
+            $('#MantinanceNote').val(response.info.notes);
+            $("#AddressDetailsAR").val(response.info.address);
+            $("#PHnum2").val(response.info.sponsor_phone);
+            $("#PHnum1").val(response.info.supply_phone);
+
+            $("select#brand option")
+                 .each(function() { this.selected = (this.text == response.brand); 
+            });
+            $("select#Eqtype option")
+                 .each(function() { this.selected = (this.text == response.type); 
+            });
+
+            $("select#EqtStatus option")
+                 .each(function() { this.selected = (this.text == response.status); 
+            });
+            $("select#Department option")
+                 .each(function() { this.selected = (this.text == response.department); 
+            });
+            $("select#pinc3 option")
+                 .each(function() { this.selected = (this.text == response.admin); 
+            });
+
+            $("select#OrgCurrencyID option")
+                 .each(function() { this.selected = (this.text == response.Currency); 
+            });
+            $("select#Supplier option")
+                 .each(function() { this.selected = (this.text == response.supplyer); 
+            });
+            $("select#SponsorName option")
+                 .each(function() { this.selected = (this.text == response.sponser); 
+            });
+
+         },
+     });
+        }
+	});
+} );
+
+</script>
 @endsection
