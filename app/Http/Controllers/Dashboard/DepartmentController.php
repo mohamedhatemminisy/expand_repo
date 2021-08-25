@@ -31,6 +31,7 @@ class DepartmentController extends Controller
         if($request->department_id == null){
             $department = new Department();
             $department->name = $request->departmentName;
+            $department->model = "App\Models\Department";
             $department->phone = $request->phone;
             $department->extphone = $request->extphone;
             $department->email = $request->email;

@@ -16,6 +16,7 @@ class CreateOrgnizationsTable extends Migration
         Schema::create('orgnizations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('model')->nullable();
             $table->string('phone_one')->nullable();
             $table->string('phone_two')->nullable();
             $table->string('zepe_code')->nullable();

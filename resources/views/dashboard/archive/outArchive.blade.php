@@ -2,6 +2,8 @@
 @section('content')
 <div class="content-body">
     <section id="hidden-label-form-layouts">
+    <form method="post" id="archive-form" enctype="multipart/form-data">
+        @csrf
         <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="card">
@@ -92,7 +94,7 @@
                                                                 {{trans('archive.copy_to')}}
                                                             </span>
                                                         </div>
-                                                        <input type="text" id="copyToText[]" class="form-control cust" name="copyToText[]">
+                                                        <input type="text" id="copyToText[]" class="form-control cust_auto" name="copyToText[]">
                                                         <input type="hidden" id="copyToID[]" name="copyToID[]" value="0">
                                                         <input type="hidden" id="copyToType[]" name="copyToType[]" value="0">
                                                         <div class="input-group-append" onclick="addRec()" style="cursor:pointer">
@@ -127,7 +129,7 @@
                                     </div>
                                 </div>
                                 <div style="text-align: center;">
-                                    <button type="button" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
+                                    <button type="submit" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
                                     {{ trans('admin.save') }}    
                                     </button>                                    
                                 </div>
@@ -138,11 +140,72 @@
             </div>
 
         </div>
+      </form>
     </section>
 </div>
 @include('dashboard.component.fetch_table');
 @endsection
+@section('script')
 <script>
+
+
+$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+   $('#archive-form').submit(function(e) {
+       e.preventDefault();
+       let formData = new FormData(this);
+     $( "#customerName" ).removeClass( "error" );
+       $.ajax({
+          type:'POST',
+          url: "store_archive",
+           data: formData,
+           contentType: false,
+           processData: false,
+           success: (response) => {
+               this.reset();
+               $('.wtbl').DataTable().ajax.reload();  
+           },
+           error: function(response){
+            if(response.responseJSON.errors.customerName){
+                $( "#customerName" ).addClass( "error" );
+            }
+           }
+       });
+  });
+
+
+
+  $( function() {
+    $( ".cust_auto" ).autocomplete({
+		source: 'archive_auto_complete',
+		minLength: 1,
+		
+        select: function( event, ui ) {
+            var currentIndex=$("input[name^=copyToID]").length -1;
+            $('input[name="copyToID[]"]').eq(currentIndex).val(ui.item.id);
+            $('input[name="copyToType[]"]').eq(currentIndex).val(ui.item.model);
+        }
+	});
+});
+
+
+$( function() {
+    $( ".cust" ).autocomplete({
+		source: 'archive_auto_complete',
+		minLength: 1,
+		
+        select: function( event, ui ) {
+            $('#customerid').val(ui.item.id);
+            $('#customerType').val(ui.item.model);
+           }
+	    });
+    });
+
+
     function CopyRec(id){
         
 		var formData =  {'id':id};
@@ -192,7 +255,7 @@
 							+'				 {{trans('archive.copy_to')}}'
 							+'			</span>'
                             +'        </div>'
-                            +'        <input type="text" id="copyToText[]" class="form-control cust1" name="copyToText[]">'
+                            +'        <input type="text" id="copyToText[]" class="form-control cust_auto ui-autocomplete-input" name="copyToText[]">'
                             +'        <input type="hidden" id="copyToID[]" name="copyToID[]" value="0">'
                             +'        <input type="hidden" id="copyToType[]" name="copyToType[]" value="0">'
                             +'        <div class="input-group-append" onclick="$(this).parent().parent().remove()" style="cursor:pointer">'
@@ -202,7 +265,7 @@
                             +'        </div>'
                             +'    </div>'
                             +'</div>')
-            $( ".cust1" ).autocomplete({
+            $( ".cust" ).autocomplete({
                 source:"generalSearch",
                 minLength: 2,
                 select: function( event, ui ) {
@@ -213,3 +276,4 @@
             });
     }
 </script>
+@endsection

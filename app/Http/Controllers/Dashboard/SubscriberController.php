@@ -36,6 +36,7 @@ class SubscriberController extends Controller
             $address->notes = $request->Note;
             $address->save();
             $user = new User();
+            $user->model = "App\Models\User";
             $user->name = $request->formDataNameAR;
             $user->phone_one = $request->formDataMobileNo1;
             $user->phone_two = $request->formDataMobileNo2;

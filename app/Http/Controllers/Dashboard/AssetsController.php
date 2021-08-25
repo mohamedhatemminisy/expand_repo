@@ -40,6 +40,7 @@ class AssetsController extends Controller
                 $path = '';
             }
             $equpment->name = $request->Equipment;
+            $equpment->model = "App\Models\Equpment";
             $equpment->serial_number = $request->SerialNo;
             $equpment->internal_number = $request->InternalNo;
             $equpment->count = $request->PiceCnt;

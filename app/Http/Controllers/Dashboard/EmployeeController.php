@@ -52,7 +52,7 @@ class EmployeeController extends Controller
             }else{
                 $path = '';
             }
-
+            $admin->model = "App\Models\Admin";
             $admin->image  = $path;
             $admin->name = $request->Name;
             $admin->identification = $request->NationalID;

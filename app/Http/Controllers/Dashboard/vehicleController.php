@@ -37,6 +37,7 @@ class vehicleController extends Controller
             }else{
                 $path = '';
             }
+            $vehicle->model = "App\Models\Vehicle";
             $vehicle->name = $request->Vehiclename;
             $vehicle->serial_number = $request->plateNo;
             $vehicle->selling_date = $request->dateinput21;

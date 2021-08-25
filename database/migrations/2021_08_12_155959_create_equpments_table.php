@@ -16,6 +16,7 @@ class CreateEqupmentsTable extends Migration
         Schema::create('equpments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('model')->nullable();
             $table->string('serial_number')->nullable();
             $table->string('internal_number')->nullable();
             $table->string('count')->nullable();

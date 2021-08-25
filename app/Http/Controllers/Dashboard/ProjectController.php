@@ -45,7 +45,7 @@ class ProjectController extends Controller
             $address->details = $request->AddressDetails;
             $address->notes = $request->Note;
             $address->save();
-
+            $project->model = "App\Models\Project";
             $project->name = $request->ProjectName;
             $project->ProjectNo = $request->ProjectNo;
             $project->dateStart = $request->dateStart;

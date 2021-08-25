@@ -60,6 +60,7 @@ class orginzationsController extends Controller
         if($request->orgnization_id == null){
             $orgnization = new Orgnization();
             $orgnization->name = $request->SponsorName;
+            $orgnization->model = "App\Models\Orgnization";
             $orgnization->phone_one = $request->MobileNo1;
             $orgnization->phone_two = $request->MobileNo2;
             $orgnization->zepe_code = $request->LisenceNo;

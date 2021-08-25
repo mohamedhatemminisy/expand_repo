@@ -56,6 +56,7 @@ class SpecialAssetsController extends Controller
             }else{
                 $path = '';
             }
+            $specialAsset->model = "App\Models\SpecialAsset";
             $specialAsset->name = $request->BName;
             $specialAsset->price = $request->OrgSalary;
             $specialAsset->notes = $request->NoteAR;

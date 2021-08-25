@@ -16,6 +16,7 @@ class CreateVehiclesTable extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('model')->nullable();
             $table->string('serial_number')->nullable();
             $table->string('selling_date')->nullable();
             $table->string('wdateinput')->nullable();

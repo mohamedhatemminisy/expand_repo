@@ -16,6 +16,7 @@ class CreateSpecialAssetsTable extends Migration
         Schema::create('special_assets', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('model')->nullable();
             $table->string('image')->nullable();
             $table->string('price')->nullable();
             $table->string('type')->nullable();
