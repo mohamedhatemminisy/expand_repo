@@ -109,6 +109,7 @@ Route::group([
         Route::get('archive_auto_complete','ArchieveController@archive_auto_complete')
         ->name('archive_auto_complete');
         
+        Route::get('in_archieve','ArchieveController@in_archieve')->name('in_archieve');
         
         
         Route::group(['prefix' => 'profile'], function () {

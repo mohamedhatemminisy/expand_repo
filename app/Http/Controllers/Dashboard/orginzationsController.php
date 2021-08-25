@@ -12,6 +12,7 @@ use App\Models\Region;
 use App\Models\Orgnization;
 use App\Http\Requests\DepartmentRequest;
 use App\Http\Requests\OrgnizationRequest;
+use Yajra\DataTables\DataTables;
 
 class orginzationsController extends Controller
 {
@@ -126,10 +127,18 @@ class orginzationsController extends Controller
     
     public function orgnization_info_all(Request $request)
     {
-        $orginzation['info'] = Orgnization::all();
         
-        return response()->json($orginzation);
-
+        $orginzation= Orgnization::select('orgnizations.*','addresses.notes','addresses.region_id','addresses.area_id',
+        'addresses.city_id','addresses.details','regions.name as region_name','cities.name as city_name',
+        'areas.name as area_name','job_titles.name as job_title_name')
+        ->leftJoin('addresses','addresses.id','orgnizations.addresse_id')
+        ->leftJoin('job_titles','job_titles.id','orgnizations.job_title_id')
+        ->leftJoin('regions','addresses.region_id','regions.id')
+        ->leftJoin('cities','addresses.city_id','cities.id')
+        ->leftJoin('areas','addresses.area_id','areas.id')->orderBy('id', 'DESC');
+        return DataTables::of($orginzation)
+                            ->addIndexColumn()
+                            ->make(true);
     }
     
 

@@ -810,7 +810,7 @@ $.ajax({
 
         success:function(response){
             $('.success_alert').css('visibility', 'visible');
-            fetchData();       
+            $('.wtbl').DataTable().ajax.reload();       
             setTimeout(function() {
             $('.success_alert').fadeOut();
             }, 3000 ); 

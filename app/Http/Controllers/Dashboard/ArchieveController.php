@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Models\Equpment;
 use App\Models\Admin;
@@ -37,5 +38,10 @@ class ArchieveController extends Controller
         ->merge($orgnization)->merge($specialAsset)->merge($user);
 
         return response()->json($names);
+    }
+    public function in_archieve(){
+        $type= 'inArchive';
+        
+        return view('dashboard.archive.outArchive',compact('type'));
     }
 }

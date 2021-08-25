@@ -148,7 +148,7 @@ return [
     'petrol' =>'petrol',
     'diesel' => 'diesel',
 
-    
+    'state' => 'state',
     'type'   => 'type',
     'number'   => 'number',
     'copy_to'   => 'copy to',

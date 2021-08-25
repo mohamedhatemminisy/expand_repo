@@ -12,7 +12,7 @@ use App\Models\Equpment;
 use App\Models\EqupmentStatus;
 use App\Models\EqupmentType;
 use App\Http\Requests\EquipentRequest;
-
+use Yajra\DataTables\DataTables;
 class AssetsController extends Controller
 {
     public function dev_equp(){
@@ -122,9 +122,16 @@ class AssetsController extends Controller
     }
     public function equip_info_all(Request $request)
     {
-        $equipment['info'] = Equpment::all();
+        $equipment= Equpment::select('equpments.*','admins.name as manager_name','departments.name as department_name','brands.name as brand_name','equpment_types.name as type_name','equpment_statuses.name as status')
+        ->leftJoin('admins','admins.id','equpments.admin_id')
+        ->leftJoin('departments','departments.id','equpments.department_id')
+        ->leftJoin('brands','brands.id','equpments.brand_id')
+        ->leftJoin('equpment_types','equpment_types.id','equpments.equpment_type_id')
+        ->leftJoin('equpment_statuses','equpment_statuses.id','equpments.equpment_status_id')->orderBy('id', 'DESC');
         
-        return response()->json($equipment);
+        return DataTables::of($equipment)
+                        ->addIndexColumn()
+                        ->make(true);
 
     }
     

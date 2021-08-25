@@ -14,6 +14,7 @@ use App\Models\Region;
 use App\Http\Requests\DepartmentRequest;
 use App\Http\Requests\SubscribertRequest;
 use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Services\DataTable;
 class SubscriberController extends Controller
 {
     public function index(){
@@ -111,10 +112,18 @@ class SubscriberController extends Controller
     }
     public function subscribe_info_all()
     {
-        $users['info'] = User::all();
-        
-        return response()->json($users);
-
+        $users= User::select('users.*','addresses.notes','addresses.region_id','addresses.area_id',
+        'addresses.city_id','addresses.details','regions.name as region_name','cities.name as city_name',
+        'areas.name as area_name','job_titles.name as job_title_name','groups.name as group_name')
+        ->join('job_titles','job_titles.id','users.job_title_id')
+        ->join('groups','groups.id','users.group_id')
+        ->join('addresses','addresses.id','users.addresse_id')
+        ->join('regions','addresses.region_id','regions.id')
+        ->join('cities','addresses.city_id','cities.id')
+        ->join('areas','addresses.area_id','areas.id')->orderBy('users.id', 'DESC');
+        return DataTables::of($users)
+                            ->addIndexColumn()
+                            ->make(true);
     }
     
 

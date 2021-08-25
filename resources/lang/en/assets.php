@@ -58,6 +58,8 @@ return [
     'fuel'   =>  'type of fuel',
     'date_lic_end'   =>  'date of ending license',
     'sure_end'   =>  'Insurance expiry date',
+    'datestart'   =>  ' date start project ',
+    'dateend'   =>  ' date end project ',
 
 
 ];

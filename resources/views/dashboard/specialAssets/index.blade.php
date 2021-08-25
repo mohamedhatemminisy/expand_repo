@@ -1014,7 +1014,7 @@ $.ajaxSetup({
            contentType: false,
            processData: false,
            success: (response) => {
-            fetchData(); 
+            $('.wtbl').DataTable().ajax.reload(); 
              if (response) {
                this.reset();
              }

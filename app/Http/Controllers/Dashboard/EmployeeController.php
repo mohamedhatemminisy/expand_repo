@@ -15,6 +15,7 @@ use App\Models\Region;
 use App\Models\AdminDetail;
 use App\Models\Department;
 use App\Http\Requests\EmployeeRequest;
+use Yajra\DataTables\DataTables;
 use DB;
 
 class EmployeeController extends Controller
@@ -179,9 +180,19 @@ class EmployeeController extends Controller
 
     public function emp_info_all()
     {
-        $admin['info'] = Admin::all();
-        
-        return response()->json($admin);
+        $admin= Admin::select('admins.*','addresses.notes','addresses.region_id','addresses.area_id',
+        'addresses.city_id','addresses.details','regions.name as region_name','cities.name as city_name',
+        'areas.name as area_name','job_types.name as job_type_name','job_titles.name as job_title_name')
+        ->leftJoin('admin_details','admins.id','admin_details.admin_id')
+        ->leftJoin('job_types','job_types.id','admin_details.job_type_id')
+        ->leftJoin('job_titles','job_titles.id','admin_details.job_title_id')
+        ->leftJoin('addresses','addresses.id','admin_details.address_id')
+        ->leftJoin('regions','addresses.region_id','regions.id')
+        ->leftJoin('cities','addresses.city_id','cities.id')
+        ->leftJoin('areas','addresses.area_id','areas.id')->orderBy('id', 'DESC');
+        return DataTables::of($admin)
+                            ->addIndexColumn()
+                            ->make(true);
 
     }
 }

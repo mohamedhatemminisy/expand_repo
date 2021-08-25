@@ -634,7 +634,7 @@ $(".save-data").click(function(event){
 			$(".loader").addClass('hide');
             $(".alert-success").removeClass('hide');
             $("#succMsg").text('{{trans('admin.department_added')}}')
-			fetchData(); 
+			$('.wtbl').DataTable().ajax.reload(); 
             setTimeout(function(){
                 $(".alert-success").addClass("hide");
             },2000)
