@@ -62,15 +62,16 @@ class ArchieveController extends Controller
         $archive->type =$request->msgType;
         $archive->serisal =$request->msgid;
         $archive->save();
-
-        $copyTo = new CopyTo();
-        for($i= 0 ; $i< count($request->copyToText) ; $i++){
-            $copyTo->archive_id =  $archive->id;
-            $copyTo->model_id =  $request->copyToID[$i];
-            $copyTo->name =  $request->copyToText[$i];    
-            $copyTo->model_name =  $request->copyToType[$i];    
+        if($request->copyToText[0] != null){
+            $copyTo = new CopyTo();
+            for($i= 0 ; $i< count($request->copyToText) ; $i++){
+                $copyTo->archive_id =  $archive->id;
+                $copyTo->model_id =  $request->copyToID[$i];
+                $copyTo->name =  $request->copyToText[$i];    
+                $copyTo->model_name =  $request->copyToType[$i];    
+            }
+            $copyTo->save();        
         }
-        $copyTo->save();        
 
         if ($archive) {
             return response()->json(['success'=>trans('admin.archive_added')]);
