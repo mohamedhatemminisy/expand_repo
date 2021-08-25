@@ -29,6 +29,7 @@ return [
     'address' => 'العنوان',
     'region' => 'المنطقة',
     'city' => 'المدينة',
+    'state' => 'البلدة',
     'area' => 'الحي',
     'address_details' => 'تفاصيل العنوان',
     'notes' => 'ملاحظات',

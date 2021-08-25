@@ -462,6 +462,8 @@ $('#store-modal').submit(function(e) {
   <!-- END MODERN JS-->
   <!-- BEGIN PAGE LEVEL JS-->
   <script src="{{asset('assets/js/scripts/pages/dashboard-ecommerce.js')}}" type="text/javascript"></script>
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script>
 
 // the selection for menu search

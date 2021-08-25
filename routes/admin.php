@@ -106,7 +106,7 @@ Route::group([
 
         Route::get('full_search','SearchController@full_search')->name('full_search');
         Route::get('out_archieve','ArchieveController@out_archieve')->name('out_archieve');
-        
+        Route::get('in_archieve','ArchieveController@in_archieve')->name('in_archieve');
         
         
         Route::group(['prefix' => 'profile'], function () {

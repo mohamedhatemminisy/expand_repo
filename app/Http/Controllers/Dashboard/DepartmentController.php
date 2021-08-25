@@ -9,7 +9,7 @@ use App\Models\Department;
 use App\Models\AdminDetail;
 use App\Http\Requests\DepartmentRequest;
 use App\Models\JobTitle;
-
+use Yajra\DataTables\DataTables;
 class DepartmentController extends Controller
 {
     public function index(){
@@ -85,9 +85,12 @@ class DepartmentController extends Controller
     }
     public function dep_info_all(Request $request)
     {
-        $depaertment['info'] = Department::all();
-        
-        return response()->json($depaertment);
+        $depaertment = Department::select('departments.*','admins.name as manager_name')
+        ->leftJoin('admins','admins.id','departments.admin_id');
+        return DataTables::of($depaertment)
+                            ->addIndexColumn()
+                            ->make(true);
+
 
     }
 }

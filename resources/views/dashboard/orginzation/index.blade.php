@@ -564,7 +564,7 @@ $.ajax({
             $('.success_alert').css('visibility', 'visible');
 
             setTimeout(function() {
-                fetchData();    
+                $('.wtbl').DataTable().ajax.reload();    
             $('.success_alert').fadeOut();
             }, 3000 ); 
             

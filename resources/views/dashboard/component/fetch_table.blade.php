@@ -1,9 +1,38 @@
+<style>
+    .detailsTB th{
+        color:#ffffff;
+    }
+      .detailsTB th,.detailsTB td{
+        text-align:right !important;
+        
+    }
+    .recList>tr>td{
+        font-size:12px;
+    }
+    table.dataTable tbody th, table.dataTable tbody td {
+    padding-bottom: 5px !important;
+}
+.dataTables_filter{
+    margin-top:-15px;
+}
+.even{
+    background-color:#D7EDF9 !important;
+}
+</style>
 <div class="content-body resultTblaa">
     <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="card">
                     <div class="card-header" style="direction: rtl;">
-                        <h4 class="card-title"><img src="images/report32.png" />  نتائج البحث</h4>
+                        <h4 class="card-title"><img src="{{asset('assets/images/ico/report32.png')}}" /> 
+                            @if ($type=="outArchive")
+                            {{ trans('archive.sending_out') }}
+                            @elseif ($type=="inArchive")
+                            {{ trans('archive.sending_in') }}
+                            @else
+                            {{ trans('archive.search_result') }}
+                             @endif
+                            </h4>
                         
                     </div>
                     <div class="card-body">
@@ -12,20 +41,17 @@
                             <div class="row" id="resultTblaa">
                                 <div class="col-xl-12 col-lg-12">
                                     <table style="width:100%; margin-top: -10px;direction: rtl;text-align: right" class="detailsTB table wtbl">
-                                        @if ($type=="outArchive")
+                                        @if ($type=="outArchive"||$type=="inArchive")
                                         <thead>
                                             <tr style="text-align:center !important;background: #00A3E8;">
                                                 <th  >
                                                     #
                                                 </th>
                                                 <th  >
-                                                    {{trans('admin.address')}}
-                                                </th>
-                                                <th>
-                                                    {{trans('admin.type')}}
+                                                    {{trans('admin.number')}}
                                                 </th>
                                                 <th  >
-                                                    {{trans('admin.number')}}
+                                                    {{trans('admin.address')}}
                                                 </th>
                                                 <th>
                                                     {{trans('admin.related_to')}}
@@ -53,13 +79,13 @@
                                              {{trans('admin.subscriber_name')}}
                                                 </th>
                                                 <th>
-                                                    رقم الجوال
+                                                    {{trans('admin.phone')}}
                                                 </th>
                                                 <th>
                                                     {{trans('admin.emp_id')}} 
                                                 </th>
                                                 <th>
-                                                    المنطقة
+                                                    {{trans('admin.region')}}
                                                 </th>
                                                 
                                             </tr>
@@ -74,13 +100,13 @@
                                                     {{trans('admin.user_name')}}
                                                 </th>
                                                 <th>
-                                                    رقم الجوال
+                                                    {{trans('admin.phone')}}
                                                 </th>
                                                 <th>
                                                     {{trans('admin.emp_id')}}  
                                                 </th>
                                                 <th>
-                                                    المنطقة
+                                                    {{trans('admin.region')}}
                                                 </th>
                                                 
                                             </tr>
@@ -270,6 +296,9 @@
                                                     {{trans('assets.manager')}}
                                                 </th>
                                                 <th>
+                                                    {{trans('admin.department')}}
+                                                </th>
+                                                <th>
                                                     {{trans('assets.vehicles_type')}}
                                                 </th>
                                                 <th>
@@ -305,9 +334,9 @@
 </div>
 
 
-<script>
+<script>/*
     $( document ).ready(function() {
-        fetchData();
+        $('.wtbl').DataTable().ajax.reload();
     });
     
         function fetchData()
@@ -485,5 +514,143 @@
                     },
                     });
     
-        }
+        }*/
+       @if($type=='outArchive'||$type=='inArchive')
+           
+       @else
+        $( function(){
+            $('.wtbl').DataTable({
+            processing:true,
+            serverSide:true,
+            info:true,
+            @if ($type=="employee")
+            ajax:"{{ route('emp_info_all') }}",
+            @elseif ($type=="subscriber")
+            ajax:"{{ route('subscribe_info_all') }}",
+            @elseif ($type=="depart")
+            ajax:"{{ route('dep_info_all') }}",
+            @elseif ($type == 'org')
+            ajax:"{{ route('orgnization_info_all') }}",
+            @elseif ($type == 'vehicle')
+            ajax:"{{ route('vehcile_info_all') }}",
+            @elseif($type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands')
+            ajax:"{{ route('asset_info_all') }}",
+            @elseif ($type == 'equip')
+            ajax:"{{ route('equip_info_all') }}",
+            @elseif ($type == 'project')
+            ajax:"{{ route('project_info_all') }}",
+            @endif
+            @if($type == 'org')
+                columns:[
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                    {data:'name'},
+                    {data:'manager_name',name:'admins.name'},
+                    {data:'phone_one'},
+                    {data:'job_title_name' ,name:'job_titles.name'},
+                    {data:'region_name',name:'regions.name'},
+                ],
+            @elseif($type == 'depart')
+            columns:[
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                {data:'name'},
+                {data:'manager_name',name:'admins.name'},//manager_name
+                {data:'department_id'},
+            ],
+            @elseif($type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands')
+            columns:[
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+               {data:'name'},
+                {data:'manager_name',name:'admins.name'},//manager_name
+                {data:'price'},
+                {data:'region_name',name:'regions.name'},
+            ],
+            @elseif($type=="employee"||$type=="subscriber")
+            columns:[
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                {data:'name'},
+                {data:'phone_one'},
+                @if ($type=="employee")
+                {data:'identification'},
+                @elseif ($type=="subscriber")
+                {data:'national_id'},
+                @endif
+                {data:'region_name',name:'regions.name'},
+            ],
+            @elseif($type == 'vehicle')
+            columns:[
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                {data:'name'},
+                {data:'manager_name',name:'admins.name'},
+                {data:'department_name',name:'departments.name'},
+                {data:'type_name',name:'vehicle_types.name'},
+                {data:'brand_name',name:'vehicle_brands.name'},//brand
+                {data:'oiltype'},
+                {data:'price'},
+                {data:'selling_date'},
+            ],
+            @elseif($type == 'project')
+            columns:[
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                {data:'name'},
+                {data:'ProjectNo'},
+                {data:'manager_name',name:'admins.name'},
+                {data:'dateStart'},
+                {data:'dateEnd'},
+                {data:'department_name',name:'departments.name'},//department
+                {data:'Projectcost'},
+                {data:'region_name',name:'regions.name'},
+            ],
+            @elseif($type == 'equip')
+                columns:[
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                {data:'name'},
+                {data:'manager_name',name:'admins.name'},
+                {data:'department_name',name:'departments.name'},
+                {data:'brand_name',name:'brands.name'},//brand
+                {data:'type_name',name:'equpment_types.name'},
+                {data:'price'},
+                {data:'status',name:'equpment_statuses.name'},
+                {data:'count'},
+            ],
+            @endif   
+            
+            "language": {
+                        "sEmptyTable":     "ليست هناك بيانات متاحة في الجدول",
+                        "sLoadingRecords": "جارٍ التحميل...",
+                        "sProcessing":   "جارٍ التحميل...",
+                        "sLengthMenu":   "أظهر _MENU_ مدخلات",
+                        "sZeroRecords":  "لم يعثر على أية سجلات",
+                        "sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                        "sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
+                        "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                        "sInfoPostFix":  "",
+                        "sSearch":       "ابحث:",
+                        "sUrl":          "",
+                        "oPaginate": {
+                            "sFirst":    "الأول",
+                            "sPrevious": "السابق",
+                            "sNext":     "التالي",
+                            "sLast":     "الأخير"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": تفعيل لترتيب العمود تصاعدياً",
+                            "sSortDescending": ": تفعيل لترتيب العمود تنازلياً"
+                        }
+                    }
+    
+        });
+        })
+        @endif 
 </script>    
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>

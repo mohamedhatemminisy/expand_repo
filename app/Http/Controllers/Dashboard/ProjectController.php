@@ -14,7 +14,7 @@ use App\Models\Region;
 use App\Models\Project;
 use App\Models\Orgnization;
 use App\Http\Requests\ProjectRequest;
-
+use Yajra\DataTables\DataTables;
 class ProjectController extends Controller
 {
     public function index(){
@@ -129,9 +129,18 @@ class ProjectController extends Controller
 
     public function project_info_all(Request $request)
     {
-        $project['info'] = Project::all();
-        
-        return response()->json($project);
+        $project= Project::select('projects.*','addresses.notes','addresses.region_id','addresses.area_id',
+        'addresses.city_id','addresses.details','regions.name as region_name','cities.name as city_name',
+        'areas.name as area_name','admins.name as manager_name','departments.name as department_name')
+        ->leftJoin('admins','admins.id','projects.admin_id')
+        ->leftJoin('departments','departments.id','projects.department_id')
+        ->leftJoin('addresses','addresses.id','projects.addresse_id')
+        ->leftJoin('regions','addresses.region_id','regions.id')
+        ->leftJoin('cities','addresses.city_id','cities.id')
+        ->leftJoin('areas','addresses.area_id','areas.id')->orderBy('id', 'DESC');
+        return DataTables::of($project)
+                            ->addIndexColumn()
+                            ->make(true);
 
     }
     
