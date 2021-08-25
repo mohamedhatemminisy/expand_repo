@@ -11,7 +11,7 @@ use App\Models\VehicleBrand;
 use App\Models\VehicleType;
 use App\Models\Vehicle;
 use App\Http\Requests\VehcileRequest;
-
+use Yajra\DataTables\DataTables;
 class vehicleController extends Controller
 {
     public function index(){
@@ -120,9 +120,16 @@ class vehicleController extends Controller
     }
     public function vehcile_info_all(Request $request)
     {
-        $vehicle['info'] = Vehicle::all();
+        $vehicle= Vehicle::select('vehicles.*','admins.name as manager_name','departments.name as department_name','vehicle_brands.name as brand_name','vehicle_types.name as type_name')
+        ->leftJoin('admins','admins.id','vehicles.admin_id')
+        ->leftJoin('departments','departments.id','vehicles.department_id')
+        ->leftJoin('vehicle_brands','vehicle_brands.id','vehicles.brand_id')
+        ->leftJoin('vehicle_types','vehicle_types.id','vehicles.type_id')->orderBy('id', 'DESC');
+        
 
-        return response()->json($vehicle);
+        return DataTables::of($vehicle)
+                            ->addIndexColumn()
+                            ->make(true);
 
     }
     

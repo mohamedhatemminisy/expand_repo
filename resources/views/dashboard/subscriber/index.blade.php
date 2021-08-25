@@ -624,7 +624,7 @@ $("#area_data").change(function () {
             $(".loader").addClass('hide');
             $(".alert-success").removeClass('hide');
             $("#succMsg").text('{{trans('admin.employee_added')}}')
-            fetchData();     
+            $('.wtbl').DataTable().ajax.reload(); 
             setTimeout(function(){
                 $(".alert-success").addClass("hide");
             },2000)
