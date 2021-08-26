@@ -41,7 +41,7 @@
                             <div class="row" id="resultTblaa">
                                 <div class="col-xl-12 col-lg-12">
                                     <table style="width:100%; margin-top: -10px;direction: rtl;text-align: right" class="detailsTB table wtbl">
-                                        @if ($type=="outArchive"||$type=="inArchive"||'projArchive')
+                                        @if ($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive')
                                         <thead>
                                             <tr style="text-align:center !important;background: #00A3E8;">
                                                 <th  >
@@ -537,7 +537,7 @@
             ajax:"{{ route('equip_info_all') }}",
             @elseif ($type == 'project')
             ajax:"{{ route('project_info_all') }}",
-            @elseif ($type=='outArchive'||$type=='inArchive'||'projArchive')
+            @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive')
             ajax:"{{ route('archieve_info_all') }}",
             @endif
             @if($type == 'org')
@@ -612,7 +612,7 @@
                 {data:'status',name:'equpment_statuses.name'},
                 {data:'count'},
             ],
-            @elseif ($type=='outArchive'||$type=='inArchive'||'projArchive')
+            @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive')
             columns:[
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
                 {data:'serisal'},
