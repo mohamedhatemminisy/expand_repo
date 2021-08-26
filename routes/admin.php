@@ -110,7 +110,8 @@ Route::group([
         Route::get('archive_auto_complete','ArchieveController@archive_auto_complete')
         ->name('archive_auto_complete');
         Route::post('store_archive','ArchieveController@store_archive')->name('store_archive');
-
+        Route::get('archieve_info_all','ArchieveController@archieve_info_all')
+        ->name('archieve_info_all');
         
         Route::get('in_archieve','ArchieveController@in_archieve')->name('in_archieve');
         

@@ -41,7 +41,7 @@
                             <div class="row" id="resultTblaa">
                                 <div class="col-xl-12 col-lg-12">
                                     <table style="width:100%; margin-top: -10px;direction: rtl;text-align: right" class="detailsTB table wtbl">
-                                        @if ($type=="outArchive"||$type=="inArchive")
+                                        @if ($type=="outArchive"||$type=="inArchive"||'projArchive')
                                         <thead>
                                             <tr style="text-align:center !important;background: #00A3E8;">
                                                 <th  >
@@ -515,9 +515,7 @@
                     });
     
         }*/
-       @if($type=='outArchive'||$type=='inArchive')
-           
-       @else
+    
         $( function(){
             $('.wtbl').DataTable({
             processing:true,
@@ -539,6 +537,8 @@
             ajax:"{{ route('equip_info_all') }}",
             @elseif ($type == 'project')
             ajax:"{{ route('project_info_all') }}",
+            @elseif ($type=='outArchive'||$type=='inArchive'||'projArchive')
+            ajax:"{{ route('archieve_info_all') }}",
             @endif
             @if($type == 'org')
                 columns:[
@@ -612,6 +612,16 @@
                 {data:'status',name:'equpment_statuses.name'},
                 {data:'count'},
             ],
+            @elseif ($type=='outArchive'||$type=='inArchive'||'projArchive')
+            columns:[
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                {data:'serisal'},
+                {data:'title'},
+                {data:'name'},
+                {data:null},
+                {data:'date'},
+                {data:'fileIDS'},
+            ],
             @endif   
             
             "language": {
@@ -640,7 +650,6 @@
     
         });
         })
-        @endif 
 </script>    
 
 

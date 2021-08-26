@@ -84,4 +84,14 @@ class ArchieveController extends Controller
         
         return view('dashboard.archive.outArchive',compact('type'));
     }
+
+    public function archieve_info_all(Request $request)
+    {
+        $archive= Archive::select('archives.*')->orderBy('id', 'DESC');
+        
+        return DataTables::of($archive)
+                        ->addIndexColumn()
+                        ->make(true);
+
+    }
 }
