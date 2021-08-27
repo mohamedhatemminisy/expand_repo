@@ -55,7 +55,7 @@ class ArchieveController extends Controller
     public function store_archive(ArchiveRequest $request){
         $archive = new Archive();
         $archive->model_id =$request->customerid;
-        $archive->name =$request->customerName;
+        $archive->name =$request->customername;
         $archive->model_name =$request->customerType;
         $archive->date =$request->msgDate;
         $archive->title =$request->msgTitle;
@@ -84,7 +84,17 @@ class ArchieveController extends Controller
         
         return view('dashboard.archive.outArchive',compact('type'));
     }
+    public function projArchive(){
+        $type= 'projArchive';
+        return view('dashboard.archive.outArchive',compact('type'));
+    }
+    public function munArchive(){
+        $type= 'munArchive';
+        return view('dashboard.archive.outArchive',compact('type'));
+    }
+    
 
+    
     public function archieve_info_all(Request $request)
     {
         $archive= Archive::select('archives.*')->orderBy('id', 'DESC');

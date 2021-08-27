@@ -114,7 +114,9 @@ Route::group([
         ->name('archieve_info_all');
         
         Route::get('in_archieve','ArchieveController@in_archieve')->name('in_archieve');
-        
+        Route::get('title_archieve','ArchieveController@projArchive')->name('title_archieve');
+        Route::get('title_archieve','ArchieveController@munArchive')->name('title_archieve');
+
         
         Route::group(['prefix' => 'profile'], function () {
             Route::get('edit', 'ProfileController@editProfile')->name('edit.profile');
