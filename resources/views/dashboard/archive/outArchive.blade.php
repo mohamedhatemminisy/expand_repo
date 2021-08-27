@@ -13,6 +13,18 @@
                             {{trans('archive.out_archive')}} 
                             @elseif ($type=='inArchive')
                             {{trans('archive.in_archive')}} 
+                            @elseif ($type=='projArchive')
+                            {{trans('archive.proj_archive')}}
+                            @elseif ($type=='munArchive')
+                            {{trans('archive.mun_archive')}} 
+                            @elseif ($type=='empArchive')
+                            {{trans('archive.emp_archive')}} 
+                            @elseif ($type=='depArchive')
+                            {{trans('archive.dep_archive')}} 
+                            @elseif ($type=='assetsArchive')
+                            {{trans('archive.assets_archive')}} 
+                            @elseif ($type=='citArchive')
+                            {{trans('archive.cit_archive')}} 
                             @endif
                            
                         </h4>
@@ -23,7 +35,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 pr-0 pr-s-12"  >
                                         <div class="row">
-                                            <div class="col-lg-8 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-9 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
@@ -32,36 +44,75 @@
                                                                 {{trans('archive.export_to')}} 
                                                                 @elseif ($type=='inArchive')
                                                                 {{trans('archive.import_from')}} 
+                                                                @elseif ($type=='projArchive'||'munArchive')
+                                                                {{trans('archive.title')}} 
                                                                 @endif
                                                             </span>
+                                                            
                                                         </div>
-                                                        <input type="text" id="customerName" class="form-control cust" name="customerName">
+                                                        <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
+                                                        
+                                                        @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
+                                                            <select name="OrgType" id="OrgType" class="form-control">
+                                                                    
+                                                                <option value="">-- نوع الارشيف --</option>
+                                                                
+                                                            </select>
+                                                            <div class="input-group-append" onclick="QuickAdd(42,'OrgType','نوع الأرشيف')" style="cursor:pointer">
+                                                                <span class="input-group-text input-group-text2">
+                                                                    <i class="fa fa-external-link"></i>
+                                                                </span>
+                                                            </div>
+                                                        @elseif ($type=='inArchive'||$type=='outArchive')
+                                                        
+                                                        @endif
                                                         <input type="hidden" id="customerid" name="customerid" value="0">
+                                                        <input type="hidden" id="customername" name="customername" value="0">
                                                         <input type="hidden" id="customerType" name="customerType" value="0">
                                                         <input type="hidden" id="msgType" name="msgType" value="<?php echo $type ?>">
                                                         <input type="hidden" id="pk_i_id" name="pk_i_id" value="0">
                                                         <!-- 2166  -->
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">
+                                                                @if ($type=='projArchive'||$type=='munArchive')
+                                                                {{trans('archive.date')}}
+                                                                @elseif ($type=='outArchive'||'inArchive')  
                                                                 {{trans('archive.date_send')}}
+                                                                @endif
+                                                                
                                                             </span>
                                                         </div>
                                                         <input type="text" id="msgDate" name="msgDate" data-mask="00/00/0000" maxlength="10" class="form-control eng-sm  valid" value="<?php echo date('d/m/Y')?>" placeholder="" autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-8 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-9 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">
+                                                                @if ($type=='projArchive')
+                                                                {{trans('archive.proj_name')}} 
+                                                                @elseif($type=='empArchive')
+                                                                {{trans('archive.name_emp')}}
+                                                                @elseif ($type=='depArchive')  
+                                                                {{trans('archive.name_dep')}}
+                                                                @elseif ($type=='citArchive')  
+                                                                {{trans('archive.name_cit')}}
+                                                                @elseif ($type=='assetsArchive')  
+                                                                {{trans('archive.name_assets')}}
+                                                                @elseif ($type=='munArchive')  
+                                                                {{trans('admin.related_to')}}
+                                                                @elseif ($type=='outArchive'||$type=='inArchive')  
                                                                 {{trans('archive.title_send')}}
+                                                                @endif
                                                             </span>
                                                         </div>
                                                         <input type="text" id="msgTitle" class="form-control" name="msgTitle">
@@ -69,12 +120,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">
+                                                                @if ($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
+                                                                {{trans('archive.num')}}
+                                                                @elseif ($type=='outArchive'||$type=='inArchive')  
                                                                 {{trans('archive.num_send')}}
+                                                                @endif
+                                                                
                                                             </span>
                                                         </div>
                                                         <input type="text" id="msgid" name="msgid" class="form-control eng-sm valid" style="text-align: left;direction: ltr;">
@@ -200,6 +256,7 @@ $( function() {
 		
         select: function( event, ui ) {
             $('#customerid').val(ui.item.id);
+            $('#customername').val(ui.item.name);
             $('#customerType').val(ui.item.model);
            }
 	    });
