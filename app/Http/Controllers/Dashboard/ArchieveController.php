@@ -84,6 +84,31 @@ class ArchieveController extends Controller
         
         return view('dashboard.archive.outArchive',compact('type'));
     }
+    public function mun_archieve(){
+        $type= 'munArchive';
+        
+        return view('dashboard.archive.mainArchive',compact('type'));
+    }
+    public function proj_archieve(){
+        $type= 'projArchive';
+        
+        return view('dashboard.archive.mainArchive',compact('type'));
+    }
+    public function emp_archieve(){
+        $type= 'empArchive';
+        
+        return view('dashboard.archive.mainArchive',compact('type'));
+    }
+    public function cit_archieve(){
+        $type= 'citArchive';
+        
+        return view('dashboard.archive.mainArchive',compact('type'));
+    }
+    public function dep_archieve(){
+        $type= 'depArchive';
+        
+        return view('dashboard.archive.mainArchive',compact('type'));
+    }
     public function projArchive(){
         $type= 'projArchive';
         return view('dashboard.archive.outArchive',compact('type'));
@@ -93,9 +118,7 @@ class ArchieveController extends Controller
         return view('dashboard.archive.outArchive',compact('type'));
     }
     
-
-    
-    public function archieve_info_all(Request $request)
+      public function archieve_info_all(Request $request)
     {
         $archive= Archive::select('archives.*')->orderBy('id', 'DESC');
         

@@ -100,6 +100,21 @@
             <li data-menu="">
               <a class="dropdown-item" href="{{route('title_archieve')}}" data-toggle="dropdown">{{trans('archive.title')}}</a>
             </li>
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('mun_archieve')}}" data-toggle="dropdown">{{trans('archive.mun_archive')}}</a>
+            </li>
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('proj_archieve')}}" data-toggle="dropdown">{{trans('archive.proj_archive')}}</a>
+            </li>
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('emp_archieve')}}" data-toggle="dropdown">{{trans('archive.emp_archive')}}</a>
+            </li>
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('dep_archieve')}}" data-toggle="dropdown">{{trans('archive.dep_archive')}}</a>
+            </li>
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('cit_archieve')}}" data-toggle="dropdown">{{trans('archive.cit_archive')}}</a>
+            </li>
           </ul>
         </li>
 
