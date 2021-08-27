@@ -23,6 +23,8 @@ class CreateArchivesTable extends Migration
             $table->string('title')->nullable();
             $table->string('serisal')->nullable();
             $table->string('fileIDS')->nullable();
+            $table->integer('type_id')->unsigned()->nullable();
+            $table->foreign('type_id')->references('id')->on('archive_types')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ use App\Models\SpecialAsset;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\CopyTo;
+use App\Models\ArchiveType;
 use DB;
 use App\Http\Requests\ArchiveRequest;
 
@@ -22,7 +23,8 @@ class ArchieveController extends Controller
 {
     public function out_archieve(){
         $type= 'outArchive';
-        return view('dashboard.archive.outArchive',compact('type'));
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.outArchive',compact('type','archive_type'));
     }
 
     public function archive_auto_complete(Request $request){
@@ -53,9 +55,22 @@ class ArchieveController extends Controller
     }
 
     public function store_archive(ArchiveRequest $request){
+        if($request->hasFile('formDataaaUploadFile')){
+            $files = $request->file('formDataaaUploadFile');
+            foreach($files as $file){
+                $new[] = url(upload_image($file, 'file_'));
+                // array_push($files_obj, $new);
+            }
+            $files = json_encode($new);
+        }else{
+            $files = null;
+        }
+
         $archive = new Archive();
         $archive->model_id =$request->customerid;
+        $archive->type_id =$request->archive_type;
         $archive->name =$request->customername;
+        $archive->fileIDS =$files;
         $archive->model_name =$request->customerType;
         $archive->date =$request->msgDate;
         $archive->title =$request->msgTitle;
@@ -67,7 +82,7 @@ class ArchieveController extends Controller
             for($i= 0 ; $i< count($request->copyToText) ; $i++){
                 $copyTo->archive_id =  $archive->id;
                 $copyTo->model_id =  $request->copyToID[$i];
-                $copyTo->name =  $request->copyToText[$i];    
+                $copyTo->name =  $request->copyToCustomer[$i];    
                 $copyTo->model_name =  $request->copyToType[$i];    
             }
             $copyTo->save();        
@@ -79,43 +94,55 @@ class ArchieveController extends Controller
             return response()->json(['error'=>$validator->errors()->all()]);
     }
     
+    function upload_image($file, $prefix){
+        if($file){
+            $files = $file;
+            $imageName = $prefix.rand(3,999).'-'.time().'.'.$files->extension();
+            $image = "storage/".$imageName;
+            $files->move(public_path('storage'), $imageName);
+            $getValue = $image;
+            return $getValue;
+        }
+    }
+
     public function in_archieve(){
         $type= 'inArchive';
-        
-        return view('dashboard.archive.outArchive',compact('type'));
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.outArchive',compact('type','archive_type'));
     }
     public function mun_archieve(){
         $type= 'munArchive';
-        
-        return view('dashboard.archive.mainArchive',compact('type'));
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.outArchive',compact('type','archive_type'));
     }
     public function proj_archieve(){
         $type= 'projArchive';
-        
-        return view('dashboard.archive.mainArchive',compact('type'));
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.outArchive',compact('type','archive_type'));
     }
     public function emp_archieve(){
         $type= 'empArchive';
-        
-        return view('dashboard.archive.mainArchive',compact('type'));
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.outArchive',compact('type','archive_type'));
     }
     public function cit_archieve(){
         $type= 'citArchive';
-        
-        return view('dashboard.archive.mainArchive',compact('type'));
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.outArchive',compact('type','archive_type'));
     }
     public function dep_archieve(){
         $type= 'depArchive';
-        
-        return view('dashboard.archive.mainArchive',compact('type'));
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.outArchive',compact('type','archive_type'));
     }
     public function projArchive(){
         $type= 'projArchive';
-        return view('dashboard.archive.outArchive',compact('type'));
-    }
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.outArchive',compact('type','archive_type'));    }
     public function munArchive(){
         $type= 'munArchive';
-        return view('dashboard.archive.outArchive',compact('type'));
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.outArchive',compact('type','archive_type'));
     }
     
       public function archieve_info_all(Request $request)

@@ -53,10 +53,13 @@
                                                         <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
                                                         
                                                         @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
-                                                            <select name="OrgType" id="OrgType" class="form-control">
+                                                            <select name="archive_type" id="archive_type" class="form-control">
                                                                     
                                                                 <option value="">-- نوع الارشيف --</option>
-                                                                
+                                                                @foreach($archive_type as $archive)
+                                                                <option value="{{$archive->id}}"> {{$archive->name}}   </option>
+                                                                @endforeach
+
                                                             </select>
                                                             <div class="input-group-append" onclick="QuickAdd(42,'OrgType','نوع الأرشيف')" style="cursor:pointer">
                                                                 <span class="input-group-text input-group-text2">
@@ -152,6 +155,7 @@
                                                         </div>
                                                         <input type="text" id="copyToText[]" class="form-control cust_auto" name="copyToText[]">
                                                         <input type="hidden" id="copyToID[]" name="copyToID[]" value="0">
+                                                        <input type="hidden" id="copyToCustomer[]" name="copyToCustomer[]" value="0">
                                                         <input type="hidden" id="copyToType[]" name="copyToType[]" value="0">
                                                         <div class="input-group-append" onclick="addRec()" style="cursor:pointer">
                                                             <span class="input-group-text input-group-text2">
@@ -243,6 +247,7 @@ $.ajaxSetup({
         select: function( event, ui ) {
             var currentIndex=$("input[name^=copyToID]").length -1;
             $('input[name="copyToID[]"]').eq(currentIndex).val(ui.item.id);
+            $('input[name="copyToCustomer[]"]').eq(currentIndex).val(ui.item.name);
             $('input[name="copyToType[]"]').eq(currentIndex).val(ui.item.model);
         }
 	});
@@ -314,6 +319,7 @@ $( function() {
                             +'        </div>'
                             +'        <input type="text" id="copyToText[]" class="form-control cust_auto ui-autocomplete-input" name="copyToText[]">'
                             +'        <input type="hidden" id="copyToID[]" name="copyToID[]" value="0">'
+                            +'        <input type="hidden" id="copyToCustomer[]" name="copyToCustomer[]" value="0">'
                             +'        <input type="hidden" id="copyToType[]" name="copyToType[]" value="0">'
                             +'        <div class="input-group-append" onclick="$(this).parent().parent().remove()" style="cursor:pointer">'
                             +'            <span class="input-group-text input-group-text2">'

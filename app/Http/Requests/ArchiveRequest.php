@@ -25,6 +25,9 @@ class ArchiveRequest extends FormRequest
     {
         return [
             'customerName' => 'required',
+            "formDataaaUploadFile"    => "nullable|array",
+            "formDataaaUploadFile.*"  => "nullable|mimes:jpeg,png,jpg,gif
+            ,doc,csv,xlsx,xls,docx,ppt,odt,ods,odp,svg,pdf|max:2048",
         ];
     }
 }

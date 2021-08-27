@@ -646,6 +646,7 @@ $( function() {
             $('#InternalPhone').val(response.info.InternalPhone);
             $('#EmailAddress').val(response.info.email);
             $("#DepartmentID").val(response.info.department_id);
+            $('#userProfileImg').attr('src', response.info.image);
             $("select#Position option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });

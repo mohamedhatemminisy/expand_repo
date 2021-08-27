@@ -33,9 +33,7 @@ class AssetsController extends Controller
         if($request->equpiment_id == null){
             $equpment = new Equpment();
             if ($request->file('imgPic')) {
-                $imagePath = $request->file('imgPic');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
+                $path = upload_image($request->file('imgPic'), 'quipent_');
             }else{
                 $path = '';
             }
@@ -45,7 +43,7 @@ class AssetsController extends Controller
             $equpment->internal_number = $request->InternalNo;
             $equpment->count = $request->PiceCnt;
             $equpment->selling_date = $request->dateinput;
-            $equpment->image  = $path;
+            $equpment->image  = url($path);
             $equpment->price   = $request->OrgSalary;
             $equpment->currency = $request->OrgCurrencyID;
             $equpment->notes   = $request->MantinanceNote;
@@ -64,18 +62,16 @@ class AssetsController extends Controller
          }else{
             $equpment = Equpment::find($request->equpiment_id);
             if ($request->file('imgPic')) {
-                $imagePath = $request->file('imgPic');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
+                $path = upload_image($request->file('imgPic'), 'quipent_');
             }else{
-                $path = $equpment->image;
+                $path = '';
             }
             $equpment->name = $request->Equipment;
             $equpment->serial_number = $request->SerialNo;
             $equpment->internal_number = $request->InternalNo;
             $equpment->count = $request->PiceCnt;
             $equpment->selling_date = $request->dateinput;
-            $equpment->image  = $path;
+            $equpment->image  = url($path);
             $equpment->price   = $request->OrgSalary;
             $equpment->currency = $request->OrgCurrencyID;
             $equpment->notes   = $request->MantinanceNote;
@@ -135,5 +131,14 @@ class AssetsController extends Controller
                         ->make(true);
 
     }
-    
+    function upload_image($file, $prefix){
+        if($file){
+            $files = $file;
+            $imageName = $prefix.rand(3,999).'-'.time().'.'.$files->extension();
+            $image = "storage/".$imageName;
+            $files->move(public_path('storage'), $imageName);
+            $getValue = $image;
+            return $getValue;
+        }
+    }  
 }

@@ -50,9 +50,7 @@ class SpecialAssetsController extends Controller
             $address->notes = $request->Note;
             $address->save();
             if ($request->file('imgPic')) {
-                $imagePath = $request->file('imgPic');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
+                $path = upload_image($request->file('imgPic'), 'special_asset_');
             }else{
                 $path = '';
             }
@@ -65,7 +63,7 @@ class SpecialAssetsController extends Controller
             $specialAsset->asset_statuses_id = $request->ownType;
             $specialAsset->addresse_id  = $address->id;
             $specialAsset->type = $request->type;
-            $specialAsset->image  = $path;
+            $specialAsset->image  = url($path);
             $specialAsset->save();
          }else{
             $specialAsset = SpecialAsset::find($request->special_id);
@@ -77,11 +75,9 @@ class SpecialAssetsController extends Controller
             $address->notes = $request->Note;
             $address->save();
             if ($request->file('imgPic')) {
-                $imagePath = $request->file('imgPic');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
+                $path = upload_image($request->file('imgPic'), 'special_asset_');
             }else{
-                $path = $specialAsset->image;
+                $path = '';
             }
             $specialAsset->name = $request->BName;
             $specialAsset->price = $request->OrgSalary;
@@ -91,7 +87,7 @@ class SpecialAssetsController extends Controller
             $specialAsset->asset_statuses_id = $request->ownType;
             $specialAsset->addresse_id  = $address->id;
             $specialAsset->type = $request->type;
-            $specialAsset->image  = $path;
+            $specialAsset->image  = url($path);
             $specialAsset->save();
          }
          if ($specialAsset) {
@@ -147,8 +143,15 @@ class SpecialAssetsController extends Controller
                 ->make(true);
 
     }
-    
-    
-
+    function upload_image($file, $prefix){
+        if($file){
+            $files = $file;
+            $imageName = $prefix.rand(3,999).'-'.time().'.'.$files->extension();
+            $image = "storage/".$imageName;
+            $files->move(public_path('storage'), $imageName);
+            $getValue = $image;
+            return $getValue;
+        }
+    }  
 
 }

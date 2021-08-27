@@ -33,7 +33,7 @@
                                                 </span>
                                             </div>  
                                         <select id="area_data" name="TownID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),9,'AreaID')">
-                                            <option> -- {{trans('admin.state')}} -- </option>
+                                            <option value=""> -- {{trans('admin.state')}} -- </option>
                                         </select>
                                     </div>
                                     </div>
@@ -54,7 +54,7 @@
                                                 </span>
                                             </div>  
                                             <select id="region_data" name="AreaID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),10,'NeighborID')">
-                                                <option value="0"> -- {{trans('admin.area')}} --  </option>                                                                         
+                                                <option value=""> -- {{trans('admin.area')}} --  </option>                                                                         
                                                 </select>
                                             
                                         </div>

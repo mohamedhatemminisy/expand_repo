@@ -855,6 +855,7 @@ $( function() {
             $("select#OrgCurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency); 
             });
+            $('#wareHouseImg').attr('src', response.info.image);
             $('#OrgSalary4').val(response.info.price);
             $('#NoteAR').val(response.info.notes);
             $('#AddressDetails').val(response.address.details);

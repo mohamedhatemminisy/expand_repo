@@ -31,9 +31,7 @@ class vehicleController extends Controller
         if($request->vehicle_id == null){
             $vehicle = new Vehicle();
             if ($request->file('imgPic')) {
-                $imagePath = $request->file('imgPic');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
+                $path = upload_image($request->file('imgPic'), 'Vehicle_');
             }else{
                 $path = '';
             }
@@ -41,7 +39,7 @@ class vehicleController extends Controller
             $vehicle->name = $request->Vehiclename;
             $vehicle->serial_number = $request->plateNo;
             $vehicle->selling_date = $request->dateinput21;
-            $vehicle->image = $path;
+            $vehicle->image  = url($path);
             $vehicle->price = $request->OrgSalary;
             $vehicle->currency = $request->OrgCurrencyID3;
             $vehicle->supply_phone = $request->PHnum1;
@@ -61,16 +59,14 @@ class vehicleController extends Controller
          }else{
             $vehicle = Vehicle::find($request->vehicle_id);
             if ($request->file('imgPic')) {
-                $imagePath = $request->file('imgPic');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
+                $path = upload_image($request->file('imgPic'), 'Vehicle_');
             }else{
-                $path = $vehicle->image;
+                $path = '';
             }
             $vehicle->name = $request->Vehiclename;
             $vehicle->serial_number = $request->plateNo;
             $vehicle->selling_date = $request->dateinput21;
-            $vehicle->image = $path;
+            $vehicle->image  = url($path);
             $vehicle->price = $request->OrgSalary;
             $vehicle->currency = $request->OrgCurrencyID3;
             $vehicle->supply_phone = $request->PHnum1;
@@ -133,8 +129,14 @@ class vehicleController extends Controller
                             ->make(true);
 
     }
-    
-
-    
-    
+    function upload_image($file, $prefix){
+        if($file){
+            $files = $file;
+            $imageName = $prefix.rand(3,999).'-'.time().'.'.$files->extension();
+            $image = "storage/".$imageName;
+            $files->move(public_path('storage'), $imageName);
+            $getValue = $image;
+            return $getValue;
+        }
+    }   
 }

@@ -22,6 +22,7 @@ use App\Models\EqupmentStatus;
 use App\Models\VehicleType;
 use App\Models\VehicleBrand;
 use App\Models\AssetStatus;
+use App\Models\ArchiveType;
 
 
 use App\Http\Requests\ExtentionRequest;
@@ -91,7 +92,11 @@ class ExtentionsController extends Controller
             $data['pj_i_id'] = $request->pk_i_id;
             return response()->json($data);
         }
-        
+        elseif($request->pk_i_id == '42'){
+            $data['data'] = ArchiveType::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
     }
 
 
@@ -145,7 +150,10 @@ class ExtentionsController extends Controller
             $data = Region::findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
         }
-        
+        elseif($request->fk_i_constant_id == '42'){
+            $data = ArchiveType::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
         
     }
 
@@ -354,7 +362,21 @@ class ExtentionsController extends Controller
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
 
-
+        elseif($request->fk_i_constant_id1 == '42'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new ArchiveType();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = ArchiveType::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
         
 
     }

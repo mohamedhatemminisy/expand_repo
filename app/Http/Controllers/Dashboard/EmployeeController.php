@@ -46,14 +46,12 @@ class EmployeeController extends Controller
             $address->notes = $request->Note;
             $address->save();
             if ($request->file('imgPic')) {
-                $imagePath = $request->file('imgPic');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
+                $path = upload_image($request->file('imgPic'), 'emp_');
             }else{
                 $path = '';
             }
             $admin->model = "App\Models\Admin";
-            $admin->image  = $path;
+            $admin->image  = url($path);
             $admin->name = $request->Name;
             $admin->identification = $request->NationalID;
             $admin->phone_one = $request->MobileNo1;
@@ -84,13 +82,11 @@ class EmployeeController extends Controller
         }else{
             $admin = Admin::find($request->employee_id);
             if ($request->file('imgPic')) {
-                $imagePath = $request->file('imgPic');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('imgPic')->storeAs('uploads', $imageName, 'public');
+                $path = upload_image($request->file('imgPic'), 'emp_');
             }else{
-                $path = $admin->image;
+                $path = '';
             }
-            $admin->image = $path;
+            $admin->image = url($path);
             $admin->name = $request->Name;
             $admin->identification = $request->NationalID;
             $admin->phone_one = $request->MobileNo1;
@@ -195,4 +191,14 @@ class EmployeeController extends Controller
                             ->make(true);
 
     }
+    function upload_image($file, $prefix){
+        if($file){
+            $files = $file;
+            $imageName = $prefix.rand(3,999).'-'.time().'.'.$files->extension();
+            $image = "storage/".$imageName;
+            $files->move(public_path('storage'), $imageName);
+            $getValue = $image;
+            return $getValue;
+        }
+    }  
 }

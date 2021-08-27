@@ -470,6 +470,8 @@ $( function() {
             $("#AddressDetailsAR").val(response.info.address);
             $("#PHnum2").val(response.info.sponsor_phone);
             $("#PHnum1").val(response.info.supply_phone);
+            
+            $('#equipmentimg').attr('src', response.info.image);
 
             $("select#brand option")
                  .each(function() { this.selected = (this.text == response.brand); 
