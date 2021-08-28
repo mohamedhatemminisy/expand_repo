@@ -50,9 +50,9 @@
                                                             </span>
                                                             
                                                         </div>
-                                                        <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
                                                         
                                                         @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
+                                                            <input type="text" id="msgTitle" class="form-control" name="msgTitle" style="width: 30%;">
                                                             <select name="archive_type" id="archive_type" class="form-control">
                                                                     
                                                                 <option value="">-- نوع الارشيف --</option>
@@ -67,7 +67,7 @@
                                                                 </span>
                                                             </div>
                                                         @elseif ($type=='inArchive'||$type=='outArchive')
-                                                        
+                                                        <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
                                                         @endif
                                                         <input type="hidden" id="customerid" name="customerid" value="0">
                                                         <input type="hidden" id="customername" name="customername" value="0">
@@ -118,7 +118,11 @@
                                                                 @endif
                                                             </span>
                                                         </div>
+                                                        @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
+                                                        <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
+                                                        @elseif ($type=='inArchive'||$type=='outArchive')
                                                         <input type="text" id="msgTitle" class="form-control" name="msgTitle">
+                                                        @endif
                                                         <input type="hidden" id="OrgType" class="form-control" name="OrgType" value="2076">
                                                     </div>
                                                 </div>
@@ -317,7 +321,7 @@ $( function() {
 							+'				 {{trans('archive.copy_to')}}'
 							+'			</span>'
                             +'        </div>'
-                            +'        <input type="text" id="copyToText[]" class="form-control cust_auto ui-autocomplete-input" name="copyToText[]">'
+                            +'        <input type="text" id="copyToText[]" class="form-control cust_auto ui-autocomplete-input" name="copyToText[]" autocomplete="off">'
                             +'        <input type="hidden" id="copyToID[]" name="copyToID[]" value="0">'
                             +'        <input type="hidden" id="copyToCustomer[]" name="copyToCustomer[]" value="0">'
                             +'        <input type="hidden" id="copyToType[]" name="copyToType[]" value="0">'
@@ -328,15 +332,7 @@ $( function() {
                             +'        </div>'
                             +'    </div>'
                             +'</div>')
-            $( ".cust" ).autocomplete({
-                source:"generalSearch",
-                minLength: 2,
-                select: function( event, ui ) {
-                    $(this).next().val(ui.item.id)
-                    $(this).next().next().val(ui.item.category)
-                    
-                }
-            });
+
     }
 </script>
 @endsection

@@ -38,6 +38,7 @@ return [
     'name_assets'   =>  'اسم الاصول ',
     'name_cit'   =>  'اسم المواطن ',
     'name_dep'   =>  'اسم القسم ',
-
+    'lic_archive'   =>  'أرشيف رخص البناء ',
+    'licFile_archive'   =>  'أرشيف ملف الترخيص ',
 
 ];

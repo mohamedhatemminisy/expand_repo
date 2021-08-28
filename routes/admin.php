@@ -121,7 +121,8 @@ Route::group([
         Route::get('proj_archieve','ArchieveController@proj_archieve')->name('proj_archieve');
         Route::get('title_archieve','ArchieveController@projArchive')->name('title_archieve');
         Route::get('title_archieve','ArchieveController@munArchive')->name('title_archieve');
-        
+        Route::get('lic_archieve','ArchieveController@licArchive')->name('lic_archieve');
+        Route::get('licFile_archieve','ArchieveController@licFileArchive')->name('licFile_archieve');
         Route::group(['prefix' => 'profile'], function () {
             Route::get('edit', 'ProfileController@editProfile')->name('edit.profile');
             Route::put('update', 'ProfileController@updateprofile')->name('update.profile');

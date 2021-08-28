@@ -144,6 +144,16 @@ class ArchieveController extends Controller
         $archive_type = ArchiveType::get();
         return view('dashboard.archive.outArchive',compact('type','archive_type'));
     }
+    public function licArchive(){
+        $type= 'licArchive';
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.licArchive',compact('type','archive_type'));
+    }
+    public function licFileArchive(){
+        $type= 'licFileArchive';
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.licArchive',compact('type','archive_type'));
+    }
     
       public function archieve_info_all(Request $request)
     {
@@ -151,6 +161,9 @@ class ArchieveController extends Controller
         
         return DataTables::of($archive)
                         ->addIndexColumn()
+                        ->setRowClass(function($archive){
+                            return $archive->id % 2 == 0 ? 'even':'odd';
+                        })
                         ->make(true);
 
     }
