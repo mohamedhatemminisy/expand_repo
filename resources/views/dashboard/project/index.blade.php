@@ -531,6 +531,7 @@ $( function() {
             $('#dateStart').val(response.info.dateStart);
             $('#dateEnd').val(response.info.dateEnd);
             $('#Projectcost').val(response.info.Projectcost);
+            $("#msgStatic").html(response.ArchiveCount);
             $("select#CurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency); 
             });

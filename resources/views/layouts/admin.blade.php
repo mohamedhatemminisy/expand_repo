@@ -469,7 +469,7 @@ $('#store-modal').submit(function(e) {
 // the selection for menu search
 
 $( function() {
-    $( ".ac1" ).autocomplete({
+    $( ".full_search" ).autocomplete({
 		source: 'full_search',
 		minLength: 1,
 		

@@ -13,6 +13,9 @@ use App\Models\EqupmentStatus;
 use App\Models\EqupmentType;
 use App\Http\Requests\EquipentRequest;
 use Yajra\DataTables\DataTables;
+use App\Models\Archive;
+use App\Models\CopyTo;
+
 class AssetsController extends Controller
 {
     public function dev_equp(){
@@ -103,6 +106,13 @@ class AssetsController extends Controller
     public function equip_info(Request $request)
     {
         $equipment['info'] = Equpment::find($request['equip_id']);
+        $model = $equipment['info']->model;
+        $ArchiveCount = count(Archive::where('model_id',$request['equip_id'])
+        ->where('model_name',$model)->get());
+        $CopyToCount = count(CopyTo::where('model_id',$request['equip_id'])
+        ->where('model_name',$model)->get());
+        $equipment['ArchiveCount'] = $ArchiveCount + $CopyToCount;
+
         $equipment['admin'] = Admin::where('id',$equipment['info']->admin_id)->first()->name;
         $equipment['department'] = Department::where('id',$equipment['info']->department_id)->first()->name;
         $equipment['sponser'] = Orgnization::where('org_type','orginzation')

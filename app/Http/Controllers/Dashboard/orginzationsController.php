@@ -10,6 +10,8 @@ use App\Models\JobTitle;
 use App\Models\Area;
 use App\Models\Region;
 use App\Models\Orgnization;
+use App\Models\CopyTo;
+use App\Models\Archive;
 use App\Http\Requests\DepartmentRequest;
 use App\Http\Requests\OrgnizationRequest;
 use Yajra\DataTables\DataTables;
@@ -110,6 +112,12 @@ class orginzationsController extends Controller
     public function orgnization_info(Request $request)
     {
         $orginzation['info'] = Orgnization::find($request['orginzation_id']);
+        $model = $orginzation['info']->model;
+        $ArchiveCount = count(Archive::where('model_id',$request['orginzation_id'])
+        ->where('model_name',$model)->get());
+        $CopyToCount = count(CopyTo::where('model_id',$request['orginzation_id'])
+        ->where('model_name',$model)->get());
+        $orginzation['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $orginzation['job_title'] = JobTitle::where('id',$orginzation['info']->job_title_id)->first()->name;
         $orginzation['address'] = Address::where('id', $orginzation['info']['addresse_id'])->first();
 

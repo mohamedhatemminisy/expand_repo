@@ -14,6 +14,8 @@ use App\Models\Region;
 use App\Http\Requests\DepartmentRequest;
 use App\Http\Requests\SubscribertRequest;
 use Yajra\DataTables\DataTables;
+use App\Models\Archive;
+use App\Models\CopyTo;
 use Yajra\DataTables\Services\DataTable;
 class SubscriberController extends Controller
 {
@@ -95,6 +97,12 @@ class SubscriberController extends Controller
     public function subscribe_info(Request $request)
     {
         $user['info'] = User::find($request['subscribe_id']);
+        $model = $user['info']->model;
+        $ArchiveCount = count(Archive::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->get());
+        $CopyToCount = count(CopyTo::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->get());
+        $user['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $user['job_title'] = JobTitle::where('id',$user['info']->job_title_id)->first()->name;
         $user['group'] = Group::where('id',$user['info']->group_id)->first()->name;
         $user['address'] = Address::where('id', $user['info']['addresse_id'])->first();

@@ -847,7 +847,7 @@ $( function() {
             $("select#pich option")
                  .each(function() { this.selected = (this.text == response.admin); 
             });
-
+            $("#msgStatic").html(response.ArchiveCount);
             $("select#ownType option")
                  .each(function() { this.selected = (this.text == response.asset_status); 
             });

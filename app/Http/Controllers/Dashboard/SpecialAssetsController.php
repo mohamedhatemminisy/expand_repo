@@ -13,6 +13,9 @@ use App\Models\SpecialAsset;
 use App\Models\Address;
 use App\Http\Requests\AssetRequest;
 use Yajra\DataTables\DataTables;
+use App\Models\Archive;
+use App\Models\CopyTo;
+
 class SpecialAssetsController extends Controller
 {
     public function buildings(){
@@ -106,12 +109,15 @@ class SpecialAssetsController extends Controller
     public function asset_info(Request $request)
     {
         $special['info'] = SpecialAsset::find($request['asset_id']);
+        $model = $special['info']->model;
+        $ArchiveCount = count(Archive::where('model_id',$request['asset_id'])
+        ->where('model_name',$model)->get());
+        $CopyToCount = count(CopyTo::where('model_id',$request['asset_id'])
+        ->where('model_name',$model)->get());
+        $special['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $special['admin'] = Admin::where('id',$special['info']->admin_id)->first()->name;
-
         $special['asset_status'] = AssetStatus::where('id',$special['info']->asset_statuses_id )->first()->name;
         $special['address'] = Address::where('id', $special['info']['addresse_id'])->first();
-       
-
         if($special['address']->city_id){
             $special['city'] =City::where('id',$special['address']->city_id)->first()->name;
         }
@@ -122,8 +128,6 @@ class SpecialAssetsController extends Controller
             $special['region'] =Region::where('id',$special['address']->region_id)->first()->name;
         }
         $special['Currency'] = trans('admin.'.$special['info']->currency);
-
-
         return response()->json($special);
 
     }

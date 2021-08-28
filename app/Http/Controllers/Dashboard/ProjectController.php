@@ -15,6 +15,9 @@ use App\Models\Project;
 use App\Models\Orgnization;
 use App\Http\Requests\ProjectRequest;
 use Yajra\DataTables\DataTables;
+use App\Models\Archive;
+use App\Models\CopyTo;
+
 class ProjectController extends Controller
 {
     public function index(){
@@ -103,6 +106,12 @@ class ProjectController extends Controller
     public function project_info(Request $request)
     {
         $project['info'] = Project::find($request['project_id']);
+        $model = $project['info']->model;
+        $ArchiveCount = count(Archive::where('model_id',$request['project_id'])
+        ->where('model_name',$model)->get());
+        $CopyToCount = count(CopyTo::where('model_id',$request['project_id'])
+        ->where('model_name',$model)->get());
+        $project['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $project['admin'] = Admin::where('id',$project['info']->admin_id)->first()->name;
         $project['department'] = Department::where('id',$project['info']->department_id)->first()->name;
         $project['address'] = Address::where('id', $project['info']['addresse_id'])->first();

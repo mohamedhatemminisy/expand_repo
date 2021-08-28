@@ -86,7 +86,7 @@
 
         <ul class="nav navbar-nav float-right">
           <li class="dropdown dropdown-language nav-item hideMob">
-            <input id="searchContent" name="searchContent" class="form-control SubPagea round ac1" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
           </li>
 
           

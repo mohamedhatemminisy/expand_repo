@@ -104,7 +104,7 @@ Route::group([
         Route::post('deleteSubConstant', 'ExtentionsController@deleteSubConstant')->name('deleteSubConstant');
         Route::post('store_model', 'ExtentionsController@store_model')->name('store_model');
 
-        Route::get('full_search','SearchController@full_search')->name('full_search');
+        Route::get('search','SearchController@full_search')->name('search');
         Route::get('out_archieve','ArchieveController@out_archieve')->name('out_archieve');
       
         Route::get('archive_auto_complete','ArchieveController@archive_auto_complete')

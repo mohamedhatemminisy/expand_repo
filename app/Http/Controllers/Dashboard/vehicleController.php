@@ -12,6 +12,9 @@ use App\Models\VehicleType;
 use App\Models\Vehicle;
 use App\Http\Requests\VehcileRequest;
 use Yajra\DataTables\DataTables;
+use App\Models\Archive;
+use App\Models\CopyTo;
+
 class vehicleController extends Controller
 {
     public function index(){
@@ -100,6 +103,12 @@ class vehicleController extends Controller
     public function vehcile_info(Request $request)
     {
         $vehicle['info'] = Vehicle::find($request['vehcile_id']);
+        $model = $vehicle['info']->model;
+        $ArchiveCount = count(Archive::where('model_id',$request['vehcile_id'])
+        ->where('model_name',$model)->get());
+        $CopyToCount = count(CopyTo::where('model_id',$request['vehcile_id'])
+        ->where('model_name',$model)->get());
+        $vehicle['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $vehicle['admin'] = Admin::where('id',$vehicle['info']->admin_id)->first()->name;
         $vehicle['admin_two'] = Admin::where('id',$vehicle['info']->admin_two)->first()->name;
         $vehicle['department'] = Department::where('id',$vehicle['info']->department_id)->first()->name;
