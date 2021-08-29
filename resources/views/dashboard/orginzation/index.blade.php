@@ -394,37 +394,9 @@ $( function() {
 	});
 } );
 
-/*
-$(".ui-autocomplete-input").keyup(function () {
-        if ($(this).val().length >= 1) {
-            // auto complete with Ajax Function :-
-            var url = 'orginzation_auto_complete';
-            let type = $("input[name=type]").val();
-
-            $.ajax({
-                type: 'GET',
-                url: url,
-                data: {
-                    orginzation: $(this).val(),
-                    type : type
-                },
-                success: function (barcodes) {
-                    $('.divKayUP').html(barcodes);
-                    $(".divKayUP").css("display", "block");
-                }
-            });
-        } else {
-            $(".ui-autocomplete").css("display", "none");
-        }
-    });
-
-    $(document).on('click', '.select_name', function () {
-		$("#employees_data").empty();
-
-            $("#barcode").val('');
-            $(".divKayUP").css("display", "none");
-            // get product details :-
-            let orginzation_id = $(this).data("id");
+function update($id)
+{
+    let orginzation_id = $id;
             $.ajax({
             type: 'get', // the method (could be GET btw)
             url: "orgnization_info",
@@ -459,8 +431,7 @@ $(".ui-autocomplete-input").keyup(function () {
             });
 			},
 			});
-        });
-*/
+}
 $("#CityID").change(function () {
         $("#area_data").empty();
         var val = $(this).val();

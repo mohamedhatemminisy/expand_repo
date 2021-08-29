@@ -23,7 +23,7 @@
 
 
         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><span>
-        {{trans('admin.underway')}}</span></a>
+          {{trans('admin.projects')}}</span></a>
           <ul class="dropdown-menu">
 
             <li data-menu="">

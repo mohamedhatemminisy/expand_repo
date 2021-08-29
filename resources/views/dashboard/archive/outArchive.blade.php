@@ -193,7 +193,7 @@
                                     </div>
                                 </div>
                                 <div style="text-align: center;">
-                                    <button type="submit" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
+                                    <button type="submit" class="btn btn-primary" id="" style="" >
                                     {{ trans('admin.save') }}    
                                     </button>                                    
                                 </div>
@@ -271,6 +271,37 @@ $( function() {
 	    });
     });
 
+    function update($id){
+        let archive_id = $id;
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "{{ route('archieve_info') }}",
+            data: {
+                archive_id: archive_id,
+            },
+            success:function(response){
+            $('#customerid').val(response.info.id);
+            $('#customerName').val(response.info.name);
+            $('#customername').val(response.info.name);
+            $('#customerType').val(response.info.model_name);
+            $('#msgTitle').val(response.info.title);
+            $('#msgDate').val(response.info.date);
+            $('#msgid').val(response.info.serisal);
+
+            attach='';
+                attach+='<div id="attach" class=" col-sm-6 ">'
+                        +'<div class="attach">'
+                            +'<span class="attach-text">'+response.info.fileIDS+'</span><a onclick="delAttach('+response.info.fileIDS+')"><i class="fa fa-trash"></i></a>'
+                            +'<a class="attach-close1" href="AttachServerName" style="color: #74798D; float:left;" target="_blank">'
+                            +'  <i class="fa fa-eye"> </i>'
+                            +'</a><input type="hidden" value="" name="attach[]" >'
+                            +'</div>'
+                        +'</div>';
+            $(".formDataaaFilesArea").html(attach)
+            
+            },
+        });
+    }
 
     function CopyRec(id){
         

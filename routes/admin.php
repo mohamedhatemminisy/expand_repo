@@ -127,6 +127,8 @@ Route::group([
             Route::get('edit', 'ProfileController@editProfile')->name('edit.profile');
             Route::put('update', 'ProfileController@updateprofile')->name('update.profile');
         });
+        Route::get('archieve_info', 'ArchieveController@archieve_info')->name('archieve_info');
+
 
 
      

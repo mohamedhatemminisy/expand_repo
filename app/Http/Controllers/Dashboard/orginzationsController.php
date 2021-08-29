@@ -128,7 +128,7 @@ class orginzationsController extends Controller
     
     public function orgnization_info_all(Request $request)
     {
-        
+        $type=$request['type'];
         $orginzation= Orgnization::select('orgnizations.*','addresses.notes','addresses.region_id','addresses.area_id',
         'addresses.city_id','addresses.details','regions.name as region_name','cities.name as city_name',
         'areas.name as area_name','job_titles.name as job_title_name')
@@ -136,7 +136,7 @@ class orginzationsController extends Controller
         ->leftJoin('job_titles','job_titles.id','orgnizations.job_title_id')
         ->leftJoin('regions','addresses.region_id','regions.id')
         ->leftJoin('cities','addresses.city_id','cities.id')
-        ->leftJoin('areas','addresses.area_id','areas.id')->orderBy('id', 'DESC');
+        ->leftJoin('areas','addresses.area_id','areas.id')->where('org_type',$type)->orderBy('id', 'DESC');
         return DataTables::of($orginzation)
                             ->addIndexColumn()
                             ->make(true);

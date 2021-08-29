@@ -686,31 +686,9 @@ $( function() {
 	});
 } );
 
-/*
-$(".ui-autocomplete-input").keyup(function () {
-            if ($(this).val().length >= 1) {
-                // auto complete with Ajax Function :-
-                var url = 'emp_auto_complete';
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    data: {
-                        employee: $(this).val()
-                    },
-                    success: function (barcodes) {
-                        $('.divKayUP').html(barcodes);
-                        $(".divKayUP").css("display", "block");
-                    }
-                });
-            } else {
-                $(".ui-autocomplete").css("display", "none");
-            }
-        });
-        $(document).on('click', '.select_name', function () {
-            $("#barcode").val('');
-            $(".divKayUP").css("display", "none");
-            // get product details :-
-            let emp_id = $(this).data("id");
+function update($id)
+{
+    let emp_id = $id;
             $.ajax({
             type: 'get', // the method (could be GET btw)
             url: "emp_info",
@@ -728,6 +706,7 @@ $(".ui-autocomplete-input").keyup(function () {
             $('#InternalPhone').val(response.info.InternalPhone);
             $('#EmailAddress').val(response.info.email);
             $("#DepartmentID").val(response.info.department_id);
+            $('#userProfileImg').attr('src', response.info.image);
             $("select#Position option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });
@@ -763,9 +742,7 @@ $(".ui-autocomplete-input").keyup(function () {
             });
                     },
                     });
-        });
-
-*/
+}
 
 $("#CityID").change(function () {
         $("#area_data").empty();

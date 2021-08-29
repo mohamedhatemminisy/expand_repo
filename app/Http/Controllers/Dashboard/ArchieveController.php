@@ -157,14 +157,17 @@ class ArchieveController extends Controller
     
       public function archieve_info_all(Request $request)
     {
-        $archive= Archive::select('archives.*')->orderBy('id', 'DESC');
+        $type=$request['type'];
+        $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC');
         
         return DataTables::of($archive)
                         ->addIndexColumn()
-                        ->setRowClass(function($archive){
-                            return $archive->id % 2 == 0 ? 'even':'odd';
-                        })
                         ->make(true);
 
+    }
+    public function archieve_info(Request $request)
+    {
+        $archive['info'] = Archive::find($request['archive_id']);
+        return response()->json($archive);
     }
 }

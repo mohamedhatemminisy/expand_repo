@@ -51,7 +51,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-12 pr-0 pr-s-12"  >
+                                        <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
                                                     <div class="input-group-prepend">
@@ -71,7 +71,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-12 pr-0 pr-s-12"  >
+                                        <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
                                                     <div class="input-group-prepend">
@@ -83,6 +83,30 @@
                                                     <select class="form-control" name="BuildingData" id="BuildingData">
                                                         <option value=""></option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="form-group">
+                                                <div class="input-group w-s-87">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            رقم الحوض
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="licn" class="form-control " name="licn">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="form-group">
+                                                <div class="input-group w-s-87">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            رقم القطعة
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="licnfile" class="form-control " name="licnfile">
                                                 </div>
                                             </div>
                                         </div>

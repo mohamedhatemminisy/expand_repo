@@ -130,6 +130,7 @@ class SpecialAssetsController extends Controller
 
     public function asset_info_all(Request $request)
     {
+        $type=$request['type'];
         $special = SpecialAsset::select('special_assets.*','addresses.notes as address_note','addresses.region_id','addresses.area_id',
         'addresses.city_id','addresses.details','regions.name as region_name','cities.name as city_name',
         'areas.name as area_name','admins.name as manager_name')
@@ -137,7 +138,7 @@ class SpecialAssetsController extends Controller
         ->leftJoin('addresses','addresses.id','special_assets.addresse_id')
         ->leftJoin('regions','addresses.region_id','regions.id')
         ->leftJoin('cities','addresses.city_id','cities.id')
-        ->leftJoin('areas','addresses.area_id','areas.id')->orderBy('id', 'DESC');
+        ->leftJoin('areas','addresses.area_id','areas.id')->where('type',$type)->orderBy('id', 'DESC');
         return DataTables::of($special)
                 ->addIndexColumn()
                 ->make(true);
