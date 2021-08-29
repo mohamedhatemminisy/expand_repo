@@ -586,38 +586,9 @@ $( function() {
 	});
 } );
 
-/*
- $(".ui-autocomplete-input").keyup(function () {
-        if ($(this).val().length >= 1) {
-            // auto complete with Ajax Function :-
-            var url = 'project_auto_complete';
-            let type = $("input[name=type]").val();
-
-            $.ajax({
-                type: 'GET',
-                url: url,
-                data: {
-                    project: $(this).val(),
-                    type : type
-                },
-                success: function (barcodes) {
-                    $('.divKayUP').html(barcodes);
-                    $(".divKayUP").css("display", "block");
-                }
-            });
-        } else {
-            $(".ui-autocomplete").css("display", "none");
-        }
-    });
-
-    $(document).on('click', '.select_name', function () {
-        $("#userList").empty();
-
-            $('.user_subscriber').css('display','none');
-            $("#barcode").val('');
-            $(".divKayUP").css("display", "none");
-            // get product details :-
-            let project_id = $(this).data("id");
+function update($id)
+{
+    let project_id = $id;
             $.ajax({
             type: 'get', // the method (could be GET btw)
             url: "project_info",
@@ -680,9 +651,7 @@ $( function() {
 
 			},
 			});
-        });
-
-*/
+}
 $("#pinc6").change(function () {
         var val = $(this).val();
 $.ajax({

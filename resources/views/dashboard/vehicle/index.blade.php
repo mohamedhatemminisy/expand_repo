@@ -454,93 +454,67 @@ $( function() {
             }
         });
 } );
+function update($id)
+{
+    
+    let vehcile_id = $id;
+                $.ajax({
+                type: 'get', // the method (could be GET btw)
+                url: "vehcile_info",
+                data: {
+                    vehcile_id: vehcile_id,
+                },
+                success:function(response){
+                $('#vehicle_id').val(response.info.id);
 
-/*
-$(".ui-autocomplete-input").keyup(function () {
-	if ($(this).val().length >= 1) {
-		// auto complete with Ajax Function :-
-		var url = 'vehicle_auto_complete';
-		$.ajax({
-			type: 'GET',
-			url: url,
-			data: {
-				vehicle: $(this).val()
-			},
-			success: function (barcodes) {
-				$('.divKayUP').html(barcodes);
-				$(".divKayUP").css("display", "block");
-			}
-		});
-	} else {
-		$(".ui-autocomplete").css("display", "none");
-	}
-});
+                $('#Vehiclename').val(response.info.name);
+                $('#plateNo').val(response.info.serial_number);
+                $('#dateinput21').val(response.info.selling_date);
+                $('#Wdateinput22').val(response.info.wdateinput);
+                $('#licensedate').val(response.info.licensedate);
+                $('#OrgSalary3').val(response.info.price);
+                $('#Inshurencedate').val(response.info.Inshurencedate);
+                $("#PHnum2").val(response.info.sponsor_phone);
+                $("#PHnum1").val(response.info.supply_phone);
+                $('#carimg').attr('src', response.info.image);
 
+                $("select#vehiclebrand option")
+                    .each(function() { this.selected = (this.text == response.brand); 
+                });
+                $("select#vehicletype option")
+                    .each(function() { this.selected = (this.text == response.type); 
+                });
 
-  $(document).on('click', '.select_name', function () {
-            $("#barcode").val('');
-            $(".divKayUP").css("display", "none");
-            // get product details :-
-            let vehcile_id = $(this).data("id");
-            $.ajax({
-            type: 'get', // the method (could be GET btw)
-            url: "vehcile_info",
-            data: {
-                vehcile_id: vehcile_id,
+                $("select#EqtStatus option")
+                    .each(function() { this.selected = (this.text == response.status); 
+                });
+                $("select#Department option")
+                    .each(function() { this.selected = (this.text == response.department); 
+                });
+                $("select#pinc2 option")
+                    .each(function() { this.selected = (this.text == response.admin); 
+                });
+                $("select#pinc3 option")
+                    .each(function() { this.selected = (this.text == response.admin_two); 
+                });
+                $("select#OrgCurrencyID3 option")
+                    .each(function() { this.selected = (this.text == response.Currency); 
+                });
+                $("select#oiltype option")
+                    .each(function() { this.selected = (this.text == response.oiltype); 
+                });
+                
+
+                $("select#Supplier option")
+                    .each(function() { this.selected = (this.text == response.supplyer); 
+                });
+                $("select#SponsorName option")
+                    .each(function() { this.selected = (this.text == response.sponser); 
+                });
+
             },
-            success:function(response){
-            $('#vehicle_id').val(response.info.id);
-
-            $('#Vehiclename').val(response.info.name);
-            $('#plateNo').val(response.info.serial_number);
-            $('#dateinput21').val(response.info.selling_date);
-            $('#Wdateinput22').val(response.info.wdateinput);
-            $('#licensedate').val(response.info.licensedate);
-            $('#OrgSalary3').val(response.info.price);
-            $('#Inshurencedate').val(response.info.Inshurencedate);
-            $("#PHnum2").val(response.info.sponsor_phone);
-            $("#PHnum1").val(response.info.supply_phone);
-
-            $("select#vehiclebrand option")
-                 .each(function() { this.selected = (this.text == response.brand); 
-            });
-            $("select#vehicletype option")
-                 .each(function() { this.selected = (this.text == response.type); 
-            });
-
-            $("select#EqtStatus option")
-                 .each(function() { this.selected = (this.text == response.status); 
-            });
-            $("select#Department option")
-                 .each(function() { this.selected = (this.text == response.department); 
-            });
-            $("select#pinc2 option")
-                 .each(function() { this.selected = (this.text == response.admin); 
-            });
-            $("select#pinc3 option")
-                 .each(function() { this.selected = (this.text == response.admin_two); 
-            });
-            $("select#OrgCurrencyID3 option")
-                 .each(function() { this.selected = (this.text == response.Currency); 
-            });
-            $("select#oiltype option")
-                 .each(function() { this.selected = (this.text == response.oiltype); 
-            });
-            
-
-            $("select#Supplier option")
-                 .each(function() { this.selected = (this.text == response.supplyer); 
-            });
-            $("select#SponsorName option")
-                 .each(function() { this.selected = (this.text == response.sponser); 
-            });
-
-         },
-     });
-
-    });
-*/
-
+        });
+}
 $('#vehicle-form').submit(function(e) {
        e.preventDefault();
        let formData = new FormData(this);

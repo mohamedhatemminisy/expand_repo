@@ -506,76 +506,10 @@ $( function() {
         }
 	});
 } );
-/*
-$(".ui-autocomplete-input").keyup(function () {
-	if ($(this).val().length >= 1) {
-		// auto complete with Ajax Function :-
-		var url = 'equip_auto_complete';
-		$.ajax({
-			type: 'GET',
-			url: url,
-			data: {
-				equipment: $(this).val()
-			},
-			success: function (barcodes) {
-				$('.divKayUP').html(barcodes);
-				$(".divKayUP").css("display", "block");
-			}
-		});
-	} else {
-		$(".ui-autocomplete").css("display", "none");
-	}
-});*/
 
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-   $('#upload-image-form').submit(function(e) {
-       e.preventDefault();
-       let formData = new FormData(this);
-     $( "#Equipment" ).removeClass( "error" );
-     $( "#brand" ).removeClass( "error" );
-     $( "#Eqtype" ).removeClass( "error" );
-     $( "#Department" ).removeClass( "error" );
-       $.ajax({
-          type:'POST',
-          url: "store_equpment",
-           data: formData,
-           contentType: false,
-           processData: false,
-           success: (response) => {
-            $('.wtbl').DataTable().ajax.reload();  
-             if (response) {
-               this.reset();
-             }
-             
-           },
-           error: function(response){
-            if(response.responseJSON.errors.Equipment){
-                $( "#Equipment" ).addClass( "error" );
-            }
-            if(response.responseJSON.errors.brand){
-                $( "#brand" ).addClass( "error" );
-            }
-            if(response.responseJSON.errors.Eqtype){
-                $( "#Eqtype" ).addClass( "error" );
-            }
-            if(response.responseJSON.errors.Department){
-                $( "#Department" ).addClass( "error" );
-            }
-           }
-       });
-  });
-/*
-  $(document).on('click', '.select_name', function () {
-            $("#barcode").val('');
-            $(".divKayUP").css("display", "none");
-            // get product details :-
-            let equip_id = $(this).data("id");
+function update($id)
+{
+    let equip_id = $id;
             $.ajax({
             type: 'get', // the method (could be GET btw)
             url: "equip_info",
@@ -595,6 +529,8 @@ $(".ui-autocomplete-input").keyup(function () {
             $("#AddressDetailsAR").val(response.info.address);
             $("#PHnum2").val(response.info.sponsor_phone);
             $("#PHnum1").val(response.info.supply_phone);
+            
+            $('#equipmentimg').attr('src', response.info.image);
 
             $("select#brand option")
                  .each(function() { this.selected = (this.text == response.brand); 
@@ -625,10 +561,7 @@ $(".ui-autocomplete-input").keyup(function () {
 
          },
      });
-        
-});
-*/
-
+}
 
 </script>
 

@@ -19,6 +19,7 @@
     background-color:#D7EDF9 !important;
 }
 </style>
+<input type="hidden" id="type" name="type" value="{{$type}}">
 <div class="content-body resultTblaa">
     <div class="row">
             <div class="col-xl-12 col-lg-12">
@@ -36,12 +37,11 @@
                         
                     </div>
                     <div class="card-body">
-
                         <div class="form-body">
                             <div class="row" id="resultTblaa">
                                 <div class="col-xl-12 col-lg-12">
                                     <table style="width:100%; margin-top: -10px;direction: rtl;text-align: right" class="detailsTB table wtbl">
-                                        @if ($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive')
+                                        @if ($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive'||$type=='licArchive'||$type=='licFileArchive')
                                         <thead>
                                             <tr style="text-align:center !important;background: #00A3E8;">
                                                 <th  >
@@ -65,7 +65,8 @@
                                                 <th style="width: 300px;">
                                                     {{trans('assets.archive')}}
                                                 </th>
-                                                
+                                                <th>
+                                                </th>
                                             </tr>
                                         </thead>
                     
@@ -515,7 +516,7 @@
                     });
     
         }*/
-    
+        var types=$('#type').val();
         $( function(){
             $('.wtbl').DataTable({
             processing:true,
@@ -528,22 +529,45 @@
             @elseif ($type=="depart")
             ajax:"{{ route('dep_info_all') }}",
             @elseif ($type == 'org')
-            ajax:"{{ route('orgnization_info_all') }}",
+            ajax: {
+                url: '{{ route('orgnization_info_all') }}',
+                data: function (d) {
+                    d.type = $('#type').val();
+                }
+            },
             @elseif ($type == 'vehicle')
             ajax:"{{ route('vehcile_info_all') }}",
             @elseif($type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands')
-            ajax:"{{ route('asset_info_all') }}",
+            ajax: {
+                url: '{{ route('asset_info_all') }}',
+                data: function (d) {
+                    d.type = $('#type').val();
+                }
+            },
             @elseif ($type == 'equip')
             ajax:"{{ route('equip_info_all') }}",
             @elseif ($type == 'project')
             ajax:"{{ route('project_info_all') }}",
-            @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive')
-            ajax:"{{ route('archieve_info_all') }}",
+            @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive'||$type=='licArchive'||$type=='licFileArchive')
+            ajax: {
+                url: '{{ route('archieve_info_all') }}',
+                data: function (d) {
+                    d.type = $('#type').val();
+                }
+            },
             @endif
             @if($type == 'org')
                 columns:[
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
-                    {data:'name'},
+                    {
+                        data: null, 
+                        render:function(data,row,type){
+                            $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
+                                return $actionBtn;
+                        },
+                        name:'name',
+                    
+                    },
                     {data:'manager_name',name:'admins.name'},
                     {data:'phone_one'},
                     {data:'job_title_name' ,name:'job_titles.name'},
@@ -552,14 +576,28 @@
             @elseif($type == 'depart')
             columns:[
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
-                {data:'name'},
+                {
+                    data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                },
                 {data:'manager_name',name:'admins.name'},//manager_name
                 {data:'department_id'},
             ],
             @elseif($type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands')
             columns:[
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
-               {data:'name'},
+                { 
+                   data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                },
                 {data:'manager_name',name:'admins.name'},//manager_name
                 {data:'price'},
                 {data:'region_name',name:'regions.name'},
@@ -567,7 +605,15 @@
             @elseif($type=="employee"||$type=="subscriber")
             columns:[
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
-                {data:'name'},
+                {
+                    data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                
+                },
                 {data:'phone_one'},
                 @if ($type=="employee")
                 {data:'identification'},
@@ -579,7 +625,15 @@
             @elseif($type == 'vehicle')
             columns:[
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
-                {data:'name'},
+                {
+                    data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                
+                },
                 {data:'manager_name',name:'admins.name'},
                 {data:'department_name',name:'departments.name'},
                 {data:'type_name',name:'vehicle_types.name'},
@@ -591,7 +645,15 @@
             @elseif($type == 'project')
             columns:[
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
-                {data:'name'},
+                {
+                    data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                
+                },
                 {data:'ProjectNo'},
                 {data:'manager_name',name:'admins.name'},
                 {data:'dateStart'},
@@ -603,7 +665,15 @@
             @elseif($type == 'equip')
                 columns:[
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
-                {data:'name'},
+                    {
+                        data: null, 
+                        render:function(data,row,type){
+                            $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
+                                return $actionBtn;
+                        },
+                        name:'name',
+                
+                     },
                 {data:'manager_name',name:'admins.name'},
                 {data:'department_name',name:'departments.name'},
                 {data:'brand_name',name:'brands.name'},//brand
@@ -612,15 +682,55 @@
                 {data:'status',name:'equpment_statuses.name'},
                 {data:'count'},
             ],
-            @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive')
+            @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive'||$type=='licArchive'||$type=='licFileArchive')
             columns:[
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
                 {data:'serisal'},
-                {data:'title'},
-                {data:'name'},
+                {
+                    data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.title+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'title',
+                
+                },
+                {
+                    data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                
+                },
                 {data:null},
                 {data:'date'},
-                {data:'fileIDS'},
+                {
+                    data: null,
+                    
+                    render:function(data,row,type){
+                        if(data.fileIDS){ 
+                        $actionBtn = '<div id="attach" class=" col-sm-6 ">'
+                                    +'<div class="attach">'
+                                      +'  <span class="attach-text">AttachName</span>'
+                                       +' <a class="attach-close1" href="AttachServerName" style="color: #74798D; float:left;" target="_blank">'
+                                        +'    <i class="fa fa-eye"> </i>'
+                                        +'</a>'
+                                    +'</div>'
+                                    +'</div>'; 
+                            return $actionBtn;}
+                            else{return '';}
+                    },
+                    name:'fileIDS',                    
+                },
+                {
+                data: null, 
+                render:function(data,row,type){
+                        $actionBtn = '<a onclick="update('+data.id+')" class="btn btn-info"><i style="color:#ffffff" class="fa fa-edit"></i> </a>';
+                            return $actionBtn;
+                    }
+                },
             ],
             @endif   
             

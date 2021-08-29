@@ -50,9 +50,9 @@
                                                             </span>
                                                             
                                                         </div>
-                                                        <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
                                                         
                                                         @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
+                                                            <input type="text" id="msgTitle" class="form-control" name="msgTitle" style="width: 30%;">
                                                             <select name="archive_type" id="archive_type" class="form-control">
                                                                     
                                                                 <option value="">-- نوع الارشيف --</option>
@@ -67,7 +67,7 @@
                                                                 </span>
                                                             </div>
                                                         @elseif ($type=='inArchive'||$type=='outArchive')
-                                                        
+                                                        <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
                                                         @endif
                                                         <input type="hidden" id="customerid" name="customerid" value="0">
                                                         <input type="hidden" id="customername" name="customername" value="0">
@@ -118,7 +118,11 @@
                                                                 @endif
                                                             </span>
                                                         </div>
+                                                        @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
+                                                        <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
+                                                        @elseif ($type=='inArchive'||$type=='outArchive')
                                                         <input type="text" id="msgTitle" class="form-control" name="msgTitle">
+                                                        @endif
                                                         <input type="hidden" id="OrgType" class="form-control" name="OrgType" value="2076">
                                                     </div>
                                                 </div>
@@ -189,7 +193,7 @@
                                     </div>
                                 </div>
                                 <div style="text-align: center;">
-                                    <button type="submit" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
+                                    <button type="submit" class="btn btn-primary" id="" style="" >
                                     {{ trans('admin.save') }}    
                                     </button>                                    
                                 </div>
@@ -267,6 +271,37 @@ $( function() {
 	    });
     });
 
+    function update($id){
+        let archive_id = $id;
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "{{ route('archieve_info') }}",
+            data: {
+                archive_id: archive_id,
+            },
+            success:function(response){
+            $('#customerid').val(response.info.id);
+            $('#customerName').val(response.info.name);
+            $('#customername').val(response.info.name);
+            $('#customerType').val(response.info.model_name);
+            $('#msgTitle').val(response.info.title);
+            $('#msgDate').val(response.info.date);
+            $('#msgid').val(response.info.serisal);
+
+            attach='';
+                attach+='<div id="attach" class=" col-sm-6 ">'
+                        +'<div class="attach">'
+                            +'<span class="attach-text">'+response.info.fileIDS+'</span><a onclick="delAttach('+response.info.fileIDS+')"><i class="fa fa-trash"></i></a>'
+                            +'<a class="attach-close1" href="AttachServerName" style="color: #74798D; float:left;" target="_blank">'
+                            +'  <i class="fa fa-eye"> </i>'
+                            +'</a><input type="hidden" value="" name="attach[]" >'
+                            +'</div>'
+                        +'</div>';
+            $(".formDataaaFilesArea").html(attach)
+            
+            },
+        });
+    }
 
     function CopyRec(id){
         
@@ -317,7 +352,7 @@ $( function() {
 							+'				 {{trans('archive.copy_to')}}'
 							+'			</span>'
                             +'        </div>'
-                            +'        <input type="text" id="copyToText[]" class="form-control cust_auto ui-autocomplete-input" name="copyToText[]">'
+                            +'        <input type="text" id="copyToText[]" class="form-control cust_auto ui-autocomplete-input" name="copyToText[]" autocomplete="off">'
                             +'        <input type="hidden" id="copyToID[]" name="copyToID[]" value="0">'
                             +'        <input type="hidden" id="copyToCustomer[]" name="copyToCustomer[]" value="0">'
                             +'        <input type="hidden" id="copyToType[]" name="copyToType[]" value="0">'
@@ -328,15 +363,7 @@ $( function() {
                             +'        </div>'
                             +'    </div>'
                             +'</div>')
-            $( ".cust" ).autocomplete({
-                source:"generalSearch",
-                minLength: 2,
-                select: function( event, ui ) {
-                    $(this).next().val(ui.item.id)
-                    $(this).next().next().val(ui.item.category)
-                    
-                }
-            });
+
     }
 </script>
 @endsection

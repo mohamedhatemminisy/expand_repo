@@ -511,37 +511,10 @@ $( function() {
         }
 	});
 } );
-/*
 
-$(".ui-autocomplete-input").keyup(function () {
-	if ($(this).val().length >= 1) {
-		// auto complete with Ajax Function :-
-		var url = 'dept_auto_complete';
-		$.ajax({
-			type: 'GET',
-			url: url,
-			data: {
-				department: $(this).val()
-			},
-			success: function (barcodes) {
-				$('.divKayUP').html(barcodes);
-				$(".divKayUP").css("display", "block");
-			}
-		});
-	} else {
-		$(".ui-autocomplete").css("display", "none");
-	}
-});
-
-
-
-	$(document).on('click', '.select_name', function () {
-		$("#employees_data").empty();
-
-            $("#barcode").val('');
-            $(".divKayUP").css("display", "none");
-            // get product details :-
-            let dep_id = $(this).data("id");
+function update($id)
+{
+	let dep_id = $id;
             $.ajax({
             type: 'get', // the method (could be GET btw)
             url: "dep_info",
@@ -582,10 +555,7 @@ $(".ui-autocomplete-input").keyup(function () {
 
 			},
 			});
-        });
-
-
-*/
+}
 $("#LinkDept").change(function () {
         var val = $(this).val();
 $.ajax({

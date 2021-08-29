@@ -23,7 +23,7 @@
 
 
         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><span>
-        {{trans('admin.underway')}}</span></a>
+          {{trans('admin.projects')}}</span></a>
           <ul class="dropdown-menu">
 
             <li data-menu="">
@@ -114,6 +114,12 @@
             </li>
             <li data-menu="">
               <a class="dropdown-item" href="{{route('cit_archieve')}}" data-toggle="dropdown">{{trans('archive.cit_archive')}}</a>
+            </li>
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('lic_archieve')}}" data-toggle="dropdown">{{trans('archive.lic_archive')}}</a>
+            </li>
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('licFile_archieve')}}" data-toggle="dropdown">{{trans('archive.licFile_archive')}}</a>
             </li>
           </ul>
         </li>

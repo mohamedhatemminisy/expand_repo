@@ -874,36 +874,10 @@ $( function() {
         }
 	});
 } );
-/*
-$(".ui-autocomplete-input").keyup(function () {
-            if ($(this).val().length >= 1) {
-                // auto complete with Ajax Function :-
-                var url = 'asset_auto_complete';
-                let type = $("input[name=type]").val();
 
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    data: {
-                        employee: $(this).val(),
-                        type : type
-
-                    },
-                    success: function (barcodes) {
-                        $('.divKayUP').html(barcodes);
-                        $(".divKayUP").css("display", "block");
-                    }
-                });
-            } else {
-                $(".ui-autocomplete").css("display", "none");
-            }
-        });
-      
-        $(document).on('click', '.select_name', function () {
-            $("#barcode").val('');
-            $(".divKayUP").css("display", "none");
-            // get product details :-
-            let asset_id = $(this).data("id");
+function update($id)
+{
+    let asset_id = $id;
             $.ajax({
             type: 'get', // the method (could be GET btw)
             url: "asset_info",
@@ -925,6 +899,7 @@ $(".ui-autocomplete-input").keyup(function () {
             $("select#OrgCurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency); 
             });
+            $('#wareHouseImg').attr('src', response.info.image);
             $('#OrgSalary4').val(response.info.price);
             $('#NoteAR').val(response.info.notes);
             $('#AddressDetails').val(response.address.details);
@@ -940,9 +915,7 @@ $(".ui-autocomplete-input").keyup(function () {
             });
                     },
                     });
-        });
-
-*/
+}
 
 
 

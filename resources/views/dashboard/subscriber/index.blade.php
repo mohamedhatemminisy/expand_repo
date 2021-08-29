@@ -444,35 +444,11 @@ $( function() {
 	});
 } );
 
-/*
-    $(".ui-autocomplete-input").keyup(function () {
-        if ($(this).val().length >= 1) {
-            // auto complete with Ajax Function :-
-            var url = 'subscribe_auto_complete';
-            $.ajax({
-                type: 'GET',
-                url: url,
-                data: {
-                    subscriber: $(this).val()
-                },
-                success: function (barcodes) {
-                    $('.divKayUP').html(barcodes);
-                    $(".divKayUP").css("display", "block");
-                }
-            });
-        } else {
-            $(".ui-autocomplete").css("display", "none");
-        }
-    });
-
-
-	$(document).on('click', '.select_name', function () {
-		$("#employees_data").empty();
-
-            $("#barcode").val('');
-            $(".divKayUP").css("display", "none");
-            // get product details :-
-            let subscribe_id = $(this).data("id");
+function update($id)
+{
+    $("#ajaxform")[0].reset();   
+    let subscribe_id = $id;
+            console.log(subscribe_id);
             $.ajax({
             type: 'get', // the method (could be GET btw)
             url: "subscribe_info",
@@ -491,7 +467,7 @@ $( function() {
             $('#formDataBussniessName').val(response.info.bussniess_name);
 
             
-
+            
             $("select#formDataProfessionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });
@@ -514,12 +490,11 @@ $( function() {
                  .each(function() { this.selected = (this.text == response.region); 
             });
 
-
+        
 
 			},
 			});
-        });
-*/
+}
 
 $("#CityID").change(function () {
         $("#area_data").empty();

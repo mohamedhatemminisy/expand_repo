@@ -38,5 +38,7 @@ return [
     'name_assets'   =>  'name of assets ',
     'name_cit'   =>  'name of citizen ',
     'name_dep'   =>  'name of department ',
+    'lic_archive'   =>  'licence of archive ',
+    'licFile_archive'   =>  'file licence of archive ',
 
 ];

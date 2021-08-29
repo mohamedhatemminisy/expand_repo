@@ -144,14 +144,30 @@ class ArchieveController extends Controller
         $archive_type = ArchiveType::get();
         return view('dashboard.archive.outArchive',compact('type','archive_type'));
     }
+    public function licArchive(){
+        $type= 'licArchive';
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.licArchive',compact('type','archive_type'));
+    }
+    public function licFileArchive(){
+        $type= 'licFileArchive';
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.licArchive',compact('type','archive_type'));
+    }
     
       public function archieve_info_all(Request $request)
     {
-        $archive= Archive::select('archives.*')->orderBy('id', 'DESC');
+        $type=$request['type'];
+        $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC');
         
         return DataTables::of($archive)
                         ->addIndexColumn()
                         ->make(true);
 
+    }
+    public function archieve_info(Request $request)
+    {
+        $archive['info'] = Archive::find($request['archive_id']);
+        return response()->json($archive);
     }
 }
