@@ -18,6 +18,9 @@ use App\Models\CopyTo;
 use App\Models\ArchiveType;
 use DB;
 use App\Http\Requests\ArchiveRequest;
+use App\Models\AttachmentType;
+use App\Models\LicenseType;
+use App\Models\ArchiveLicense;
 
 class ArchieveController extends Controller
 {
@@ -31,6 +34,28 @@ class ArchieveController extends Controller
         $emp_data = $request['term'];
         // $equip = Equpment::where('name', 'like', '%' . $emp_data . '%')
         // ->select("CONCAT('name','equip') AS label")->get();
+        $inArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        ->where('type','inArchive')
+        ->select('*',DB::raw("CONCAT(name , '( أرشيف الوارد )' )AS label"))->get();
+        $outArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        ->where('type','outArchive')
+        ->select('*',DB::raw("CONCAT(name , '(  أرشيف الصادر  )' )AS label"))->get();
+        $munArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        ->where('type','munArchive')
+        ->select('*',DB::raw("CONCAT(name , '(  أرشيف عنوان الوثيقة  )' )AS label"))->get();
+        $projArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        ->where('type','projArchive')
+        ->select('*',DB::raw("CONCAT(name , '(  أرشيف المشاريع   )' )AS label"))->get();
+        $empArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        ->where('type','empArchive')
+        ->select('*',DB::raw("CONCAT(name , '(  أرشيف الموظفين   )' )AS label"))->get();
+        $depArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        ->where('type','depArchive')
+        ->select('*',DB::raw("CONCAT(name , '(  أرشيف الاقسام   )' )AS label"))->get();
+        $citArchive =  Archive::where('name', 'like', '%' . $emp_data . '%')
+        ->where('type','citArchive')
+        ->select('*',DB::raw("CONCAT(name , '(  أرشيف المواطنين   )' )AS label"))->get();
+
         $equip = Equpment::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(اجهزه و معدات)' )AS label"))->get();
         $vehicle = Vehicle::where('name', 'like', '%' . $emp_data . '%')
@@ -48,11 +73,64 @@ class ArchieveController extends Controller
         $user = User::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(المشتركين)' )AS label"))->get();
         $names = $equip->merge($vehicle)->merge($project)
-        ->merge($admin)->merge($department)
+        ->merge($admin)->merge($department)->merge($inArchive)
+        ->merge($outArchive)->merge($munArchive)->merge($projArchive)
+        ->merge($empArchive)->merge($depArchive)->merge($citArchive)
         ->merge($orgnization)->merge($specialAsset)->merge($user);
 
         return response()->json($names);
     }
+
+    public function Linence_auto_complete(Request $request){
+        $emp_data = $request['term'];
+      
+        $licArchive= ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
+        ->where('type','licArchive')
+        ->select('*',DB::raw("CONCAT(name , '( أرشيف رخص البناء)' )AS label"))->get();
+        $licFileArchive= ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
+        ->where('type','licFileArchive')
+        ->select('*',DB::raw("CONCAT(name , '(أرشيف ملف الترخيص)' )AS label"))->get();
+        $users = User::where('name', 'like', '%' . $emp_data . '%')
+        ->select('*',DB::raw("CONCAT(name , '(المشتركين)' )AS label"))->get();
+
+        $names =$licArchive->merge($users)->merge($licFileArchive);
+
+        return response()->json($names);
+    
+    }
+    public function store_lince_archive(Request $request){
+        $archive = ArchiveLicense::where('id',$request->customerid)
+        ->where('model','App\Models\ArchiveLicense')
+        ->where('type',$request->type)->first();
+        if($archive){
+            $archive->name =$request->customername;
+            $archive->licn =$request->licn;
+            $archive->licnfile =$request->licnfile;        
+            $archive->licNo =$request->licNo;
+            $archive->license_type =$request->BuildingData;
+            $archive->license_id =$request->BuildingTypeData;
+            $archive->attachment_id =$request->AttahType;
+            $archive->save();  
+        }else{
+        $archive = new ArchiveLicense();
+        $archive->name =$request->customername;
+        $archive->model_id =$request->customerid;
+        $archive->model_name =$request->customerType;
+        $archive->licn =$request->licn;
+        $archive->model ="App\Models\ArchiveLicense";
+        $archive->licnfile =$request->licnfile;        
+        $archive->licNo =$request->licNo;
+        $archive->license_type =$request->BuildingData;
+        $archive->type =$request->type; 
+        $archive->license_id =$request->BuildingTypeData;
+        $archive->attachment_id =$request->AttahType;
+        $archive->save();
+        }
+        if ($archive) {
+            return response()->json(['success'=>trans('admin.archive_added')]);
+        }
+    }
+
 
     public function store_archive(ArchiveRequest $request){
         if($request->hasFile('formDataaaUploadFile')){
@@ -146,13 +224,15 @@ class ArchieveController extends Controller
     }
     public function licArchive(){
         $type= 'licArchive';
-        $archive_type = ArchiveType::get();
-        return view('dashboard.archive.licArchive',compact('type','archive_type'));
+        $attachment_type = AttachmentType::get();
+        $license_type = LicenseType::get();
+        return view('dashboard.archive.licArchive',compact('type','attachment_type','license_type'));
     }
     public function licFileArchive(){
         $type= 'licFileArchive';
-        $archive_type = ArchiveType::get();
-        return view('dashboard.archive.licArchive',compact('type','archive_type'));
+        $attachment_type = AttachmentType::get();
+        $license_type = LicenseType::get();
+        return view('dashboard.archive.licArchive',compact('type','attachment_type','license_type'));
     }
     
       public function archieve_info_all(Request $request)

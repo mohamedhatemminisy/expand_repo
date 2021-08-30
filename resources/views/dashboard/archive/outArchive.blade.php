@@ -52,7 +52,7 @@
                                                         </div>
                                                         
                                                         @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
-                                                            <input type="text" id="msgTitle" class="form-control" name="msgTitle" style="width: 30%;">
+                                                            <input type="text" id="msgTitle" class="form-control cust" name="msgTitle" style="width: 30%;">
                                                             <select name="archive_type" id="archive_type" class="form-control">
                                                                     
                                                                 <option value="">-- نوع الارشيف --</option>
@@ -264,9 +264,12 @@ $( function() {
 		minLength: 1,
 		
         select: function( event, ui ) {
+            console.log(ui.item);
             $('#customerid').val(ui.item.id);
             $('#customername').val(ui.item.name);
             $('#customerType').val(ui.item.model);
+            $('#msgid').val(ui.item.serisal);
+            $('#msgTitle').val(ui.item.title);
            }
 	    });
     });

@@ -29,9 +29,12 @@
                                                     </div>
                                                     <input type="text" id="customerName" class="form-control cust" name="customerName">
                                                     <input type="hidden" id="customerid" name="customerid" value="0">
+                                                    <input type="hidden" id="archieveid" name="archieveid" value="0">
+                                                    <input type="hidden" id="customername" name="customername" value="0">
                                                     <input type="hidden" id="customerType" name="customerType" value="0">
                                                     <input type="hidden" id="msgType" name="msgType" value="">
                                                     <input type="hidden" id="pk_i_id" name="pk_i_id" value="0">
+                                                    <input type="hidden" id="type" name="type" value="{{$type}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -60,9 +63,11 @@
                                                         </span>
                                                     </div>
                                                     <select class="form-control" name="BuildingTypeData" id="BuildingTypeData">
-                                                        <option value=""></option>
+                                                                @foreach($license_type as $license)
+                                                                <option value="{{$license->id}}"> {{$license->name}}   </option>
+                                                                @endforeach
                                                     </select>
-                                                    
+                                                
                                                     <div class="input-group-append" onclick="QuickAdd(16,'BuildingTypeData','نوع الترخيص')" style="cursor:pointer">
                                                         <span class="input-group-text input-group-text2">
                                                             <i class="fa fa-external-link"></i>
@@ -80,9 +85,16 @@
                                                         </span>
                                                     </div>
                                                     
+
+
+
                                                     <select class="form-control" name="BuildingData" id="BuildingData">
-                                                        <option value=""></option>
+                                                        <option value="2079">قائم</option>
+                                                        <option value="2080">مقترح</option>
+                                                        <option value="2081">قائم/مقترح</option>
                                                     </select>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -120,7 +132,9 @@
                                                     </div>
                                                     
                                                     <select class="form-control" name="AttahType" id="AttahType">
-                                                        <option value=""></option>
+                                                            @foreach($attachment_type as $attachment)
+                                                            <option value="{{$attachment->id}}"> {{$attachment->name}}   </option>
+                                                            @endforeach
                                                     </select>
                                                     <div class="input-group-append" onclick="QuickAdd(46,'AttahType','نوع المرفق')" style="cursor:pointer">
                                                         <span class="input-group-text input-group-text2">
@@ -145,7 +159,7 @@
                                     </div>
                                     <div style="text-align: center;">
                                         
-                                    <button type="button" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
+                                    <button type="submit" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
                                         حفظ    
                                     </button>
                                         
@@ -169,4 +183,55 @@
     </form>
 </div>
 @include('dashboard.component.fetch_table');
+@endsection
+
+@section('script')
+<script>
+
+
+
+$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+   $('#archive-form').submit(function(e) {
+       e.preventDefault();
+       let formData = new FormData(this);
+       $.ajax({
+          type:'POST',
+          url: "store_lince_archive",
+           data: formData,
+           contentType: false,
+           processData: false,
+           success: (response) => {
+               this.reset();
+               $('.wtbl').DataTable().ajax.reload();  
+           },
+           error: function(response){
+           }
+       });
+  });
+
+
+
+$( function() {
+    $( ".cust" ).autocomplete({
+		source: 'Linence_auto_complete',
+		minLength: 1,
+		
+        select: function( event, ui ) {
+            console.log(ui.item.model);
+            $('#customerid').val(ui.item.id);
+            $('#customername').val(ui.item.name);
+            $('#customerType').val(ui.item.model);
+            $('#licNo').val(ui.item.licNo);
+            $('#licn').val(ui.item.licn);
+            $('#licnfile').val(ui.item.licnfile);
+           }
+	    });
+    });
+
+</script>
 @endsection

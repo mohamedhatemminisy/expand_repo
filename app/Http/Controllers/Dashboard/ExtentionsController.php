@@ -23,7 +23,8 @@ use App\Models\VehicleType;
 use App\Models\VehicleBrand;
 use App\Models\AssetStatus;
 use App\Models\ArchiveType;
-
+use App\Models\AttachmentType;
+use App\Models\LicenseType;
 
 use App\Http\Requests\ExtentionRequest;
 
@@ -97,6 +98,17 @@ class ExtentionsController extends Controller
             $data['pj_i_id'] = $request->pk_i_id;
             return response()->json($data);
         }
+        elseif($request->pk_i_id == '16'){
+            $data['data'] = LicenseType::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        elseif($request->pk_i_id == '46'){
+            $data['data'] = AttachmentType::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        
     }
 
 
@@ -154,6 +166,15 @@ class ExtentionsController extends Controller
             $data = ArchiveType::findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
         }
+        elseif($request->fk_i_constant_id == '16'){
+            $data = LicenseType::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '46'){
+            $data = AttachmentType::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+
         
     }
 
@@ -377,8 +398,38 @@ class ExtentionsController extends Controller
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
+        elseif($request->fk_i_constant_id1 == '16'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new LicenseType();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = LicenseType::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+        elseif($request->fk_i_constant_id1 == '46'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new AttachmentType();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = AttachmentType::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
         
-
+        
     }
 
 }

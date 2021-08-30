@@ -129,10 +129,13 @@ Route::group([
         });
         Route::get('archieve_info', 'ArchieveController@archieve_info')->name('archieve_info');
 
+        Route::get('Linence_auto_complete','ArchieveController@Linence_auto_complete')
+        ->name('Linence_auto_complete');
+        Route::post('store_lince_archive','ArchieveController@store_lince_archive')
+        ->name('store_lince_archive');
 
-
-     
-
+        
+        
         /**
          * admins Routes
          */
