@@ -18,7 +18,15 @@
 .even{
     background-color:#D7EDF9 !important;
 }
+.dt-buttons
+{
+    margin-bottom: 20px;
+    text-align: left;
+    
+}
+
 </style>
+
 <input type="hidden" id="type" name="type" value="{{$type}}">
 <div class="content-body resultTblaa">
     <div class="row">
@@ -518,7 +526,7 @@
         }*/
         var types=$('#type').val();
         $( function(){
-            $('.wtbl').DataTable({
+            var table=$('.wtbl').DataTable({
             processing:true,
             serverSide:true,
             info:true,
@@ -704,7 +712,7 @@
                     name:'name',
                 
                 },
-                {data:null},
+                {data:'model_id'},
                 {data:'date'},
                 {
                     data: null,
@@ -729,10 +737,44 @@
                 render:function(data,row,type){
                         $actionBtn = '<a onclick="update('+data.id+')" class="btn btn-info"><i style="color:#ffffff" class="fa fa-edit"></i> </a>';
                             return $actionBtn;
-                    }
+                    },
+                    name:'name',
                 },
             ],
+           
+
             @endif   
+            dom: 'Bfltip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    tag: 'img',
+                    title:'',
+                    attr:  {
+                        title: 'excel',
+                        src:'{{asset('assets/images/ico/excel.png')}}',
+                        style: 'cursor:pointer;',
+                    },
+
+                },
+                {
+                    extend: 'print',
+                    tag: 'img',
+                    title:'',
+                    attr:  {
+                        title: 'print',
+                        src:'{{asset('assets/images/ico/Printer.png')}} ',
+                        style: 'cursor:pointer;height: 32px;',
+                        class:"fa fa-print"
+                    },
+                    customize: function ( win ) {
+                  
+ 
+                    $(win.document.body).find( 'table' ).find('tbody')
+                        .css( 'font-size', '20pt' );
+                    }
+                },
+                ],
             
             "language": {
                         "sEmptyTable":     "ليست هناك بيانات متاحة في الجدول",
@@ -759,17 +801,6 @@
                     }
     
         });
+        
         })
 </script>    
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
-<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
