@@ -381,6 +381,7 @@
 </form>
 </section>
 <?php $type=$types;?>
+@include('dashboard.component.archive_table');
 @include('dashboard.component.fetch_table');
 
 @stop
@@ -414,7 +415,7 @@ $( function() {
                 $("#PHnum1").val(response.info.supply_phone);
                 $('#carimg').attr('src', response.info.image);
                 $("#msgStatic").html(response.ArchiveCount);
-
+                drawTablesArchive(response.Archive);
                 $("select#vehiclebrand option")
                     .each(function() { this.selected = (this.text == response.brand); 
                 });

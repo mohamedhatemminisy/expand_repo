@@ -1,9 +1,8 @@
 @extends('layouts.admin')
 @section('content')
 
-<section class="horizontal-grid" id="horizontal-grid">
 <form id="ajaxform">
-
+<section class="horizontal-grid" id="horizontal-grid">
 <div class="row white-row">
     <div class="col-sm-12 col-lg-6 col-md-12">
         <div class="card leftSide">
@@ -261,7 +260,7 @@
     </div>
 
     <div class="col-sm-12 col-lg-6 col-md-12">
-        <div class="card rightSide" style="min-height:594.938px">
+        <div class="card rightSide" style="min-height:646px">
                 <div class="card-header">
                     <h4 class="card-title"><img src="https://db.expand.ps/images/maps-icon.png" width="32" height="32"> {{trans('admin.address')}}</h4>
                 </div>
@@ -499,10 +498,9 @@
     </div>
 
 </div>
-
-</form>
 </section>
-
+</form>
+@include('dashboard.component.archive_table');
 @include('dashboard.component.fetch_table');
 
 @stop
@@ -532,6 +530,7 @@ $( function() {
             $('#dateEnd').val(response.info.dateEnd);
             $('#Projectcost').val(response.info.Projectcost);
             $("#msgStatic").html(response.ArchiveCount);
+            drawTablesArchive(response.Archive);
             $("select#CurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency); 
             });

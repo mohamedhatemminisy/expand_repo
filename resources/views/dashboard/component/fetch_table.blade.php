@@ -49,7 +49,7 @@
                             <div class="row" id="resultTblaa">
                                 <div class="col-xl-12 col-lg-12">
                                     <table style="width:100%; margin-top: -10px;direction: rtl;text-align: right" class="detailsTB table wtbl">
-                                        @if ($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive'||$type=='licArchive'||$type=='licFileArchive')
+                                        @if ($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive')
                                         <thead>
                                             <tr style="text-align:center !important;background: #00A3E8;">
                                                 <th  >
@@ -77,7 +77,37 @@
                                                 </th>
                                             </tr>
                                         </thead>
-                    
+                                        @elseif($type=='licArchive'||$type=='licFileArchive')
+                                        <thead>
+                                            <tr style="text-align:center !important;background: #00A3E8;">
+                                                <th  >
+                                                    #
+                                                </th>
+                                                @if($type=='licArchive')
+                                                <th  >
+                                                    {{trans('archive.lic_num')}}
+                                                </th>
+                                                @elseif($type=='licFileArchive')
+                                                <th  >
+                                                    {{trans('archive.licfile_num')}}
+                                                </th>
+                                                @endif
+                                                <th  >
+                                                    {{trans('archive.subs')}}
+                                                </th>
+                                                <th>
+                                                    {{trans('archive.lic_type')}}
+                                                </th>
+                                                <th>
+                                                    {{trans('archive.build_type')}}
+                                                </th>
+                                                <th style="width: 300px;">
+                                                    {{trans('archive.attach')}}
+                                                </th>
+                                                <th>
+                                                </th>
+                                            </tr>
+                                        </thead>
                                         @elseif ($type=="subscriber")
                                         <thead>
                                             <tr style="text-align:center !important;background: #00A3E8;">
@@ -556,9 +586,16 @@
             ajax:"{{ route('equip_info_all') }}",
             @elseif ($type == 'project')
             ajax:"{{ route('project_info_all') }}",
-            @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive'||$type=='licArchive'||$type=='licFileArchive')
+            @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive')
             ajax: {
                 url: '{{ route('archieve_info_all') }}',
+                data: function (d) {
+                    d.type = $('#type').val();
+                }
+            },
+            @elseif($type=='licArchive'||$type=='licFileArchive')
+            ajax: {
+                url: '{{ route('archievelic_info_all') }}',
                 data: function (d) {
                     d.type = $('#type').val();
                 }
@@ -690,7 +727,7 @@
                 {data:'status',name:'equpment_statuses.name'},
                 {data:'count'},
             ],
-            @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive'||$type=='licArchive'||$type=='licFileArchive')
+            @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive')
             columns:[
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
                 {data:'serisal'},
@@ -741,8 +778,40 @@
                     name:'name',
                 },
             ],
-           
-
+            @elseif ($type=='licArchive'||$type=='licFileArchive')
+            columns:[
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                {data:'licNo'},
+                {
+                    data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.name+')">'+data.name+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                
+                },
+                {
+                    data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.license_type+')">'+data.license_type+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'license_type',
+                
+                },
+                {data:'licn'},
+                {data:'attachment_id'},
+                
+                {
+                data: null, 
+                render:function(data,row,type){
+                        $actionBtn = '<a onclick="update('+data.id+')" class="btn btn-info"><i style="color:#ffffff" class="fa fa-edit"></i> </a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                },
+            ],
             @endif   
             dom: 'Bfltip',
             buttons: [

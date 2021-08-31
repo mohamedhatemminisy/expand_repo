@@ -15,7 +15,7 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\CopyTo;
 use App\Models\ArchiveType;
-
+use Illuminate\Support\Facades\DB;
 class SearchController extends Controller
 {
     

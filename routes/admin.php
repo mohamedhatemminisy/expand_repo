@@ -112,7 +112,9 @@ Route::group([
         Route::post('store_archive','ArchieveController@store_archive')->name('store_archive');
         Route::get('archieve_info_all','ArchieveController@archieve_info_all')
         ->name('archieve_info_all');
-        
+        Route::get('archievelic_info_all','ArchieveController@archievelic_info_all')
+        ->name('archievelic_info_all');
+
         Route::get('in_archieve','ArchieveController@in_archieve')->name('in_archieve');
         Route::get('emp_archieve','ArchieveController@emp_archieve')->name('emp_archieve');
         Route::get('dep_archieve','ArchieveController@dep_archieve')->name('dep_archieve');

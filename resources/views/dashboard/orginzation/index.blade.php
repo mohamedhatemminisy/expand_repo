@@ -333,6 +333,7 @@
 </form>
 </section>
 <?php $types=$type; $type="org";?>
+@include('dashboard.component.archive_table');
 @include('dashboard.component.fetch_table');
 <?php $type=$types;?>
 @stop
@@ -375,6 +376,7 @@ $( function() {
             $('#phone2').val(response.info.whatsapp_two);
             $('#website').val(response.info.website);
             $("#msgStatic").html(response.ArchiveCount);
+            drawTablesArchive(response.Archive);
             $("select#PositionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });

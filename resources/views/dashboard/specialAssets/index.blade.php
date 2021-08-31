@@ -811,6 +811,7 @@
 </form>
 
 </section>
+@include('dashboard.component.archive_table');
 @include('dashboard.component.fetch_table');
 
 @endsection
@@ -848,6 +849,7 @@ $( function() {
                  .each(function() { this.selected = (this.text == response.admin); 
             });
             $("#msgStatic").html(response.ArchiveCount);
+            drawTablesArchive(response.Archive);
             $("select#ownType option")
                  .each(function() { this.selected = (this.text == response.asset_status); 
             });

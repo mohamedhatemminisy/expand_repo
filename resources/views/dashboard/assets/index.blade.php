@@ -436,6 +436,7 @@
 </form>
 </section>
 <?php $type=$types;?>
+@include('dashboard.component.archive_table');
 @include('dashboard.component.fetch_table');
 
 @endsection
@@ -471,7 +472,7 @@ $( function() {
             $("#PHnum2").val(response.info.sponsor_phone);
             $("#PHnum1").val(response.info.supply_phone);
             $("#msgStatic").html(response.ArchiveCount);
-
+            drawTablesArchive(response.Archive);
             $('#equipmentimg').attr('src', response.info.image);
 
             $("select#brand option")
