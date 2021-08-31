@@ -342,7 +342,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-6">
-            <div class="card rightSide" style="min-height:503.359px">
+            <div class="card rightSide" style="min-height:598.359px">
                 <div class="card-header">
                     <h4 class="card-title">
                         <img src="https://db.expand.ps/images/maps-icon.png" width="32" height="32"> {{trans('admin.address')}}</h4>
@@ -378,9 +378,8 @@
     </div>
 </form>
 </section>
+@include('dashboard.component.archive_table');
 @include('dashboard.component.fetch_table');
-
-
 @stop
 @section('script')
 <script>
@@ -414,6 +413,7 @@ $( function() {
             $('#formDataEmailAddress').val(response.info.email);
             $('#formDataBussniessName').val(response.info.bussniess_name);
             $("#certListCnt").html(response.ArchiveCount);
+            drawTablesArchive(response.Archive);
             $("select#formDataProfessionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });
@@ -628,7 +628,11 @@ $("#area_data").change(function () {
   });
 
 
+  function ShowCertModal(bindTo){
 
+$("#CitizenName").html($("#formDataNameAR").val())
+$("#CertModal").modal('show')
+}
 </script>
 
 

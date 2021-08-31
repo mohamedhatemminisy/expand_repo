@@ -538,7 +538,7 @@
 					</div>
 
                         
-                        <div class="form-actions" style="border-top:0px;">
+                        <div class="form-actions" style="border-top:0px; padding-bottom:44px;">
                             <div class="text-right">
                                 <button type="submit" class="btn btn-primary" id="saveBtn">{{trans('admin.save')}}  <i class="ft-thumbs-up position-right"></i></button>
                                 <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>

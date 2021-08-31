@@ -12,7 +12,7 @@
 
           </a></li>
         <li class="nav-item">
-          <a class="navbar-brand" style="padding: 0px;" href="">
+          <a class="navbar-brand" style="padding: 0px;" href="{{ route('admin.dashboard') }}">
             <img class="" alt="modern admin logo" src="{{asset('assets/images/logo/16232479351317.png')}}" style="height:64px !important;">
           </a>
         </li>

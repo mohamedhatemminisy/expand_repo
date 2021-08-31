@@ -399,7 +399,7 @@
 
 
         <div class="col-sm-12 col-lg-6 col-md-12">
-            <div class="card rightSide" style="min-height:1183.75px">
+            <div class="card rightSide" style="min-height: 1035.75px;">
                 <div class="card-header">
                     <h4 class="card-title"><img src="https://db.expand.ps/images/maps-icon.png" width="32" height="32"> {{trans('admin.address')}}</h4>
                 </div>

@@ -100,7 +100,7 @@ class ArchieveController extends Controller
     }
     public function store_lince_archive(Request $request){
         $archive = ArchiveLicense::where('id',$request->customerid)
-        ->where('model','App\Models\ArchiveLicense')
+        ->where('model_name','App\Models\ArchiveLicense')
         ->where('type',$request->type)->first();
         if($archive){
             $archive->name =$request->customername;
@@ -117,7 +117,6 @@ class ArchieveController extends Controller
         $archive->model_id =$request->customerid;
         $archive->model_name =$request->customerType;
         $archive->licn =$request->licn;
-        $archive->model ="App\Models\ArchiveLicense";
         $archive->licnfile =$request->licnfile;        
         $archive->licNo =$request->licNo;
         $archive->license_type =$request->BuildingData;
@@ -239,6 +238,16 @@ class ArchieveController extends Controller
     {
         $type=$request['type'];
         $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC');
+        
+        return DataTables::of($archive)
+                        ->addIndexColumn()
+                        ->make(true);
+
+    }
+    public function archievelic_info_all(Request $request)
+    {
+        $type=$request['type'];
+        $archive= ArchiveLicense::all()->where('type',$type);
         
         return DataTables::of($archive)
                         ->addIndexColumn()

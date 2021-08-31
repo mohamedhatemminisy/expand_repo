@@ -40,5 +40,11 @@ return [
     'name_dep'   =>  'name of department ',
     'lic_archive'   =>  'licence of archive ',
     'licFile_archive'   =>  'file licence of archive ',
+    'lic_num'   =>  'number of license',
+    'subs'   =>  'subscriber ',
+    'lic_type'   =>  'license type ',
+    'build_type'   =>  'building type ',
+    'attach'   =>  'attachment ',
+    'licfile_num'   =>  'number of license file',
 
 ];

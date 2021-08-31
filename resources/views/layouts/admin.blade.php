@@ -110,110 +110,7 @@ th{
   background-color:#0073AA; 
 }
 </style>
-<div class="modal fade text-left" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-	<div class="modal-dialog"  role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel1"> 
-				الأرشيف
-				<span id="msgTitleSpn"></span></h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div class="form-body">
-				    <ul class="nav nav-tabs">
-                      <li class="nav-item">
-                        <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tabMM1" aria-expanded="true">أرشيف الصادر</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tabMM2" aria-expanded="false">أرشيف الوارد</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tabMM3" aria-expanded="false">نسخة إلى </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="base-tab4" data-toggle="tab" aria-controls="tab4" href="#tabMM4" aria-expanded="false"> أخرى </a>
-                      </li>
-                    </ul>
-                    <div class="tab-content px-1 pt-1">
-                      <div role="tabpanel"   style="max-height:400px; overflow-x:hidden; overflow-y:scroll"class="tab-pane active" id="tabMM1" aria-expanded="true" aria-labelledby="base-tab1">
-                        <p>
-        					<table width="100%" class="detailsTB table SaderTbl">
-            				    <thead>
-            						<tr>
-            							<th>#</th>
-            							<th>رقم المراسلة</th>
-            							<th>عنوان المراسلة</th>
-            							<th>التاريخ </th>
-            							<th>نسخة إلى </th>
-            							<th>المرفقات </th>
-            						</tr>
-        						</thead>
-        						<tbody id="msgList">
-        						</tbody>
-        					</table>
-                        </p>
-                      </div>
-                      <div class="tab-pane"  style="max-height:400px; overflow-x:hidden; overflow-y:scroll "id="tabMM2" aria-labelledby="base-tab2">
-                        <p>
-        					<table width="100%" class="detailsTB table waredTbl">
-            				    <thead>
-            						<tr>
-            							<th width="50px">#</th>
-            							<th width="80px">رقم المراسلة</th>
-            							<th>عنوان المراسلة</th>
-            							<th width="80px">التاريخ </th>
-            							<th>المرفقات </th>
-            						</tr>
-        						</thead>
-        						<tbody id="msgRList">
-        						</tbody>
-        					</table>
-    					</p>
-                      </div>
-                      <div style="max-height:400px; overflow-x:hidden; overflow-y:scroll" class="tab-pane" id="tabMM3" aria-labelledby="base-tab3">
-                        <p >
-        					<table width="100%" class="detailsTB table OtherTbl">
-            				    <thead>
-            						<tr>
-            							<th width="50px">#</th>
-            							<th width="80px">رقم الأرشيف </th>
-            							<th>عنوان الأرشيف</th>
-            							<th width="80px">التاريخ </th>
-            							<th>المرفقات </th>
-            						</tr>
-        						</thead>
-        						<tbody id="msgOList">
-        						</tbody>
-        					</table>
-    					</p>
-                      </div>
-                      <div style="max-height:400px; overflow-x:hidden; overflow-y:scroll" class="tab-pane" id="tabMM4" aria-labelledby="base-tab4">
-                        <p >
-        					<table width="100%" class="detailsTB table OtherTbl">
-            				    <thead>
-            						<tr>
-            							<th width="50px">#</th>
-            							<th width="80px">رقم الأرشيف </th>
-            							<th>عنوان الأرشيف</th>
-            							<th width="80px">نوعها</th>
-            							<th width="80px">التاريخ </th>
-            							<th>المرفقات </th>
-            						</tr>
-        						</thead>
-        						<tbody id="msgOList1">
-        						</tbody>
-        					</table>
-    					</p>
-                      </div>
-                    </div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+
 <div class="modal fade text-left" id="smsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 	<div class="modal-dialog" STYLE="max-width: 40%!important;"  role="document">
 		<div class="modal-content">
@@ -471,7 +368,7 @@ $('#store-modal').submit(function(e) {
 
 $( function() {
     $( ".full_search" ).autocomplete({
-		source: 'full_search',
+		source:'search',
 		minLength: 1,
 		
         select: function( event, ui ) {

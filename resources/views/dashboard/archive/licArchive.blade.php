@@ -54,7 +54,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
                                                     <div class="input-group-prepend">
@@ -68,7 +70,12 @@
                                                                 @endforeach
                                                     </select>
                                                 
-                                                    <div class="input-group-append" onclick="QuickAdd(16,'BuildingTypeData','نوع الترخيص')" style="cursor:pointer">
+                                                    <div class="input-group-append" onclick="QuickAdd(16,'BuildingTypeData','نوع الترخيص')" style="cursor:pointer;max-width: 15px;
+                                                    margin-left: 0px !important;
+                                                    padding-left: 0px !important;
+                                                    padding-right: 0px !important;
+                                                    margin-right:15px;
+                                                     ">
                                                         <span class="input-group-text input-group-text2">
                                                             <i class="fa fa-external-link"></i>
                                                         </span>
@@ -98,7 +105,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2 col-md-12 pr-0 pr-s-12"  >
+                                        <div class="col-lg-2 col-md-12 pr-0 pr-s-12" style="min-width: 21%" >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
                                                     <div class="input-group-prepend">
@@ -110,7 +117,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2 col-md-12 pr-0 pr-s-12"  >
+                                        <div class="col-lg-2 col-md-12 pr-0 pr-s-12"  style="min-width: 20%" >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
                                                     <div class="input-group-prepend">
@@ -122,6 +129,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                        <div class="row">
                                         <div class="col-lg-10 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
