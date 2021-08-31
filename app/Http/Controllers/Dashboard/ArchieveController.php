@@ -135,7 +135,7 @@ class ArchieveController extends Controller
         if($request->hasFile('formDataaaUploadFile')){
             $files = $request->file('formDataaaUploadFile');
             foreach($files as $file){
-                $new[] = url(upload_image($file, 'file_'));
+                $new[] = (upload_image($file, 'file_'));
                 // array_push($files_obj, $new);
             }
             $files = json_encode($new);
