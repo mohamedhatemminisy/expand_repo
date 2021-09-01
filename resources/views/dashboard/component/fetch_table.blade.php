@@ -755,17 +755,24 @@
                     data: null,
                     
                     render:function(data,row,type){
-                        if(data.fileIDS){ 
-                        $actionBtn = '<div id="attach" class=" col-sm-6 ">'
+                        if(data.fileIDS&&typeof(data.fileIDS)=="object"){ 
+                            var i=1;
+                            $actionBtn="<div class='row' style='margin-left:0px;'>";
+                            data.fileIDS.forEach(file => {
+                                $actionBtn += '<div id="attach" class=" col-sm-6 ">'
                                     +'<div class="attach">'
-                                      +'  <span class="attach-text">AttachName</span>'
-                                       +' <a class="attach-close1" href="AttachServerName" style="color: #74798D; float:left;" target="_blank">'
+                                      +'  <span class="attach-text">مرفق '+i+'</span>'
+                                       +' <a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
                                         +'    <i class="fa fa-eye"> </i>'
                                         +'</a>'
                                     +'</div>'
                                     +'</div>'; 
-                            return $actionBtn;}
-                            else{return '';}
+                                    i++;
+                            });
+                            $actionBtn += '</div>';
+                            return $actionBtn;
+                        }
+                        else{return '';}
                     },
                     name:'fileIDS',                    
                 },

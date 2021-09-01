@@ -38,6 +38,9 @@ aria-hidden="true">
                                 <li class="nav-item">
                                   <a class="nav-link" id="base-tab7" data-toggle="tab" aria-controls="tab7" href="#xtab7" aria-expanded="false">أرشيف ملف الترخيص</a>
                                 </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" id="base-tab8" data-toggle="tab" aria-controls="tab8" href="#xtab8" aria-expanded="false">نسخة الى</a>
+                                </li>
                               </ul>
                               <div class="tab-content px-1 pt-1">
                                 <div role="tabpanel" class="tab-pane active" id="xtab1" aria-expanded="true" aria-labelledby="base-tab1">
@@ -127,7 +130,7 @@ aria-hidden="true">
                                 </div>
                                 <div class="tab-pane" id="xtab99" aria-labelledby="base-tab99">
                                   <p>
-                                          <table width="100%" class="detailsTB table">
+                                  <table width="100%" class="detailsTB table">
                                   <tr>
                                     <th style="width: 300px;">عنوان الأرشيف</th>
                                     <th style="width: 100px;">التاريخ</th>
@@ -184,6 +187,24 @@ aria-hidden="true">
                               <tbody id="msgList1">
                               </tbody>
                             </table>
+                                  </p>
+                                </div>
+                                <div class="tab-pane" id="xtab8" aria-labelledby="base-tab8">
+                                  <p>
+                                  <table width="100%" class="detailsTB table copyToTbl">
+                                        <thead>
+                                        <tr>
+                                          <th width="50px">#</th>
+                                          <th width="80px">رقم الأرشيف</th>
+                                          <th>عنوان الأرشيف</th>
+                                          <th width="120px"> صادر من </th>
+                                          <th width="80px">التاريخ </th>
+                                          <th>المرفقات </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="copyToList">
+                                    </tbody>
+                                  </table>
                                   </p>
                                 </div>
                                 <div class="tab-pane" id="xtab3" aria-labelledby="base-tab3">
@@ -376,11 +397,12 @@ aria-hidden="true">
 
 
 <script>
-function drawTablesArchive($archives)
+function drawTablesArchive($archives,$copyTo)
 {
   @if ($type=="subscriber")
     var s=1;
     var w=1;
+    var c=1;
     $archives.forEach(archive => {
         
         if(archive.type=="outArchive")
@@ -389,10 +411,29 @@ function drawTablesArchive($archives)
                 "<td>"+archive.serisal+"</td>"+
                 "<td>"+archive.title+"</td>"+
                 "<td>"+archive.date+"</td>"+
-                "<td>"+archive.fileIDS+"</td>"+
-                "</tr>";
+                "<td>";
+                attach='';
+                var i=1;
+                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
+                archive.fileIDS.forEach(file => {
+                    attach+='<div id="attach" class=" col-sm-6 ">'
+                            +'<div class="attach">'
+                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
+                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
+                                +'  <i class="fa fa-eye"> </i>'
+                                +'</a><input type="hidden" value="" name="attach[]" >'
+                                +'</div>'
+                            +'</div>';
+                            i++;
+                        });
+                        $row += attach;
+                      }
+                
+               
+                $row += "</td></tr>";
             $('#msgList1').append($row)
             s++;
+                
            }
            if(archive.type=="inArchive")
            { $row="<tr>"+
@@ -401,6 +442,7 @@ function drawTablesArchive($archives)
                 "<td>"+archive.title+"</td>"+
                 "<td>"+archive.date+"</td>"+
                 "<td>"+archive.fileIDS+"</td>"+
+                
                 "</tr>";
             $('#msgRList1').append($row)
             w++;
@@ -523,8 +565,78 @@ function drawTablesArchive($archives)
                         }
                     }
     });
-   
-           
+   $copyTo.forEach(copy => {
+            $row="<tr>"+
+                "<td>"+c+"</td>"+
+                "<td>"+copy.archive.serisal+"</td>"+
+                "<td>"+copy.archive.title+"</td>"+
+                "<td>"+copy.archive.name+"</td>"+
+                "<td>"+copy.archive.date+"</td>"+
+                "<td>"+copy.archive.fileIDS+"</td>"+
+                "</tr>";
+            $('#copyToList').append($row)
+            c++;
+  });
+  $('.copyToTbl').DataTable({
+
+                    dom: 'Bfltip',
+                        buttons: [
+                            {
+                                extend: 'excel',
+                                tag: 'img',
+                                title:'',
+                                attr:  {
+                                    title: 'excel',
+                                    src:'{{asset('assets/images/ico/excel.png')}}',
+                                    style: 'cursor:pointer;',
+                                },
+
+                            },
+                            {
+                                extend: 'print',
+                                tag: 'img',
+                                title:'',
+                                attr:  {
+                                    title: 'print',
+                                    src:'{{asset('assets/images/ico/Printer.png')}} ',
+                                    style: 'cursor:pointer;height: 32px;',
+                                    class:"fa fa-print"
+                                },
+                                customize: function ( win ) {
+                              
+
+                                $(win.document.body).find( 'table' ).find('tbody')
+                                    .css( 'font-size', '20pt' );
+                                }
+                            },
+                            ],
+                        
+                        "language": {
+                                    "sEmptyTable":     "ليست هناك بيانات متاحة في الجدول",
+                                    "sLoadingRecords": "جارٍ التحميل...",
+                                    "sProcessing":   "جارٍ التحميل...",
+                                    "sLengthMenu":   "أظهر _MENU_ مدخلات",
+                                    "sZeroRecords":  "لم يعثر على أية سجلات",
+                                    "sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                                    "sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
+                                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                                    "sInfoPostFix":  "",
+                                    "sSearch":       "ابحث:",
+                                    "sUrl":          "",
+                                    "oPaginate": {
+                                        "sFirst":    "الأول",
+                                        "sPrevious": "السابق",
+                                        "sNext":     "التالي",
+                                        "sLast":     "الأخير"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending":  ": تفعيل لترتيب العمود تصاعدياً",
+                                        "sSortDescending": ": تفعيل لترتيب العمود تنازلياً"
+                                    }
+                                }
+                    });
+
+
   @elseif ($type=="project")
         var proj=1
         $archives.forEach(archive => {

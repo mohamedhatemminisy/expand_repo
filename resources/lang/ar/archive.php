@@ -27,7 +27,7 @@ return [
     'title'   =>  'عنوان الوثيقة  ',
     'num'   =>  'الرقم  ',
     'proj_name'   =>  'اسم المشروع ',
-    'proj_archive'   =>  'أرشيف الشاريع ',
+    'proj_archive'   =>  'أرشيف المشاريع ',
     'mun_archive'   =>  'أرشيف البلدية ',
     'emp_archive'   =>  'أرشيف الموظفين ',
     'dep_archive'   =>  'أرشيف الاقسام ',

@@ -232,6 +232,7 @@ $.ajaxSetup({
            success: (response) => {
                this.reset();
                $('.wtbl').DataTable().ajax.reload();  
+               $(".formDataaaFilesArea").html('');
            },
            error: function(response){
             if(response.responseJSON.errors.customerName){
@@ -265,6 +266,7 @@ $( function() {
 		
         select: function( event, ui ) {
             console.log(ui.item);
+            $(".formDataaaFilesArea").html('');
             $('#customerid').val(ui.item.id);
             $('#customername').val(ui.item.name);
             $('#customerType').val(ui.item.model);
@@ -276,6 +278,7 @@ $( function() {
 
     function update($id){
         let archive_id = $id;
+        $(".formDataaaFilesArea").html('');
             $.ajax({
             type: 'get', // the method (could be GET btw)
             url: "{{ route('archieve_info') }}",
@@ -290,16 +293,19 @@ $( function() {
             $('#msgTitle').val(response.info.title);
             $('#msgDate').val(response.info.date);
             $('#msgid').val(response.info.serisal);
-
             attach='';
+            var i=1;
+            response.info.fileIDS.forEach(file => {
                 attach+='<div id="attach" class=" col-sm-6 ">'
                         +'<div class="attach">'
-                            +'<span class="attach-text">'+response.info.fileIDS+'</span><a onclick="delAttach('+response.info.fileIDS+')"><i class="fa fa-trash"></i></a>'
-                            +'<a class="attach-close1" href="AttachServerName" style="color: #74798D; float:left;" target="_blank">'
+                            +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
+                            +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
                             +'  <i class="fa fa-eye"> </i>'
                             +'</a><input type="hidden" value="" name="attach[]" >'
                             +'</div>'
                         +'</div>';
+                        i++;
+                    });
             $(".formDataaaFilesArea").html(attach)
             
             },
