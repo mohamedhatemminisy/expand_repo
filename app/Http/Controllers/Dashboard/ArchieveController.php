@@ -21,6 +21,7 @@ use App\Http\Requests\ArchiveRequest;
 use App\Models\AttachmentType;
 use App\Models\LicenseType;
 use App\Models\ArchiveLicense;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class ArchieveController extends Controller
 {
@@ -135,7 +136,7 @@ class ArchieveController extends Controller
         if($request->hasFile('formDataaaUploadFile')){
             $files = $request->file('formDataaaUploadFile');
             foreach($files as $file){
-                $new[] = (upload_image($file, 'file_'));
+                $new[] = url(upload_image($file, 'file_'));
                 // array_push($files_obj, $new);
             }
             $files = json_encode($new);

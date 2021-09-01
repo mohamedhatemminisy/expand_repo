@@ -101,8 +101,11 @@ class SubscriberController extends Controller
         $ArchiveCount = count(Archive::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['subscribe_id'])
-        ->where('model_name',$model)->get();
+        ->where('model_name',$model)->with('copyTo')->get();
         $user['Archive'] = $Archive;
+        $CopyTo = CopyTo::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->with('archive')->get();
+        $user['copyTo'] = $CopyTo;
         $CopyToCount = count(CopyTo::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->get());
         $user['ArchiveCount'] = $ArchiveCount + $CopyToCount;

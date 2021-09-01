@@ -413,7 +413,7 @@ $( function() {
             $('#formDataEmailAddress').val(response.info.email);
             $('#formDataBussniessName').val(response.info.bussniess_name);
             $("#certListCnt").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive);
+            drawTablesArchive(response.Archive,response.copyTo);
             $("select#formDataProfessionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });
