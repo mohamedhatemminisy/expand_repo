@@ -49,6 +49,8 @@ class ProjectController extends Controller
             $address->notes = $request->Note;
             $address->save();
             $project->model = "App\Models\Project";
+            $project->add_by = Auth()->user()->id;
+            $project->url = 'projects';
             $project->name = $request->ProjectName;
             $project->ProjectNo = $request->ProjectNo;
             $project->dateStart = $request->dateStart;

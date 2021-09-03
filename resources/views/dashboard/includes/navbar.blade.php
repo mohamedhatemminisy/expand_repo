@@ -50,7 +50,7 @@
             </li>
             </li>           
            <li data-menu="">
-              <a class="dropdown-item" href="{{route('orginzations')}}" data-toggle="dropdown">{{trans('admin.orginzations')}}</a>
+              <a class="dropdown-item" href="{{route('orginzation')}}" data-toggle="dropdown">{{trans('admin.orginzations')}}</a>
             </li>
           </ul>
         </li>

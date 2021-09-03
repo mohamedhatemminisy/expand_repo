@@ -24,6 +24,9 @@ class CreateProjectsTable extends Migration
             $table->string('currency')->nullable();
             $table->string('cost1')->nullable();
             $table->string('pinc8')->nullable();
+            $table->string('url')->nullable();
+            $table->integer('added_by')->unsigned()->nullable();
+            $table->foreign('added_by')->references('id')->on('admins')->onDelete('cascade');
             $table->integer('admin_id')->unsigned();
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->integer('department_id')->unsigned();

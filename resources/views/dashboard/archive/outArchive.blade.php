@@ -73,6 +73,7 @@
                                                         <input type="hidden" id="customername" name="customername" value="0">
                                                         <input type="hidden" id="customerType" name="customerType" value="0">
                                                         <input type="hidden" id="msgType" name="msgType" value="<?php echo $type ?>">
+                                                        <input type="hidden" id="url" name="url" value="<?php echo $url ?>">
                                                         <input type="hidden" id="pk_i_id" name="pk_i_id" value="0">
                                                         <!-- 2166  -->
                                                         

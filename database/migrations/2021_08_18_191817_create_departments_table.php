@@ -20,6 +20,9 @@ class CreateDepartmentsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('extphone')->nullable();
             $table->string('email')->nullable();
+            $table->string('url')->nullable();
+            $table->integer('added_by')->unsigned()->nullable();
+            $table->foreign('added_by')->references('id')->on('admins')->onDelete('cascade');
             $table->integer('admin_id')->unsigned();
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->integer('department_id')->unsigned()->nullable();

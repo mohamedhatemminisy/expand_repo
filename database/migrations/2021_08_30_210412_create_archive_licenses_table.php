@@ -23,6 +23,9 @@ class CreateArchiveLicensesTable extends Migration
             $table->string('licnfile')->nullable();
             $table->string('type')->nullable();  
             $table->string('license_type')->nullable();
+            $table->string('url')->nullable();
+            $table->integer('added_by')->unsigned()->nullable();
+            $table->foreign('added_by')->references('id')->on('admins')->onDelete('cascade');
             $table->integer('license_id')->unsigned()->nullable();
             $table->foreign('license_id')->references('id')->on('license_types')->onDelete('cascade');
             $table->integer('attachment_id')->unsigned()->nullable();

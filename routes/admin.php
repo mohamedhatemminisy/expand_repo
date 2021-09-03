@@ -67,7 +67,7 @@ Route::group([
         Route::get('space', 'orginzationsController@space')->name('space');
         Route::get('banks', 'orginzationsController@banks')->name('banks');
         Route::get('suppliers', 'orginzationsController@suppliers')->name('suppliers');
-        Route::get('orginzations', 'orginzationsController@index')->name('orginzations');
+        Route::get('orginzation', 'orginzationsController@index')->name('orginzation');
         Route::post('store_orginzation', 'orginzationsController@store_orginzation')->name('store_orginzation');
         Route::get('orginzation_auto_complete', 'orginzationsController@orginzation_auto_complete')
         ->name('orginzation_auto_complete');

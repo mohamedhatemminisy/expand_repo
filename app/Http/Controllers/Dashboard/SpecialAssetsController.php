@@ -66,6 +66,8 @@ class SpecialAssetsController extends Controller
             $specialAsset->asset_statuses_id = $request->ownType;
             $specialAsset->addresse_id  = $address->id;
             $specialAsset->type = $request->type;
+            $specialAsset->add_by = Auth()->user()->id;
+            $specialAsset->url =  $request->type;
             $specialAsset->image  = url($path);
             $specialAsset->save();
          }else{

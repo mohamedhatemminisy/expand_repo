@@ -27,6 +27,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();
+            $table->string('url')->nullable();
+            $table->integer('added_by')->unsigned()->nullable();
+            $table->foreign('added_by')->references('id')->on('admins')->onDelete('cascade');
             $table->integer('job_title_id')->unsigned()->nullable();
             $table->foreign('job_title_id')->references('id')->on('job_titles')->onDelete('cascade');
             $table->integer('group_id')->unsigned()->nullable();

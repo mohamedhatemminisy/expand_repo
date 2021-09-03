@@ -40,6 +40,8 @@ class SubscriberController extends Controller
             $user = new User();
             $user->model = "App\Models\User";
             $user->name = $request->formDataNameAR;
+            $user->url =  "subscribers";
+            $user->add_by = Auth()->user()->id;
             $user->phone_one = $request->formDataMobileNo1;
             $user->phone_two = $request->formDataMobileNo2;
             $user->national_id = $request->formDataNationalID;
