@@ -31,6 +31,7 @@ Route::group([
         Route::post('area', 'SettingsController@area')->name('area');
 
         Route::get('employee', 'EmployeeController@index')->name('employee');
+        Route::get('employee/id/{id}', 'EmployeeController@index');
         Route::post('store_employee', 'EmployeeController@store_employee')->name('store_employee');
         Route::get('emp_auto_complete', 'EmployeeController@emp_auto_complete')->name('emp_auto_complete');
         Route::get('emp_info', 'EmployeeController@emp_info')->name('emp_info');
@@ -41,6 +42,8 @@ Route::group([
         
 
         Route::get('department', 'DepartmentController@index')->name('department');
+        Route::get('department/id/{id}', 'DepartmentController@index');
+
         Route::post('store_department', 'DepartmentController@store_department')->name('store_department');
         Route::post('depart_manger', 'DepartmentController@depart_manger')->name('depart_manger');
         Route::get('dept_auto_complete', 'DepartmentController@dept_auto_complete')->name('dept_auto_complete');
@@ -48,12 +51,14 @@ Route::group([
         Route::get('dep_info_all', 'DepartmentController@dep_info_all')->name('dep_info_all');
         
         Route::get('subscribers', 'SubscriberController@index')->name('subscribers');
+        Route::get('subscribers/id/{id}', 'SubscriberController@index')->name('subscriber');
         Route::post('store_subscriber', 'SubscriberController@store_subscriber')->name('store_subscriber');
         Route::get('subscribe_auto_complete', 'SubscriberController@subscribe_auto_complete')->name('subscribe_auto_complete');
         Route::get('subscribe_info', 'SubscriberController@subscribe_info')->name('subscribe_info');
         Route::get('subscribe_info_all', 'SubscriberController@subscribe_info_all')->name('subscribe_info_all');
 
         Route::get('projects', 'ProjectController@index')->name('projects');
+        Route::get('projects/id/{id}', 'ProjectController@index');
         Route::post('store_project', 'ProjectController@store_project')->name('store_project');
         Route::post('depart_manger_project', 'ProjectController@depart_manger_project')->name('depart_manger_project');
         Route::get('project_auto_complete', 'ProjectController@project_auto_complete')->name('project_auto_complete');
@@ -64,10 +69,15 @@ Route::group([
 
         
         Route::get('enginering', 'orginzationsController@enginering')->name('enginering');
+        Route::get('enginering/id/{id}', 'orginzationsController@enginering');
+        Route::get('space/id/{id}', 'orginzationsController@space');
         Route::get('space', 'orginzationsController@space')->name('space');
         Route::get('banks', 'orginzationsController@banks')->name('banks');
+        Route::get('banks/id/{id}', 'orginzationsController@banks');
+        Route::get('suppliers/id/{id}', 'orginzationsController@suppliers');
         Route::get('suppliers', 'orginzationsController@suppliers')->name('suppliers');
         Route::get('orginzation', 'orginzationsController@index')->name('orginzation');
+        Route::get('orginzation/id/{id}', 'orginzationsController@index');
         Route::post('store_orginzation', 'orginzationsController@store_orginzation')->name('store_orginzation');
         Route::get('orginzation_auto_complete', 'orginzationsController@orginzation_auto_complete')
         ->name('orginzation_auto_complete');
@@ -76,6 +86,7 @@ Route::group([
 
 
         Route::get('dev_equp', 'AssetsController@dev_equp')->name('dev_equp');
+        Route::get('dev_equp/id/{id}', 'AssetsController@dev_equp');
         Route::post('store_equpment', 'AssetsController@store_equpment')->name('store_equpment');
         Route::get('equip_auto_complete', 'AssetsController@equip_auto_complete')
         ->name('equip_auto_complete');
@@ -84,8 +95,11 @@ Route::group([
         
   
         Route::get('buildings', 'SpecialAssetsController@buildings')->name('buildings');
+        Route::get('buildings/id/{id}', 'SpecialAssetsController@buildings');
+        Route::get('Gardens_lands/id/{id}', 'SpecialAssetsController@Gardens_lands');
         Route::get('Gardens_lands', 'SpecialAssetsController@Gardens_lands')->name('Gardens_lands');
         Route::get('warehouses', 'SpecialAssetsController@warehouses')->name('warehouses');
+        Route::get('warehouses/id/{id}', 'SpecialAssetsController@warehouses');
         Route::post('store_assets', 'SpecialAssetsController@store_assets')->name('store_assets');
         Route::get('asset_auto_complete', 'SpecialAssetsController@asset_auto_complete')
         ->name('asset_auto_complete');
@@ -94,6 +108,7 @@ Route::group([
 
 
         Route::get('vehicles', 'vehicleController@index')->name('vehicles');
+        Route::get('vehicles/id/{id}', 'vehicleController@index');
         Route::post('store_vehcile', 'vehicleController@store_vehcile')->name('store_vehcile');
         Route::get('vehicle_auto_complete', 'vehicleController@vehicle_auto_complete')
         ->name('vehicle_auto_complete');
@@ -104,7 +119,7 @@ Route::group([
         Route::post('deleteSubConstant', 'ExtentionsController@deleteSubConstant')->name('deleteSubConstant');
         Route::post('store_model', 'ExtentionsController@store_model')->name('store_model');
 
-        Route::get('search','SearchController@full_search')->name('search');
+        Route::get('search','SearchController@full_search');
         Route::get('out_archieve','ArchieveController@out_archieve')->name('out_archieve');
       
         Route::get('archive_auto_complete','ArchieveController@archive_auto_complete')

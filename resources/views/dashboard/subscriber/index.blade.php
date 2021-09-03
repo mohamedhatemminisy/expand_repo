@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+
 <section class="horizontal-grid" id="horizontal-grid">
     <form id="ajaxform">
     <div class="row white-row">
@@ -383,7 +384,18 @@
 @stop
 @section('script')
 <script>
+$(function(){
+    var url = $(location).attr('href');
+    var parts = url.split("/");
+    var last_part = parts[parts.length-2]
+   if(last_part == 'id'){
+    $.ajax({
 
+
+    });
+
+   }
+});
 
 
 $( function() {
@@ -394,52 +406,43 @@ $( function() {
         select: function( event, ui ) {
             let subscribe_id = (ui.item.id)
             
-
-            console.log(subscribe_id);
             $.ajax({
             type: 'get', // the method (could be GET btw)
             url: "subscribe_info",
-            data: {
-                subscribe_id: subscribe_id,
-            },
-            success:function(response){
-                console.log(response);
-            $('#subscriber_id').val(response.info.id);
-            $('#formDataNameAR').val(response.info.name);
-            $('#formDataNationalID').val(response.info.national_id);
-            $('#formDataMobileNo1').val(response.info.phone_one);
-            $('#formDataMobileNo2').val(response.info.phone_two);
-            $('#formDataCutomerNo').val(response.info.cutomer_num);
-            $('#formDataEmailAddress').val(response.info.email);
-            $('#formDataBussniessName').val(response.info.bussniess_name);
-            $("#certListCnt").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
-            $("select#formDataProfessionID option")
-                 .each(function() { this.selected = (this.text == response.job_title); 
+                data: {
+                    subscribe_id: subscribe_id,
+                },
+                success:function(response){
+                $('#subscriber_id').val(response.info.id);
+                $('#formDataNameAR').val(response.info.name);
+                $('#formDataNationalID').val(response.info.national_id);
+                $('#formDataMobileNo1').val(response.info.phone_one);
+                $('#formDataMobileNo2').val(response.info.phone_two);
+                $('#formDataCutomerNo').val(response.info.cutomer_num);
+                $('#formDataEmailAddress').val(response.info.email);
+                $('#formDataBussniessName').val(response.info.bussniess_name);
+                $("#certListCnt").html(response.ArchiveCount);
+                drawTablesArchive(response.Archive,response.copyTo);
+                $("select#formDataProfessionID option")
+                    .each(function() { this.selected = (this.text == response.job_title); 
+                });
+                $("select#formDataIndustryID option")
+                    .each(function() { this.selected = (this.text == response.group); 
+                });
+                $('#username').val(response.info.username);
+                $('#AddressDetails').val(response.address.details);
+                $('#Note').val(response.address.notes);
+                $("select#CityID option")
+                    .each(function() { this.selected = (this.text == response.city); 
+                });
+                $("select#area_data option")
+                    .each(function() { this.selected = (this.text == response.area); 
+                });
+                $("select#region_data option")
+                    .each(function() { this.selected = (this.text == response.region); 
+                });
+                },
             });
-            $("select#formDataIndustryID option")
-                 .each(function() { this.selected = (this.text == response.group); 
-            });
-            $('#username').val(response.info.username);
-            $('#AddressDetails').val(response.address.details);
-            $('#Note').val(response.address.notes);
-            $("select#CityID option")
-                 .each(function() { this.selected = (this.text == response.city); 
-            });
-            
-            $("select#area_data option")
-                 .each(function() { this.selected = (this.text == response.area); 
-            });
-                        console.log( response.region);
-
-            $("select#region_data option")
-                 .each(function() { this.selected = (this.text == response.region); 
-            });
-
-        
-
-			},
-			});
         }
 	});
 } );

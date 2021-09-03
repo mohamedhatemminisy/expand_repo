@@ -144,6 +144,15 @@ class SubscriberController extends Controller
     }
     
 
+    public function subscriber($id){
+        $subscriber = User::find($id);
+        $city = City::get();
+        $groups = Group::get();
+        $jobTitle = JobTitle::get();
+        $type="subscriber";
+        return view('dashboard.subscriber.show',compact('city','groups','jobTitle','type','subscriber')); 
+    }
+
 
 
 

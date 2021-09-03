@@ -12,7 +12,7 @@ use App\Models\JobTitle;
 use Yajra\DataTables\DataTables;
 class DepartmentController extends Controller
 {
-    public function index(){
+    public function index($id){
         $admins = Admin::get();
         $departments = Department::get();
         $type='depart';
