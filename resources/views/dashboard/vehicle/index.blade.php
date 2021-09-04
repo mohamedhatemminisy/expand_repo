@@ -478,7 +478,8 @@ function update($id)
                 $("#PHnum2").val(response.info.sponsor_phone);
                 $("#PHnum1").val(response.info.supply_phone);
                 $('#carimg').attr('src', response.info.image);
-
+                $("#msgStatic").html(response.ArchiveCount);
+                drawTablesArchive(response.Archive);
                 $("select#vehiclebrand option")
                     .each(function() { this.selected = (this.text == response.brand); 
                 });
