@@ -814,6 +814,15 @@ $.ajax({
            success: (response) => {
             $('.wtbl').DataTable().ajax.reload();  
              if (response) {
+                $(".loader").addClass('hide');
+			Swal.fire({
+				position: 'top-center',
+				icon: 'success',
+				title: '{{trans('admin.data_added')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
+
                this.reset();
              }
              
@@ -844,6 +853,13 @@ $.ajax({
                 $( "#DirectManager" ).addClass( "error" );
             }
 
+			Swal.fire({
+				position: 'top-center',
+				icon: 'error',
+				title: '{{trans('admin.error_save')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
            }
        });
   });
