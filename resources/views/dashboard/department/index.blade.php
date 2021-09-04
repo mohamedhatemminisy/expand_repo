@@ -459,6 +459,7 @@
 @include('dashboard.component.fetch_table');
 @stop
 @section('script')
+
 <script>
 
 $( function() {
@@ -573,6 +574,7 @@ $.ajax({
 
 
 $(".save-data").click(function(event){
+	
 	$(".loader").removeClass('hide');
      $( "#departmentName" ).removeClass( "error" );
       event.preventDefault();
@@ -602,8 +604,15 @@ $(".save-data").click(function(event){
 
         success:function(response){
 			$(".loader").addClass('hide');
-            $(".alert-success").removeClass('hide');
-            $("#succMsg").text('{{trans('admin.department_added')}}')
+			Swal.fire({
+				position: 'top-center',
+				icon: 'success',
+				title: '{{trans('admin.department_added')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
+            // $(".alert-success").removeClass('hide');
+            // $("#succMsg").text('{{trans('admin.department_added')}}')
 			$('.wtbl').DataTable().ajax.reload(); 
             setTimeout(function(){
                 $(".alert-success").addClass("hide");
@@ -613,9 +622,20 @@ $(".save-data").click(function(event){
         },
         error: function(response) {
 			$(".loader").addClass('hide');
-            $(".alert-success").addClass("hide");
-			$(".alert-danger").removeClass('hide');
-            $("#errMsg").text('{{trans('admin.error_save')}}')
+
+			Swal.fire({
+				position: 'top-center',
+				icon: 'error',
+				title: '{{trans('admin.error_save')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
+
+			// Swal.fire('Any fool can use a computer');
+
+            // $(".alert-success").addClass("hide");
+			// $(".alert-danger").removeClass('hide');
+            // $("#errMsg").text('{{trans('admin.error_save')}}')
             setTimeout(function(){
                 $(".alert-danger").addClass("hide");
             },2000)

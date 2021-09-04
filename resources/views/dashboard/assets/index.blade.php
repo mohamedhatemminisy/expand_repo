@@ -527,11 +527,26 @@ $('#upload-image-form').submit(function(e) {
            success: (response) => {
             $('.wtbl').DataTable().ajax.reload();  
              if (response) {
+                Swal.fire({
+				position: 'top-center',
+				icon: 'success',
+				title: '{{trans('admin.data_added')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
+
                this.reset();
              }
              
            },
            error: function(response){
+            Swal.fire({
+				position: 'top-center',
+				icon: 'error',
+				title: '{{trans('admin.error_save')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
             if(response.responseJSON.errors.Equipment){
                 $( "#Equipment" ).addClass( "error" );
             }

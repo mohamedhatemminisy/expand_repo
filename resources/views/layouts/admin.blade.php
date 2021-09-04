@@ -357,7 +357,6 @@ $('#store-modal').submit(function(e) {
   <script src="{{asset('assets/js/core/app.js')}}" type="text/javascript"></script>
   <script src="{{asset('assets/js/scripts/customizer.js')}}" type="text/javascript"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
   <!-- END MODERN JS-->
   <!-- BEGIN PAGE LEVEL JS-->
   <script src="{{asset('assets/js/scripts/pages/dashboard-ecommerce.js')}}" type="text/javascript"></script>
