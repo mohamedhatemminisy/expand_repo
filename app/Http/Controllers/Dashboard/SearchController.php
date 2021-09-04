@@ -38,8 +38,8 @@ class SearchController extends Controller
         ->select('*',DB::raw("CONCAT(name , '(المباني و المستودعات و الاراضي)' )AS label"))->get();
         $user = User::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(المشتركين)' )AS label"))->get();
-        $archive =  Archive::where('name', 'like', '%' . $emp_data . '%')
-        ->select('*',DB::raw("CONCAT(name , '(الارشيف)' )AS label"))->get();
+        $archive =  Archive::where('title', 'like', '%' . $emp_data . '%')
+        ->select('*',DB::raw("CONCAT(title , '(الارشيف)' )AS label"))->get();
         $archiveLicense =  ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(رخص البناء ,التراخيص)' )AS label"))->get();
         $names = $equip->merge($vehicle)->merge($project)

@@ -6,4 +6,11 @@
       <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Hand-crafted & Made with <i class="ft-heart pink"></i></span>
     </p>
   </footer>
+  <script>
+    $(document).ready(function(){
+    var arr=Object.fromEntries(new URLSearchParams(location.search).entries());
+		if(arr.id){update(arr.id);}
+});
+
+  </script>
   <!-- BEGIN VENDOR JS-->
