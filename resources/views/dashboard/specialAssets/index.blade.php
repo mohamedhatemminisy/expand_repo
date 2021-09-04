@@ -893,7 +893,8 @@ function update($id)
             $("select#pich option")
                  .each(function() { this.selected = (this.text == response.admin); 
             });
-
+            $("#msgStatic").html(response.ArchiveCount);
+            drawTablesArchive(response.Archive);
             $("select#ownType option")
                  .each(function() { this.selected = (this.text == response.asset_status); 
             });

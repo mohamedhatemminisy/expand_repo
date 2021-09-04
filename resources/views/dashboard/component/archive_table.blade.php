@@ -227,6 +227,7 @@ aria-hidden="true">
                             <thead>
     						    <tr>
         							<th width="50px"># </th>
+                                    <th width="80px">رقم المراسلة </th>
         							<th width="80px">العنوان </th>
         							<th width="60px">التاريخ</th>
         							<th width="50px">النوع</th>
