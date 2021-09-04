@@ -260,4 +260,9 @@ class ArchieveController extends Controller
         $archive['info'] = Archive::find($request['archive_id']);
         return response()->json($archive);
     }
+    public function archieveLic_info(Request $request)
+    {
+        $archive['info']= ArchiveLicense::find($request['archive_id']);
+        return response()->json($archive);
+    }
 }

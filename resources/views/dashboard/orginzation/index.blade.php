@@ -376,7 +376,7 @@ $( function() {
             $('#phone2').val(response.info.whatsapp_two);
             $('#website').val(response.info.website);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive);
+            drawTablesArchive(response.Archive,response.copyTo);
             $("select#PositionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });

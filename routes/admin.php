@@ -130,6 +130,7 @@ Route::group([
             Route::put('update', 'ProfileController@updateprofile')->name('update.profile');
         });
         Route::get('archieve_info', 'ArchieveController@archieve_info')->name('archieve_info');
+        Route::get('archieveLic_info', 'ArchieveController@archieveLic_info')->name('archieveLic_info');
 
         Route::get('Linence_auto_complete','ArchieveController@Linence_auto_complete')
         ->name('Linence_auto_complete');
