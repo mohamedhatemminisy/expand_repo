@@ -541,7 +541,15 @@ $.ajax({
                 $('.wtbl').DataTable().ajax.reload();    
             $('.success_alert').fadeOut();
             }, 3000 ); 
-            
+            $(".loader").addClass('hide');
+			Swal.fire({
+				position: 'top-center',
+				icon: 'success',
+				title: '{{trans('admin.data_added')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
+
             $("#ajaxform")[0].reset();    
                 
         },
@@ -550,7 +558,13 @@ $.ajax({
             if(response.responseJSON.errors.SponsorName){
                 $( "#SponsorName" ).addClass( "error" );
             }
-           
+            Swal.fire({
+				position: 'top-center',
+				icon: 'error',
+				title: '{{trans('admin.error_save')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
 
            }
 

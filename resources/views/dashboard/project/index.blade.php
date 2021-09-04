@@ -779,11 +779,19 @@ $.ajax({
 
         success:function(response){
             $('.success_alert').css('visibility', 'visible');
-            $('.wtbl').DataTable().ajax.reload();       
+            $('.wtbl').DataTable().ajax.reload();  
+
             setTimeout(function() {
             $('.success_alert').fadeOut();
             }, 3000 ); 
-            
+        $(".loader").addClass('hide');
+			Swal.fire({
+				position: 'top-center',
+				icon: 'success',
+				title: '{{trans('admin.data_added')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
             $("#ajaxform")[0].reset();   
             
         },
@@ -797,6 +805,15 @@ $.ajax({
             if(response.responseJSON.errors.dateEnd){
                 $( "#dateEnd" ).addClass( "error" );
             }
+			$(".loader").addClass('hide');
+
+			Swal.fire({
+				position: 'top-center',
+				icon: 'error',
+				title: '{{trans('admin.error_save')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
            }
 
 

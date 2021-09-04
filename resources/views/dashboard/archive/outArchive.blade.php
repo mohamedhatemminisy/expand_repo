@@ -231,11 +231,25 @@ $.ajaxSetup({
            contentType: false,
            processData: false,
            success: (response) => {
+            Swal.fire({
+				position: 'top-center',
+				icon: 'success',
+				title: '{{trans('admin.data_added')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
                this.reset();
                $('.wtbl').DataTable().ajax.reload();  
                $(".formDataaaFilesArea").html('');
            },
            error: function(response){
+            Swal.fire({
+				position: 'top-center',
+				icon: 'error',
+				title: '{{trans('admin.error_save')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
             if(response.responseJSON.errors.customerName){
                 $( "#customerName" ).addClass( "error" );
             }

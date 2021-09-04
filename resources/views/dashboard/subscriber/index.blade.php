@@ -386,8 +386,8 @@
 <script>
 $(document).ready(function(){
     var arr=Object.fromEntries(new URLSearchParams(location.search).entries());
-    console.log(arr.id);
-            if(arr.id){
+    console.log(arr);
+            if(arr){
             let subscribe_id = arr.id;
             console.log(subscribe_id);
             $.ajax({
@@ -590,7 +590,7 @@ $("#area_data").change(function () {
 
 
     $(".save-data").click(function(event){
-        $(".loader").removeClass('hide');
+        // $(".loader").removeClass('hide');
      $( "#formDataNameAR" ).removeClass( "error" );
       event.preventDefault();
 
@@ -638,30 +638,42 @@ $("#area_data").change(function () {
          },
 
         success:function(response){
-            $(".loader").addClass('hide');
-            $(".alert-success").removeClass('hide');
-            $("#succMsg").text('{{trans('admin.employee_added')}}')
-            $('.wtbl').DataTable().ajax.reload(); 
-            setTimeout(function(){
-                $(".alert-success").addClass("hide");
-            },2000)
-
+            // $(".loader").addClass('hide');
+            // $(".alert-success").removeClass('hide');
+            // $("#succMsg").text('{{trans('admin.employee_added')}}')
+            // $('.wtbl').DataTable().ajax.reload(); 
+            // setTimeout(function(){
+            //     $(".alert-success").addClass("hide");
+            // },2000)
+            Swal.fire({
+				position: 'top-center',
+				icon: 'success',
+				title: '{{trans('admin.employee_added')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
             $("#ajaxform")[0].reset();   
               
         },
         error: function(response) {
-            $(".loader").addClass('hide');
-            $(".alert-success").addClass("hide");
-			$(".alert-danger").removeClass('hide');
-            $("#errMsg").text('{{trans('admin.error_save')}}')
-            setTimeout(function(){
-                $(".alert-danger").addClass("hide");
-            },2000)
-            
-            if(response.responseJSON.errors.formDataNameAR){
-                $( "#formDataNameAR" ).addClass( "error" );
-                alert(response.responseJSON.errors.formDataNameAR);
-            }
+
+            // $(".alert-success").addClass("hide");
+			// $(".alert-danger").removeClass('hide');
+            // $("#errMsg").text('{{trans('admin.error_save')}}')
+            // setTimeout(function(){
+            //     $(".alert-danger").addClass("hide");
+            // },2000)
+            Swal.fire({
+				position: 'top-center',
+				icon: 'error',
+				title: '{{trans('admin.error_save')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
+            // if(response.responseJSON.errors.formDataNameAR){
+            //     $( "#formDataNameAR" ).addClass( "error" );
+            //     alert(response.responseJSON.errors.formDataNameAR);
+            // }
            
 
            }
