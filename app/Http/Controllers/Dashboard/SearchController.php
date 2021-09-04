@@ -11,6 +11,7 @@ use App\Models\Department;
 use App\Models\Orgnization;
 use App\Models\Project;
 use App\Models\SpecialAsset;
+use App\Models\ArchiveLicense;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\CopyTo;
@@ -39,10 +40,12 @@ class SearchController extends Controller
         ->select('*',DB::raw("CONCAT(name , '(المشتركين)' )AS label"))->get();
         $archive =  Archive::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(الارشيف)' )AS label"))->get();
-
+        $archiveLicense =  ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
+        ->select('*',DB::raw("CONCAT(name , '(رخص البناء ,التراخيص)' )AS label"))->get();
         $names = $equip->merge($vehicle)->merge($project)
         ->merge($admin)->merge($department)->merge($archive)
-        ->merge($orgnization)->merge($specialAsset)->merge($user);
+        ->merge($orgnization)->merge($specialAsset)
+        ->merge($archiveLicense)->merge($user);
 
         return response()->json($names);
     }

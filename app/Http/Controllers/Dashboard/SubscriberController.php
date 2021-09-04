@@ -40,6 +40,8 @@ class SubscriberController extends Controller
             $user = new User();
             $user->model = "App\Models\User";
             $user->name = $request->formDataNameAR;
+            $user->url =  "subscribers";
+            $user->add_by = Auth()->user()->id;
             $user->phone_one = $request->formDataMobileNo1;
             $user->phone_two = $request->formDataMobileNo2;
             $user->national_id = $request->formDataNationalID;
@@ -141,6 +143,15 @@ class SubscriberController extends Controller
                             ->make(true);
     }
     
+
+    public function subscriber($id){
+        $subscriber = User::find($id);
+        $city = City::get();
+        $groups = Group::get();
+        $jobTitle = JobTitle::get();
+        $type="subscriber";
+        return view('dashboard.subscriber.show',compact('city','groups','jobTitle','type','subscriber')); 
+    }
 
 
 

@@ -425,7 +425,6 @@
                     <div class="form-actions" style="border-top:0px;">
                         <div class="text-right">
                         <button type="submit" class="btn btn-primary">{{trans('assets.save')}} <i class="ft-thumbs-up position-right"></i></button>
-
                         <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                         </div>
                     </div>
@@ -507,7 +506,47 @@ $( function() {
         }
 	});
 } );
-
+$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+$('#upload-image-form').submit(function(e) {
+       e.preventDefault();
+       let formData = new FormData(this);
+     $( "#Equipment" ).removeClass( "error" );
+     $( "#brand" ).removeClass( "error" );
+     $( "#Eqtype" ).removeClass( "error" );
+     $( "#Department" ).removeClass( "error" );
+       $.ajax({
+          type:'POST',
+          url: "store_equpment",
+           data: formData,
+           contentType: false,
+           processData: false,
+           success: (response) => {
+            $('.wtbl').DataTable().ajax.reload();  
+             if (response) {
+               this.reset();
+             }
+             
+           },
+           error: function(response){
+            if(response.responseJSON.errors.Equipment){
+                $( "#Equipment" ).addClass( "error" );
+            }
+            if(response.responseJSON.errors.brand){
+                $( "#brand" ).addClass( "error" );
+            }
+            if(response.responseJSON.errors.Eqtype){
+                $( "#Eqtype" ).addClass( "error" );
+            }
+            if(response.responseJSON.errors.Department){
+                $( "#Department" ).addClass( "error" );
+            }
+           }
+       });
+  });
 function update($id)
 {
     let equip_id = $id;

@@ -30,7 +30,7 @@ class EmployeeController extends Controller
         return view('dashboard.employee.index',compact('type','city','admin','jobType','jobTitle','departments'));         
     }
 
-    public function store_employee(Request $request){
+    public function store_employee(EmployeeRequest $request){
         DB::beginTransaction();
         $role = new Role();
         $role->permissions = json_encode($request->my_multi_select3);
@@ -63,6 +63,8 @@ class EmployeeController extends Controller
             $admin->username = $request->username;
             $admin->start_date = $request->HiringDate;
             $admin->status = '1';
+            $admin->add_by = Auth()->user()->id;
+            $admin->url = 'employee';
             $admin->email  = $request->EmailAddress;
             $admin->password = bcrypt($request->password);
             $admin->InternalPhone = $request->InternalPhone;

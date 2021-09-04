@@ -30,6 +30,9 @@ class CreateEqupmentsTable extends Migration
             $table->string('supply_phone')->nullable();
             $table->string('sponsor_phone')->nullable();
             $table->integer('sponser')->unsigned();
+            $table->string('url')->nullable();
+            $table->integer('added_by')->unsigned()->nullable();
+            $table->foreign('added_by')->references('id')->on('admins')->onDelete('cascade');
             $table->foreign('sponser')->references('id')->on('orgnizations')->onDelete('cascade');
             $table->integer('supplyer')->unsigned();
             $table->foreign('supplyer')->references('id')->on('orgnizations')->onDelete('cascade');

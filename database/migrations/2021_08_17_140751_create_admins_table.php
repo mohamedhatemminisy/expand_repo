@@ -31,6 +31,9 @@ class CreateAdminsTable extends Migration
             $table->string('status')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('url')->nullable();
+            $table->integer('added_by')->unsigned()->nullable();
+            $table->foreign('added_by')->references('id')->on('admins')->onDelete('cascade');
             $table->integer('admin_id')->unsigned();
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->integer('role_id')->unsigned();

@@ -61,6 +61,8 @@ class orginzationsController extends Controller
         $address->save();
         if($request->orgnization_id == null){
             $orgnization = new Orgnization();
+            $orgnization->add_by = Auth()->user()->id;
+            $orgnization->url = $request->type;
             $orgnization->name = $request->SponsorName;
             $orgnization->model = "App\Models\Orgnization";
             $orgnization->phone_one = $request->MobileNo1;

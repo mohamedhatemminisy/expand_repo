@@ -27,8 +27,9 @@ class ArchieveController extends Controller
 {
     public function out_archieve(){
         $type= 'outArchive';
+        $url = "out_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type'));
+        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
     }
 
     public function archive_auto_complete(Request $request){
@@ -114,6 +115,8 @@ class ArchieveController extends Controller
             $archive->save();  
         }else{
         $archive = new ArchiveLicense();
+        $archive->url =  $request->url;
+        $archive->add_by = Auth()->user()->id;
         $archive->name =$request->customername;
         $archive->model_id =$request->customerid;
         $archive->model_name =$request->customerType;
@@ -154,6 +157,8 @@ class ArchieveController extends Controller
         $archive->title =$request->msgTitle;
         $archive->type =$request->msgType;
         $archive->serisal =$request->msgid;
+        $archive->url =  $request->url;
+        $archive->add_by = Auth()->user()->id;
         $archive->save();
         if($request->copyToText[0] != null){
             $copyTo = new CopyTo();
@@ -185,54 +190,67 @@ class ArchieveController extends Controller
 
     public function in_archieve(){
         $type= 'inArchive';
+        $url = "in_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type'));
+        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
     }
     public function mun_archieve(){
         $type= 'munArchive';
+        $url = "mun_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type'));
+        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
     }
     public function proj_archieve(){
         $type= 'projArchive';
+        $url = "proj_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type'));
+        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
     }
     public function emp_archieve(){
         $type= 'empArchive';
+        $url = "emp_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type'));
+        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
     }
     public function cit_archieve(){
         $type= 'citArchive';
+        $url = "cit_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type'));
+        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
     }
     public function dep_archieve(){
         $type= 'depArchive';
+        $url = "dep_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type'));
+        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
     }
     public function projArchive(){
         $type= 'projArchive';
+        $url = "proj_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type'));    }
+        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));   
+    }
     public function munArchive(){
         $type= 'munArchive';
+        $url = "mun_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type'));
+        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
     }
     public function licArchive(){
         $type= 'licArchive';
+        $url = "lic_archieve";
         $attachment_type = AttachmentType::get();
         $license_type = LicenseType::get();
-        return view('dashboard.archive.licArchive',compact('type','attachment_type','license_type'));
+        return view('dashboard.archive.licArchive',compact('type','attachment_type'
+        ,'license_type','url'));
     }
     public function licFileArchive(){
         $type= 'licFileArchive';
         $attachment_type = AttachmentType::get();
         $license_type = LicenseType::get();
-        return view('dashboard.archive.licArchive',compact('type','attachment_type','license_type'));
+        $url = "licFile_archieve";
+        return view('dashboard.archive.licArchive',compact('type','attachment_type',
+        'license_type','url'));
     }
     
       public function archieve_info_all(Request $request)

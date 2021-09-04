@@ -38,6 +38,8 @@ class vehicleController extends Controller
             }else{
                 $path = '';
             }
+            $vehicle->add_by = Auth()->user()->id;
+            $vehicle->url = "vehicles";
             $vehicle->model = "App\Models\Vehicle";
             $vehicle->name = $request->Vehiclename;
             $vehicle->serial_number = $request->plateNo;

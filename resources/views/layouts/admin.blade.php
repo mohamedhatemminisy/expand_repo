@@ -371,8 +371,15 @@ $( function() {
 		source:'search',
 		minLength: 1,
 		
+
+
+		
         select: function( event, ui ) {
-			
+			var id = ui.item.id;
+			var url = ui.item.url;
+			var fullUrl = url+'/id'+'/'+id;
+		    $(location).attr('href', fullUrl)
+
 		}
 	});
 });

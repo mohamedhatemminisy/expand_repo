@@ -41,6 +41,8 @@ class AssetsController extends Controller
                 $path = '';
             }
             $equpment->name = $request->Equipment;
+            $equpment->add_by = Auth()->user()->id;
+            $equpment->url = "dev_equp";
             $equpment->model = "App\Models\Equpment";
             $equpment->serial_number = $request->SerialNo;
             $equpment->internal_number = $request->InternalNo;
