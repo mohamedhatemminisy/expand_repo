@@ -242,6 +242,43 @@ $( function() {
            }
 	    });
     });
+    function update($id){
+        let archive_id = $id;
+        $(".formDataaaFilesArea").html('');
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "{{ route('archieveLic_info') }}",
+            data: {
+                archive_id: archive_id,
+            },
+            success:function(response){
+            $('#customerid').val(response.info.model_id);
+            $('#customername').val(response.info.name);
+            $('#customerName').val(response.info.name);
 
+            $('#customerType').val(response.info.model_name);
+            $('#licNo').val(response.info.licNo);
+            $('#licn').val(response.info.licn);
+            $('#licnfile').val(response.info.licnfile);
+            $('#license_type').val(response.info.license_type);
+            attach='';
+            var i=1;
+            if(response.info.fileIDS&&typeof(response.info.fileIDS)=="object"){ 
+            response.info.fileIDS.forEach(file => {
+                attach+='<div id="attach" class=" col-sm-6 ">'
+                        +'<div class="attach">'
+                            +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
+                            +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
+                            +'  <i class="fa fa-eye"> </i>'
+                            +'</a><input type="hidden" value="" name="attach[]" >'
+                            +'</div>'
+                        +'</div>';
+                        i++;
+                    });}
+            $(".formDataaaFilesArea").html(attach)
+            
+            },
+        });
+    }
 </script>
 @endsection

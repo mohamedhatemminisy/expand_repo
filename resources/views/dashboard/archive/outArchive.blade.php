@@ -52,7 +52,7 @@
                                                         </div>
                                                         
                                                         @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
-                                                            <input type="text" id="msgTitle" class="form-control cust" name="msgTitle" style="width: 30%;">
+                                                            <input type="text" id="msgTitle" class="form-control" name="msgTitle" style="width: 30%;">
                                                             <select name="archive_type" id="archive_type" class="form-control">
                                                                     
                                                                 <option value="">-- نوع الارشيف --</option>
@@ -267,12 +267,10 @@ $( function() {
 		
         select: function( event, ui ) {
             console.log(ui.item);
-            $(".formDataaaFilesArea").html('');
             $('#customerid').val(ui.item.id);
+            $('#customerName').val(ui.item.name);
             $('#customername').val(ui.item.name);
             $('#customerType').val(ui.item.model);
-            $('#msgid').val(ui.item.serisal);
-            $('#msgTitle').val(ui.item.title);
            }
 	    });
     });
@@ -296,6 +294,7 @@ $( function() {
             $('#msgid').val(response.info.serisal);
             attach='';
             var i=1;
+            if(response.info.fileIDS&&typeof(response.info.fileIDS)=="object"){ 
             response.info.fileIDS.forEach(file => {
                 attach+='<div id="attach" class=" col-sm-6 ">'
                         +'<div class="attach">'
@@ -306,7 +305,7 @@ $( function() {
                             +'</div>'
                         +'</div>';
                         i++;
-                    });
+                    });}
             $(".formDataaaFilesArea").html(attach)
             
             },

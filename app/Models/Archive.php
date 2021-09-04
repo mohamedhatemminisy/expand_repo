@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
 
 class Archive extends Model
@@ -9,8 +10,7 @@ class Archive extends Model
     public function copyTo(){
         return $this->hasMany(CopyTo::class);
     }
-
     protected $casts = [
-        'fileIDS' => 'array',
+        'fileIDS' => Json::class,
     ];
 }

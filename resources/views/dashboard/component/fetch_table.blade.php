@@ -792,7 +792,7 @@
                 {
                     data: null, 
                     render:function(data,row,type){
-                        $actionBtn = '<a ondblclick="update('+data.name+')">'+data.name+'</a>';
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
                             return $actionBtn;
                     },
                     name:'name',
@@ -801,7 +801,7 @@
                 {
                     data: null, 
                     render:function(data,row,type){
-                        $actionBtn = '<a ondblclick="update('+data.license_type+')">'+data.license_type+'</a>';
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.license_type+'</a>';
                             return $actionBtn;
                     },
                     name:'license_type',

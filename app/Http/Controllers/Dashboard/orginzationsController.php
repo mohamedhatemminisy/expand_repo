@@ -121,6 +121,9 @@ class orginzationsController extends Controller
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['orginzation_id'])
         ->where('model_name',$model)->get();
+        $CopyTo = CopyTo::where('model_id',$request['orginzation_id'])
+        ->where('model_name',$model)->with('archive')->get();
+        $orginzation['copyTo'] = $CopyTo;
         $orginzation['Archive'] = $Archive;
         $orginzation['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $orginzation['job_title'] = JobTitle::where('id',$orginzation['info']->job_title_id)->first()->name;
