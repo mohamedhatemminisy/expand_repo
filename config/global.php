@@ -7,7 +7,7 @@ return [
         'employee' => 'employee',
         'department' => 'department',
 
-        'roles' => 'التحكم بادوار المستخدمين',
-    ]
+
+        ]
 
 ];

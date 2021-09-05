@@ -25,6 +25,9 @@ use App\Models\AssetStatus;
 use App\Models\ArchiveType;
 use App\Models\AttachmentType;
 use App\Models\LicenseType;
+use App\Models\CraftType;
+use App\Models\LicenseRating;
+use App\Models\LimitNumber;
 
 use App\Http\Requests\ExtentionRequest;
 
@@ -109,6 +112,22 @@ class ExtentionsController extends Controller
             return response()->json($data);
         }
         
+        elseif($request->pk_i_id == '66'){
+            $data['data'] = CraftType::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        elseif($request->pk_i_id == '49'){
+            $data['data'] = LicenseRating::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        elseif($request->pk_i_id == '56'){
+            $data['data'] = LimitNumber::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        
     }
 
 
@@ -172,6 +191,18 @@ class ExtentionsController extends Controller
         }
         elseif($request->fk_i_constant_id == '46'){
             $data = AttachmentType::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '66'){
+            $data = CraftType::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '49'){
+            $data = LicenseRating::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '56'){
+            $data = LimitNumber::findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
         }
 
@@ -420,6 +451,51 @@ class ExtentionsController extends Controller
                 $job->save();
             }else{
                 $job = AttachmentType::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+        elseif($request->fk_i_constant_id1 == '66'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new CraftType();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = CraftType::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+        elseif($request->fk_i_constant_id1 == '49'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new LicenseRating();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = LicenseRating::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+        elseif($request->fk_i_constant_id1 == '56'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new LimitNumber();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = LimitNumber::find($request->fk_i_constantdet_id1);
                 $job->name = $request->s_name_ar1;
                 $job->save();
             }

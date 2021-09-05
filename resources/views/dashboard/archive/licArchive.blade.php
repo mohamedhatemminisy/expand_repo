@@ -131,8 +131,8 @@
                                                     <select class="form-control" name="LicBorder[]" id="LicBorder1" onchange="
                                                         <option value=""></option>                                                        
                                                     </select>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text input-group-text2" id="1" onclick="ShowLOModal(0,1,$(this).prev(),0)">
+                                                    <div class="input-group-append" onclick="QuickAdd(56,'licType','رقم الحد')" style="cursor:pointer; margin-left: 0px !important;">
+                                                        <span class="input-group-text input-group-text2">
                                                             <i class="fa fa-external-link"></i>
                                                         </span>
                                                     </div>

@@ -21,6 +21,10 @@ use App\Http\Requests\ArchiveRequest;
 use App\Models\AttachmentType;
 use App\Models\LicenseType;
 use App\Models\ArchiveLicense;
+use App\Models\CraftType;
+use App\Models\jobLicArchieve;
+use App\Models\LicenseRating;
+use App\Models\LimitNumber;
 use Illuminate\Support\Facades\DB as FacadesDB;
 
 class ArchieveController extends Controller
@@ -101,6 +105,7 @@ class ArchieveController extends Controller
     
     }
     public function store_lince_archive(Request $request){
+        dd($request->all());
         $archive = ArchiveLicense::where('id',$request->customerid)
         ->where('model_name','App\Models\ArchiveLicense')
         ->where('type',$request->type)->first();
@@ -255,9 +260,12 @@ class ArchieveController extends Controller
     public function jobLicArchive(){
         $type= 'jobLicArchive';
         $url = "jobLic_archieve";
+        $craftType = CraftType::get();
+        $limitNumber = LimitNumber::get();
+        $licenseRating = LicenseRating::get();
         $attachment_type = AttachmentType::get();
         return view('dashboard.archive.licArchive',compact('type','attachment_type'
-       ,'url'));
+       ,'url','craftType','limitNumber'));
     }
     public function reportArchive(){
         $type= 'reportArchive';
