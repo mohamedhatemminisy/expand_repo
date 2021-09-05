@@ -256,7 +256,7 @@ class ArchieveController extends Controller
         $type= 'jobLicArchive';
         $url = "jobLic_archieve";
         $attachment_type = AttachmentType::get();
-        return view('dashboard.archive.rptArchive',compact('type','attachment_type'
+        return view('dashboard.archive.licArchive',compact('type','attachment_type'
        ,'url'));
     }
     public function reportArchive(){
