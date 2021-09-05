@@ -108,6 +108,30 @@
                                                 </th>
                                             </tr>
                                         </thead>
+                                        @elseif ($type=="jobLicArchive")
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                    الاسم التجاري
+                                                </th>
+                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                    صنف الرخصة
+                                                </th>
+                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                    تاريخ الإصدار
+                                                </th>
+                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                    تاريخ الإنتهاء
+                                                </th>
+                                                
+                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                    حالة الرخصة
+                                                </th>
+                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                    
+                                                </th>
+                                            </tr>
+                                        </thead>
                                         @elseif ($type=="subscriber")
                                         <thead>
                                             <tr style="text-align:center !important;background: #00A3E8;">
@@ -127,6 +151,32 @@
                                                     {{trans('admin.region')}}
                                                 </th>
                                                 
+                                            </tr>
+                                        </thead>
+                                        @elseif ($type=="reportArchive")
+                                        <thead>
+                                            <tr style="text-align:center !important;background: #00A3E8;">
+                                                <th width="50px">
+                                                #
+                                                </th>
+                                                <th>
+                                             {{trans('archive.title_name')}}
+                                                </th>
+                                                <th>
+                                                    {{trans('admin.type')}}
+                                                </th>
+                                                <th>
+                                                    {{trans('archive.num')}} 
+                                                </th>
+                                                <th>
+                                                    {{trans('admin.related_to')}}
+                                                </th>
+                                                <th>
+                                                    {{trans('archive.date_send')}}
+                                                </th>
+                                                <th>
+                                                    {{trans('archive.attach')}}
+                                                </th>
                                             </tr>
                                         </thead>
                                         @elseif ($type=="employee")
@@ -373,187 +423,7 @@
 </div>
 
 
-<script>/*
-    $( document ).ready(function() {
-        $('.wtbl').DataTable().ajax.reload();
-    });
-    
-        function fetchData()
-        {
-            $("#recListaa ").html('');
-            $.ajax({
-                    type: 'get', // the method (could be GET btw)
-                    @if ($type=="employee")
-                        url: "emp_info_all",
-                    @elseif ($type=="subscriber")
-                        url: "subscribe_info_all",
-                    @elseif ($type=="depart")
-                        url: "dep_info_all",
-                    @elseif ($type == 'org')
-                        url: "orgnization_info_all",
-                    @elseif ($type == 'vehicle')
-                        url: "vehcile_info_all",
-                    @elseif($type == 'buldings'||$type == 'warehouses'||$type == 'Gardens_lands')
-                        url: "asset_info_all",
-                    @elseif ($type == 'equip')
-                        url: "equip_info_all",
-                    @elseif ($type == 'project')
-                        url: "project_info_all",
-                    @endif
-                    success:function(response){
-                        var i=1;
-                        @if($type == 'org')
-                        (response.info).forEach(user => {
-    
-                            row='<tr>'
-                            +
-                            '<td>'+i+'</td>'
-                            +
-                            '<td>'+user.name+'</td>'
-
-                            +
-                            '<td>'+user.manager_name+'</td>'
-
-                            +
-                            '<td>'+user.phone_one+'</td>'
-
-                            
-                            +   '<td></td>'
-
-                            +   '</tr>'
-                            ;
-                            i++;
-                            $("#recListaa ").append(row)
-                            });
-                        @endif
-                        @if($type == 'depart')
-                        (response.info).forEach(depart => {
-    
-                            row='<tr>'
-                            +
-                            '<td>'+i+'</td>'
-                            +
-                            '<td>'+depart.name+'</td>'
-                            +
-                            '<td>'+depart.manager_name+'</td>'                            
-                            +   '<td></td>'
-
-                            +   '</tr>'
-                            ;
-                            i++;
-                            $("#recListaa ").append(row)
-                            });
-                        @endif
-                        @if($type == 'buldings'||$type == 'warehouses'||$type == 'Gardens_lands')
-                        (response.info).forEach(user => {
-    
-                            row='<tr>'
-                            +
-                            '<td>'+i+'</td>'
-                            +
-                            '<td>'+user.name+'</td>'
-
-                            +
-                            '<td>'+user.manager_name+'</td>'
-
-                            +
-                            '<td>'+user.price+'</td>'
-
-                            
-                            +   '<td></td>'
-
-                            +   '</tr>'
-                            ;
-                            i++;
-                            $("#recListaa ").append(row)
-                            });
-                        @endif
-                        @if($type=="employee"||$type=="subscriber")
-                        (response.info).forEach(user => {
-    
-                            row='<tr>'
-                            +
-                                '<td>'+i+'</td>'
-                            +
-                                '<td>'+user.name+'</td>'
-                            
-                            +
-                                '<td>'+user.phone_one+'</td>'
-                            
-                            +
-                            @if ($type=="employee")
-                            '<td>'+user.identification+'</td>'
-                            @elseif ($type=="subscriber")
-                            '<td>'+user.national_id+'</td>'
-                            @endif
-    
-                            +   '<td></td>'
-    
-                            +   '</tr>'
-                            ;
-                            i++;
-                            $("#recListaa ").append(row)
-                        });
-                        @endif
-                        @if($type == 'vehicle')
-                        (response.info).forEach(vehicle => {
-    
-                            row='<tr>'
-                            +   '<td>'+i+'</td>'
-                            +   '<td>'+vehicle.name+'</td>'
-                            +   '<td>'+vehicle.manager_name+'</td>'
-                            +   '<td>'+vehicle.type+'</td>'
-                            +   '<td>'+vehicle.brand+'</td>'
-                            +   '<td>'+vehicle.oiltype+'</td>'
-                            +   '<td>'+vehicle.price+'</td>'
-                            +   '<td>'+vehicle.selling_date+'</td>'
-                            +   '</tr>'
-                            ;
-                            i++;
-                            $("#recListaa ").append(row)
-                            });
-                        @endif
-                        @if ($type == 'project')
-                        (response.info).forEach(project => {
-                            row='<tr>'
-                            +   '<td>'+i+'</td>'
-                            +   '<td>'+project.name+'</td>'
-                            +   '<td>'+project.ProjectNo+'</td>'
-                            +   '<td>'+project.manager+'</td>'
-                            +   '<td>'+project.dateStart+'</td>'
-                            +   '<td>'+project.dateEnd+'</td>'
-                            +   '<td>'+project.department+'</td>'
-                            +   '<td>'+project.Projectcost+'</td>'
-                            +   '<td>'+project.region+'</td>'
-                            +   '</tr>'
-                            ;
-                            i++;
-                            $("#recListaa ").append(row)
-                            });
-
-                        @endif
-                        @if ($type == 'equip')
-                        (response.info).forEach(equip => {
-                            row='<tr>'
-                            +   '<td>'+i+'</td>'
-                            +   '<td>'+equip.name+'</td>'
-                            +   '<td>'+equip.manager_name+'</td>'
-                            +   '<td>'+equip.department+'</td>'
-                            +   '<td>'+equip.brand+'</td>'
-                            +   '<td>'+equip.type+'</td>'
-                            +   '<td>'+equip.price+'</td>'
-                            +   '<td>'+equip.status+'</td>'
-                            +   '<td>'+equip.count+'</td>'
-                            +   '</tr>'
-                            ;
-                            i++;
-                            $("#recListaa ").append(row)
-                            });
-                        @endif   
-                    },
-                    });
-    
-        }*/
+<script>
         var types=$('#type').val();
         $( function(){
             var table=$('.wtbl').DataTable({
@@ -593,7 +463,7 @@
                     d.type = $('#type').val();
                 }
             },
-            @elseif($type=='licArchive'||$type=='licFileArchive')
+            @elseif($type=='licArchive'||$type=='licFileArchive'||$type=="jobLicArchive"||$type=="reportArchive")
             ajax: {
                 url: '{{ route('archievelic_info_all') }}',
                 data: function (d) {
@@ -819,6 +689,7 @@
                     name:'name',
                 },
             ],
+            
             @endif   
             dom: 'Bfltip',
             buttons: [

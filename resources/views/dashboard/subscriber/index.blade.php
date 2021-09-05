@@ -409,7 +409,7 @@ $( function() {
                 $('#formDataEmailAddress').val(response.info.email);
                 $('#formDataBussniessName').val(response.info.bussniess_name);
                 $("#certListCnt").html(response.ArchiveCount);
-                drawTablesArchive(response.Archive,response.copyTo);
+                drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic);
                 $("select#formDataProfessionID option")
                     .each(function() { this.selected = (this.text == response.job_title); 
                 });
@@ -437,7 +437,7 @@ $( function() {
 
 function update($id)
 {
-    $("#ajaxform")[0].reset();   
+    
     let subscribe_id = $id;
             console.log(subscribe_id);
             $.ajax({
@@ -457,7 +457,7 @@ function update($id)
             $('#formDataEmailAddress').val(response.info.email);
             $('#formDataBussniessName').val(response.info.bussniess_name);
             $("#certListCnt").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic);
             
             $("select#formDataProfessionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
@@ -588,14 +588,14 @@ $("#area_data").change(function () {
             // $(".loader").addClass('hide');
             // $(".alert-success").removeClass('hide');
             // $("#succMsg").text('{{trans('admin.employee_added')}}')
-            // $('.wtbl').DataTable().ajax.reload(); 
+             $('.wtbl').DataTable().ajax.reload(); 
             // setTimeout(function(){
             //     $(".alert-success").addClass("hide");
             // },2000)
             Swal.fire({
 				position: 'top-center',
 				icon: 'success',
-				title: '{{trans('admin.employee_added')}}',
+				title: '{{trans('admin.data_added')}}',
 				showConfirmButton: false,
 				timer: 1500
 				})

@@ -252,7 +252,20 @@ class ArchieveController extends Controller
         return view('dashboard.archive.licArchive',compact('type','attachment_type',
         'license_type','url'));
     }
-    
+    public function jobLicArchive(){
+        $type= 'jobLicArchive';
+        $url = "jobLic_archieve";
+        $attachment_type = AttachmentType::get();
+        return view('dashboard.archive.rptArchive',compact('type','attachment_type'
+       ,'url'));
+    }
+    public function reportArchive(){
+        $type= 'reportArchive';
+        $url = "report_archieve";
+        $attachment_type = AttachmentType::get();
+        return view('dashboard.archive.rptArchive',compact('type','attachment_type'
+       ,'url'));
+    }
       public function archieve_info_all(Request $request)
     {
         $type=$request['type'];

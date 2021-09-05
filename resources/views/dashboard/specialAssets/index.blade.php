@@ -786,9 +786,9 @@
                             <div class="row" style="text-align: center">
                                 <div class="col-md-2 w-s-50" style="padding: 0px;">
                                     <div class="form-group">
-                                        <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#msgModal').modal('show')" style="cursor:pointer">
+                                        <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#CertModal').modal('show')" style="cursor:pointer">
                                         <div class="form-group">
-                                            <a onclick="$('#msgModal').modal('show')" style="color:#000000"> {{trans('assets.archive')}}
+                                            <a onclick="$('#CertModal').modal('show')" style="color:#000000"> {{trans('assets.archive')}}
                                             <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
                                         </div>
                                     </div>
@@ -849,7 +849,7 @@ $( function() {
                  .each(function() { this.selected = (this.text == response.admin); 
             });
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive);
+            drawTablesArchive(response.Archive,response.copyTo);
             $("select#ownType option")
                  .each(function() { this.selected = (this.text == response.asset_status); 
             });
@@ -894,7 +894,7 @@ function update($id)
                  .each(function() { this.selected = (this.text == response.admin); 
             });
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive);
+            drawTablesArchive(response.Archive,response.copyTo);
             $("select#ownType option")
                  .each(function() { this.selected = (this.text == response.asset_status); 
             });

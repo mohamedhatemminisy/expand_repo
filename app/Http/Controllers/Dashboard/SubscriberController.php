@@ -15,6 +15,8 @@ use App\Http\Requests\DepartmentRequest;
 use App\Http\Requests\SubscribertRequest;
 use Yajra\DataTables\DataTables;
 use App\Models\Archive;
+use App\Models\ArchiveLicense;
+
 use App\Models\CopyTo;
 use Yajra\DataTables\Services\DataTable;
 class SubscriberController extends Controller
@@ -104,13 +106,18 @@ class SubscriberController extends Controller
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->with('copyTo')->get();
+        $ArchiveLic =ArchiveLicense::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->get();
+        $user['ArchiveLic'] = $ArchiveLic;
+        $ArchiveLicCount =count(ArchiveLicense::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->get());
         $user['Archive'] = $Archive;
         $CopyTo = CopyTo::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->with('archive')->get();
         $user['copyTo'] = $CopyTo;
         $CopyToCount = count(CopyTo::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->get());
-        $user['ArchiveCount'] = $ArchiveCount + $CopyToCount;
+        $user['ArchiveCount'] = $ArchiveCount + $CopyToCount +$ArchiveLicCount;
         $user['job_title'] = JobTitle::where('id',$user['info']->job_title_id)->first()->name;
         $user['group'] = Group::where('id',$user['info']->group_id)->first()->name;
         $user['address'] = Address::where('id', $user['info']['addresse_id'])->first();

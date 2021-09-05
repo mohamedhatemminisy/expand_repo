@@ -117,6 +117,10 @@ class AssetsController extends Controller
         $Archive =Archive::where('model_id',$request['equip_id'])
         ->where('model_name',$model)->get();
         $equipment['Archive'] = $Archive;
+        $CopyTo = CopyTo::where('model_id',$request['equip_id'])
+        ->where('model_name',$model)->with('archive')->get();
+        $equipment['copyTo'] = $CopyTo;
+
         $equipment['admin'] = Admin::where('id',$equipment['info']->admin_id)->first()->name;
         $equipment['department'] = Department::where('id',$equipment['info']->department_id)->first()->name;
         $equipment['sponser'] = Orgnization::where('org_type','orginzation')

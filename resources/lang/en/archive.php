@@ -47,4 +47,9 @@ return [
     'attach'   =>  'attachment ',
     'licfile_num'   =>  'number of license file',
 
+    'jobLic_archive'   =>  'archive of job license ',
+    'reports'   =>  'reports ',
+    'report_archive'   =>  'report of archives ',
+    'title_name'   =>  'title  ',
+
 ];
