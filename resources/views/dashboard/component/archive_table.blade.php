@@ -1,4 +1,5 @@
-@if ($type=="subscriber")
+@if ($type=="subscriber"||$type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org')
+
 <div class="modal fade text-left" id="CertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
 aria-hidden="true">
   <div class="modal-dialog"  role="document">
@@ -16,12 +17,12 @@ aria-hidden="true">
                       <div class="col-sm-12">
                           <div class="form-group">
                               <ul class="nav nav-tabs">
-                                <li class="nav-item">
+                               <!-- <li class="nav-item">
                                   <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#xtab1" aria-expanded="true">شهادات</a>
                                 </li>
-                                
+                                -->
                                 <li class="nav-item">
-                                  <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#xtab2" aria-expanded="true">أرشيف الصادر</a>
+                                  <a class="nav-link active" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#xtab2" aria-expanded="true">أرشيف الصادر</a>
                                 </li>
                                 <li class="nav-item">
                                   <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#xtab3" aria-expanded="false">أرشيف الوارد</a>
@@ -29,21 +30,24 @@ aria-hidden="true">
                                 <li class="nav-item">
                                   <a class="nav-link" id="base-tab4" data-toggle="tab" aria-controls="tab4" href="#xtab4" aria-expanded="false">أخرى </a>
                                 </li>
-                                <li class="nav-item">
+                                @if ($type=="subscriber")
+                                {{-- <li class="nav-item">
                                   <a class="nav-link" id="base-tab5" data-toggle="tab" aria-controls="tab5" href="#xtab5" aria-expanded="false">شهادة تسجيل  اراضي</a>
-                                </li>
+                                </li> --}}
+                                
                                 <li class="nav-item">
                                   <a class="nav-link" id="base-tab6" data-toggle="tab" aria-controls="tab6" href="#xtab6" aria-expanded="false">أرشيف رخص البناء</a>
                                 </li>
                                 <li class="nav-item">
                                   <a class="nav-link" id="base-tab7" data-toggle="tab" aria-controls="tab7" href="#xtab7" aria-expanded="false">أرشيف ملف الترخيص</a>
                                 </li>
+                                @endif
                                 <li class="nav-item">
                                   <a class="nav-link" id="base-tab8" data-toggle="tab" aria-controls="tab8" href="#xtab8" aria-expanded="false">نسخة الى</a>
                                 </li>
                               </ul>
                               <div class="tab-content px-1 pt-1">
-                                <div role="tabpanel" class="tab-pane active" id="xtab1" aria-expanded="true" aria-labelledby="base-tab1">
+                                <div role="tabpanel" class="tab-pane " id="xtab1" aria-expanded="true" aria-labelledby="base-tab1">
                                   <p>
                                   <table style="width:100%; margin-top: -10px;" class="detailsTB table engTbl">
                                       <tr>
@@ -129,7 +133,7 @@ aria-hidden="true">
                         </p>
                                 </div>
 
-                                <div class="tab-pane" id="xtab2" aria-labelledby="base-tab2">
+                                <div class="tab-pane active" id="xtab2" aria-labelledby="base-tab2">
                                   <p>
                             <table width="100%" class="detailsTB table SaderTbla">
                                   <thead>
@@ -209,9 +213,9 @@ aria-hidden="true">
   </div>
 </div>
 @elseif ($type=="project")
-<div class="modal fade text-left" id="OrgArchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="display: none;" aria-hidden="true">
+<div class="modal fade text-left" height="500px" id="OrgArchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="display: none;" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<div class="modal-content" >
 			<div class="modal-header">
 				<h4 class="modal-title" id="myModalLabel1">الأرشيف </h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -222,12 +226,12 @@ aria-hidden="true">
 				<div class="form-body">
                     <form id="orgArchFormData">
                         
-    					<div style="overflow-y: auto; max-height:300px;">
+    					<div>
               <table width="100%" class="detailsTB table archTbl">
                             <thead>
     						    <tr>
         							<th width="50px"># </th>
-                                    <th width="80px">رقم المراسلة </th>
+                                    <th width="80px">رقم الأرشيف </th>
         							<th width="80px">العنوان </th>
         							<th width="60px">التاريخ</th>
         							<th width="50px">النوع</th>
@@ -354,9 +358,37 @@ aria-hidden="true">
 
 
 <script>
+@if ($type=="subscriber")
+function drawTablesArchive($archives,$copyTo,$archivesLic)
+@else
 function drawTablesArchive($archives,$copyTo)
+@endif
 {
-  @if ($type=="subscriber")
+    @if ($type=="subscriber"||$type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org')
+    if ( $.fn.DataTable.isDataTable( '.SaderTbla' ) ) {
+        $(".SaderTbla").dataTable().fnDestroy();
+        $('#msgList1').empty();
+    }
+    if ( $.fn.DataTable.isDataTable( '.waredTbla' ) ) {
+        $(".waredTbla").dataTable().fnDestroy();
+        $('#msgRList1').empty();
+    }
+    if ( $.fn.DataTable.isDataTable( '.OtherTbla' ) ) {
+        $(".OtherTbla").dataTable().fnDestroy();
+        $('#msgOList11').empty();
+    }
+    if ( $.fn.DataTable.isDataTable( '.licTbl' ) ) {
+        $(".licTbl").dataTable().fnDestroy();
+        $('#licList').empty();
+    }
+    if ( $.fn.DataTable.isDataTable( '.licFileTbl' ) ) {
+        $(".licFileTbl").dataTable().fnDestroy();
+        $('#licFileList').empty();
+    }
+    if ( $.fn.DataTable.isDataTable( '.copyToTbl' ) ) {
+        $(".copyToTbl").dataTable().fnDestroy();
+        $('#copyToList').empty();
+    }
     var s=1;
     var w=1;
     var c=1,p=1,lc=1,lf=1;
@@ -451,65 +483,7 @@ function drawTablesArchive($archives,$copyTo)
             $('#msgOList11').append($row)
             p++;
            }
-           if(archive.type=="licArchive")
-           { $row="<tr>"+
-                "<td>"+lc+"</td>"+
-                "<td>"+archive.licNo+"</td>"+
-                "<td>"+archive.license_id+"</td>"+
-                "<td>"+archive.license_type+"</td>"+
-                "<td>";
-                attach='';
-                var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
-                
-               
-                $row += "</td></tr>";
-            $('#licList').append($row)
-            lc++;
-           }
-           if(archive.type=="licFileArchive")
-           { $row="<tr>"+
-                "<td>"+lf+"</td>"+
-                "<td>"+archive.licNo+"</td>"+
-                "<td>"+archive.license_id+"</td>"+
-                "<td>"+archive.license_type+"</td>"+
-                "<td>";
-                attach='';
-                var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
-                
-               
-                $row += "</td></tr>";
-            $('#licFileList').append($row)
-            lf++;
-           }
-           
+        
         
     });
 
@@ -686,7 +660,69 @@ function drawTablesArchive($archives,$copyTo)
                         }
                     }
     });
-    $('.licTbl').DataTable({
+    @if ($type=="subscriber")
+    console.log($archivesLic);
+        $archivesLic.forEach(archive => {
+           if(archive.type=="licArchive")
+           { $row="<tr>"+
+                "<td>"+lc+"</td>"+
+                "<td>"+archive.licNo+"</td>"+
+                "<td>"+archive.license_id+"</td>"+
+                "<td>"+archive.license_type+"</td>"+
+                "<td>";
+                attach='';
+                var i=1;
+                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
+                archive.fileIDS.forEach(file => {
+                    attach+='<div id="attach" class=" col-sm-6 ">'
+                            +'<div class="attach">'
+                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
+                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
+                                +'  <i class="fa fa-eye"> </i>'
+                                +'</a><input type="hidden" value="" name="attach[]" >'
+                                +'</div>'
+                            +'</div>';
+                            i++;
+                        });
+                        $row += attach;
+                      }
+                
+               
+                $row += "</td></tr>";
+            $('#licList').append($row)
+            lc++;
+           }
+           if(archive.type=="licFileArchive")
+           { $row="<tr>"+
+                "<td>"+lf+"</td>"+
+                "<td>"+archive.licNo+"</td>"+
+                "<td>"+archive.license_id+"</td>"+
+                "<td>"+archive.license_type+"</td>"+
+                "<td>";
+                attach='';
+                var i=1;
+                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
+                archive.fileIDS.forEach(file => {
+                    attach+='<div id="attach" class=" col-sm-6 ">'
+                            +'<div class="attach">'
+                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
+                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
+                                +'  <i class="fa fa-eye"> </i>'
+                                +'</a><input type="hidden" value="" name="attach[]" >'
+                                +'</div>'
+                            +'</div>';
+                            i++;
+                        });
+                        $row += attach;
+                      }
+                
+               
+                $row += "</td></tr>";
+            $('#licFileList').append($row)
+            lf++;
+           }
+        });
+        $('.licTbl').DataTable({
         dom: 'Bfltip',
             buttons: [
                 {
@@ -800,6 +836,7 @@ function drawTablesArchive($archives,$copyTo)
                         }
                     }
     });
+    @endif
    $copyTo.forEach(copy => {
             $row="<tr>"+
                 "<td>"+c+"</td>"+
@@ -891,6 +928,11 @@ function drawTablesArchive($archives,$copyTo)
 
 
   @elseif ($type=="project")
+  if ( $.fn.DataTable.isDataTable( '.archTbl' ) ) {
+    $(".archTbl").dataTable().fnDestroy();
+            $('#msgRList1').empty();
+            console.log("inside");
+            }
         var proj=1
         $archives.forEach(archive => {
           console.log(archive);
@@ -923,8 +965,8 @@ function drawTablesArchive($archives,$copyTo)
             $('#msgRList1').append($row)
             proj++;
         });
+        
         $('.archTbl').DataTable({
-
             dom: 'Bfltip',
             buttons: [
                 {
@@ -985,7 +1027,7 @@ function drawTablesArchive($archives,$copyTo)
     @elseif ($type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org')
     var s=1;
     var w=1,p=1,c=1;
-
+    
     $archives.forEach(archive => {
         
         if(archive.type=="outArchive")

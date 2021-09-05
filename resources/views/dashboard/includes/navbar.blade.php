@@ -98,9 +98,6 @@
               <a class="dropdown-item" href="{{route('in_archieve')}}" data-toggle="dropdown">{{trans('archive.import_from')}}</a>
             </li>
             <li data-menu="">
-              <a class="dropdown-item" href="{{route('title_archieve')}}" data-toggle="dropdown">{{trans('archive.title')}}</a>
-            </li>
-            <li data-menu="">
               <a class="dropdown-item" href="{{route('mun_archieve')}}" data-toggle="dropdown">{{trans('archive.mun_archive')}}</a>
             </li>
             <li data-menu="">
@@ -121,10 +118,21 @@
             <li data-menu="">
               <a class="dropdown-item" href="{{route('licFile_archieve')}}" data-toggle="dropdown">{{trans('archive.licFile_archive')}}</a>
             </li>
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('jobLic_archieve')}}" data-toggle="dropdown">{{trans('archive.jobLic_archive')}}</a>
+            </li>
           </ul>
         </li>
 
-
+        <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><span>
+            {{trans('archive.reports')}}
+              </span></a>
+            <ul class="dropdown-menu">  
+              <li data-menu="">
+                <a class="dropdown-item" href="{{route('report_archieve')}}" data-toggle="dropdown">{{trans('archive.report_archive')}}</a>
+              </li>
+            </ul>
+        </li>
       </ul>
     </div>
   </div>

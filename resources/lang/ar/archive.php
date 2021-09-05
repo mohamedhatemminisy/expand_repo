@@ -46,4 +46,9 @@ return [
     'lic_type'   =>  'نوع الترخيص ',
     'build_type'   =>  'نوع البناء ',
     'attach'   =>  'المرفقات ',
+
+    'jobLic_archive'   =>  'أرشيف رخص الحرف والصناعات ',
+    'reports'   =>  'التقارير ',
+    'report_archive'   =>  'تقرير الأرشيف ',
+    'title_name'   =>  'العنوان  ',
 ];

@@ -13,18 +13,24 @@
                                 أرشيف رخص البناء
                                 @elseif ($type=='licFileArchive')
                                 أرشيف ملف الترخيص
+                                @elseif ($type=='jobLicArchive')
+                                رخص الحرف و الصناعات
                                 @endif
                             </h4>
                         </div>
                         <div class="card-body">
                             <div class="form-body">
                                     <div class="row">
-                                        <div class="col-lg-8 col-md-12 pr-0 pr-s-12"  >
+                                        <div class="col-lg-7 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">
+                                                            @if ($type=='jobLicArchive')
+                                                             اسم المشترك 
+                                                            @else
                                                             اسم صاحب الرخصة
+                                                            @endif
                                                         </span>
                                                     </div>
                                                     <input type="text" id="customerName" class="form-control cust" name="customerName">
@@ -39,6 +45,27 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @if ($type=='jobLicArchive')
+                                        <div class="col-lg-5 col-md-12 pr-0"  >
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+    													<span class="input-group-text" id="basic-addon1">
+    														نوع الحرفة
+    													</span>
+                                                    </div>
+                                                    <select class="form-control" name="licType" id="licType">
+                                                        <option value=""></option>
+                                                    </select>
+                                                    <div class="input-group-append" onclick="QuickAdd(66,'licType','نوع الحرفة')" style="cursor:pointer; margin-left: 0px !important;">
+                                                        <span class="input-group-text input-group-text2">
+                                                            <i class="fa fa-external-link"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @else
                                         <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
@@ -55,8 +82,76 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                     <div class="row">
+                                    @if ($type=='jobLicArchive')
+                                        <div class="col-lg-3 col-md-12 pr-0 pr-s-12">
+                                            <div class="form-group">
+                                                <div class="input-group w-s-87">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            تصنيف الرخصة
+                                                        </span>
+                                                    </div>
+                                                    <select class="form-control" name="lic_cat" id="lic_cat">
+                                                        <option value=""></option>
+                                                    </select>
+                                                    <div class="input-group-append" onclick="QuickAdd(49,'lic_cat','تصنيف رخصة')" style="cursor:pointer; margin-left: 0px !important;">
+                                                    <span class="input-group-text input-group-text2">
+                                                        <i class="fa fa-external-link"></i>
+                                                    </span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="form-group">
+                                                <div class="input-group w-s-87">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            المنطقة
+                                                        </span>
+                                                    </div>
+                                                    <select class="form-control" name="cityData" id="cityData" >
+                                                        <option value=""></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12"  >
+                                            <div class="form-group">
+                                                <div class="input-group"> 
+                                                    <div class="input-group-prepend">
+    													<span class="input-group-text" id="basic-addon1">
+    														رقم الحد
+    													</span>
+                                                    </div>
+                                                    
+                                                    <select class="form-control" name="LicBorder[]" id="LicBorder1" onchange="
+                                                        <option value=""></option>                                                        
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text input-group-text2" id="1" onclick="ShowLOModal(0,1,$(this).prev(),0)">
+                                                            <i class="fa fa-external-link"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="form-group">
+                                                <div class="input-group w-s-87">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            رقم الرخصة
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="licNo" name="licNo" class="form-control eng-sm  valid" value="" placeholder="" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @else
                                         <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
@@ -84,6 +179,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                      
                                         <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
@@ -130,7 +226,49 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
+                                </div>
+                                    @if ($type=="jobLicArchive")
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-12 pr-0 pr-s-12"  >
+                                                <div class="form-group">
+                                                    <div class="input-group w-s-87" style="    width: 98% !important;">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon1">
+                                                                الاسم التجاري
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" id="businessName" name="businessName" class="form-control eng-sm  valid" value="" placeholder="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
+                                                <div class="form-group">
+                                                    <div class="input-group w-s-87">
+                                                        <div class="input-group-prepend">
+    														<span class="input-group-text" id="basic-addon1">
+    															تاريخ البداية
+    														</span>
+                                                        </div>
+                                                        <input type="text" id="startAt" name="startAt" class="form-control" value="<?php echo date('d/m/Y')?>" onblur="calcRenew()">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
+                                                <div class="form-group">
+                                                    <div class="input-group w-s-87">
+                                                        <div class="input-group-prepend">
+    														<span class="input-group-text" id="basic-addon1">
+    															تاريخ النهاية
+    														</span>
+                                                        </div>
+                                                        <input type="text" id="endAt" name="endAt" class="form-control" value="31/03/<?php echo date('m')<=3?date('Y'):date('Y')+1; ?>" placeholder="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    
                                         <div class="row">
                                         <div class="col-lg-10 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
@@ -180,7 +318,11 @@
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6">
+                    @if ($type=='jobLicArchive')
+                    <div class="card lSide" style="min-height:358.2px;">
+                    @else
                     <div class="card lSide" style="min-height:302.2px;">
+                    @endif
                         <div class="card-header">
                             <h4 class="card-title"><img src="{{asset('assets/images/ico/report32.png')}}" />مرفقات الرخصة </h4>
                         </div>
