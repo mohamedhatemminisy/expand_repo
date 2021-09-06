@@ -264,7 +264,7 @@ class ArchieveController extends Controller
         $limitNumber = LimitNumber::get();
         $licenseRating = LicenseRating::get();
         $attachment_type = AttachmentType::get();
-        return view('dashboard.archive.licArchive',compact('type','attachment_type'
+        return view('dashboard.archive.jobLicArchive',compact('type','attachment_type'
        ,'url','craftType','limitNumber'));
     }
     public function reportArchive(){
