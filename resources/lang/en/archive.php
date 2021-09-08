@@ -48,6 +48,9 @@ return [
     'licfile_num'   =>  'number of license file',
 
     'jobLic_archive'   =>  'archive of job license ',
+    'agenda_archieve'   =>  'archive of meeting ',
+    'agenda_report'   =>  'report archive meeting',
+
     'reports'   =>  'reports ',
     'report_archive'   =>  'report of archives ',
     'title_name'   =>  'title  ',

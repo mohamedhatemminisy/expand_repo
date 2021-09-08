@@ -121,6 +121,9 @@
             <li data-menu="">
               <a class="dropdown-item" href="{{route('jobLic_archieve')}}" data-toggle="dropdown">{{trans('archive.jobLic_archive')}}</a>
             </li>
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('agenda_archieve')}}" data-toggle="dropdown">{{trans('archive.agenda_archieve')}}</a>
+            </li>
           </ul>
         </li>
 
@@ -130,6 +133,9 @@
             <ul class="dropdown-menu">  
               <li data-menu="">
                 <a class="dropdown-item" href="{{route('report_archieve')}}" data-toggle="dropdown">{{trans('archive.report_archive')}}</a>
+              </li>
+              <li data-menu="">
+                <a class="dropdown-item" href="{{route('agenda_report')}}" data-toggle="dropdown">{{trans('archive.agenda_report')}}</a>
               </li>
             </ul>
         </li>

@@ -141,6 +141,8 @@ Route::group([
         Route::get('lic_archieve','ArchieveController@licArchive')->name('lic_archieve');
         Route::get('jobLic_archieve','ArchieveController@jobLicArchive')->name('jobLic_archieve');
         Route::get('report_archieve','ArchieveController@reportArchive')->name('report_archieve');
+        Route::get('agenda_archieve','ArchieveController@agendaArchive')->name('agenda_archieve');
+        Route::get('agenda_report','ArchieveController@agendaReportArchive')->name('agenda_report');
 
         Route::get('licFile_archieve','ArchieveController@licFileArchive')->name('licFile_archieve');
         Route::group(['prefix' => 'profile'], function () {

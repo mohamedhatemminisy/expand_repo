@@ -311,6 +311,19 @@ class ArchieveController extends Controller
         return view('dashboard.archive.rptArchive',compact('type','attachment_type'
        ,'url'));
     }
+    public function agendaArchive(){
+        $type= 'agArchive';
+        $url = "agenda_archieve";
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.agenda',compact('type','archive_type','url'));
+    }
+    public function agendaReportArchive(){
+        $type= 'agenda_report';
+        $url = "agenda_report";
+        $archive_type = ArchiveType::get();
+        return view('dashboard.archive.agendaReport',compact('type','archive_type','url'));
+    }
+
       public function archieve_info_all(Request $request)
     {
         $type=$request['type'];
