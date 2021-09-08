@@ -105,7 +105,6 @@ class ArchieveController extends Controller
     
     }
     public function store_lince_archive(Request $request){
-        dd($request->all());
         $archive = ArchiveLicense::where('id',$request->customerid)
         ->where('model_name','App\Models\ArchiveLicense')
         ->where('type',$request->type)->first();
@@ -139,7 +138,45 @@ class ArchieveController extends Controller
         }
     }
 
+    public function store_jobLic_archieve(Request $request){
 
+        $archive = jobLicArchieve::where('id',$request->customerid)
+        ->where('model_name','App\Models\jobLicArchieve')->first();
+        if($archive){
+            $archive->name =$request->customerName;
+            $archive->region =$request->cityData;
+            $archive->license_number =$request->licNo;        
+            $archive->trade_name =$request->businessName;
+            $archive->start_date =$request->startAt;
+            $archive->expiry_ate =$request->endAt; 
+            $archive->craft_type_id  =$request->licType;
+            $archive->limit_number_id  =$request->LicBorder;
+            $archive->attachment_id   =$request->AttahType;
+            $archive->license_rating_id  =$request->lic_cat;
+            $archive->save();  
+        }else{
+        
+        $archive = new jobLicArchieve();
+        $archive->url =  $request->url;
+        $archive->added_by  = Auth()->user()->id;
+        $archive->name =$request->customerName;
+        $archive->model_id =$request->customerid;
+        $archive->model_name =$request->customerType;
+        $archive->region =$request->cityData;
+        $archive->license_number =$request->licNo;        
+        $archive->trade_name =$request->businessName;
+        $archive->start_date =$request->startAt;
+        $archive->expiry_ate =$request->endAt; 
+        $archive->craft_type_id  =$request->licType;
+        $archive->limit_number_id  =$request->LicBorder;
+        $archive->attachment_id   =$request->AttahType;
+        $archive->license_rating_id  =$request->lic_cat;
+        $archive->save();
+        }
+        if ($archive) {
+            return response()->json(['success'=>trans('admin.archive_added')]);
+        }
+    }
     public function store_archive(ArchiveRequest $request){
         if($request->hasFile('formDataaaUploadFile')){
             $files = $request->file('formDataaaUploadFile');
@@ -265,7 +302,7 @@ class ArchieveController extends Controller
         $licenseRating = LicenseRating::get();
         $attachment_type = AttachmentType::get();
         return view('dashboard.archive.jobLicArchive',compact('type','attachment_type'
-       ,'url','craftType','limitNumber'));
+       ,'url','craftType','limitNumber','licenseRating'));
     }
     public function reportArchive(){
         $type= 'reportArchive';
@@ -304,4 +341,10 @@ class ArchieveController extends Controller
         $archive['info']= ArchiveLicense::find($request['archive_id']);
         return response()->json($archive);
     }
+    public function job_Lic_info(Request $request)
+    {
+        $archive['info']= jobLicArchieve::find($request['archive_id']);
+        return response()->json($archive);
+    }
+    
 }

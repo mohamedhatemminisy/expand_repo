@@ -44,7 +44,9 @@
     													</span>
                                                     </div>
                                                     <select class="form-control" name="licType" id="licType">
-                                                        <option value=""></option>
+                                                        @foreach($craftType as $type)
+                                                        <option value="{{$type->id}}">{{$type->name}}</option>
+                                                        @endforeach
                                                     </select>
                                                     <div class="input-group-append" onclick="QuickAdd(66,'licType','نوع الحرفة')" style="cursor:pointer; margin-left: 0px !important;">
                                                         <span class="input-group-text input-group-text2">
@@ -66,7 +68,9 @@
                                                         </span>
                                                     </div>
                                                     <select class="form-control" name="lic_cat" id="lic_cat">
-                                                        <option value=""></option>
+                                                        @foreach($licenseRating as $rate)
+                                                        <option value="{{$rate->id}}">{{$rate->name}}</option>
+                                                        @endforeach
                                                     </select>
                                                     <div class="input-group-append" onclick="QuickAdd(49,'lic_cat','تصنيف رخصة')" style="cursor:pointer; margin-left: 0px !important;">
                                                     <span class="input-group-text input-group-text2">
@@ -99,8 +103,10 @@
     													</span>
                                                     </div>
                                                     
-                                                    <select class="form-control" name="LicBorder[]" id="LicBorder1" onchange="
-                                                        <option value=""></option>                                                        
+                                                    <select class="form-control" name="LicBorder" id="LicBorder1">
+                                                     @foreach($limitNumber as $number)
+                                                        <option value="{{$number->id}}">{{$number->name}}</option>  
+                                                        @endforeach                                                      
                                                     </select>
                                                     <div class="input-group-append" onclick="QuickAdd(56,'licType','رقم الحد')" style="cursor:pointer; margin-left: 0px !important;">
                                                         <span class="input-group-text input-group-text2">
@@ -246,7 +252,7 @@ $.ajaxSetup({
        let formData = new FormData(this);
        $.ajax({
           type:'POST',
-          url: "store_lince_archive",
+          url: "store_jobLic_archieve",
            data: formData,
            contentType: false,
            processData: false,
@@ -297,20 +303,22 @@ $( function() {
         $(".formDataaaFilesArea").html('');
             $.ajax({
             type: 'get', // the method (could be GET btw)
-            url: "{{ route('archieveLic_info') }}",
+            url: "{{ route('job_Lic_info') }}",
             data: {
                 archive_id: archive_id,
             },
             success:function(response){
+                console.log(response.info);
             $('#customerid').val(response.info.model_id);
             $('#customername').val(response.info.name);
             $('#customerName').val(response.info.name);
 
             $('#customerType').val(response.info.model_name);
-            $('#licNo').val(response.info.licNo);
-            $('#licn').val(response.info.licn);
-            $('#licnfile').val(response.info.licnfile);
-            $('#license_type').val(response.info.license_type);
+            $('#licNo').val(response.info.license_number);
+            $('#businessName').val(response.info.trade_name);
+            $('#startAt').val(response.info.start_date);
+            $('#endAt').val(response.info.expiry_ate);
+
             attach='';
             var i=1;
             if(response.info.fileIDS&&typeof(response.info.fileIDS)=="object"){ 
