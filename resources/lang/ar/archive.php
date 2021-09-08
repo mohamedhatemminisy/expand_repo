@@ -48,6 +48,8 @@ return [
     'attach'   =>  'المرفقات ',
 
     'jobLic_archive'   =>  'أرشيف رخص الحرف والصناعات ',
+    'agenda_archieve'   =>  'أرشيف الجلسات ',
+    'agenda_report'   =>  'تقرير أرشيف الجلسات ',
     'reports'   =>  'التقارير ',
     'report_archive'   =>  'تقرير الأرشيف ',
     'title_name'   =>  'العنوان  ',
