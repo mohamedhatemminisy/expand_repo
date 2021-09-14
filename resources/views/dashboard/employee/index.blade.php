@@ -806,6 +806,7 @@ $.ajax({
             $( "#HiringDate" ).removeClass( "error" );
             $( "#DirectManager" ).removeClass( "error" );
             $( "#JobType" ).removeClass( "error" );
+            $( "#MobileNo1" ).removeClass( "error" );
 
        $.ajax({
           type:'POST',
@@ -853,6 +854,9 @@ $.ajax({
             }
             if(response.responseJSON.errors.DirectManager){
                 $( "#DirectManager" ).addClass( "error" );
+            }
+            if(response.responseJSON.errors.MobileNo1){
+                $( "#MobileNo1" ).addClass( "error" );
             }
 
 			Swal.fire({
