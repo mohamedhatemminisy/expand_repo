@@ -59,7 +59,7 @@ return [
     'year' => 'عن سنة',
     'vac_annual' => ' رصيد سنوي',
     'emr_blanace' => ' رصيد طارئ',
-    'user_info' => ' بيانت المستخدم و الصلاحيات',
+    'user_info' => ' بيانت المستخدم',
     'has_account' =>'لديه حساب على النظام',
     'permissions' => 'الصلحيات',
     'user_name' => 'اسم المستخدم',
@@ -68,7 +68,7 @@ return [
 
     'dept_info'  => 'معلومات القسم',
     'department' => 'القسم',
-    'manager'   => 'المسؤل',
+    'manager'   => 'الموظف المسؤل ',
     'select_manager' => 'اختر المسؤل',
     'related_to' => 'مرتبط ب',
     'dep_employees' => 'موظفي القسم',
@@ -102,7 +102,7 @@ return [
     'subscriber_num'  => 'رقم المشترك.',
     'business_name'   => 'الاسم التجاري',
     'part'            => 'القطاع',
-    'subscriber_details' => 'تفاصيل المشترك',
+    'subscriber_details' => 'تفاصيل المشترك',   
     'subscriber_data'   => 'بيانت المستخدم',
     'region'   => 'منطقة',
     'underway'  => 'قيد التطوير',
@@ -114,9 +114,9 @@ return [
     'project_end_date'  => 'تاريخ نهاية المشروع',
     'project_cost'  => 'تكلفة المشروع',
     'archieve'  => 'الارشيف',
-    'select_financier' => 'اختر الممول',
+    'select_financier' => 'الجهة الممولة',
     'financie_percentage' => 'نسبة التمويل',
-    'supplier_company' => 'الشركة الموردة    ',
+    'supplier_company' => 'الشركة المنفذة    ',
     'Contact' => 'جهة التواصل    ',
 
 

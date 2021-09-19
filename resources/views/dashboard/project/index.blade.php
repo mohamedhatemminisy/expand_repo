@@ -151,7 +151,7 @@
                             <div class="row">
                                     <div class="col-md-7">
                                         <div class="form-group">
-                                            <div class="input-group" style="width: 100% !important;">
+                                            <div class="input-group" style="width: 75% !important;">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">
                                                     {{trans('admin.project_cost')}}
@@ -159,7 +159,7 @@
                                                 </div>
                                                 <input id="Projectcost" name="Projectcost" class="form-control numFeild " placeholder="00.00" style="    border-radius: 0rem !important;">
 
-                                                <select id="CurrencyID" name="CurrencyID" type="text" class="form-control" style="padding: 0 !important;height: 32px !important;">
+                                                <select id="CurrencyID" name="CurrencyID" type="text" class="form-control" style="max-width: 25%">
                                                     <option> - </option>
                                                     <option value="shekel" selected=""> {{trans('admin.shekel')}} </option>
                                                     <option value="dollar"> {{trans('admin.dollar')}} </option>

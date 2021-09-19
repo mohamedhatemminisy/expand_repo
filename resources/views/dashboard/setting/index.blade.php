@@ -102,7 +102,7 @@
                                 <div class="col-lg-8 col-md-12 pr-0 pr-s-12">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-12 pr-s-12 pr-0">
-                                            <div class="form-group" style="    margin-right: 5px;">
+                                            <div class="form-group" >
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                     <span class="input-group-text input-group-text1" id="basic-addon1">
@@ -114,7 +114,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-12">
-                                            <div class="form-group" style="    margin-right: 7px; margin-left: -9px;">
+                                            <div class="form-group" style="    margin-right: -8px;" >
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                             <span class="input-group-text input-group-text1" id="basic-addon1">
@@ -192,7 +192,7 @@
                 </div>
                 <hr>
 
-                <div class="card">
+                <div class="card hide">
                     <div class="card-header">
                         <h4 class="card-title"><img src="https://db.expand.ps/images/workHrs.png" width="32" height="32">
                         {{trans('admin.working_details')}}

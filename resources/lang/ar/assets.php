@@ -45,7 +45,7 @@ return [
     'suplier_v_header'   =>  ' القسم / مانح / مورد ',
     'address_detail'   =>  ' تفاصيل العنوان ',
     'company_s'   =>  ' الشركة الموردة ',
-    'company_sp'   =>  ' الشركة المانحة ',
+    'company_sp'   =>  ' المؤسسة المانحة ',
     'attach'   =>  ' مرفقات ',
     'plate'   =>  'رقم اللوحة',
     'vehicles_brand'   =>  'العلامة التجارية للمركبة',

@@ -30,12 +30,12 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form id="formDataaa" onsubmit="return false">
+                        <form id="formDataaa" action="{{  url('store_archive') }}" onsubmit="return false">
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 pr-0 pr-s-12"  >
                                         <div class="row">
-                                            <div class="col-lg-9 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-8 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
@@ -80,7 +80,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
@@ -97,7 +97,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-9 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-8 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
@@ -128,7 +128,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
@@ -150,7 +150,7 @@
                                             <div class="col-md-12">
                                                 <input type="checkbox" name="copyTo" onclick="$('.copyto').toggle()"> {{trans('archive.copy_to')}}
                                             </div>
-                                            <div class="col-md-12 pr-0 pr-s-12 copyto hide"  >
+                                            <div class="col-md-8 pr-0 pr-s-12 copyto hide"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
@@ -176,6 +176,10 @@
                                     <div class="col-lg-5 col-md-12 pr-0 pr-s-12"  >
                                         <div class="row attachs-body">
                                             <div class="form-group col-12 mb-2">
+                                                <div class="progress">
+                                                    <div class="bar"></div >
+                                                    <div class="percent">0%</div >
+                                                </div>
                                                 <input type="hidden" name="fromname" value="formDataaa">
                                                 <input type="file" class="form-control-file" id="formDataaaupload-file[]" multiple="" name="formDataaaUploadFile[]" onchange="doUploadAttach('formDataaa')" 
                                                 style="display: none" >

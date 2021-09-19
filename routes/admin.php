@@ -131,6 +131,9 @@ Route::group([
         ->name('archieve_info_all');
         Route::get('archievelic_info_all','ArchieveController@archievelic_info_all')
         ->name('archievelic_info_all');
+        Route::get('archieve_report','ArchieveController@archieve_report')
+        ->name('archieve_report');
+
 
         Route::get('in_archieve','ArchieveController@in_archieve')->name('in_archieve')->middleware('can:in_archieve');
         Route::get('emp_archieve','ArchieveController@emp_archieve')->name('emp_archieve')->middleware('can:emp_archieve');
@@ -138,6 +141,7 @@ Route::group([
         Route::get('cit_archieve','ArchieveController@cit_archieve')->name('cit_archieve')->middleware('can:cit_archieve');
         Route::get('mun_archieve','ArchieveController@mun_archieve')->name('mun_archieve')->middleware('can:mun_archieve');
         Route::get('proj_archieve','ArchieveController@proj_archieve')->name('proj_archieve')->middleware('can:proj_archieve');
+
         Route::get('title_archieve','ArchieveController@projArchive')->name('title_archieve');
         Route::get('title_archieve','ArchieveController@munArchive')->name('title_archieve');
         Route::get('lic_archieve','ArchieveController@licArchive')->name('lic_archieve')->middleware('can:lic_archieve');
