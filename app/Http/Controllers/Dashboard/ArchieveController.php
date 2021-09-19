@@ -309,8 +309,9 @@ class ArchieveController extends Controller
         $type= 'reportArchive';
         $url = "report_archieve";
         $attachment_type = AttachmentType::get();
+        $license_type = LicenseType::get();
         return view('dashboard.archive.rptArchive',compact('type','attachment_type'
-       ,'url'));
+       ,'license_type','url'));
     }
     public function agendaArchive(){
         $type= 'agArchive';
@@ -349,6 +350,84 @@ class ArchieveController extends Controller
     {
         $archive['info'] = Archive::find($request['archive_id']);
         return response()->json($archive);
+    }
+    public function archieve_report(Request $request)
+    {   
+        if($request->get('arcType')=="licArchive"||$request->get('arcType')=="licFileArchive")
+        {   $archive['type']="lic";
+            $archive['result'] =  ArchiveLicense::query();
+            if($request->get('name')){
+                $archive['result']->where('name','=',$request->get('name'));
+            }
+            if($request->get('arcType')){
+                $archive['result']->where('type','=',$request->get('arcType'));
+            }
+            if($request->get('BuildingData')){
+                if($request->get('BuildingData')=="-1")
+                {}
+                else{
+                $archive['result']->where('license_type','=',$request->get('BuildingData'));
+                }
+            }
+            if($request->get('BuildingTypeData')){
+                if($request->get('BuildingTypeData')=="-1")
+                {}
+                else{
+                $archive['result']->where('license_id','=',$request->get('BuildingTypeData'));
+                }
+            }
+            if($request->get('archNo')){
+                $archive['result']->where('licNo','=',$request->get('archNo'));
+            }
+            if($request->get('start')&&$request->get('end')){
+                $from = date_create(($request->get('start')));
+                $from = explode('/', ($request->get('start'))); 
+                $from = $from[2].'-'.$from[1].'-'.$from[0];
+                $to = date_create(($request->get('end')));
+                $to = explode('/', ($request->get('end'))); 
+                $to = $to[2].'-'.$to[1].'-'.$to[0];
+                $archive['result']->whereRaw('CAST(archive_licenses.created_at AS DATE) between ? and ?',[$from,$to]);
+            }
+            $archive['result']= $archive['result']->select('archive_licenses.*','license_types.name as licName')
+                        ->selectRaw('DATE_FORMAT(archive_licenses.created_at, "%Y-%m-%d") as date')
+                        ->leftJoin('license_types','license_types.id','archive_licenses.license_id')
+                        ->get();
+
+        }
+        else
+        {
+            $archive['type']="all";
+            $archive['result'] = Archive::query();
+            
+            if($request->get('name')){
+                $archive['result']->where('name','=',$request->get('name'));
+            }
+            if($request->get('arcType')){
+                if($request->get('arcType')=="all")
+                {
+                }
+                else
+                {
+                $archive['result']->where('type','=',$request->get('arcType'));
+                }
+            }
+
+            if($request->get('archNo')){
+                $archive['result']->where('serisal','=',$request->get('archNo'));
+            }
+            if($request->get('start')&&$request->get('end')){
+                $from = date_create(($request->get('start')));
+                $from = explode('/', ($request->get('start'))); 
+                $from = $from[2].'-'.$from[1].'-'.$from[0];
+                $to = date_create(($request->get('end')));
+                $to = explode('/', ($request->get('end'))); 
+                $to = $to[2].'-'.$to[1].'-'.$to[0];
+                $archive['result']->whereBetween('date',[$from,$to]);
+            }
+            $archive['result']= $archive['result']->get();
+        }
+        return response()->json($archive);
+
     }
     public function archieveLic_info(Request $request)
     {

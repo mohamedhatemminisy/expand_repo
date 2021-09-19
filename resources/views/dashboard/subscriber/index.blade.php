@@ -186,7 +186,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="card-header" style="padding-top:0px;">
+            <div class="card-header hide" style="padding-top:0px;">
                 <h4 class="card-title"><i class="fa fa-key"></i> 
                 {{trans('admin.subscriber_data')}}
                 </h4>
@@ -200,7 +200,7 @@
                     </ul>
                 </div>
             
-            <div class="row" id="userlogin">
+            <div class="row hide" id="userlogin">
                     <div class="col-md-6">
                         <div class="form-group">
                                 <div class="input-group">

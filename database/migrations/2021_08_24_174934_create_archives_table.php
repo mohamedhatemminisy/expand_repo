@@ -19,7 +19,7 @@ class CreateArchivesTable extends Migration
             $table->string('type')->nullable();
             $table->string('model_id')->nullable();
             $table->string('model_name')->nullable();
-            $table->string('date')->nullable();
+            $table->date('date')->nullable();
             $table->string('title')->nullable();
             $table->string('serisal')->nullable();
             $table->string('fileIDS')->nullable();

@@ -83,6 +83,9 @@
                                                 <th  >
                                                     #
                                                 </th>
+                                                <th  >
+                                                    {{trans('admin.subscriber_name')}}
+                                                </th>
                                                 @if($type=='licArchive')
                                                 <th  >
                                                     {{trans('archive.lic_num')}}
@@ -111,24 +114,27 @@
                                         @elseif ($type=="jobLicArchive")
                                         <thead>
                                             <tr>
-                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                <th  >
+                                                    {{trans('admin.subscriber_name')}}
+                                                </th>
+                                                <th >
                                                     الاسم التجاري
                                                 </th>
-                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                <th >
                                                     صنف الرخصة
                                                 </th>
-                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                <th >
                                                     تاريخ الإصدار
                                                 </th>
-                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                <th >
                                                     تاريخ الإنتهاء
                                                 </th>
                                                 
-                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
+                                                <th >
                                                     حالة الرخصة
                                                 </th>
-                                                <th scope="col"  style="border: 1px solid #000000;text-align:center;font-weight:bold">
-                                                    
+                                                <th >
+                                                    المرفقات
                                                 </th>
                                             </tr>
                                         </thead>
@@ -148,35 +154,9 @@
                                                     {{trans('admin.emp_id')}} 
                                                 </th>
                                                 <th>
-                                                    {{trans('admin.region')}}
+                                                    {{trans('admin.address')}}
                                                 </th>
                                                 
-                                            </tr>
-                                        </thead>
-                                        @elseif ($type=="reportArchive")
-                                        <thead>
-                                            <tr style="text-align:center !important;background: #00A3E8;">
-                                                <th width="50px">
-                                                #
-                                                </th>
-                                                <th>
-                                             {{trans('archive.title_name')}}
-                                                </th>
-                                                <th>
-                                                    {{trans('admin.type')}}
-                                                </th>
-                                                <th>
-                                                    {{trans('archive.num')}} 
-                                                </th>
-                                                <th>
-                                                    {{trans('admin.related_to')}}
-                                                </th>
-                                                <th>
-                                                    {{trans('archive.date_send')}}
-                                                </th>
-                                                <th>
-                                                    {{trans('archive.attach')}}
-                                                </th>
                                             </tr>
                                         </thead>
                                         @elseif ($type=="employee")
@@ -186,7 +166,7 @@
                                                 #
                                                 </th>
                                                 <th>
-                                                    {{trans('admin.user_name')}}
+                                                    {{trans('admin.employee_name')}}
                                                 </th>
                                                 <th>
                                                     {{trans('admin.phone')}}
@@ -195,7 +175,7 @@
                                                     {{trans('admin.emp_id')}}  
                                                 </th>
                                                 <th>
-                                                    {{trans('admin.region')}}
+                                                    {{trans('admin.address')}}
                                                 </th>
                                                 
                                             </tr>
@@ -248,7 +228,7 @@
                                                     {{trans('admin.project_cost')}}   
                                                 </th>
                                                 <th>
-                                                    {{trans('admin.region')}}   
+                                                    {{trans('admin.address')}}   
                                                 </th>
                                             </tr>
                                         </thead>
@@ -268,7 +248,7 @@
                                                     {{trans('assets.actual_price')}} 
                                                 </th>
                                                 <th>
-                                                    {{trans('admin.region')}}
+                                                    {{trans('admin.address')}}
                                                 </th>
                                                 
                                             </tr>
@@ -289,7 +269,7 @@
                                                     {{trans('assets.actual_price')}} 
                                                 </th>
                                                 <th>
-                                                    {{trans('admin.region')}}
+                                                    {{trans('admin.address')}}
                                                 </th>
                                                 
                                             </tr>
@@ -310,7 +290,7 @@
                                                     {{trans('assets.actual_price')}} 
                                                 </th>
                                                 <th>
-                                                    {{trans('admin.region')}}
+                                                    {{trans('admin.address')}}
                                                 </th>
                                                 
                                             </tr>
@@ -334,7 +314,7 @@
                                                     {{trans('admin.job_title')}} 
                                                 </th>
                                                 <th>
-                                                    {{trans('admin.region')}}
+                                                    {{trans('admin.address')}}
                                                 </th>
                                                 
                                             </tr>
@@ -420,8 +400,6 @@
 
         </div>
 </div>
-</div>
-
 
 <script>
         var types=$('#type').val();
@@ -463,7 +441,7 @@
                     d.type = $('#type').val();
                 }
             },
-            @elseif($type=='licArchive'||$type=='licFileArchive'||$type=="jobLicArchive"||$type=="reportArchive")
+            @elseif($type=='licArchive'||$type=='licFileArchive'||$type=="jobLicArchive")
             ajax: {
                 url: '{{ route('archievelic_info_all') }}',
                 data: function (d) {
@@ -658,6 +636,15 @@
             @elseif ($type=='licArchive'||$type=='licFileArchive')
             columns:[
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                {
+                    data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                
+                },
                 {data:'licNo'},
                 {
                     data: null, 

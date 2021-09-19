@@ -122,12 +122,12 @@
           <ul class="dropdown-menu">
           @can('out_archieve')
             <li data-menu="">
-              <a class="dropdown-item" href="{{route('out_archieve')}}" data-toggle="dropdown">{{trans('archive.export_to')}}</a>
+              <a class="dropdown-item" href="{{route('out_archieve')}}" data-toggle="dropdown">{{trans('archive.out_archive')}}</a>
             </li>
           @endcan
           @can('in_archieve')
             <li data-menu="">
-              <a class="dropdown-item" href="{{route('in_archieve')}}" data-toggle="dropdown">{{trans('archive.import_from')}}</a>
+              <a class="dropdown-item" href="{{route('in_archieve')}}" data-toggle="dropdown">{{trans('archive.in_archive')}}</a>
             </li>
             @endcan
           @can('mun_archieve')

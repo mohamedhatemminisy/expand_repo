@@ -269,15 +269,13 @@
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">
-                                                        {{trans('admin.start_date')}}
+                                                            تاريخ التعيين
                                                         </span>
                                                     </div>
-                                                    <input id="HiringDate" type="date" name="HiringDate" data-mask="00/00/0000" maxlength="10" class="form-control eng-sm singledate valid" placeholder="dd/mm/yyyy" autocomplete="off">
-                                                    <div class="input-group-append" style="visibility: hidden;">
+                                                    <input id="HiringDate" name="HiringDate" data-mask="00/00/0000" maxlength="10" class="form-control eng-sm singledate valid" placeholder="dd/mm/yyyy" autocomplete="off">
+                                                    <div class="input-group-append" style="visibility: hidden">
                                                         <span class="input-group-text input-group-text2">
-                                                            <a href="https://db.expand.ps/addDepartment" target="_blank"> 
-															<i class="fa fa-external-link"></i>
-															</a>
+                                                            <i class="fa fa-external-link" style="color: #ffffff"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -336,7 +334,7 @@
 
 
 
-                            <div class="card-header" style="padding-top:0px;">
+                            <div class="card-header hide" style="padding-top:0px;">
                                 <h4 class="card-title"><img src="https://db.expand.ps/images/workHrs.png" width="32" height="32"> 
                                 {{trans('admin.Holiday_info')}}
                                  </h4>
@@ -352,7 +350,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="card-content collapse show">
+                            <div class="card-content collapse hide">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4" style="padding-right: 0px;">
@@ -497,7 +495,8 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                    @include('dashboard.component.address')		
+                    @include('dashboard.component.address')	
+                    @include('dashboard.component.archive_table')	
 						<div class="col-sm-12">
 							<div class="card">
 								<div class="card-header">

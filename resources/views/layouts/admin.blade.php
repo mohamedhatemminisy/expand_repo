@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="{{ app() -> getLocale() === 'ar' ? 'rtl' : 'ltr'}}">
 <head>
+	
+<script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -20,7 +22,6 @@
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery-ui.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('assets/fonts/font-awesome/css/font-awesome.min.css')}}">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
   <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/css/weather-icons/climacons.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('assets/fonts/meteocons/style.css')}}">
@@ -61,12 +62,20 @@
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/core/colors/palette-gradient.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/pages/timeline.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/pages/dashboard-ecommerce.css')}}">
+ 
   <!-- END Page Level CSS-->
   <!-- BEGIN Custom CSS-->
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
   <!-- END Custom CSS-->
 @endif
+ 
 
+<style>
+	.progress { position:relative; width:100%; 
+    height: 20px;  display:none;}
+	.bar { background-color: #b5076f; width:0%; height:20px; }
+	.percent { position:absolute; display:inline-block; left:50%; color: #040608;}
+</style>
 </head>
 <body class="horizontal-layout horizontal-menu horizontal-menu-padding 2-columns   menu-expanded"
 data-open="click" data-menu="horizontal-menu" data-col="2-columns">
@@ -218,9 +227,9 @@ aria-hidden="true">
 				</div>
 			</div>
 			<div class="form-group" style="color:#EB844C">
-				New <span id="ModalTitle1"></span>:
+				New <span id="ModalTitle1"></span>: 
 			</div>
-			<form method="post" id="store-modal" ">
+			<form method="post" id="store-modal" >
                 @csrf
 			<div class="form-group">
 
@@ -361,7 +370,6 @@ $('#store-modal').submit(function(e) {
   <!-- BEGIN PAGE LEVEL JS-->
   <script src="{{asset('assets/js/scripts/pages/dashboard-ecommerce.js')}}" type="text/javascript"></script>
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
-	
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.0/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/fh-3.1.9/r-2.2.9/sp-1.4.0/datatables.min.js"></script>
 <script>
 
@@ -519,6 +527,44 @@ function deleteConstant(id){
                                                             
 });
 
+
+var SITEURL = "{{URL('/')}}";
+function  doUploadAttach(frm){
+	var bar = $('.bar');
+	var percent = $('.percent');
+	console.log('1');
+
+	$(".progress").show()
+	$('#'+frm).ajaxForm({
+		beforeSend: function() {
+			var percentVal = '0%';
+			bar.width(percentVal)
+			percent.html(percentVal);
+			console.log('2');
+
+		},
+		uploadProgress: function(event, position, total, percentComplete) {
+			var percentVal = percentComplete + '%';
+			bar.width(percentVal)
+			percent.html(percentVal);
+			console.log('3');
+
+		},
+		complete: function(xhr) {
+			alert('File Has Been Uploaded Successfully');
+			//window.location.href = SITEURL +"/"+"ajax-file-upload-progress-bar";
+			console.log('4');
+
+
+		$(".progress").hide()
+		},
+		error: function()
+                {
+					console.log('8888');
+                }
+		
+	});
+}
 </script>
 
   <!-- END PAGE LEVEL JS-->

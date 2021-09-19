@@ -40,7 +40,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
+                                        <div class="col-lg-5 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
                                                     <div class="input-group-prepend">
