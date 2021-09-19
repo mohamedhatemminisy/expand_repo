@@ -47,6 +47,10 @@ return [
     'build_type'   =>  'نوع البناء ',
     'attach'   =>  'المرفقات ',
 
+    'build_type1'   =>  'قائم ',
+    'build_type2'   =>  'مقترح ',
+    'build_type3'   =>  'قائم/مقترح ',
+
     'jobLic_archive'   =>  'أرشيف رخص الحرف والصناعات ',
     'agenda_archieve'   =>  'أرشيف الجلسات ',
     'agenda_report'   =>  'تقرير أرشيف الجلسات ',

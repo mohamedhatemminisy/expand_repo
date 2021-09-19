@@ -33,7 +33,7 @@
               $('.horizontal-menu.menu-collapsed #main-menu-navigation .nav-item a span').show()
               },100)
   
-            " ><i class="fa fa-bars" style="font-size: 1.6rem;"></i></a></li>
+            " ><i class="fa fa-bars" style="font-size: 1.9rem;margin-top: 7px; "></i></a></li>
           <li class="dropdown nav-item mega-dropdown hideMob" style="padding-top: 15px;">
             <a  href="">
               
@@ -54,7 +54,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
               <a class="dropdown-item hide" href="#"><i class="ft-user"></i> تعديل الملف الشخصي</a>
-            <a class="dropdown-item" href=""><i class="ft-mail"></i>صندوق الوارد
+            <a class="dropdown-item" style="    margin-top: 5px;" href=""><i class="ft-mail"></i>صندوق الوارد
             <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow"></span>
             </a>
             <a class="dropdown-item hide" href="#"><i class="ft-check-square"></i> المهام</a>
@@ -64,12 +64,20 @@
           </div>
           </li>
           <li class="dropdown dropdown-notification nav-item hideMob">
-            <a class="nav-link nav-link-label" href=""><i class="ft-mail" style="font-size: 27px !important;margin-left: 14px;"></i>
+            <a class="nav-link nav-link-label" style="    margin-top: 5px;" href=""><i class="ft-mail" style="font-size: 27px !important;margin-left: 14px;  color: #1E9FF2!important;"></i>
               <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow"></span>
             </a>
           </li>
           
-          <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown"
+          
+          
+        </ul>
+
+        <ul class="nav navbar-nav float-right">
+          <li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+          <li class="dropdown dropdown-language nav-item" style=" display:none; margin-top: 14px;"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">{{trans('admin.languages')}}<span class="selected-language"></span></a>
             <div class="dropdown-menu" aria-labelledby="dropdown-flag">
 
@@ -81,14 +89,6 @@
 
               </div>
           </li>
-          
-        </ul>
-
-        <ul class="nav navbar-nav float-right">
-          <li class="dropdown dropdown-language nav-item hideMob">
-            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
-          </li>
-
           
         </ul>
       </div>

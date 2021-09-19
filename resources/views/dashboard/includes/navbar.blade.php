@@ -92,10 +92,10 @@
           <ul class="dropdown-menu">
 
             <li data-menu="">
-              <a class="dropdown-item" href="{{route('out_archieve')}}" data-toggle="dropdown">{{trans('archive.export_to')}}</a>
+              <a class="dropdown-item" href="{{route('out_archieve')}}" data-toggle="dropdown">{{trans('archive.out_archive')}}</a>
             </li>
             <li data-menu="">
-              <a class="dropdown-item" href="{{route('in_archieve')}}" data-toggle="dropdown">{{trans('archive.import_from')}}</a>
+              <a class="dropdown-item" href="{{route('in_archieve')}}" data-toggle="dropdown">{{trans('archive.in_archive')}}</a>
             </li>
             <li data-menu="">
               <a class="dropdown-item" href="{{route('mun_archieve')}}" data-toggle="dropdown">{{trans('archive.mun_archive')}}</a>

@@ -253,7 +253,7 @@
                 <div class="card-header" style="padding-top:0px;">
                         <h4 class="card-title">
                             <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
-                            {{trans('admin.details')}}
+                            {{trans('admin.archieve')}}
                         </h4>
                         <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
                         <div class="heading-elements" style="display: none">
