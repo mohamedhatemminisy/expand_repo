@@ -523,8 +523,10 @@
 													<input type="hidden" id="pk_i_id" name="pk_i_id" value="1" />
 														<select multiple="multiple" class="multi-select" id="my_multi_select3" name="my_multi_select3[]">
 															<optgroup label="نظام الصلاحيات"></optgroup>
-																<option value='117'selected>نقل ذمة مالية/كهرباء</option>
-																<option value='152'selected>تقرير الحرف و الصناعات	</option>
+                                                              @foreach(config('global.permissions') as $name => $value)
+																<option value='{{$name}}'selected> @lang('admin.'.$name)
+                                                                </option>
+                                                             @endforeach
 														</select>								
 													</div>
 												</div>
@@ -803,6 +805,7 @@ $.ajax({
             $( "#HiringDate" ).removeClass( "error" );
             $( "#DirectManager" ).removeClass( "error" );
             $( "#JobType" ).removeClass( "error" );
+            $( "#MobileNo1" ).removeClass( "error" );
 
        $.ajax({
           type:'POST',
@@ -850,6 +853,9 @@ $.ajax({
             }
             if(response.responseJSON.errors.DirectManager){
                 $( "#DirectManager" ).addClass( "error" );
+            }
+            if(response.responseJSON.errors.MobileNo1){
+                $( "#MobileNo1" ).addClass( "error" );
             }
 
 			Swal.fire({

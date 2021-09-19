@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\CopyTo;
 use App\Models\ArchiveType;
+use App\Models\jobLicArchieve;
 use Illuminate\Support\Facades\DB;
 class SearchController extends Controller
 {
@@ -42,10 +43,13 @@ class SearchController extends Controller
         ->select('*',DB::raw("CONCAT(title , '(الارشيف)' )AS label"))->get();
         $archiveLicense =  ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(رخص البناء ,التراخيص)' )AS label"))->get();
+        $jobLicArchieve =  jobLicArchieve::where('name', 'like', '%' . $emp_data . '%')
+        ->select('*',DB::raw("CONCAT(name , '(رخص الحرف و الصناعات)' )AS label"))->get();
+        
         $names = $equip->merge($vehicle)->merge($project)
         ->merge($admin)->merge($department)->merge($archive)
         ->merge($orgnization)->merge($specialAsset)
-        ->merge($archiveLicense)->merge($user);
+        ->merge($archiveLicense)->merge($user)->merge($jobLicArchieve);
 
         return response()->json($names);
     }

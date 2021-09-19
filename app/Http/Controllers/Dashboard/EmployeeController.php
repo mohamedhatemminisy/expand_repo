@@ -66,7 +66,7 @@ class EmployeeController extends Controller
             $admin->add_by = Auth()->user()->id;
             $admin->url = 'employee';
             $admin->email  = $request->EmailAddress;
-            $admin->password = bcrypt($request->password);
+            $admin->password = bcrypt($request->identification);
             $admin->InternalPhone = $request->InternalPhone;
             $admin->admin_id  = $request->DirectManager;
             $admin->role_id = $role->id;
