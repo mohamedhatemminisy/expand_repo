@@ -456,4 +456,25 @@ class ArchieveController extends Controller
         }
     
     }
+    // public function uploadAttach(Request $request){
+
+    //     if ($request->hasFile('formDataaaUploadFile')) {
+    //         $files=$request->file('formDataaaUploadFile');
+    //         foreach ($files as $file)
+    //         {
+    //             $url = $this->upload_image($file
+    //              , 'quipent_');
+    //             if ($url) 
+    //             {
+    //                 $file = File::create([
+    //                     'url' => $url,
+    //                     'real_name' => $file->getClientOriginalName(),
+    //                     'extension' => $file->getClientOriginalExtension(),
+    //                 ]);
+    //             }
+    //         }
+    //     return true;
+    //     }
+    
+    // }
 }
