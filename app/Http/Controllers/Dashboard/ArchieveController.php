@@ -451,14 +451,14 @@ class ArchieveController extends Controller
                 if ($url) 
                 {
                     
-                    $filed = File::create([
+                    $files[] = File::create([
                         'url' => $url,
                         'real_name' => $file->getClientOriginalName(),
                         'extension' => $file->getClientOriginalExtension(),
                     ]);
                 }
             }
-            return response()->json($filed);
+            return response()->json($files);
         }
     
     }
