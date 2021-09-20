@@ -441,18 +441,24 @@ class ArchieveController extends Controller
     }
     
     public function uploadAttach(Request $request){
-        dd($request);
 
-        if ($request->file('archive_files')) {
-        $url = $this->upload_image($request->file('archive_files')
-        , 'quipent_');
-         if ($url) {
-            $file = File::create([
-                'url' => $url,
-                'real_name' => $request->archive_files->getClientOriginalName(),
-                'extension' => $request->archive_files->getClientOriginalExtension(),
-             ]);
+        if ($request->hasFile('formDataaaUploadFile')) {
+            $files=$request->file('formDataaaUploadFile');
+            foreach ($files as $file)
+            {
+                $url = $this->upload_image($file
+                 , 'quipent_');
+                if ($url) 
+                {
+                    
+                    $filed = File::create([
+                        'url' => $url,
+                        'real_name' => $file->getClientOriginalName(),
+                        'extension' => $file->getClientOriginalExtension(),
+                    ]);
+                }
             }
+            return response()->json($filed);
         }
     
     }
