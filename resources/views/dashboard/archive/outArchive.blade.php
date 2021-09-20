@@ -215,7 +215,6 @@
     </section>
 </div>
 @include('dashboard.component.fetch_table');
-@endsection
 @section('script')
 <script>
 
@@ -485,4 +484,5 @@ $( function() {
   
 
 </script>
+@endsection
 @endsection
