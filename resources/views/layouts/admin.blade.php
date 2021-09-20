@@ -527,6 +527,47 @@ function deleteConstant(id){
                                                             
 });
 
+<<<<<<< HEAD
+=======
+
+// var SITEURL = "{{URL('/')}}";
+// function  doUploadAttach(frm){
+// 	var bar = $('.bar');
+// 	var percent = $('.percent');
+// 	console.log('1');
+
+// 	$(".progress").show()
+// 	$('#'+frm).ajaxForm({
+// 		beforeSend: function() {
+// 			var percentVal = '0%';
+// 			bar.width(percentVal)
+// 			percent.html(percentVal);
+// 			console.log('2');
+
+// 		},
+// 		uploadProgress: function(event, position, total, percentComplete) {
+// 			var percentVal = percentComplete + '%';
+// 			bar.width(percentVal)
+// 			percent.html(percentVal);
+// 			console.log('3');
+
+// 		},
+// 		complete: function(xhr) {
+// 			alert('File Has Been Uploaded Successfully');
+// 			//window.location.href = SITEURL +"/"+"ajax-file-upload-progress-bar";
+// 			console.log('4');
+
+
+// 		$(".progress").hide()
+// 		},
+// 		error: function()
+//                 {
+// 					console.log('8888');
+//                 }
+		
+// 	});
+// }
+>>>>>>> 206070f0f1d65bfb6003d5c4a9a5646439b8e543
 </script>
 
   <!-- END PAGE LEVEL JS-->
