@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\CopyTo;
 use App\Models\ArchiveType;
+use App\Models\File;
 use DB;
 use App\Http\Requests\ArchiveRequest;
 use App\Models\AttachmentType;
@@ -439,4 +440,20 @@ class ArchieveController extends Controller
         return response()->json($archive);
     }
     
+    public function uploadAttach(Request $request){
+        dd($request);
+
+        if ($request->file('archive_files')) {
+        $url = $this->upload_image($request->file('archive_files')
+        , 'quipent_');
+         if ($url) {
+            $file = File::create([
+                'url' => $url,
+                'real_name' => $request->archive_files->getClientOriginalName(),
+                'extension' => $request->archive_files->getClientOriginalExtension(),
+             ]);
+            }
+        }
+    
+    }
 }

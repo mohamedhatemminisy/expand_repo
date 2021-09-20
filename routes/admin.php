@@ -150,6 +150,7 @@ Route::group([
         Route::get('agenda_archieve','ArchieveController@agendaArchive')->name('agenda_archieve')->middleware('can:agenda_archieve');
         Route::get('agenda_report','ArchieveController@agendaReportArchive')->name('agenda_report')->middleware('can:agenda_report');
 
+        Route::post('uploadAttach','ArchieveController@uploadAttach')->name('uploadAttach');
         Route::get('licFile_archieve','ArchieveController@licFileArchive')->name('licFile_archieve')->middleware('can:licFile_archieve');
         Route::group(['prefix' => 'profile'], function () {
             Route::get('edit', 'ProfileController@editProfile')->name('edit.profile');
