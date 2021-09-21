@@ -391,7 +391,6 @@ $( function() {
         $(".loader").removeClass('hide');
         $(".form-actions").addClass('hide');
         var formData = new FormData($("#"+formDataStr)[0]);
-        console.log(formData);
         $.ajax({
             url: 'uploadAttach',
             type: 'POST',
@@ -399,10 +398,12 @@ $( function() {
             dataType:"json",
             async: true,
             success: function (data) {
-                console.log(data);
                 row='';
                 row1='';
-                if(data.status.success){
+                // var len = data.files.length;
+                console.log(data.all_files);
+                if(data){
+
                     for(j=imgCounter;j<data.img.length;j++){
             if(data.img[j].type==1 ) {
                 shortCutName=data.img[j].orgname;

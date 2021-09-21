@@ -32,12 +32,12 @@ class EmployeeController extends Controller
 
     public function store_employee(EmployeeRequest $request){
         DB::beginTransaction();
-        $role = new Role();
-        $role->permissions = json_encode($request->my_multi_select3);
-        $role->save();
-
         if($request->employee_id == null){
             $admin = new Admin();
+            $role = new Role();
+            $role->permissions = json_encode($request->my_multi_select3);
+            $role->save();
+
             $address = new Address();
             $address->area_id = $request->area_data;
             $address->city_id = $request->CityID;
@@ -83,11 +83,15 @@ class EmployeeController extends Controller
             $AdminDetail->save();
         }else{
             $admin = Admin::find($request->employee_id);
+            $role = Role::where('id',$admin->role_id)->first();
+            $role->permissions = json_encode($request->my_multi_select3);
+            $role->save();
             if ($request->file('imgPic')) {
                 $path = upload_image($request->file('imgPic'), 'emp_');
             }else{
                 $path = '';
             }
+            $admin->role_id = $role->id;
             $admin->image = url($path);
             $admin->name = $request->Name;
             $admin->identification = $request->NationalID;
@@ -108,7 +112,6 @@ class EmployeeController extends Controller
             }
             $admin->InternalPhone = $request->InternalPhone;
             $admin->admin_id  = $request->DirectManager;
-            $admin->role_id = $role->id;
             $admin->save();
             $AdminDetail = AdminDetail::where('admin_id',$admin->id)->first();
             $address = Address::where('id',$AdminDetail->address_id)->first();
