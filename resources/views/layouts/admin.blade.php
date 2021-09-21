@@ -527,6 +527,8 @@ function deleteConstant(id){
                                                             
 });
 
+<<<<<<< HEAD
+=======
 
 // var SITEURL = "{{URL('/')}}";
 // function  doUploadAttach(frm){
@@ -565,6 +567,7 @@ function deleteConstant(id){
 		
 // 	});
 // }
+>>>>>>> 206070f0f1d65bfb6003d5c4a9a5646439b8e543
 </script>
 
   <!-- END PAGE LEVEL JS-->

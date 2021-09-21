@@ -217,14 +217,11 @@
 @include('dashboard.component.fetch_table');
 @section('script')
 <script>
-
-
 $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
    $('#archive-form').submit(function(e) {
        e.preventDefault();
        let formData = new FormData(this);
@@ -261,9 +258,6 @@ $.ajaxSetup({
            }
        });
   });
-
-
-
   $( function() {
     $( ".cust_auto" ).autocomplete({
 		source: 'archive_auto_complete',
@@ -277,8 +271,6 @@ $.ajaxSetup({
         }
 	});
 });
-
-
 $( function() {
     $( ".cust" ).autocomplete({
 		source: 'archive_auto_complete',
@@ -293,7 +285,6 @@ $( function() {
            }
 	    });
     });
-
     function update($id){
         let archive_id = $id;
         $(".formDataaaFilesArea").html('');
@@ -330,7 +321,6 @@ $( function() {
             },
         });
     }
-
     function CopyRec(id){
         
 		var formData =  {'id':id};
@@ -368,7 +358,6 @@ $( function() {
 			        alert('لا يوجد بيانات')
 			},
 			error:function(){
-
 			},
 		});
     }
@@ -391,7 +380,6 @@ $( function() {
                             +'        </div>'
                             +'    </div>'
                             +'</div>')
-
     }
     function doUploadAttach(formDataStr)
     {
@@ -400,7 +388,6 @@ $( function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $(".loader").removeClass('hide');
         $(".form-actions").addClass('hide');
         var formData = new FormData($("#"+formDataStr)[0]);
@@ -412,6 +399,7 @@ $( function() {
             dataType:"json",
             async: true,
             success: function (data) {
+                console.log(data);
                 row='';
                 row1='';
                 if(data.status.success){
@@ -436,7 +424,6 @@ $( function() {
                                 +'         <div class="col-sm-12" style="height: 80px;">'
                                 +'         <a class="group1" href="'+realPath+'uploads/'+data.img[j].name+'" title="'+data.img[j].orgname+'" style="color: #74798D" >' +
                                 '                <img src="'+realPath+'uploads/'+data.img[j].name+'" title="'+data.img[j].orgname+'" id="imgSlider'+(j+1)+'" style="max-height:80px;"/></a>'
-
                                 +'           <a class="attach-close" style="color: #74798D" onclick="$(this).parent().parent().parent().remove()" ><i class="fa fa-times"></i></a>'
                                 +'             <input type="hidden" id="'+formDataStr+'imgUploads[]" name="'+formDataStr+'imgUploads[]" value="'+data.img[j].name+'">'
                                 +'             <input type="hidden" id="'+formDataStr+'orgNameList[]" name="'+formDataStr+'orgNameList[]" value="'+data.img[j].orgname+'">'
@@ -454,7 +441,6 @@ $( function() {
                     $(".loader").addClass('hide');
                     document.getElementById(""+formDataStr+"upload-file[]").value="";
                     document.getElementById(""+formDataStr+"upload-image[]").value="";
-
                     $(".group1").colorbox({rel:'group1'});
                     setTimeout(function(){
                         $(".alert-danger").addClass("hide");
@@ -482,7 +468,6 @@ $( function() {
         });
     }
   
-
 </script>
 @endsection
 @endsection

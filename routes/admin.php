@@ -134,7 +134,6 @@ Route::group([
         Route::get('archieve_report','ArchieveController@archieve_report')
         ->name('archieve_report');
 
-
         Route::get('in_archieve','ArchieveController@in_archieve')->name('in_archieve')->middleware('can:in_archieve');
         Route::get('emp_archieve','ArchieveController@emp_archieve')->name('emp_archieve')->middleware('can:emp_archieve');
         Route::get('dep_archieve','ArchieveController@dep_archieve')->name('dep_archieve')->middleware('can:dep_archieve');
