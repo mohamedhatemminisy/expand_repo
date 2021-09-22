@@ -189,5 +189,6 @@ return [
     'assets' => 'Assets',
     'archieve' => 'Archieve',
     "reports" => 'Reports',
+    'meeting_deleted' => 'Meeting deleted',
 
 ];

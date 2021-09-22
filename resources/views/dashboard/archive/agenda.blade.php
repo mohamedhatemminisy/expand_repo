@@ -32,6 +32,12 @@
                                                             aria-invalid="false"
                                                             onchange="DisplayMeeting();$('.allmember').addClass('hide');$('.meeting'+$(this).val()).removeClass('hide')">
                                                             <option disabled selected> -- اختر -- </option>
+                                                            @if(count($agendaExtention)>0)
+                                                            @foreach($agendaExtention as $agenda)
+                                                            <option value="{{$agenda->id}}">{{$agenda->name}}</option>
+
+                                                            @endforeach
+                                                            @endif
                                                             {{-- <?php if(isset($meetingNames) && !empty($meetingNames) && count($meetingNames) > 0){ ?>
                                                                 <?php foreach ($meetingNames as $key => $value){ ?>
                                                                     <option value="<?php echo $value->pk_i_id; ?>"><?php echo $value->meetingnamear; ?></option>
@@ -182,6 +188,8 @@
                                             <input type="file" class="form-control-file" id="subject1UploadFile[]"
                                                 multiple="" name="subject1UploadFile[]" onchange="doUploadAttachNew(1)"
                                                 style="display: none">
+                                                <meta name="csrf-token" content="{{ csrf_token() }}" />
+
                                             <input type="file" class="form-control-file" id="subject1UploadImage[]"
                                                 multiple="" name="subject1UploadImage[]" onchange="doUploadAttachNew(1)"
                                                 accept="image/*" style="display: none">
@@ -768,14 +776,19 @@
         } );
         
         function doUploadAttachNew(frmid){
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
             $("#fromname").val('subject'+frmid)
             $("#startUpload").val(frmid)
-            console.log(imgCounter)
             $(".loader").removeClass('hide');
             $(".form-actions").addClass('hide');
             var formData = new FormData($("#formData")[0]);
+
             $.ajax({
-                url: 'uploadAttach',
+                url: 'agendaAttach',
                 type: 'POST',
                 data: formData,
                 dataType:"json",

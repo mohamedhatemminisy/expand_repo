@@ -190,5 +190,6 @@ return [
     'assets' => 'الأصول',
     'archieve' => 'الارشيف',
     "reports" => 'التقارير',
+    'meeting_deleted' => 'تم حذف الاجتماع',
 ];
  

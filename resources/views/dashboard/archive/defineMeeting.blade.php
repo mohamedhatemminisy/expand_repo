@@ -21,17 +21,18 @@
                                     </tr>
                                 </thead>
                                 <tbody id="subTask3">
-                                    {{-- <?php $i=1;
+                                    <?php $i=1;
+                                    $meetingTitleList = App\Models\AgendaExtention::get();
                                     foreach($meetingTitleList as $row){?>
                                     <tr> 
                                         <td width="20px"><?php echo $i;$i++;?> </td>
-                                        <td><?php echo $row->meetingnamear?></td>
+                                        <td><?php echo $row->name?></td>
                                         <td width="60px">
-                                            <i class="fa fa-edit" id="trash" aria-hidden="true" style="color:#1E9FF2;padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="editConstant1(<?php echo $row->pk_i_id?>,'<?php echo $row->meetingnamear?>')"></i>
-                                            <i class="fa fa-trash" id="trash" aria-hidden="true" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="deleteCer(<?php echo $row->pk_i_id?>,'<?php echo $row->meetingnamear?>')"></i>
+                                            <i class="fa fa-edit" id="trash" aria-hidden="true" style="color:#1E9FF2;padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="editConstant1(<?php echo $row->id?>,'<?php echo $row->meetingnamear?>')"></i>
+                                            <i class="fa fa-trash" id="trash" aria-hidden="true" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="deleteCer(<?php echo $row->id?>,'<?php echo $row->meetingnamear?>')"></i>
                                         </td>
                                         </tr>
-                                    <?php }?> --}}
+                                    <?php }?> 
                                 </tbody>
                             </table>
                         </div>
@@ -43,7 +44,7 @@
                                     عنوان الاجتماع
                                 </span>
                             </div>
-                            <input type="text" id="s_name_ar1" class="form-control" placeholder=" عنوان الاجتماع" name="s_name_ar1">
+                            <input type="text" id="name_ar1" class="form-control" placeholder=" عنوان الاجتماع" name="name_ar1">
                             <input type="hidden" id="s_name_en1" class="form-control" placeholder="" name="s_name_en1">
                             <input type="hidden" id="fk_i_constant_id1" class="form-control" placeholder="Label (En)" name="fk_i_constant_id1">
                             <input type="hidden" id="fk_i_constantdet_id1" class="form-control" placeholder="Label (En)" name="fk_i_constantdet_id1">
@@ -142,7 +143,7 @@
             }
         });
         $( ".cac" ).autocomplete({
-            source: "searchEmpByName",
+            source: "searchSubscriberByName",
             minLength: 2,
             select: function( event, ui ) {
                 $("#membername").val(ui.item.label)
@@ -174,15 +175,13 @@
     } );
     
     function addMeeting(){
-                if($("#s_name_ar1").val()=='')
-                {
-                    $("#s_name_ar1").addClass('error')
-                    return;
-                }
+           $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-                $("#s_name_ar1").removeClass('error')
                 fillIn="meetingTitleName";
-                $(".loader").removeClass('hide');
                 //$(".form-actions").addClass('hide');
                 if($("#fk_i_constantdet_id1").val()==0) {
 
@@ -208,10 +207,11 @@
                     for(var i=0;i<MemberPerIDList.length;i++){
                         membersPerid.push(MemberPerIDList[i].value);
                     }
+                    // alert( $("#name_ar1").val());
 
                     var formData = {
                         //'fk_i_constant_id': $("#fk_i_constant_id1").val(),
-                        'meetingnamear': $("#s_name_ar1").val(),
+                        'name_ar1': $("#name_ar1").val(),
                         'meetingnameen': $("#s_name_en1").val(),
                         'meetingmanager': $("#meetingManager").val(),
                         'managerID': $("#managerID").val(),
@@ -229,48 +229,25 @@
                         dataType: "json",
                         async: true,
                         success: function (data) {
-                            $("#" + fillIn).children().remove();//(new Option(" Select ", ''));
-                            $("#" + fillIn).html(new Option("-- اختر --", ''));
-                            
-                            for (i = 0; i < data.meetingTitleList1.length; i++)
-                                    $("#" + fillIn).append(new Option(data.meetingTitleList[i].meetingnamear, data.meetingTitleList[i].pk_i_id));
-                            
-                            $("#subTask3").html('');
-                            for(j=0; j<data.meetingTitleList1.length;j++) {
-                                row += '<tr>'
-                                    + '<td width="20px">'
-                                    + i
-                                    + '</td>'
-                                    + '<td>'
-                                    + data.meetingTitleList1[j].meetingnamear
-                                    + '</td>'
-                                    + '<td width="40px">'
-                                    + '<i class="fa fa-edit" id="trash" aria-hidden="true" style="color:#1E9FF2;padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="editConstant1('+data.meetingTitleList1[j].pk_i_id+',\''+data.meetingTitleList1[j].meetingnamear+'\')"></i>'
-                                    + '<i class="fa fa-trash" id="trash" aria-hidden="true" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;" onclick="deleteCer('+data.meetingTitleList1[j].pk_i_id+',\''+data.meetingTitleList1[j].meetingnamear+'\')"></i>'
-                                    + '</td>'
-                                    + '</tr>'
-                                i++
+
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'success',
+                                title: '{{trans('admin.data_added')}}',
+                                showConfirmButton: false,
+                                timer: 1500
+                                })
+                                location.reload();
+                        },
+                        error: function(response) {
+                            if(response.responseJSON.errors.name_ar1){
+                                $( "#name_ar1" ).addClass( "error" );
                             }
-    
-                            $("#subTask3").html(row);
                             $(".loader").addClass('hide');
-                            //$(".form-actions").removeClass('hide');
-                            $("#s_name_ar1").val('')
-                            $("#s_name_en1").val(''),
-                            $("#meetingManager").val(''),
-                            $("#subTask2").children().remove(),
-                            $("#AddNew").modal('hide');
-                        },
-                        error: function () {
-                            $(".alert-success").addClass("hide");
-                            $(".alert-danger").removeClass('hide');
-                            $("#errMsg").text(data.status.msg)
-                            $(".loader").addClass('hide');
-                            //$(".form-actions").removeClass('hide');
-                        },
-                        /*cache: false,
-                         contentType: false,
-                         processData: false*/
+                        }
+
+
+
                     });
                 }
                 else{
@@ -299,8 +276,8 @@
                     }
                     var formData = {
                         //'fk_i_constant_id': $("#fk_i_constant_id1").val(),
-                        'pk_i_id': $("#fk_i_constantdet_id1").val(),
-                        'meetingnamear': $("#s_name_ar1").val(),
+                        'id': $("#fk_i_constantdet_id1").val(),
+                        'meetingnamear': $("#name_ar1").val(),
                         'meetingnameen': $("#s_name_en1").val(),
                         'meetingmanager': $("#meetingManager").val(),
                         'managerID': $("#managerID").val(),
@@ -342,7 +319,7 @@
 
                             $(".loader").addClass('hide');
                             //$(".form-actions").removeClass('hide');
-                            $("#s_name_ar1").val(''),
+                            $("#name_ar1").val(''),
                             $("#s_name_en1").val(''),
                             $("#meetingManager").val(''),
                             $("#subTask2").children().remove(),
@@ -387,7 +364,7 @@
     }
     
     function restModalForm(){
-        $("#s_name_ar1").val('');
+        $("#name_ar1").val('');
         $("#meetingManager").val('');
         $("#managerID").val('');
         $("#subTask2").html('');
@@ -439,7 +416,13 @@
             }
             
     function editConstant1(id,title){
-        var formData = {'pk_i_id':id};
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var formData = {'id':id};
         console.log(formData);
         $.ajax({
             url: 'getMeetingDetailsByID',
@@ -448,10 +431,11 @@
             dataType:"json",
             async: true,
             success: function (data) {
-                $("#s_name_ar1").val(data.meetingTitleList[0].meetingnamear);
-                $("#fk_i_constantdet_id1").val(data.meetingTitleList[0].pk_i_id);
-                $("#meetingManager").val(data.meetingTitleList[0].meetingmanager);
-                $("#managerID").val(data.meetingTitleList[0].managerID);
+                console.log(data);
+                $("#name_ar1").val(data.name);
+                $("#fk_i_constantdet_id1").val(data.id);
+                $("#meetingManager").val(data.admin);
+                $("#managerID").val(data.managerID);
                 $("#subTask2").html('');
                 for(j=0; j<data.meetingTitleList.length;j++) {
                     row='<tr>'
@@ -502,12 +486,17 @@
     }
             
     function deleteCer(id,title){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
                 //deleteCertification
                 fillIn=$("#ctrlToRefresh1").val();
                 if(!confirm('هل انت متاكد من حذف هذا التسجيل ؟'))
                     return
                 var formData = {
-                    'pk_i_id': id,
+                    'id': id,
                     'meetingnamear': title
                     /*'fk_i_constant_id': $("#fk_i_constant_id1").val(),*/
                 };
@@ -519,20 +508,14 @@
                     dataType: "json",
                     async: true,
                     success: function (data) {
-                        $("#" + fillIn).html(new Option(" Select ", ''));
-                        if (data.meetingTitleList.length > 0) {
-                            for (i = 0; i < data.meetingTitleList.length; i++)
-                                $("#" + fillIn).append(new Option(data.meetingTitleList[i].meetingnamear, data.meetingTitleList[i].pk_i_id));
-                        }
-                        else {
-                            //$("#"+fillIn).append(new Option(data.constList[0].s_name_ar, data.currNode[0].pk_i_id));
-                        }
-
-                        $(".loader").addClass('hide');
-
-                        //$("#QuickAdd").modal('hide');
-                        DrawCert($("#fk_i_constant_id1").val())
-                        $("#fk_i_constantdet_id1").val('0')
+                        Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: '{{trans('admin.meeting_deleted')}}',
+                        showConfirmButton: false,
+                        timer: 1500
+                        })
+                        location.reload();
                     },
                     error: function () {
                         $(".alert-success").addClass("hide");

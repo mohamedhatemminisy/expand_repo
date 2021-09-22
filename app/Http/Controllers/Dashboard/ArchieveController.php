@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\CopyTo;
 use App\Models\ArchiveType;
+use App\Models\AgendaExtention;
 use App\Models\File;
 use Session;
 use DB;
@@ -328,10 +329,11 @@ class ArchieveController extends Controller
        ,'license_type','url'));
     }
     public function agendaArchive(){
+        $agendaExtention = AgendaExtention::get();
         $type= 'agArchive';
         $url = "agenda_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.agenda',compact('type','archive_type','url'));
+        return view('dashboard.archive.agenda',compact('type','archive_type','url','agendaExtention'));
     }
     public function agendaReportArchive(){
         $type= 'agenda_report';

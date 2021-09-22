@@ -155,6 +155,25 @@ Route::group([
             Route::get('edit', 'ProfileController@editProfile')->name('edit.profile');
             Route::put('update', 'ProfileController@updateprofile')->name('update.profile');
         });
+        Route::post('agendaAttach','AgendaArchieveController@agendaAttach')->name('agendaAttach');
+        Route::get('searchEmpByName', 'AgendaArchieveController@searchEmpByName')
+        ->name('searchEmpByName');
+        Route::get('searchSubscriberByName', 'AgendaArchieveController@searchSubscriberByName')
+        ->name('searchSubscriberByName');
+        Route::post('doAddMeetingTitles','AgendaArchieveController@doAddMeetingTitles')->name('doAddMeetingTitles');
+        Route::get('generalSearch', 'AgendaArchieveController@searchSubscriberByName')
+        ->name('generalSearch');
+        Route::post('deleteMeetingTitle','AgendaArchieveController@deleteMeetingTitle')
+        ->name('deleteMeetingTitle');
+        Route::post('getMeetingDetailsByID','AgendaArchieveController@getMeetingDetailsByID')
+        ->name('getMeetingDetailsByID');
+        Route::post('doEditMeetingTitle','AgendaArchieveController@doEditMeetingTitle')
+        ->name('doEditMeetingTitle');
+        
+        
+        
+        
+
         Route::get('archieve_info', 'ArchieveController@archieve_info')->name('archieve_info');
         Route::get('archieveLic_info', 'ArchieveController@archieveLic_info')->name('archieveLic_info');
         Route::get('job_Lic_info', 'ArchieveController@job_Lic_info')->name('job_Lic_info');
