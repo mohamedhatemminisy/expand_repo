@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArchiveRequest extends FormRequest
+class MeetingTitleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,7 @@ class ArchiveRequest extends FormRequest
     public function rules()
     {
         return [
-            'customerName' => 'required',
-            // "formDataaaUploadFile"    => "nullable|array",
-            // "formDataaaUploadFile.*"  => "nullable|mimes:jpeg,png,jpg,gif
-            // ,doc,csv,xlsx,xls,docx,ppt,odt,ods,odp,svg,pdf|max:2048",
+            'name_ar1' => 'required|string',
         ];
     }
 }

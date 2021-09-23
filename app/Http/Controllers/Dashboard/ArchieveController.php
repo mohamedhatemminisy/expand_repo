@@ -16,7 +16,9 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\CopyTo;
 use App\Models\ArchiveType;
+use App\Models\AgendaExtention;
 use App\Models\File;
+use Session;
 use DB;
 use App\Http\Requests\ArchiveRequest;
 use App\Models\AttachmentType;
@@ -133,6 +135,14 @@ class ArchieveController extends Controller
         $archive->license_id =$request->BuildingTypeData;
         $archive->attachment_id =$request->AttahType;
         $archive->save();
+        $files_ids = Session::get('files_ids');
+        foreach($files_ids as $id){
+            $file = File::find($id);
+            $file->archive_id = $archive->id;
+            $file->model_name = "App\Models\ArchiveLicense";
+            $file->save();
+        }
+
         }
         if ($archive) {
             return response()->json(['success'=>trans('admin.archive_added')]);
@@ -173,28 +183,24 @@ class ArchieveController extends Controller
         $archive->attachment_id   =$request->AttahType;
         $archive->license_rating_id  =$request->lic_cat;
         $archive->save();
+        $files_ids = Session::get('files_ids');
+        foreach($files_ids as $id){
+            $file = File::find($id);
+            $file->archive_id = $archive->id;
+            $file->model_name = "App\Models\jobLicArchieve";
+            $file->save();
+        }
         }
         if ($archive) {
             return response()->json(['success'=>trans('admin.archive_added')]);
         }
     }
     public function store_archive(ArchiveRequest $request){
-        if($request->hasFile('formDataaaUploadFile')){
-            $files = $request->file('formDataaaUploadFile');
-            foreach($files as $file){
-                $new[] = url(upload_image($file, 'file_'));
-                // array_push($files_obj, $new);
-            }
-            $files = json_encode($new);
-        }else{
-            $files = null;
-        }
 
         $archive = new Archive();
         $archive->model_id =$request->customerid;
         $archive->type_id =$request->archive_type;
         $archive->name =$request->customername;
-        $archive->fileIDS =$files;
         $archive->model_name =$request->customerType;
         $archive->date =$request->msgDate;
         $archive->title =$request->msgTitle;
@@ -203,6 +209,15 @@ class ArchieveController extends Controller
         $archive->url =  $request->url;
         $archive->add_by = Auth()->user()->id;
         $archive->save();
+
+        $files_ids = Session::get('files_ids');
+        foreach($files_ids as $id){
+            $file = File::find($id);
+            $file->archive_id = $archive->id;
+            $file->model_name = "App\Models\Archive";
+            $file->save();
+        }
+
         if($request->copyToText[0] != null){
             $copyTo = new CopyTo();
             for($i= 0 ; $i< count($request->copyToText) ; $i++){
@@ -314,10 +329,11 @@ class ArchieveController extends Controller
        ,'license_type','url'));
     }
     public function agendaArchive(){
+        $agendaExtention = AgendaExtention::get();
         $type= 'agArchive';
         $url = "agenda_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.agenda',compact('type','archive_type','url'));
+        return view('dashboard.archive.agenda',compact('type','archive_type','url','agendaExtention'));
     }
     public function agendaReportArchive(){
         $type= 'agenda_report';
@@ -452,7 +468,7 @@ class ArchieveController extends Controller
                 if ($url) 
                 {
 
-                    $files[] = File::create([
+                    $uploaded_files['files'] = File::create([
                         'url' => $url,
                         'real_name' => $file->getClientOriginalName(),
                         'extension' => $file->getClientOriginalExtension(),
@@ -460,8 +476,15 @@ class ArchieveController extends Controller
 
                 }
 
+                $data[] = $uploaded_files;
             }
-            return response()->json($files);
+            foreach($data as $row){
+                $files_ids[] = $row['files']->id;
+            }
+            Session::put('files_ids', $files_ids);
+
+            $all_files['all_files'] = File::whereIn('id',$files_ids)->get();
+            return response()->json($all_files);
         }
     
     }
