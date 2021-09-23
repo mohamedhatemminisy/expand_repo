@@ -10,6 +10,8 @@ use App\Models\AdminDetail;
 use App\Http\Requests\DepartmentRequest;
 use App\Models\JobTitle;
 use Yajra\DataTables\DataTables;
+use App\Models\Archive;
+use App\Models\CopyTo;
 class DepartmentController extends Controller
 {
     public function index(){
@@ -76,6 +78,19 @@ class DepartmentController extends Controller
             $depaertment['dep_parent_manager'] = Admin::where('id', $depaertment_info->admin_id)->first()->name;
 
         }
+        $model = $depaertment['info']->model;
+        $ArchiveCount = count(Archive::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->get());
+        $CopyToCount = count(CopyTo::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->get());
+        $Archive =Archive::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->get();
+        $CopyTo = CopyTo::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->with('archive')->get();
+        $depaertment['copyTo'] = $CopyTo;
+        $depaertment['Archive'] = $Archive;
+        $depaertment['ArchiveCount'] = $ArchiveCount + $CopyToCount;
+        
 
         $employees = AdminDetail::where('department_id',$request['dep_id'])->pluck('admin_id')->toArray();
         $employees_job_titles = AdminDetail::where('department_id',$request['dep_id'])->pluck('job_title_id')->toArray();

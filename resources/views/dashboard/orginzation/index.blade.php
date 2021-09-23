@@ -292,32 +292,8 @@
                     <div class="card-content collapse show">
                         <div class="card-body">
                         @include('dashboard.component.address')		
-                            <div class="row">
-                                <div class="col-md attachs-section">
-                                    <img src="{{asset('assets/images/ico/upload.png')}}" width="40" height="40">
-                                    <span class="attach-header">{{trans('admin.attachments')}} 
-                                        <span id="attach-required">*</span>
-                                        <span class="attach-icons">
-                                            <a href="#" onclick="document.getElementById('formDataupload-file[]').click(); return false" class="attach-icon"><i class="fa fa-paperclip"></i></a>
-                                            <a href="#" onclick="document.getElementById('formDataupload-image[]').click(); return false" class="attach-icon"><i class="fa fa-picture-o"></i></a>
-                                            <a onclick="showLinkModal('formData')" class="attach-icon"><i class="fa fa-link"></i></a>
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="row attachs-body">
-                                <div class="form-group col-12 mb-2">
-                                    <input type="hidden" name="fromname" value="formData">
-                                    <input type="file" class="form-control-file" id="formDataupload-file[]" multiple="" name="formDataUploadFile[]" onchange="doUploadAttach('formData')" style="display: none" accept=".doxc, .xlsx, .pptx, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf">
-                                    <input type="file" class="form-control-file" id="formDataupload-image[]" multiple="" name="formDataUploadImage[]" onchange="doUploadAttach('formData')" accept="image/*" style="display: none">
-                                    <div class="row formDataImagesArea">
-                                    </div>
-                                    <div class="row formDataFilesArea" style="margin-left: 0px;">
-                                    </div>
-                                    <div class="row formDataLinkArea" style="margin-left: 0px;">
-                                    </div>
-                                </div>
-                            </div>
+                            
+                        
 
                             <div class="form-actions" style="border-top:0px;">
                                 <div class="text-right">

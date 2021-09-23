@@ -235,7 +235,7 @@ class ArchieveController extends Controller
         $type= 'inArchive';
         $url = "in_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
+        return view('dashboard.archive.jalArchive',compact('type','archive_type','url'));
     }
     public function mun_archieve(){
         $type= 'munArchive';
@@ -446,17 +446,20 @@ class ArchieveController extends Controller
             $files=$request->file('formDataaaUploadFile');
             foreach ($files as $file)
             {
+
                 $url = $this->upload_image($file
                  , 'quipent_');
                 if ($url) 
                 {
-                    
+
                     $files[] = File::create([
                         'url' => $url,
                         'real_name' => $file->getClientOriginalName(),
                         'extension' => $file->getClientOriginalExtension(),
                     ]);
+
                 }
+
             }
             return response()->json($files);
         }

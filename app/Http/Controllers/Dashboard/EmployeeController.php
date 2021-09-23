@@ -14,6 +14,8 @@ use App\Models\Area;
 use App\Models\Region;
 use App\Models\AdminDetail;
 use App\Models\Department;
+use App\Models\Archive;
+use App\Models\CopyTo;
 use App\Http\Requests\EmployeeRequest;
 use Yajra\DataTables\DataTables;
 use DB;
@@ -48,7 +50,7 @@ class EmployeeController extends Controller
             if ($request->file('imgPic')) {
                 $path = upload_image($request->file('imgPic'), 'emp_');
             }else{
-                $path = '';
+                $path = public_path('assets/images/ico/user.png');
             }
             $admin->model = "App\Models\Admin";
             $admin->image  = url($path);
@@ -155,6 +157,20 @@ class EmployeeController extends Controller
     public function emp_info(Request $request)
     {
         $admin['info'] = Admin::find($request['emp_id']);
+
+        $model = $admin['info']->model;
+        $ArchiveCount = count(Archive::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->get());
+        $CopyToCount = count(CopyTo::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->get());
+        $Archive =Archive::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->get();
+        $CopyTo = CopyTo::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->with('archive')->get();
+        $admin['copyTo'] = $CopyTo;
+        $admin['Archive'] = $Archive;
+        $admin['ArchiveCount'] = $ArchiveCount + $CopyToCount;
+
         $admin['details'] = AdminDetail::where('admin_id',$request['emp_id'])->first();
         $admin['job_title'] = JobTitle::where('id',$admin['details']->job_title_id )->first()->name;
         $admin['job_type'] = JobType::where('id',$admin['details']->job_type_id )->first()->name;
