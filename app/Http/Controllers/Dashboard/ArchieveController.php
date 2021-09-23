@@ -235,7 +235,7 @@ class ArchieveController extends Controller
         $type= 'inArchive';
         $url = "in_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.jalArchive',compact('type','archive_type','url'));
+        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
     }
     public function mun_archieve(){
         $type= 'munArchive';
