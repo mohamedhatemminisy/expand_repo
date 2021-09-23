@@ -31,6 +31,8 @@ Route::group([
         Route::post('store_settings', 'SettingsController@store_settings')->name('store_settings');
         Route::post('state', 'SettingsController@state')->name('state');
         Route::post('area', 'SettingsController@area')->name('area');
+        Route::get('Organization_info', 'SettingsController@Organization_info')->name('Organization_info');
+
 
         Route::get('employee', 'EmployeeController@index')->name('employee')->middleware('can:employee');
         Route::get('employee/id/{id}', 'EmployeeController@index');

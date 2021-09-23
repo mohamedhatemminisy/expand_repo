@@ -68,7 +68,7 @@
             {{trans('admin.project_start_date')}}
             </span>
                                         </div>
-                                        <input type="date" id="dateStart" name="dateStart" data-mask="00/00/0000" maxlength="10" class="form-control eng-sm singledate valid " placeholder="dd/mm/yyyy" aria-describedby="basic-addon1" autocomplete="off">
+                                        <input type="text" id="dateStart" name="dateStart" data-mask="00/00/0000" maxlength="10" class="form-control eng-sm singledate valid " placeholder="dd/mm/yyyy" aria-describedby="basic-addon1" autocomplete="off">
 
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
             {{trans('admin.project_end_date')}}
             </span>
                                         </div>
-                                        <input type="date" id="dateEnd" name="dateEnd" class="form-control eng-sm singledate valid" data-mask="00/00/0000" autocomplete="off" maxlength="10" placeholder="dd/mm/yyyy" aria-describedby="basic-addon1">
+                                        <input type="text" id="dateEnd" name="dateEnd" class="form-control eng-sm singledate valid" data-mask="00/00/0000" autocomplete="off" maxlength="10" placeholder="dd/mm/yyyy" aria-describedby="basic-addon1">
 
                                     </div>
                                 </div>
@@ -368,124 +368,7 @@
                 </div>
             
             </div>
-            <div class="card" style="display:none">
-                <div class="card-header">
-                    <h4 class="card-title"><img src="https://db.expand.ps/images/sponsor.png" width="32" height="32"> المقاول</h4>
-                    <!-- <a class="heading-elements-toggle">
-                        <i class="ft-align-justify font-medium-3"></i></a> -->
-                    <div class="heading-elements" style="display: none;">
-                        <ul class="list-inline mb-0">
-                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                            <li><a data-action="close"><i class="ft-x"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-content collapse show">
-                    <div class="card-body">
-
-                        <div class="row">
-                            <table style=" margin-left: 2% !important;width:100%; margin-top: 0;" class="detailsTB table">
-                                <tbody>
-                                    <tr>
-                                    <th scope="col">مكتب الهندسة</th>
-                                    <th scope="col">الشخص المسؤول</th>
-                                    <th scope="col"></th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <select type="text" id="EngOffice" name="EngOffice[]" class="form-control" onchange="getOfficeInfo($(this).val(),$('#pinc7'))" style="padding-right: 0 !important;padding-left: 0rem !important;">
-                                            <option> - </option>
-                                                                                                                <option value="1"> مكتب كنان الهندسي </option>
-                                                                                                                <option value="2"> مكتب حمزة  </option>
-                                                                                                                <option value="3"> مكتب الهدى الهندسي </option>
-                                                                                                                <option value="4"> مكتب الأحمد </option>
-                                                                                                                <option value="5"> مكتب x </option>
-                                                                                                                <option value="6"> مكتب فلسطين للمساحة والهندسة والخدمات العقارية  </option>
-                                                                                                                <option value="7"> مكتب زهراء للمساحة  </option>
-                                                                                                                <option value="8"> مكتب المهندس وائل  </option>
-                                                                                                                <option value="9"> مكتب السلام للمحاسبة  </option>
-                                                                                                                <option value="10"> مكتب السلام الهندسي  </option>
-                                                                                                                <option value="11"> مكتب النجاح الهندسي  </option>
-                                                                                                                <option value="12"> مكتب الكرمل للمساحة  </option>
-                                                                                                                <option value="13"> مكتب الوفاء الهندسي  </option>
-                                                                                                                <option value="14"> مكتب الحنبلي  </option>
-                                                                                                                <option value="15"> مكتب العودة  </option>
-                                                                                                                <option value="16"> مكتب عتمة الهندسي  </option>
-                                                                                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text" id="pinc7" name="pinc7" class="form-control alphaFeild" placeholder="" aria-describedby="basic-addon1" style="    padding-left: 10px !important;padding-right: 0 !important;">
-                                    </td>
-                                    <td>
-                                        <i class="fas fa-plus-circle" id="plusElement2" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color: #1E9FF2;font-size: 15pt;"></i>
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                                <tbody id="other2">
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <div class="input-group" style=" width: 96% !important;">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                    ملاحظات
-                                                    </span>
-                                                </div>
-                                                <textarea type="text" id="NoteAR" class="form-control" placeholder="ادخل ملاحظاتك هنا" name="NoteAR" style="height: 35px;"></textarea>
-                                                <div class="input-group-append hidden-xs hidden-sm">
-                                                    <span class="input-group-text input-group-text2" style="color:#ffffff">
-                                                    <i class="fa fa-external-link-alt"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md attachs-section">
-                                <img src="https://db.expand.ps/images/upload.png" width="40" height="40">
-                                <span class="attach-header">مرفقات
-                                <span id="attach-required">*</span>
-                                <span class="attach-icons">
-                                    <a href="#" onclick="document.getElementById('formDataupload-file[]').click(); return false" class="attach-icon"><i class="fas fa-paperclip"></i></a>
-                                    <a href="#" onclick="document.getElementById('formDataupload-image[]').click(); return false" class="attach-icon"><i class="far fa-image"></i></a>
-                                    <a onclick="showLinkModal('formData')" class="attach-icon"><i class="fas fa-link"></i></a>
-                                </span>
-                            </span>
-                            </div>
-                        </div>
-                        <div class="row attachs-body">
-                            <div class="form-group col-12 mb-2">
-                                <input type="hidden" name="fromname" value="formData">
-                                <input type="file" class="form-control-file" id="formDataupload-file[]" multiple="" name="formDataUploadFile[]" onchange="doUploadAttach('formData')" style="display: none" accept=".doxc, .xlsx, .pptx, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf">
-                                <input type="file" class="form-control-file" id="formDataupload-image[]" multiple="" name="formDataUploadImage[]" onchange="doUploadAttach('formData')" accept="image/*" style="display: none">
-                                <div class="row formDataImagesArea">
-                                </div>
-                                <div class="row formDataFilesArea" style="margin-left: 0px;">
-                                </div>
-                                <div class="row formDataLinkArea" style="margin-left: 0px;">
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
+            
             <div class="form-actions" style="border-top:0px;">
                 <div class="text-right">
                     <button class="btn btn-primary save-data">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>

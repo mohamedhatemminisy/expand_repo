@@ -11,6 +11,8 @@ use App\Models\Address;
 use App\Models\SettingTranslation;
 use Illuminate\Http\Request;
 use DB;
+use App\Models\Archive;
+use App\Models\CopyTo;
 
 class SettingsController extends Controller
 {
@@ -19,6 +21,9 @@ class SettingsController extends Controller
         $setting = Setting::first();
         $address = Address::where('id',$setting->address_id)->first();
         $city = City::get();
+
+        
+
         return view('dashboard.setting.index',compact('setting','city','address')); 
     }
 
@@ -45,7 +50,6 @@ class SettingsController extends Controller
     }
 
     public function store_settings(Request $request){
-
         $address = new Address();
         $address->area_id = $request->area_data;
         $address->city_id = $request->CityID;
@@ -53,13 +57,14 @@ class SettingsController extends Controller
         $address->details = $request->AddressDetails;
         $address->notes = $request->Note;
         $address->save();
-        
         $setting = Setting::first();
         if($setting){
-            if ($request->has('logo')) {
-                $fileName = upload_image($request->file('logo'), 'logo_');
+            if ($request->file('logo')) {
+                $path = upload_image($request->file('logo'), 'emp_');
+            }else{
+                $path = '';
             }
-            $setting->logo = $fileName;
+            $setting->logo = url($path);
             $setting->phone_one = $request->phone_one;
             $setting->phone_two = $request->phone_two;
             $setting->email = $request->email;
@@ -91,10 +96,12 @@ class SettingsController extends Controller
 
         }else{
             $setting =new Setting();
-            if ($request->has('logo')) {
-                $fileName = upload_image($request->file('logo'), 'logo_');
+            if ($request->file('logo')) {
+                $path = upload_image($request->file('logo'), 'emp_');
+            }else{
+                $path = public_path('assets/images/ico/user.png');
             }
-            $setting->logo = $fileName;
+            $setting->logo = url($path);
             $setting->phone_one = $request->phone_one;
             $setting->phone_two = $request->phone_two;
             $setting->email = $request->email;
@@ -128,5 +135,14 @@ class SettingsController extends Controller
         return response()->json($setting);
     }
     
+    public function Organization_info(Request $request)
+    {
+
+        $ArchiveCount = count(Archive::where('type','munArchive')->get());
+        $Archive =Archive::where('type','munArchive')->get();
+        $Archivelist['Archive'] = $Archive;
+        $Archivelist['ArchiveCount'] = $ArchiveCount;
+        return response()->json($Archivelist);
+    }
 
 }

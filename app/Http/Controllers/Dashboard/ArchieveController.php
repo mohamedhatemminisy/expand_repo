@@ -462,16 +462,20 @@ class ArchieveController extends Controller
             $files=$request->file('formDataaaUploadFile');
             foreach ($files as $file)
             {
+
                 $url = $this->upload_image($file
                  , 'quipent_');
                 if ($url) 
                 {
+
                     $uploaded_files['files'] = File::create([
                         'url' => $url,
                         'real_name' => $file->getClientOriginalName(),
                         'extension' => $file->getClientOriginalExtension(),
                     ]);
+
                 }
+
                 $data[] = $uploaded_files;
             }
             foreach($data as $row){

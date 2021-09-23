@@ -1,4 +1,4 @@
-@if ($type=="subscriber"||$type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org')
+@if ($type=="subscriber"||$type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org'||$type == 'employee'||$type == 'depart')
 
 <div class="modal fade text-left" id="CertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
 aria-hidden="true">
@@ -212,7 +212,7 @@ aria-hidden="true">
       </div>
   </div>
 </div>
-@elseif ($type=="project")
+@elseif ($type=="project"||$type=="orgnization")
 <div class="modal fade text-left" height="500px" id="OrgArchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="display: none;" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" >
@@ -249,7 +249,7 @@ aria-hidden="true">
 		</div>
 	</div>
 </div>
-@elseif ($type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org')
+@elseif ($type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org'||$type == 'employee'||$type == 'depart')
   <div class="modal fade text-left" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
     <div class="modal-dialog"  role="document">
       <div class="modal-content">
@@ -364,7 +364,7 @@ function drawTablesArchive($archives,$copyTo,$archivesLic)
 function drawTablesArchive($archives,$copyTo)
 @endif
 {
-    @if ($type=="subscriber"||$type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org')
+    @if ($type=="subscriber"||$type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org'||$type == 'employee'||$type == 'depart')
     if ( $.fn.DataTable.isDataTable( '.SaderTbla' ) ) {
         $(".SaderTbla").dataTable().fnDestroy();
         $('#msgList1').empty();
@@ -392,6 +392,7 @@ function drawTablesArchive($archives,$copyTo)
     var s=1;
     var w=1;
     var c=1,p=1,lc=1,lf=1;
+    var typeArray = { "outArchive": '{{trans('archive.out_archive')}}', "inArchive": '{{trans('archive.in_archive')}}',"projArchive": '{{trans('archive.proj_archive')}}',"munArchive": '{{trans('archive.mun_archive')}}',"empArchive": '{{trans('archive.emp_archive')}}',"depArchive": '{{trans('archive.dep_archive')}}',"assetsArchive": '{{trans('archive.assets_archive')}}',"citArchive": '{{trans('archive.cit_archive')}}',"licArchive": '{{trans('archive.lic_archive')}}',"licFileArchive": '{{trans('archive.licFile_archive')}}'}; 
     $archives.forEach(archive => {
         
         if(archive.type=="outArchive")
@@ -458,7 +459,7 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+p+"</td>"+
                 "<td>"+archive.serisal+"</td>"+
                 "<td>"+archive.title+"</td>"+
-                "<td>"+archive.type+"</td>"+
+                "<td>"+typeArray[archive.type]+"</td>"+
                 "<td>"+archive.date+"</td>"+
                 "<td>";
                 attach='';
@@ -927,7 +928,7 @@ function drawTablesArchive($archives,$copyTo)
                     });
 
 
-  @elseif ($type=="project")
+  @elseif ($type=="project"||$type=="orgnization")
   if ( $.fn.DataTable.isDataTable( '.archTbl' ) ) {
     $(".archTbl").dataTable().fnDestroy();
             $('#msgRList1').empty();
@@ -941,7 +942,7 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+archive.serisal+"</td>"+
                 "<td>"+archive.title+"</td>"+
                 "<td>"+archive.date+"</td>"+
-                "<td>"+archive.type+"</td>"+
+                "<td>"+typeArray[archive.type]+"</td>"+
                 "<td>";
                 attach='';
                 var i=1;
@@ -1024,7 +1025,7 @@ function drawTablesArchive($archives,$copyTo)
                     }
         });
 
-    @elseif ($type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org')
+    @elseif ($type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type == 'equip'||$type == 'org'||$type == 'employee'||$type == 'depart')
     var s=1;
     var w=1,p=1,c=1;
     
@@ -1095,7 +1096,7 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+p+"</td>"+
                 "<td>"+archive.serisal+"</td>"+
                 "<td>"+archive.title+"</td>"+
-                "<td>"+archive.type+"</td>"+
+                "<td>"+typeArray[archive.type]+"</td>"+
                 "<td>"+archive.date+"</td>"+
                 "<td>";
                 attach='';

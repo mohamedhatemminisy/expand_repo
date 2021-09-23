@@ -1,10 +1,9 @@
 
 @extends('layouts.admin')
 @section('content')
-
-
 <section class="horizontal-grid" id="horizontal-grid">
 <form id="ajaxform">
+    @csrf  
     <div class="row white-row">
         <div class="col-sm-12 col-lg-6 col-md-12">
             <div class="card leftSide">
@@ -96,8 +95,9 @@
                                 </div>
 
                                 <div class="col-sm-12 col-md-12 col-lg-4">
-                                    <img src="https://db.expand.ps/uploads/16232479351317.png" id="userProfileImg" style="width:100%;cursor:pointer;max-height: 150px;" onclick="document.getElementById('formDataimgPic').click(); return false">
-                                    <input type="hidden" id="userimgpath" name="userimgpath" value="16232479351317.png">
+                                    <img id="userProfileImg" src="https://db.expand.ps/uploads/16232479351317.png" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
+                                    <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
+                                    <input type="hidden" style="display: none" id="userimgpath" name="userimgpath">
                                 </div>
                                 <div class="col-lg-8 col-md-12 pr-0 pr-s-12">
                                     <div class="row">
@@ -122,8 +122,6 @@
                                                     </span>
                                                     </div>
                                                     <input type="text" id="fax" name="fax" class="form-control noleft" maxlength="9" placeholder="090000000" aria-describedby="basic-addon1" value="{{$setting->fax}}">
-
-
                                                 </div>
                                             </div>
                                         </div>
@@ -149,7 +147,27 @@
                     </div>
                 </div>
                 <hr>
-
+                <div class="card-header" style="padding-top:0px;">
+                    <h4 class="card-title">
+                        <img src="{{ asset('assets/images/ico/msg.png') }}" width="32" height="32"> 
+                    الأرشيف
+                    </h4>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body" style="padding-bottom: 0px;">
+                        <div class="row" style="text-align: center">
+                            <div class="col-md-2 w-s-50" style="padding: 0px;">
+                                <div class="form-group">
+                                    <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#OrgArchModal').modal('show')" style="cursor:pointer">
+                                    <div class="form-group">
+                                        <a onclick="$('#OrgArchModal').modal('show')" style="color:#000000"> {{trans('admin.archieve')}} 
+                                        <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-header" style="padding-top:0px;">
                     <h4 class="card-title">
                         {{trans('admin.storage')}}
@@ -405,100 +423,9 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                    <div class="row">
-                            <div class="col-md-4" style="padding-left:0px;">
-                                <div class="row">
-                                    <div class="form-group col-10" style="padding-left:0px;">
-    
-                                        <select id="CityID" name="CityID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),8,'TownID')">
-                                            <option disabled> -- {{trans('admin.city')}} --</option>     
-                                            @foreach($city as $cit)
-                                                <option  value="{{$cit->id}}">  {{$cit->name}} </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="input-group-append col-2" onclick="QuickAdd(10,'PositionID','City')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
-                                        <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4" style="padding-left:0px;">
-                                <div class="row">
-                                    <div class="form-group col-10" style="padding-left:0px;">
-                                        <select id="area_data" name="TownID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),9,'AreaID')">
-                                            <option disabled>   {{trans('admin.area')}} </option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group-append col-2" onclick="QuickAdd(33,$('#CityID').find(':selected').val(),'Area')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
-                                        <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4" style="padding-left:0px;">
-                                <div class="row">  
-                                    <div class="form-group col-10" style="padding-left:0px;">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <select id="region_data" name="AreaID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),10,'NeighborID')">
-                                                <option value="0" disabled>   {{trans('admin.region')}}  </option>                                                                         
-                                                </select>
-                                        </div>
-                                    </div>
-                                    <div class="input-group-append col-2" onclick="QuickAdd(77,$('#area_data').find(':selected').val(),'Resion')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
-                                        <span class="input-group-text input-group-text2">
-                                            <i class="fa fa-external-link"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="input-group" style="width: 98% !important;">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">
-                                            {{trans('admin.address_details')}}
-                                            </span>
-                                        </div>
-                                        <textarea type="text" id="AddressDetails" class="form-control" 
-                                        placeholder="{{trans('admin.address_details')}}" name="AddressDetails"
-                                         style="height: 40px;">{{$address->details}}</textarea>
-                                        <div class="input-group-append hidden-xs hidden-sm">
-                                        <span class="input-group-text input-group-text2" style="color:#ffffff">
-                                        <i class="fa fa-external-link-alt"></i>
-                                        </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="input-group" style="width: 98% !important;">
-                                        <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                {{trans('admin.notes')}}
-                                                </span>
-                                        </div>
-                                        <textarea type="text" id="Note" class="form-control"
-                                         placeholder="{{trans('admin.notes')}}" name="Note" 
-                                         style="height: 40px;">{{$address->notes}}</textarea>
-                                        <div class="input-group-append hidden-xs hidden-sm">
-                                            <span class="input-group-text input-group-text2" style="color:#ffffff">
-                                            <i class="fa fa-external-link-alt"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                        <div class="form-actions" style="border-top:0px;">
+                        @include('dashboard.component.address')	
+                        
+                        <div class="form-actions" style="border-top:0px;">
                             <div class="text-right">
                                 <button class="btn btn-primary save-data">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
                                 <button type="reset" class="btn btn-warning"> {{trans('admin.reset')}} <i class="ft-refresh-cw position-right"></i></button>
@@ -510,8 +437,9 @@
         </div>
     </div>
 </form>
+<?php  $type="orgnization";  ?>
+@include('dashboard.component.archive_table');
 </section>
-    @stop
 @section('script')
 <script>
 $(document).ready(function () {
@@ -523,7 +451,7 @@ $(document).ready(function () {
       let name_en = $("input[name=name_en]").val();
       let phone_one = $("input[name=phone_one]").val();
       let phone_two = $("input[name=phone_two]").val();
-      let userimgpath = $("input[name=userimgpath]").val();
+      let userimgpath = $("input[name=imgPic]").val(); 
       let website = $("input[name=website]").val();
       let fax = $("input[name=fax]").val();
       let email = $("input[name=email]").val();
@@ -552,10 +480,12 @@ $(document).ready(function () {
       var AddressDetails = $('#AddressDetails').val();
       var Note = $('#Note').val();
       var _token ='{{csrf_token()}}';
-
+console.log(userimgpath);
       $.ajax({
         url: "store_settings",
         type:"POST",
+        contentType: false,
+           processData: false,
         data:{
             name_ar:name_ar,
             name_en:name_en,
@@ -678,7 +608,23 @@ $.ajax({
          },
         });
     });
+    
+    $( function() {
+            $.ajax({
+            type: 'get', // the method (could be GET btw)
+            url: "Organization_info",
+            success:function(response){
+                $("#msgStatic").html(response.ArchiveCount);
+                drawTablesArchive(response.Archive,[]);
+                },
+			});
+
+        
+    });
+
 
 });
+   
 </script>
+@endsection
 @endsection

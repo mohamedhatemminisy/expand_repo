@@ -82,7 +82,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4" style="text-align: center;">
-                                                <img id="userProfileImg" src="https://db.expand.ps/images/user.png" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
+                                                <img id="userProfileImg" src="{{ asset('assets/images/ico/user.png') }}" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
                                                 <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
                                                 <input type="hidden" id="userimgpath" name="userimgpath">
                                             </div>
@@ -496,13 +496,38 @@
                 <div class="card-content collapse show">
                     <div class="card-body">
                     @include('dashboard.component.address')	
-                    @include('dashboard.component.archive_table')	
+                    <div class="card-header" style="padding-top:0px;">
+                        <h4 class="card-title">
+                            <img src="{{ asset('assets/images/ico/msg.png') }}" width="32" height="32"> 
+                        الأرشيف
+                        </h4>
+                    </div>
+                    <div class="card-content collapse show">
+                        <div class="card-body" style="padding-bottom: 0px;">
+                            <div class="row" style="text-align: center">
+                                    <div class="col-md-2 w-s-50" style="padding: 0px;">
+                                        <div class="form-group">
+                                            <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#CertModal').modal('show')" style="cursor:pointer">
+                                            <div class="form-group">
+                                                <a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}} 
+                                                <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
 						<div class="col-sm-12">
 							<div class="card">
 								<div class="card-header">
 									<h4 class="card-title" style="padding-bottom: 10px !important;padding-top: 5px;">			
-										<i class="fa fa-key" style="color:#4267B2"></i> &nbsp;قائمة الصلاحيات									</h4>
-									<a class="heading-elements-toggle">
+										<i class="fa fa-key" style="color:#4267B2"></i> 									
+                                        <a onclick="$('#salahiat').toggleClass('show');">
+                                            &nbsp;قائمة الصلاحيات
+                                        </a>
+                                    </h4>
+                                        
+                                        <a class="heading-elements-toggle">
 									    <i class="ft-align-justify font-medium-3">
 									        
 									    </i>
@@ -513,7 +538,7 @@
 										</a>
 									</div>
 								</div>
-								<div class="card-content collapse show" >
+								<div class="card-content collapse " id="salahiat">
 									<div class="card-body" style="padding-bottom: 0px;">
 										<div class="form-body">
 
@@ -557,6 +582,7 @@
   </form>
 </section>
 <?php  $type=$types;  ?>
+@include('dashboard.component.archive_table');
 @include('dashboard.component.fetch_table');
 
 
@@ -648,6 +674,9 @@ $( function() {
             $('#EmailAddress').val(response.info.email);
             $("#DepartmentID").val(response.info.department_id);
             $('#userProfileImg').attr('src', response.info.image);
+            $("#msgStatic").html(response.ArchiveCount);
+            drawTablesArchive(response.Archive,response.copyTo);
+
             $("select#Position option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });
@@ -708,6 +737,8 @@ function update($id)
             $('#EmailAddress').val(response.info.email);
             $("#DepartmentID").val(response.info.department_id);
             $('#userProfileImg').attr('src', response.info.image);
+            $("#msgStatic").html(response.ArchiveCount);
+            drawTablesArchive(response.Archive,response.copyTo);
             $("select#Position option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });

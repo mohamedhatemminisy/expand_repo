@@ -409,33 +409,26 @@
 											</div>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-md attachs-section">
-											<img src="{{asset('assets/images/ico/upload.png')}}" width="40" height="40">
-											<span class="attach-header">{{trans('admin.attachements')}}
-			                              <span id="attach-required">*</span>
-			                              <span class="attach-icons">
-	                                        <a href="#" onclick="document.getElementById('formDataupload-file[]').click(); return false" class="attach-icon"><i class="fa fa-paperclip"></i></a>
-	                                        <a href="#" onclick="document.getElementById('formDataupload-image[]').click(); return false" class="attach-icon"><i class="fa fa-image"></i></a>
-	                						<a onclick="showLinkModal('formData')" class="attach-icon"><i class="fa fa-link"></i></a>
-	                  						</span>
-                    					</span>
-										</div>
+									
+									<div class="card-header" style="padding-top:0px;">
+										<h4 class="card-title">
+											<img src="{{ asset('assets/images/ico/msg.png') }}" width="32" height="32"> 
+										الأرشيف
+										</h4>
 									</div>
-									<div class="row attachs-body">
-										<div class="form-group col-12 mb-2">
-											<input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()">
-											<input type="hidden" name="fromname" value="formData">
-											<input type="file" class="form-control-file" id="formDataupload-file[]" multiple="" name="formDataUploadFile[]" onchange="doUploadAttach('formData')" 
-											style="display: none" accept=".doxc, .xlsx, .pptx, application/msword, application/vnd.ms-excel,
-											 application/vnd.ms-powerpoint,text/plain, application/pdf">
-											<input type="file" class="form-control-file" id="formDataupload-image[]" multiple="" name="formDataUploadImage[]" onchange="doUploadAttach('formData')" accept="image/*" style="display: none">
-											<div class="row formDataImagesArea">
-											</div>
-											<div class="row formDataFilesArea" style="margin-left: 0px;">
-											</div>
-											<div class="row formDataLinkArea" style="margin-left: 0px;">
-											</div>
+									<div class="card-content collapse show">
+										<div class="card-body" style="padding-bottom: 0px;">
+											<div class="row" style="text-align: center">
+													<div class="col-md-2 w-s-50" style="padding: 0px;">
+														<div class="form-group">
+															<img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#CertModal').modal('show')" style="cursor:pointer">
+															<div class="form-group">
+																<a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}} 
+																<span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
+															</div>
+														</div>
+													</div>
+												</div>
 										</div>
 									</div>
 
@@ -455,7 +448,7 @@
                 </div>
 				</form>
             </section>
-
+@include('dashboard.component.archive_table');
 @include('dashboard.component.fetch_table');
 @stop
 @section('script')
@@ -482,6 +475,8 @@ $( function() {
             $('#phone').val(response.info.phone);
             $('#extphone').val(response.info.extphone);
             $('#inChargeLink').val(response.dep_parent_manager);
+			$("#msgStatic").html(response.ArchiveCount);
+            drawTablesArchive(response.Archive,response.copyTo);
             $("select#LinkDept option")
                  .each(function() { this.selected = (this.text == response.dep_parent); 
             });
@@ -529,6 +524,8 @@ function update($id)
             $('#phone').val(response.info.phone);
             $('#extphone').val(response.info.extphone);
             $('#inChargeLink').val(response.dep_parent_manager);
+			$("#msgStatic").html(response.ArchiveCount);
+            drawTablesArchive(response.Archive,response.copyTo);
             $("select#LinkDept option")
                  .each(function() { this.selected = (this.text == response.dep_parent); 
             });
