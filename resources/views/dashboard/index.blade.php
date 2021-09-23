@@ -16,7 +16,7 @@
 			<div class="col-md-4">
 			</div>
 			<div class="col-md-4">
-				&nbsp;<input id="searchContent" name="searchContent" class="form-control round ac1 hideMob ui-autocomplete-input" placeholder="بحث" style="text-align: center;" autocomplete="off">
+				&nbsp;<input id="searchContent" name="searchContent" class="form-control round ac1 hideMob full_search ui-autocomplete-input" placeholder="بحث" style="text-align: center;" autocomplete="off">
 			</div>
 			<div class="col-md-4">
 			</div>
