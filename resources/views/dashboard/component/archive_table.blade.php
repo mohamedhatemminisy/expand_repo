@@ -394,7 +394,7 @@ function drawTablesArchive($archives,$copyTo)
     var c=1,p=1,lc=1,lf=1;
     var typeArray = { "outArchive": '{{trans('archive.out_archive')}}', "inArchive": '{{trans('archive.in_archive')}}',"projArchive": '{{trans('archive.proj_archive')}}',"munArchive": '{{trans('archive.mun_archive')}}',"empArchive": '{{trans('archive.emp_archive')}}',"depArchive": '{{trans('archive.dep_archive')}}',"assetsArchive": '{{trans('archive.assets_archive')}}',"citArchive": '{{trans('archive.cit_archive')}}',"licArchive": '{{trans('archive.lic_archive')}}',"licFileArchive": '{{trans('archive.licFile_archive')}}'}; 
     $archives.forEach(archive => {
-        
+
         if(archive.type=="outArchive")
            { $row="<tr>"+
                 "<td>"+s+"</td>"+
@@ -403,23 +403,27 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+archive.date+"</td>"+
                 "<td>";
                 attach='';
-                var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
+                if(archive.files.length>0){
+                    console.log(archive.files.length);
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                        shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' ;
+                    }
+                    $row += attach;
+                var attach='';
+                }
                 
-               
                 $row += "</td></tr>";
             $('#msgList1').append($row)
             s++;
@@ -432,24 +436,29 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+archive.title+"</td>"+
                 "<td>"+archive.date+"</td>"+
                 "<td>";
-                attach='';
-                var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
-                
-               
+                    attach='';
+                    if(archive.files.length>0){
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>';
+                                
+                    }
+                    $row += attach;   
+                var attach='';    
+                }
+                         
                 $row += "</td></tr>";
             $('#msgRList1').append($row)
             w++;
@@ -462,24 +471,29 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+typeArray[archive.type]+"</td>"+
                 "<td>"+archive.date+"</td>"+
                 "<td>";
-                attach='';
-                var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
-                
-               
+                    attach='';
+                    if(archive.files){
+                    var j=0;
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    var attach='';
+                }
+
                 $row += "</td></tr>";
             $('#msgOList11').append($row)
             p++;
@@ -662,7 +676,6 @@ function drawTablesArchive($archives,$copyTo)
                     }
     });
     @if ($type=="subscriber")
-    console.log($archivesLic);
         $archivesLic.forEach(archive => {
            if(archive.type=="licArchive")
            { $row="<tr>"+
@@ -671,24 +684,30 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+archive.license_id+"</td>"+
                 "<td>"+archive.license_type+"</td>"+
                 "<td>";
-                attach='';
-                var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
+                    attach='';
+                    if(archive.files){
+                    var j=0;
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    attach='';
+                }
                 
-               
+                      
                 $row += "</td></tr>";
             $('#licList').append($row)
             lc++;
@@ -700,22 +719,28 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+archive.license_id+"</td>"+
                 "<td>"+archive.license_type+"</td>"+
                 "<td>";
-                attach='';
-                var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
+                    attach='';
+                    if(archive.files){
+                    var j=0;
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    attach='';
+                }
                 
                
                 $row += "</td></tr>";
@@ -846,22 +871,28 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+copy.archive.name+"</td>"+
                 "<td>"+copy.archive.date+"</td>"+
                 "<td>";
-                attach='';
-                var i=1;
-                if(copy.archive.fileIDS&&typeof(copy.archive.fileIDS)=="object"){ 
-                copy.archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
+                    attach='';
+                    if(archive.files){
+                    var j=0;
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    attach='';
+                }
                 
                
                 $row += "</td></tr>";
@@ -936,7 +967,6 @@ function drawTablesArchive($archives,$copyTo)
             }
         var proj=1
         $archives.forEach(archive => {
-          console.log(archive);
            $row="<tr>"+
                 "<td>"+proj+"</td>"+
                 "<td>"+archive.serisal+"</td>"+
@@ -946,20 +976,27 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>";
                 attach='';
                 var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
+                if(archive.files){
+                    var j=0;
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    attach='';
+                }
                 
                
                 $row += "</td></tr>";
@@ -1038,23 +1075,28 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+archive.title+"</td>"+
                 "<td>"+archive.date+"</td>"+
                 "<td>";
-                attach='';
-                var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
-                
+                     attach='';
+                    if(archive.files){
+                    var j=0;
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    attach='';
+                    }
                
                 $row += "</td></tr>";
             $('#msgList').append($row)
@@ -1067,22 +1109,28 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+archive.title+"</td>"+
                 "<td>"+archive.date+"</td>"+
                 "<td>";
-                attach='';
-                var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
+                    attach='';
+                    if(archive.files){
+                    var j=0;
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    attach='';
+                    }
                 
                
                 $row += "</td></tr>";
@@ -1099,22 +1147,28 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+typeArray[archive.type]+"</td>"+
                 "<td>"+archive.date+"</td>"+
                 "<td>";
-                attach='';
-                var i=1;
-                if(archive.fileIDS&&typeof(archive.fileIDS)=="object"){ 
-                archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
+                    attach='';
+                    if(archive.files){
+                    var j=0;
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    attach='';
+                }
                 
                
                 $row += "</td></tr>";
@@ -1130,22 +1184,28 @@ function drawTablesArchive($archives,$copyTo)
                   "<td>"+copy.archive.name+"</td>"+
                   "<td>"+copy.archive.date+"</td>"+
                   "<td>";
-                attach='';
-                var i=1;
-                if(copy.archive.fileIDS&&typeof(copy.archive.fileIDS)=="object"){ 
-                copy.archive.fileIDS.forEach(file => {
-                    attach+='<div id="attach" class=" col-sm-6 ">'
-                            +'<div class="attach">'
-                                +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                                +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                                +'  <i class="fa fa-eye"> </i>'
-                                +'</a><input type="hidden" value="" name="attach[]" >'
-                                +'</div>'
-                            +'</div>';
-                            i++;
-                        });
-                        $row += attach;
-                      }
+                    attach='';
+                    if(archive.files){
+                    var j=0;
+                    for(j=0;j<archive.files.length;j++){
+                        shortCutName=archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=archive.files[j].url;
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    attach='';
+                }
                 
                
                 $row += "</td></tr>";

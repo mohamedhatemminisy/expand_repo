@@ -345,7 +345,7 @@ class ArchieveController extends Controller
       public function archieve_info_all(Request $request)
     {
         $type=$request['type'];
-        $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC');
+        $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC')->with('files')->get();
         
         return DataTables::of($archive)
                         ->addIndexColumn()
@@ -365,6 +365,7 @@ class ArchieveController extends Controller
     public function archieve_info(Request $request)
     {
         $archive['info'] = Archive::find($request['archive_id']);
+        $archive['files'] = File::where('archive_id','=',$request['archive_id'])->get();
         return response()->json($archive);
     }
     public function archieve_report(Request $request)
@@ -440,7 +441,7 @@ class ArchieveController extends Controller
                 $to = $to[2].'-'.$to[1].'-'.$to[0];
                 $archive['result']->whereBetween('date',[$from,$to]);
             }
-            $archive['result']= $archive['result']->get();
+            $archive['result']= $archive['result']->with('files')->get();
         }
         return response()->json($archive);
 
@@ -448,11 +449,13 @@ class ArchieveController extends Controller
     public function archieveLic_info(Request $request)
     {
         $archive['info']= ArchiveLicense::find($request['archive_id']);
+        $archive['files'] = File::where('archive_id','=',$request['archive_id'])->get();
         return response()->json($archive);
     }
     public function job_Lic_info(Request $request)
     {
         $archive['info']= jobLicArchieve::find($request['archive_id']);
+        $archive['files'] = File::where('archive_id','=',$request['archive_id'])->get();
         return response()->json($archive);
     }
     

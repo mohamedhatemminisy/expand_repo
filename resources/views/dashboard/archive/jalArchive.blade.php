@@ -2,7 +2,7 @@
 @section('content')
 <div class="content-body">
     <section id="hidden-label-form-layouts">
-    <form method="post" id="archive-form" enctype="multipart/form-data">
+    <form method="post" id="formDataaa" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-xl-12 col-lg-12">
@@ -113,7 +113,7 @@
                                                 <input type="hidden" name="fromname" value="formDataaa">
                                                 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-                                                <input type="file" class="form-control-file" id="formDataaaupload-file[]" multiple="" name="formDataaaUploadFile[]" onchange="doUploadAttach('archive-form')" 
+                                                <input type="file" class="form-control-file" id="formDataaaupload-file[]" multiple="" name="formDataaaUploadFile[]" onchange="doUploadAttach('formDataaa')" 
                                                 style="display: none" >
                                                 <div class="row formDataaaFilesArea" style="margin-left: 0px;">
                                                 </div>
@@ -152,7 +152,7 @@ $.ajaxSetup({
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-   $('#archive-form').submit(function(e) {
+   $('#formDataaa').submit(function(e) {
        e.preventDefault();
        let formData = new FormData(this);
      $( "#customerName" ).removeClass( "error" );
@@ -310,75 +310,6 @@ $( function() {
                             +'        </div>'
                             +'    </div>'
                             +'</div>')
-    }
-    function doUploadAttach(formDataStr)
-    {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $(".loader").removeClass('hide');
-        $(".form-actions").addClass('hide');
-        var formData = new FormData($("#"+formDataStr)[0]);
-        console.log(formData);
-        $.ajax({
-            url: 'uploadAttach',
-            type: 'POST',
-            data: formData,
-            dataType:"json",
-            async: true,
-            success: function (data) {
-                console.log(data);
-                row='';
-                row1='';
-                if(data){
-                for(j=0;j<data.length;j++){
-                    if(data[j]) {
-                        shortCutName=data.img[j].orgname;
-                                    shortCutName=shortCutName.substring(0, 40)
-                                    row+='<div id="attach" class=" col-sm-6 ">' +
-                                        '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
-                                        +'    <span class="attach-text">'+shortCutName+'</span>'
-                                        +'    <a class="attach-close1" href="'+realPath+'uploads/'+data.img[j].name+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
-                                        +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
-                                        +'      <input type="hidden" id="'+formDataStr+'imgUploads[]" name="'+formDataStr+'imgUploads[]" value="'+data.img[j].name+'">'
-                                        +'             <input type="hidden" id="'+formDataStr+'orgNameList[]" name="'+formDataStr+'orgNameList[]" value="'+data.img[j].orgname+'">'
-                                        +'    </div>'
-                                        +'  </div>' +
-                                        '</div>'
-                    }
-                       
-                    }
-                    //$(".attachs-carousel-container").html(row)
-                    $(".alert-danger").addClass("hide");
-                    $(".alert-success").removeClass('hide');
-        $("."+formDataStr+"FilesArea").append(row)
-                    $(".loader").addClass('hide');
-                    document.getElementById(""+formDataStr+"upload-file[]").value="";
-                    $(".group1").colorbox({rel:'group1'});
-                    setTimeout(function(){
-                        $(".alert-danger").addClass("hide");
-                        $(".alert-success").addClass("hide");
-                    },2000)
-                }
-                else {
-                    $(".alert-success").addClass("hide");
-                    $(".alert-danger").removeClass('hide');
-                }
-                $(".loader").addClass('hide');
-                $(".form-actions").removeClass('hide');
-            },
-            error:function(){
-                $(".alert-success").addClass("hide");
-                $(".alert-danger").removeClass('hide');
-                $(".loader").addClass('hide');
-                $(".form-actions").removeClass('hide');
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
     }
   
 </script>
