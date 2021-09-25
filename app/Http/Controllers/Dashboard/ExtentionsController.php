@@ -28,6 +28,7 @@ use App\Models\LicenseType;
 use App\Models\CraftType;
 use App\Models\LicenseRating;
 use App\Models\LimitNumber;
+use App\Models\AgendaExtention;
 
 use App\Http\Requests\ExtentionRequest;
 
@@ -127,6 +128,11 @@ class ExtentionsController extends Controller
             $data['pj_i_id'] = $request->pk_i_id;
             return response()->json($data);
         }
+        elseif($request->pk_i_id == '99'){
+            $data['data'] = AgendaExtention::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
         
     }
 
@@ -203,6 +209,10 @@ class ExtentionsController extends Controller
         }
         elseif($request->fk_i_constant_id == '56'){
             $data = LimitNumber::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '99'){
+            $data = AgendaExtention::findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
         }
 
@@ -496,6 +506,21 @@ class ExtentionsController extends Controller
                 $job->save();
             }else{
                 $job = LimitNumber::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json(['success'=>trans('admin.equpment_added')]);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+        elseif($request->fk_i_constant_id1 == '99'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new AgendaExtention();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = AgendaExtention::find($request->fk_i_constantdet_id1);
                 $job->name = $request->s_name_ar1;
                 $job->save();
             }

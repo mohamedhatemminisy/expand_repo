@@ -196,10 +196,9 @@ class ArchieveController extends Controller
         }
     }
     public function store_archive(ArchiveRequest $request){
-        dd($request->all());
         $archive = new Archive();
         $archive->model_id =$request->customerid;
-        $archive->type_id =$request->archive_type;
+        $archive->type_id =$request->archive_type   ;
         $archive->name =$request->customername;
         $archive->model_name =$request->customerType;
         $archive->date =$request->msgDate;
@@ -262,6 +261,7 @@ class ArchieveController extends Controller
         $type= 'projArchive';
         $url = "proj_archieve";
         $archive_type = ArchiveType::get();
+
         return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
     }
     public function emp_archieve(){
@@ -333,7 +333,7 @@ class ArchieveController extends Controller
         $type= 'agArchive';
         $url = "agenda_archieve";
         $archive_type = ArchiveType::get();
-        return view('dashboard.archive.agenda',compact('type','archive_type','url','agendaExtention'));
+        return view('dashboard.archive.jalArchive',compact('type','archive_type','url','agendaExtention'));
     }
     public function agendaReportArchive(){
         $type= 'agenda_report';

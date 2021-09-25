@@ -206,4 +206,7 @@ Route::group([
 
     });
 
+    Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin'], function () {
+    Route::get('search','SearchController@full_search');
+    });
 });
