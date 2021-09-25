@@ -111,11 +111,11 @@ class vehicleController extends Controller
         $CopyToCount = count(CopyTo::where('model_id',$request['vehcile_id'])
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['vehcile_id'])
-        ->where('model_name',$model)->get();
+        ->where('model_name',$model)->with('files')->get();
         $vehicle['Archive'] = $Archive;
         $vehicle['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $CopyTo = CopyTo::where('model_id',$request['vehcile_id'])
-        ->where('model_name',$model)->with('archive')->get();
+        ->where('model_name',$model)->with('archive','archive.files')->get();
         $vehicle['copyTo'] = $CopyTo;
         $vehicle['admin'] = Admin::where('id',$vehicle['info']->admin_id)->first()->name;
         $vehicle['admin_two'] = Admin::where('id',$vehicle['info']->admin_two)->first()->name;

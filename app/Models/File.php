@@ -11,4 +11,8 @@ class File extends Model
     {
         return $this->belongsTo(Archive::class);
     }
+    public function copy_to()
+    {
+        return $this->belongsTo(CopyTo::class,'archive_id');
+    }
 }
