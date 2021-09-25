@@ -2,7 +2,7 @@
 @section('content')
 <div class="content-body">
         <section id="hidden-label-form-layouts">
-            <form method="post" id="archive-form" enctype="multipart/form-data">
+            <form method="post" id="formDataaa" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-xl-6 col-lg-6">
@@ -199,7 +199,7 @@
                                                     </div>
                                                     <input type="hidden" name="fromname" value="formDataaa">
                                                     <input type="file" class="form-control-file" id="formDataaaupload-file[]" multiple="" name="formDataaaUploadFile[]" 
-                                                    onchange="doUploadAttach('archive-form')" 
+                                                    onchange="doUploadAttach('formDataaa')" 
                                                     style="display: none" >
                                                 </div>
                                             </div>
@@ -227,6 +227,8 @@
                             <h4 class="card-title"><img src="{{asset('assets/images/ico/report32.png')}}" />مرفقات الرخصة </h4>
                         </div>
                         <div class="card-body" id="attachList">
+                            <div class="row formDataaaFilesArea" style="margin-left: 0px;">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -248,7 +250,7 @@ $.ajaxSetup({
         }
     });
 
-   $('#archive-form').submit(function(e) {
+   $('#formDataaa').submit(function(e) {
        e.preventDefault();
        let formData = new FormData(this);
        $.ajax({
@@ -337,94 +339,6 @@ $( function() {
             $(".formDataaaFilesArea").html(attach)
             
             },
-        });
-    }
-
-    function doUploadAttach(formDataStr)
-    {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $(".loader").removeClass('hide');
-        $(".form-actions").addClass('hide');
-        var formData = new FormData($("#"+formDataStr)[0]);
-        $.ajax({
-            url: 'uploadAttach',
-            type: 'POST',
-            data: formData,
-            dataType:"json",
-            async: true,
-            success: function (data) {
-                row='';
-                row1='';
-                // var len = data.files.length;
-                console.log(data.all_files);
-                if(data){
-
-                    for(j=imgCounter;j<data.img.length;j++){
-            if(data.img[j].type==1 ) {
-                shortCutName=data.img[j].orgname;
-                            shortCutName=shortCutName.substring(0, 40)
-                            row+='<div id="attach" class=" col-sm-6 ">' +
-                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
-                                +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+realPath+'uploads/'+data.img[j].name+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
-                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
-                                +'      <input type="hidden" id="'+formDataStr+'imgUploads[]" name="'+formDataStr+'imgUploads[]" value="'+data.img[j].name+'">'
-                                +'             <input type="hidden" id="'+formDataStr+'orgNameList[]" name="'+formDataStr+'orgNameList[]" value="'+data.img[j].orgname+'">'
-                                +'    </div>'
-                                +'  </div>' +
-                                '</div>'
-            }
-                        if(data.img[j].type==2 ) {
-            row1+='<div  class="col-sm-2" id="i'+(j+1)+'">'
-                +'     <div class="row"  onmouseover="$(this).children().first().children().first().next().show()"  onmouseout="$(this).children().first().children().first().next().hide()">'
-                                +'         <div class="col-sm-12" style="height: 80px;">'
-                                +'         <a class="group1" href="'+realPath+'uploads/'+data.img[j].name+'" title="'+data.img[j].orgname+'" style="color: #74798D" >' +
-                                '                <img src="'+realPath+'uploads/'+data.img[j].name+'" title="'+data.img[j].orgname+'" id="imgSlider'+(j+1)+'" style="max-height:80px;"/></a>'
-                                +'           <a class="attach-close" style="color: #74798D" onclick="$(this).parent().parent().parent().remove()" ><i class="fa fa-times"></i></a>'
-                                +'             <input type="hidden" id="'+formDataStr+'imgUploads[]" name="'+formDataStr+'imgUploads[]" value="'+data.img[j].name+'">'
-                                +'             <input type="hidden" id="'+formDataStr+'orgNameList[]" name="'+formDataStr+'orgNameList[]" value="'+data.img[j].orgname+'">'
-                                +'         </div>'
-                +'     </div>'
-                +'</div>'
-                        }
-                    }
-                    //$(".attachs-carousel-container").html(row)
-                    $(".alert-danger").addClass("hide");
-                    $(".alert-success").removeClass('hide');
-                    $("#succMsg").text(data.status.msg)
-        $("."+formDataStr+"FilesArea").append(row)
-        $("."+formDataStr+"ImagesArea").append(row1)
-                    $(".loader").addClass('hide');
-                    document.getElementById(""+formDataStr+"upload-file[]").value="";
-                    document.getElementById(""+formDataStr+"upload-image[]").value="";
-                    $(".group1").colorbox({rel:'group1'});
-                    setTimeout(function(){
-                        $(".alert-danger").addClass("hide");
-                        $(".alert-success").addClass("hide");
-                    },2000)
-                }
-                else {
-                    $(".alert-success").addClass("hide");
-                    $(".alert-danger").removeClass('hide');
-                    $("#errMsg").text(data.status.msg)
-                }
-                $(".loader").addClass('hide');
-                $(".form-actions").removeClass('hide');
-            },
-            error:function(){
-                $(".alert-success").addClass("hide");
-                $(".alert-danger").removeClass('hide');
-                $("#errMsg").text(data.status.msg)
-                $(".loader").addClass('hide');
-                $(".form-actions").removeClass('hide');
-            },
-            cache: false,
-            contentType: false,
-            processData: false
         });
     }
   

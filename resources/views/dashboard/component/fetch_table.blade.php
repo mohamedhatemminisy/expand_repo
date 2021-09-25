@@ -603,19 +603,22 @@
                     data: null,
                     
                     render:function(data,row,type){
-                        if(data.fileIDS&&typeof(data.fileIDS)=="object"){ 
+                        if(data.files.length>0){ 
                             var i=1;
                             $actionBtn="<div class='row' style='margin-left:0px;'>";
-                            data.fileIDS.forEach(file => {
+                            data.files.forEach(file => {
+                                shortCutName=file.real_name;
+                                urlfile='{{ asset('') }}';
+                                console.log(urlfile);
+                                urlfile+=file.url;
                                 $actionBtn += '<div id="attach" class=" col-sm-6 ">'
                                     +'<div class="attach">'
-                                      +'  <span class="attach-text">مرفق '+i+'</span>'
-                                       +' <a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
+                                      +'  <span class="attach-text">'+shortCutName+'</span>'
+                                       +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
                                         +'    <i class="fa fa-eye"> </i>'
                                         +'</a>'
                                     +'</div>'
                                     +'</div>'; 
-                                    i++;
                             });
                             $actionBtn += '</div>';
                             return $actionBtn;

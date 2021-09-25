@@ -408,6 +408,74 @@ $("#QuickAdd").modal('show');
 $(".loader").addClass('hide');
 }
 
+function doUploadAttach(formDataStr)
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(".loader").removeClass('hide');
+        $(".form-actions").addClass('hide');
+        var formData = new FormData($("#"+formDataStr)[0]);
+        $.ajax({
+            url: 'uploadAttach',
+            type: 'POST',
+            data: formData,
+            dataType:"json",
+            async: true,
+            success: function (data) {
+                row='';
+                console.log(data.all_files);
+                if(data.all_files){
+                    var j=0;
+                    for(j=0;j<data.all_files.length;j++){
+                shortCutName=data.all_files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        console.log(urlfile);
+                        urlfile+=data.all_files[j].url;
+                        console.log(urlfile);
+                            shortCutName=shortCutName.substring(0, 40)
+                            row+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="'+formDataStr+'imgUploads[]" name="'+formDataStr+'imgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="'+formDataStr+'orgNameList[]" name="'+formDataStr+'orgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $(".alert-danger").addClass("hide");
+                    $(".alert-success").removeClass('hide');
+        $("."+formDataStr+"FilesArea").append(row)
+                    $(".loader").addClass('hide');
+                    //document.getElementById(""+formDataStr+"upload-file[]").value="";
+                    $(".group1").colorbox({rel:'group1'});
+                    setTimeout(function(){
+                        $(".alert-danger").addClass("hide");
+                        $(".alert-success").addClass("hide");
+                    },2000)
+                }
+                else {
+                    $(".alert-success").addClass("hide");
+                    $(".alert-danger").removeClass('hide');
+                }
+                $(".loader").addClass('hide');
+                $(".form-actions").removeClass('hide');
+            },
+            error:function(){
+                $(".alert-success").addClass("hide");
+                $(".alert-danger").removeClass('hide');
+                $(".loader").addClass('hide');
+                $(".form-actions").removeClass('hide');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
 function DrawTable(id){
 	var formData = {
 		'pk_i_id':id,
@@ -525,7 +593,10 @@ function deleteConstant(id){
     } */
      
   });
-                                                            
+
+  
+
+
 });
 
 </script>

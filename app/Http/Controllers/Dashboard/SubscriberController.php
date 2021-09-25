@@ -105,7 +105,7 @@ class SubscriberController extends Controller
         $ArchiveCount = count(Archive::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['subscribe_id'])
-        ->where('model_name',$model)->with('copyTo')->get();
+        ->where('model_name',$model)->with('copyTo')->with('files')->get();
         $ArchiveLic =ArchiveLicense::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->get();
         $user['ArchiveLic'] = $ArchiveLic;
