@@ -95,9 +95,7 @@
                                                     {{trans('archive.licfile_num')}}
                                                 </th>
                                                 @endif
-                                                <th  >
-                                                    {{trans('archive.subs')}}
-                                                </th>
+                                                
                                                 <th>
                                                     {{trans('archive.lic_type')}}
                                                 </th>
@@ -649,15 +647,7 @@
                 
                 },
                 {data:'licNo'},
-                {
-                    data: null, 
-                    render:function(data,row,type){
-                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
-                            return $actionBtn;
-                    },
-                    name:'name',
                 
-                },
                 {
                     data: null, 
                     render:function(data,row,type){
@@ -668,7 +658,34 @@
                 
                 },
                 {data:'licn'},
-                {data:'attachment_id'},
+                {
+                    data: null,
+                    
+                    render:function(data,row,type){
+                        if(data.files.length>0){ 
+                            var i=1;
+                            $actionBtn="<div class='row' style='margin-left:0px;'>";
+                            data.files.forEach(file => {
+                                shortCutName=file.real_name;
+                                urlfile='{{ asset('') }}';
+                                console.log(urlfile);
+                                urlfile+=file.url;
+                                $actionBtn += '<div id="attach" class=" col-sm-6 ">'
+                                    +'<div class="attach">'
+                                      +'  <span class="attach-text">'+shortCutName+'</span>'
+                                       +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
+                                        +'    <i class="fa fa-eye"> </i>'
+                                        +'</a>'
+                                    +'</div>'
+                                    +'</div>'; 
+                            });
+                            $actionBtn += '</div>';
+                            return $actionBtn;
+                        }
+                        else{return '';}
+                    },
+                    name:'fileIDS',                    
+                },
                 
                 {
                 data: null, 

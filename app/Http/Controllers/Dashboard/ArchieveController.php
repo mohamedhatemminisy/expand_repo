@@ -196,7 +196,7 @@ class ArchieveController extends Controller
         }
     }
     public function store_archive(ArchiveRequest $request){
-
+        dd($request->all());
         $archive = new Archive();
         $archive->model_id =$request->customerid;
         $archive->type_id =$request->archive_type;
@@ -355,7 +355,7 @@ class ArchieveController extends Controller
     public function archievelic_info_all(Request $request)
     {
         $type=$request['type'];
-        $archive= ArchiveLicense::all()->where('type',$type);
+        $archive= ArchiveLicense::select('archive_licenses.*')->where('type',$type)->with('files')->get();
         
         return DataTables::of($archive)
                         ->addIndexColumn()
