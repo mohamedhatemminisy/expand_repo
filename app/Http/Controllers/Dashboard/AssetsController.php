@@ -115,10 +115,10 @@ class AssetsController extends Controller
         ->where('model_name',$model)->get());
         $equipment['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $Archive =Archive::where('model_id',$request['equip_id'])
-        ->where('model_name',$model)->get();
+        ->where('model_name',$model)->with('files')->get();
         $equipment['Archive'] = $Archive;
         $CopyTo = CopyTo::where('model_id',$request['equip_id'])
-        ->where('model_name',$model)->with('archive')->get();
+        ->where('model_name',$model)->with('archive','archive.files')->get();
         $equipment['copyTo'] = $CopyTo;
 
         $equipment['admin'] = Admin::where('id',$equipment['info']->admin_id)->first()->name;

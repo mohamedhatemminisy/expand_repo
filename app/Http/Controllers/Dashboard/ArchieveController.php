@@ -422,6 +422,7 @@ class ArchieveController extends Controller
             $archive['result']= $archive['result']->select('archive_licenses.*','license_types.name as licName')
                         ->selectRaw('DATE_FORMAT(archive_licenses.created_at, "%Y-%m-%d") as date')
                         ->leftJoin('license_types','license_types.id','archive_licenses.license_id')
+                        ->with('files')
                         ->get();
 
         }

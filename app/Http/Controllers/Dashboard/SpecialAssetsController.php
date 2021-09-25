@@ -117,12 +117,12 @@ class SpecialAssetsController extends Controller
         $CopyToCount = count(CopyTo::where('model_id',$request['asset_id'])
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['asset_id'])
-        ->where('model_name',$model)->get();
+        ->where('model_name',$model)->with('files')->get();
         $special['Archive'] = $Archive;
         $special['ArchiveCount'] = $ArchiveCount + $CopyToCount;
 
         $CopyTo = CopyTo::where('model_id',$request['asset_id'])
-        ->where('model_name',$model)->with('archive')->get();
+        ->where('model_name',$model)->with('archive','archive.files')->get();
         $special['copyTo'] = $CopyTo;
 
         $special['admin'] = Admin::where('id',$special['info']->admin_id)->first()->name;
