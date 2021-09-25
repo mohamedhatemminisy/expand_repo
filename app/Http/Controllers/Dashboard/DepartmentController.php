@@ -84,9 +84,9 @@ class DepartmentController extends Controller
         $CopyToCount = count(CopyTo::where('model_id',$request['dep_id'])
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['dep_id'])
-        ->where('model_name',$model)->get();
+        ->where('model_name',$model)->with('files')->get();
         $CopyTo = CopyTo::where('model_id',$request['dep_id'])
-        ->where('model_name',$model)->with('archive')->get();
+        ->where('model_name',$model)->with('archive','archive.files')->get();
         $depaertment['copyTo'] = $CopyTo;
         $depaertment['Archive'] = $Archive;
         $depaertment['ArchiveCount'] = $ArchiveCount + $CopyToCount;

@@ -609,11 +609,19 @@
                                 urlfile='{{ asset('') }}';
                                 console.log(urlfile);
                                 urlfile+=file.url;
+                                if(file.extension=="jpg"||file.extension=="png")
+                                fileimage='{{ asset('assets/images/ico/image.png') }}';
+                                else if(file.extension=="pdf")
+                                fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                                else if(file.extension=="excel"||file.extension=="xsc")
+                                fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                                else
+                                fileimage='{{ asset('assets/images/ico/file.png') }}';
                                 $actionBtn += '<div id="attach" class=" col-sm-6 ">'
                                     +'<div class="attach">'
                                       +'  <span class="attach-text">'+shortCutName+'</span>'
                                        +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
-                                        +'    <i class="fa fa-eye"> </i>'
+                                        +'    <img style="width: 20px;"src="'+fileimage+'">'
                                         +'</a>'
                                     +'</div>'
                                     +'</div>'; 
@@ -670,12 +678,19 @@
                                 urlfile='{{ asset('') }}';
                                 console.log(urlfile);
                                 urlfile+=file.url;
+                                if(file.extension=="jpg"||file.extension=="png")
+                                fileimage='{{ asset('assets/images/ico/image.png') }}';
+                                else if(file.extension=="pdf")
+                                fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                                else if(file.extension=="excel"||file.extension=="xsc")
+                                fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                                else
+                                fileimage='{{ asset('assets/images/ico/file.png') }}';
                                 $actionBtn += '<div id="attach" class=" col-sm-6 ">'
                                     +'<div class="attach">'
                                       +'  <span class="attach-text">'+shortCutName+'</span>'
                                        +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
-                                        +'    <i class="fa fa-eye"> </i>'
-                                        +'</a>'
+                                        +'    <img style="width: 20px;"src="'+fileimage+'">'                                        +'</a>'
                                     +'</div>'
                                     +'</div>'; 
                             });

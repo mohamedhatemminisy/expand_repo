@@ -112,13 +112,13 @@ class ProjectController extends Controller
         $ArchiveCount = count(Archive::where('model_id',$request['project_id'])
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['project_id'])
-        ->where('model_name',$model)->get();
+        ->where('model_name',$model)->with('files')->get();
         $project['Archive'] = $Archive;
         $CopyToCount = count(CopyTo::where('model_id',$request['project_id'])
         ->where('model_name',$model)->get());
         $project['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $CopyTo = CopyTo::where('model_id',$request['project_id'])
-        ->where('model_name',$model)->with('archive')->get();
+        ->where('model_name',$model)->with('archive','archive.files')->get();
         $project['copyTo'] = $CopyTo;
         $project['admin'] = Admin::where('id',$project['info']->admin_id)->first()->name;
         $project['department'] = Department::where('id',$project['info']->department_id)->first()->name;

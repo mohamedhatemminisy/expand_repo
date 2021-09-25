@@ -196,7 +196,6 @@ class ArchieveController extends Controller
         }
     }
     public function store_archive(ArchiveRequest $request){
-        dd($request->all());
         $archive = new Archive();
         $archive->model_id =$request->customerid;
         $archive->type_id =$request->archive_type;
@@ -408,6 +407,7 @@ class ArchieveController extends Controller
             $archive['result']= $archive['result']->select('archive_licenses.*','license_types.name as licName')
                         ->selectRaw('DATE_FORMAT(archive_licenses.created_at, "%Y-%m-%d") as date')
                         ->leftJoin('license_types','license_types.id','archive_licenses.license_id')
+                        ->with('files')
                         ->get();
 
         }

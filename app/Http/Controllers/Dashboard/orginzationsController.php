@@ -120,9 +120,9 @@ class orginzationsController extends Controller
         $CopyToCount = count(CopyTo::where('model_id',$request['orginzation_id'])
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['orginzation_id'])
-        ->where('model_name',$model)->get();
+        ->where('model_name',$model)->with('files')->get();
         $CopyTo = CopyTo::where('model_id',$request['orginzation_id'])
-        ->where('model_name',$model)->with('archive')->get();
+        ->where('model_name',$model)->with('archive','archive.files')->get();
         $orginzation['copyTo'] = $CopyTo;
         $orginzation['Archive'] = $Archive;
         $orginzation['ArchiveCount'] = $ArchiveCount + $CopyToCount;

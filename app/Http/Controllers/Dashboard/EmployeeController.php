@@ -169,7 +169,7 @@ class EmployeeController extends Controller
         $Archive =Archive::where('model_id',$request['emp_id'])
         ->where('model_name',$model)->with('files')->get();
         $CopyTo = CopyTo::where('model_id',$request['emp_id'])
-        ->where('model_name',$model)->with('archive')->get();
+        ->where('model_name',$model)->with('archive','archive.files')->get();
         $admin['copyTo'] = $CopyTo;
         $admin['Archive'] = $Archive;
         $admin['ArchiveCount'] = $ArchiveCount + $CopyToCount;

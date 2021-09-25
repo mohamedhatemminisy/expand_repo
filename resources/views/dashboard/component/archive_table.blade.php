@@ -409,11 +409,19 @@ function drawTablesArchive($archives,$copyTo)
                         shortCutName=archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
                         urlfile+=archive.files[j].url;
+                        if(archive.files[j].extension=="jpg"||archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(archive.files[j].extension=="excel"||archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
                         shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
                                 +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
@@ -442,11 +450,19 @@ function drawTablesArchive($archives,$copyTo)
                         shortCutName=archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
                         urlfile+=archive.files[j].url;
+                        if(archive.files[j].extension=="jpg"||archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(archive.files[j].extension=="excel"||archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
                                 +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
@@ -478,11 +494,19 @@ function drawTablesArchive($archives,$copyTo)
                         shortCutName=archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
                         urlfile+=archive.files[j].url;
+                        if(archive.files[j].extension=="jpg"||archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(archive.files[j].extension=="excel"||archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
                                 +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
@@ -691,6 +715,14 @@ function drawTablesArchive($archives,$copyTo)
                         shortCutName=archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
                         urlfile+=archive.files[j].url;
+                        if(archive.files[j].extension=="jpg"||archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(archive.files[j].extension=="excel"||archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
@@ -726,11 +758,19 @@ function drawTablesArchive($archives,$copyTo)
                         shortCutName=archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
                         urlfile+=archive.files[j].url;
+                        if(archive.files[j].extension=="jpg"||archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(archive.files[j].extension=="excel"||archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
                                 +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
@@ -882,7 +922,7 @@ function drawTablesArchive($archives,$copyTo)
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
                                 +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
@@ -982,11 +1022,19 @@ function drawTablesArchive($archives,$copyTo)
                         shortCutName=archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
                         urlfile+=archive.files[j].url;
+                        if(archive.files[j].extension=="jpg"||archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(archive.files[j].extension=="excel"||archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
                                 +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
@@ -1082,11 +1130,19 @@ function drawTablesArchive($archives,$copyTo)
                         shortCutName=archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
                         urlfile+=archive.files[j].url;
+                        if(archive.files[j].extension=="jpg"||archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(archive.files[j].extension=="excel"||archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
                                 +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
@@ -1116,11 +1172,19 @@ function drawTablesArchive($archives,$copyTo)
                         shortCutName=archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
                         urlfile+=archive.files[j].url;
+                        if(archive.files[j].extension=="jpg"||archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(archive.files[j].extension=="excel"||archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
                                 +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
@@ -1154,11 +1218,19 @@ function drawTablesArchive($archives,$copyTo)
                         shortCutName=archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
                         urlfile+=archive.files[j].url;
+                        if(archive.files[j].extension=="jpg"||archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(archive.files[j].extension=="excel"||archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
                                 +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
@@ -1191,11 +1263,12 @@ function drawTablesArchive($archives,$copyTo)
                         shortCutName=copy.archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
                         urlfile+=copy.archive.files[j].url;
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
                                 +'    <span class="attach-text">'+shortCutName+'</span>'
-                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img src="'+fileimage+'"></a>'
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
