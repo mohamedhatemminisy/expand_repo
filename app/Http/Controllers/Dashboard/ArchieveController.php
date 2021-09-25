@@ -196,6 +196,20 @@ class ArchieveController extends Controller
         }
     }
     public function store_archive(ArchiveRequest $request){
+        $archive = Archive::where('id',$request->customerid)->first();
+        if($archive){
+            $archive->model_id =$request->customerid;
+            $archive->type_id =$request->archive_type   ;
+            $archive->name =$request->customername;
+            $archive->model_name =$request->customerType;
+            $archive->date =$request->msgDate;
+            $archive->title =$request->msgTitle;
+            $archive->type =$request->msgType;
+            $archive->serisal =$request->msgid;
+            $archive->url =  $request->url;
+            $archive->add_by = Auth()->user()->id;
+            $archive->save();
+        }else{
         $archive = new Archive();
         $archive->model_id =$request->customerid;
         $archive->type_id =$request->archive_type   ;
@@ -227,7 +241,7 @@ class ArchieveController extends Controller
             }
             $copyTo->save();        
         }
-
+    }
         if ($archive) {
             return response()->json(['success'=>trans('admin.archive_added')]);
         }
