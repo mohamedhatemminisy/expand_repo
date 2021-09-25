@@ -110,12 +110,12 @@ class AssetsController extends Controller
         $equipment['info'] = Equpment::find($request['equip_id']);
         $model = $equipment['info']->model;
         $ArchiveCount = count(Archive::where('model_id',$request['equip_id'])
-        ->where('model_name',$model)->with('files')->get());
+        ->where('model_name',$model)->get());
         $CopyToCount = count(CopyTo::where('model_id',$request['equip_id'])
         ->where('model_name',$model)->get());
         $equipment['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $Archive =Archive::where('model_id',$request['equip_id'])
-        ->where('model_name',$model)->get();
+        ->where('model_name',$model)->with('files')->get();
         $equipment['Archive'] = $Archive;
         $CopyTo = CopyTo::where('model_id',$request['equip_id'])
         ->where('model_name',$model)->with('archive','archive.files')->get();
