@@ -29,18 +29,25 @@
                                                         </div>
                                                         <input type="hidden" id="meetingID" name="meetingID" value="0">
                                                         <input type="hidden" id="lastorder" name="lastorder" value="1">
-                                                        <select type="text" id="meetingTitleName" name="meetingTitleName"
+                                                        <input type="hidden" name="customerName" value="agenda_archieve">
+                                                        <select type="text" id="archive_type" name="archive_type"
                                                             class="form-control alphaFeild"
                                                             style="height: 34px !important;width: 115px;"
                                                             aria-invalid="false"
                                                            >
-                                                            <option disabled selected> -- اختر -- </option>                                                               
+                                                            <option disabled selected> -- اختر -- </option> 
+                                                            @if(count($archive_type)>0)
+                                                            @foreach($archive_type as $archive)
+                                                            <option value="{{$archive->id}}">{{$archive->name}}</option>
+
+                                                            @endforeach
+                                                            @endif                                                    
                                                         </select>
 
-                                                        <div class="input-group-append"  style="cursor:pointet;padding-left: 5px;;margin-left:0px !important;">
-                                                            <span class="input-group-text input-group-text2">
-                                                                <i class="fa fa-external-link"></i>
-                                                            </span>
+                                                        <div class="input-group-append" onclick="QuickAdd(42,'OrgType','نوع الاجتماع')" style="cursor:pointer">
+                                                                <span class="input-group-text input-group-text2">
+                                                                    <i class="fa fa-external-link"></i>
+                                                                </span>
                                                         </div>
                                                         
                                                         
@@ -155,7 +162,6 @@ $.ajaxSetup({
    $('#formDataaa').submit(function(e) {
        e.preventDefault();
        let formData = new FormData(this);
-     $( "#customerName" ).removeClass( "error" );
        $.ajax({
           type:'POST',
           url: "store_archive",
@@ -182,9 +188,7 @@ $.ajaxSetup({
 				showConfirmButton: false,
 				timer: 1500
 				})
-            if(response.responseJSON.errors.customerName){
-                $( "#customerName" ).addClass( "error" );
-            }
+
            }
        });
   });
