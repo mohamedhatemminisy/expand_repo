@@ -431,6 +431,7 @@ function doUploadAttach(formDataStr)
                     var j=0;
                     for(j=0;j<data.all_files.length;j++){
                 shortCutName=data.all_files[j].real_name;
+                shortCutID=data.all_files[j].id;
                         urlfile='{{ asset('') }}';
                         console.log(urlfile);
                         urlfile+=data.all_files[j].url;
@@ -443,7 +444,8 @@ function doUploadAttach(formDataStr)
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="'+formDataStr+'imgUploads[]" name="'+formDataStr+'imgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="'+formDataStr+'orgNameList[]" name="'+formDataStr+'orgNameList[]" value="'+shortCutName+'">'
-                                +'    </div>'
+								+'             <input type="hidden" id="'+formDataStr+'orgIdList[]" name="'+formDataStr+'orgIdList[]" value="'+shortCutID+'">'
+							    +'    </div>'
                                 +'  </div>' +
                                 '</div>'
                     }

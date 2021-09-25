@@ -135,7 +135,7 @@ class ArchieveController extends Controller
         $archive->license_id =$request->BuildingTypeData;
         $archive->attachment_id =$request->AttahType;
         $archive->save();
-        $files_ids = Session::get('files_ids');
+        $files_ids = $request->formDataaaorgIdList;
         foreach($files_ids as $id){
             $file = File::find($id);
             $file->archive_id = $archive->id;
@@ -183,7 +183,7 @@ class ArchieveController extends Controller
         $archive->attachment_id   =$request->AttahType;
         $archive->license_rating_id  =$request->lic_cat;
         $archive->save();
-        $files_ids = Session::get('files_ids');
+        $files_ids = $request->formDataaaorgIdList;
         foreach($files_ids as $id){
             $file = File::find($id);
             $file->archive_id = $archive->id;
@@ -209,7 +209,7 @@ class ArchieveController extends Controller
         $archive->add_by = Auth()->user()->id;
         $archive->save();
 
-        $files_ids = Session::get('files_ids');
+        $files_ids =$request->formDataaaorgIdList;
         foreach($files_ids as $id){
             $file = File::find($id);
             $file->archive_id = $archive->id;
