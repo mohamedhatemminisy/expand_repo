@@ -872,12 +872,12 @@ function drawTablesArchive($archives,$copyTo)
                 "<td>"+copy.archive.date+"</td>"+
                 "<td>";
                     attach='';
-                    if(archive.files){
+                    if(copy.archive.files.length>0){
                     var j=0;
-                    for(j=0;j<archive.files.length;j++){
-                        shortCutName=archive.files[j].real_name;
+                    for(j=0;j<copy.archive.files.length;j++){
+                        shortCutName=copy.archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
-                        urlfile+=archive.files[j].url;
+                        urlfile+=copy.archive.files[j].url;
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
@@ -1185,12 +1185,12 @@ function drawTablesArchive($archives,$copyTo)
                   "<td>"+copy.archive.date+"</td>"+
                   "<td>";
                     attach='';
-                    if(archive.files){
+                    if(copy.archive.files.length>0){
                     var j=0;
-                    for(j=0;j<archive.files.length;j++){
-                        shortCutName=archive.files[j].real_name;
+                    for(j=0;j<copy.archive.files.length;j++){
+                        shortCutName=copy.archive.files[j].real_name;
                         urlfile='{{ asset('') }}';
-                        urlfile+=archive.files[j].url;
+                        urlfile+=copy.archive.files[j].url;
                             shortCutName=shortCutName.substring(0, 20);
                             attach+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'

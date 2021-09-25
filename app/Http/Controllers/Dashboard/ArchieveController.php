@@ -355,7 +355,7 @@ class ArchieveController extends Controller
     public function archievelic_info_all(Request $request)
     {
         $type=$request['type'];
-        $archive= ArchiveLicense::all()->where('type',$type);
+        $archive= ArchiveLicense::select('archive_licenses.*')->where('type',$type)->with('files')->get();
         
         return DataTables::of($archive)
                         ->addIndexColumn()
