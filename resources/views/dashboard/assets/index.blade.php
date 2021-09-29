@@ -584,7 +584,8 @@ function update($id)
             $("#AddressDetailsAR").val(response.info.address);
             $("#PHnum2").val(response.info.sponsor_phone);
             $("#PHnum1").val(response.info.supply_phone);
-            
+            $("#msgStatic").html(response.ArchiveCount);
+            drawTablesArchive(response.Archive,response.copyTo);
             $('#equipmentimg').attr('src', response.info.image);
 
             $("select#brand option")

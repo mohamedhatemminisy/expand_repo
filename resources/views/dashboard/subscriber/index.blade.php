@@ -303,9 +303,9 @@
                             </div>
                             <div class="col-md-2 w-s-50" style="padding: 0px;">
                                 <div class="form-group">
-                                    <img src="https://db.expand.ps/images/ico6.jpg" height="64px" onclick="ShowLicModal('formData')" style="cursor:pointer">
+                                    <img src="https://db.expand.ps/images/ico6.jpg" height="64px" onclick="$('#joblicModal').modal('show')" style="cursor:pointer">
                                     <div class="form-group">
-                                        <a onclick="ShowLicModal('formData')" style="color:#000000"> رخص حرف
+                                        <a onclick="$('#joblicModal').modal('show')" style="color:#000000"> رخص حرف
                                             <span id="licListCnt" style="color: #1e9ff2">(0)</span>
                                         </a>
                                     </div>
@@ -380,6 +380,7 @@
 </form>
 </section>
 @include('dashboard.component.archive_table');
+@include('dashboard.component.archive_joblic');
 @include('dashboard.component.fetch_table');
 @stop
 @section('script')
@@ -408,8 +409,10 @@ $( function() {
                 $('#formDataCutomerNo').val(response.info.cutomer_num);
                 $('#formDataEmailAddress').val(response.info.email);
                 $('#formDataBussniessName').val(response.info.bussniess_name);
-                $("#certListCnt").html(response.ArchiveCount);
+                $("#certListCnt").html("("+response.ArchiveCount+")");
+                $("#licListCnt").html("("+response.ArchiveJobLicCount+")");
                 drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic);
+                drawTableJoblic(response.ArchiveJobLic);
                 $("select#formDataProfessionID option")
                     .each(function() { this.selected = (this.text == response.job_title); 
                 });

@@ -20,9 +20,12 @@
 }
 .dt-buttons
 {
-    margin-bottom: 20px;
     text-align: left;
-    
+    display: inline;
+    float: left;
+    position: relative;
+    bottom: 10px;
+    margin-right: 10px;
 }
 
 </style>
@@ -33,11 +36,47 @@
             <div class="col-xl-12 col-lg-12">
                 <div class="card">
                     <div class="card-header" style="direction: rtl;">
-                        <h4 class="card-title"><img src="{{asset('assets/images/ico/report32.png')}}" /> 
+                        <h4 class="card-title datatable_header"><img src="{{asset('assets/images/ico/report32.png')}}" /> 
                             @if ($type=="outArchive")
                             {{ trans('archive.sending_out') }}
                             @elseif ($type=="inArchive")
                             {{ trans('archive.sending_in') }}
+                            @elseif ($type=="empArchive")
+                            {{ trans('archive.emp_archive') }}
+                            @elseif ($type=="depArchive")
+                            {{ trans('archive.dep_archive') }}
+                            @elseif ($type=="citArchive")
+                            {{ trans('archive.cit_archive') }}
+                            @elseif ($type=="licArchive")
+                            {{ trans('archive.lic_archive') }}
+                            @elseif ($type=="projArchive")
+                            {{ trans('archive.proj_archive') }}
+                            @elseif ($type=="munArchive")
+                            {{ trans('archive.mun_archive') }}
+                            @elseif ($type=="licFileArchive")
+                            {{ trans('archive.licFile_archive') }}
+                            @elseif ($type=="joblicArchive")
+                            {{ trans('archive.jobLic_archive') }}
+                            @elseif ($type=="subscriber")
+                            {{ trans('admin.subscribers') }}
+                            @elseif ($type=="depart")
+                            {{ trans('admin.department') }}
+                            @elseif ($type=="project")
+                            {{ trans('admin.projects') }}
+                            @elseif ($type=="employee")
+                            {{ trans('admin.employee') }}
+                            @elseif ($type=="vehicle")
+                            {{ trans('admin.vehicles') }}
+                            @elseif ($type=="buildings")
+                            {{ trans('admin.buildings') }}
+                            @elseif ($type=="warehouses")
+                            {{ trans('admin.warehouses') }}
+                            @elseif ($type=="Gardens_lands")
+                            {{ trans('admin.Gardens_lands') }}
+                            @elseif ($type=="equip")
+                            {{ trans('admin.dev_equp') }}
+                            @elseif ($type=="org")
+                            {{ trans('admin.orginzation') }}
                             @else
                             {{ trans('archive.search_result') }}
                              @endif
@@ -113,10 +152,16 @@
                                         <thead>
                                             <tr>
                                                 <th  >
+                                                   #
+                                                </th>
+                                                <th  >
                                                     {{trans('admin.subscriber_name')}}
                                                 </th>
                                                 <th >
                                                     الاسم التجاري
+                                                </th>
+                                                <th >
+                                                    رقم الرخصة
                                                 </th>
                                                 <th >
                                                     صنف الرخصة
@@ -133,6 +178,9 @@
                                                 </th>
                                                 <th >
                                                     المرفقات
+                                                </th>
+                                                <th >
+                                                    
                                                 </th>
                                             </tr>
                                         </thead>
@@ -171,6 +219,12 @@
                                                 </th>
                                                 <th>
                                                     {{trans('admin.emp_id')}}  
+                                                </th>
+                                                <th>
+                                                    {{trans('admin.departmentt')}}  
+                                                </th>
+                                                <th>
+                                                    {{trans('admin.job_title')}}  
                                                 </th>
                                                 <th>
                                                     {{trans('admin.address')}}
@@ -306,6 +360,9 @@
                                                     {{trans('assets.manager')}}
                                                 </th>
                                                 <th>
+                                                    {{trans('admin.ZIP_code')}}
+                                                </th>
+                                                <th>
                                                     {{trans('admin.phone')}} 
                                                 </th>
                                                 <th>
@@ -439,13 +496,15 @@
                     d.type = $('#type').val();
                 }
             },
-            @elseif($type=='licArchive'||$type=='licFileArchive'||$type=="jobLicArchive")
+            @elseif($type=='licArchive'||$type=='licFileArchive')
             ajax: {
                 url: '{{ route('archievelic_info_all') }}',
                 data: function (d) {
                     d.type = $('#type').val();
                 }
             },
+            @elseif($type=="jobLicArchive")
+            ajax:"{{ route('archieveJoblic_info_all') }}",
             @endif
             @if($type == 'org')
                 columns:[
@@ -459,10 +518,11 @@
                         name:'name',
                     
                     },
-                    {data:'manager_name',name:'admins.name'},
+                    {data:'manager_name',name:'manager_name'},
+                    {data:'zepe_code',name:'zepe_code'},
                     {data:'phone_one'},
                     {data:'job_title_name' ,name:'job_titles.name'},
-                    {data:'region_name',name:'regions.name'},
+                    {data:'area_name',name:'areas.name'},
                 ],
             @elseif($type == 'depart')
             columns:[
@@ -491,7 +551,7 @@
                 },
                 {data:'manager_name',name:'admins.name'},//manager_name
                 {data:'price'},
-                {data:'region_name',name:'regions.name'},
+                {data:'area_name',name:'areas.name'},
             ],
             @elseif($type=="employee"||$type=="subscriber")
             columns:[
@@ -508,10 +568,12 @@
                 {data:'phone_one'},
                 @if ($type=="employee")
                 {data:'identification'},
+                {data:'identification'},
+                {data:'job_title_name'},
                 @elseif ($type=="subscriber")
                 {data:'national_id'},
                 @endif
-                {data:'region_name',name:'regions.name'},
+                {data:'area_name',name:'areas.name'},
             ],
             @elseif($type == 'vehicle')
             columns:[
@@ -551,7 +613,7 @@
                 {data:'dateEnd'},
                 {data:'department_name',name:'departments.name'},//department
                 {data:'Projectcost'},
-                {data:'region_name',name:'regions.name'},
+                {data:'area_name',name:'areas.name'},
             ],
             @elseif($type == 'equip')
                 columns:[
@@ -712,8 +774,73 @@
                 },
             ],
             
+            @elseif ($type=='jobLicArchive')
+            columns:[
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                {
+                    data: null, 
+                    render:function(data,row,type){
+                        $actionBtn = '<a ondblclick="update('+data.id+')">'+data.name+'</a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                
+                },
+                {data:'trade_name'},
+                {data:'license_number'},
+                {data:'license_ratings_name',name:'license_ratings.name'},
+                {data:'start_date'},
+                {data:'expiry_ate'},
+                {data:'expiry_ate'},
+                {
+                    data: null,
+                    
+                    render:function(data,row,type){
+                        if(data.files.length>0){ 
+                            var i=1;
+                            $actionBtn="<div class='row' style='margin-left:0px;'>";
+                            data.files.forEach(file => {
+                                shortCutName=file.real_name;
+                                shortCutName=shortCutName.substring(0, 20);
+                                urlfile='{{ asset('') }}';
+                                console.log(urlfile);
+                                urlfile+=file.url;
+                                if(file.extension=="jpg"||file.extension=="png")
+                                fileimage='{{ asset('assets/images/ico/image.png') }}';
+                                else if(file.extension=="pdf")
+                                fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                                else if(file.extension=="excel"||file.extension=="xsc")
+                                fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                                else
+                                fileimage='{{ asset('assets/images/ico/file.png') }}';
+                                $actionBtn += '<div id="attach" class=" col-sm-6 ">'
+                                    +'<div class="attach">'
+                                      +'  <span class="attach-text">'+shortCutName+'</span>'
+                                       +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
+                                        +'    <img style="width: 20px;"src="'+fileimage+'">'                                        +'</a>'
+                                    +'</div>'
+                                    +'</div>'; 
+                            });
+                            $actionBtn += '</div>';
+                            return $actionBtn;
+                        }
+                        else{return '';}
+                    },
+                    name:'fileIDS',                    
+                },
+                
+                {
+                data: null, 
+                render:function(data,row,type){
+                        $actionBtn = '<a onclick="update('+data.id+')" class="btn btn-info"><i style="color:#ffffff" class="fa fa-edit"></i> </a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                },
+            ],
+            
             @endif   
-            dom: 'Bfltip',
+            dom: 'Bflrtip',
             buttons: [
                 {
                     extend: 'excel',
@@ -722,7 +849,7 @@
                     attr:  {
                         title: 'excel',
                         src:'{{asset('assets/images/ico/excel.png')}}',
-                        style: 'cursor:pointer;',
+                        style: 'cursor:pointer;display:inline',
                     },
 
                 },
@@ -733,7 +860,7 @@
                     attr:  {
                         title: 'print',
                         src:'{{asset('assets/images/ico/Printer.png')}} ',
-                        style: 'cursor:pointer;height: 32px;',
+                        style: 'cursor:pointer;height: 32px;display:inline',
                         class:"fa fa-print"
                     },
                     customize: function ( win ) {
@@ -744,6 +871,8 @@
                     }
                 },
                 ],
+                
+
             
             "language": {
                         "sEmptyTable":     "ليست هناك بيانات متاحة في الجدول",
@@ -770,6 +899,6 @@
                     }
     
         });
-        
+        table.buttons().container().appendTo($('.datatable_header'));
         })
 </script>    
