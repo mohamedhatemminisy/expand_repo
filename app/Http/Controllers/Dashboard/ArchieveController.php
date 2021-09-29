@@ -376,6 +376,17 @@ class ArchieveController extends Controller
                         ->make(true);
 
     }
+    public function archieveJoblic_info_all(Request $request)
+    {
+        $archive= jobLicArchieve::select('job_lic_archieves.*','craft_types.name as craft_name','license_ratings.name as license_ratings_name')
+        ->leftJoin('craft_types','craft_types.id','job_lic_archieves.craft_type_id')
+        ->leftJoin('license_ratings','license_ratings.id','job_lic_archieves.license_rating_id')
+        ->with('files')->get();        
+        return DataTables::of($archive)
+                        ->addIndexColumn()
+                        ->make(true);
+
+    }
     public function archieve_info(Request $request)
     {
         $archive['info'] = Archive::find($request['archive_id']);
@@ -469,7 +480,11 @@ class ArchieveController extends Controller
     }
     public function job_Lic_info(Request $request)
     {
-        $archive['info']= jobLicArchieve::find($request['archive_id']);
+        $archive['info']= jobLicArchieve::where($request['archive_id'])
+        ->select('job_lic_archieves.*','craft_types.name as craft_name','license_ratings.name as license_ratings_name')
+        ->leftJoin('craft_types','craft_types.id','job_lic_archieves.craft_type_id')
+        ->leftJoin('license_ratings','license_ratings.id','job_lic_archieves.license_rating_id')
+        ->get();
         $archive['files'] = File::where('archive_id','=',$request['archive_id'])->get();
         return response()->json($archive);
     }

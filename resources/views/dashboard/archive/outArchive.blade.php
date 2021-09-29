@@ -32,7 +32,7 @@
                     <div class="card-body">
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-12 pr-0 pr-s-12"  >
+                                    <div class="col-lg-7 col-md-12 pr-0 pr-s-12"  >
                                         <div class="row">
                                             <div class="col-lg-8 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
@@ -79,7 +79,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
@@ -127,7 +127,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
@@ -172,7 +172,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 col-md-12 pr-0 pr-s-12"  >
+                                    <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
                                         <div class="row attachs-body">
                                             <div class="form-group col-12 mb-2">
                                                 <div class="progress">
