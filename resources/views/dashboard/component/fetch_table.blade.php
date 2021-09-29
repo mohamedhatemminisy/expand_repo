@@ -148,6 +148,32 @@
                                                 </th>
                                             </tr>
                                         </thead>
+                                        @elseif($type=='agArchive')
+                                        <thead>
+                                            <tr style="text-align:center !important;background: #00A3E8;">
+                                                <th  >
+                                                    #
+                                                </th>
+                                                <th  >
+                                                   اسم الاجتماع
+                                                </th>
+                                                <th  >
+                                                   رقم الجلسة
+                                                </th>
+                                                <th  >
+                                                    تاريخ الجلسة
+                                                </th>                                                
+                                                <th style="width: 200px;">
+                                                    مرتبط ب
+                                                </th>
+                                                
+                                                <th style="width: 200px;">
+                                                    {{trans('archive.attach')}}
+                                                </th>
+                                                <th>
+                                                </th>
+                                            </tr>
+                                        </thead>
                                         @elseif ($type=="jobLicArchive")
                                         <thead>
                                             <tr>
@@ -467,6 +493,8 @@
             ajax:"{{ route('emp_info_all') }}",
             @elseif ($type=="subscriber")
             ajax:"{{ route('subscribe_info_all') }}",
+            @elseif ($type=='agArchive')
+            ajax:"{{ route('jalArchieve_info_all') }}",
             @elseif ($type=="depart")
             ajax:"{{ route('dep_info_all') }}",
             @elseif ($type == 'org')
@@ -634,6 +662,76 @@
                 {data:'price'},
                 {data:'status',name:'equpment_statuses.name'},
                 {data:'count'},
+            ],
+            @elseif ($type=='agArchive')
+            columns:[
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},
+                {data:'type_id'},
+                {data:'serisal'},
+                {data:'date'},
+                {
+                    data: null,
+                    
+                    render:function(data,row,type){
+                        if(data.copy_to.length>0){ 
+                            console.log(data.copy_to);
+                            var i=1;
+                            $actionBtn="<div class='row' style='margin-left:0px;'>";
+                                data.copy_to.forEach(copy_to => {
+                                $actionBtn += '<div id="names" class=" col-sm-6 ">'
+                                      +'  <span class="attach-text">'+copy_to.name+'</span>'
+                                    +'</div>'; 
+                            });
+                            $actionBtn += '</div>';
+                            return $actionBtn;
+                        }
+                        else{return '';}
+                    },
+                    name:'fileIDS',                    
+                },
+                {
+                    data: null,
+                    
+                    render:function(data,row,type){
+                        if(data.files.length>0){ 
+                            var i=1;
+                            $actionBtn="<div class='row' style='margin-left:0px;'>";
+                            data.files.forEach(file => {
+                                shortCutName=file.real_name;
+                                urlfile='{{ asset('') }}';
+                                urlfile+=file.url;
+                                if(file.extension=="jpg"||file.extension=="png")
+                                fileimage='{{ asset('assets/images/ico/image.png') }}';
+                                else if(file.extension=="pdf")
+                                fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                                else if(file.extension=="excel"||file.extension=="xsc")
+                                fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                                else
+                                fileimage='{{ asset('assets/images/ico/file.png') }}';
+                                $actionBtn += '<div id="attach" class=" col-sm-6 ">'
+                                    +'<div class="attach">'
+                                      +'  <span class="attach-text">'+shortCutName+'</span>'
+                                       +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
+                                        +'    <img style="width: 20px;"src="'+fileimage+'">'
+                                        +'</a>'
+                                    +'</div>'
+                                    +'</div>'; 
+                            });
+                            $actionBtn += '</div>';
+                            return $actionBtn;
+                        }
+                        else{return '';}
+                    },
+                    name:'fileIDS',                    
+                },
+                {
+                data: null, 
+                render:function(data,row,type){
+                        $actionBtn = '<a onclick="update('+data.id+')" class="btn btn-info"><i style="color:#ffffff" class="fa fa-edit"></i> </a>';
+                            return $actionBtn;
+                    },
+                    name:'name',
+                },
             ],
             @elseif($type=="outArchive"||$type=="inArchive"||$type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='assetsArchive'||$type=='citArchive'||$type=='depArchive')
             columns:[
