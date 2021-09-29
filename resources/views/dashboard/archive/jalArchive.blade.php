@@ -164,7 +164,7 @@ $.ajaxSetup({
        let formData = new FormData(this);
        $.ajax({
           type:'POST',
-          url: "store_archive",
+          url: "store_jal_archive",
            data: formData,
            contentType: false,
            processData: false,

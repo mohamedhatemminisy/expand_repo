@@ -10,6 +10,8 @@ use App\Models\Admin;
 use App\Models\Archive;
 use App\Models\Department;
 use App\Models\Orgnization;
+use App\Models\Setting;
+use App\Models\Region;
 use App\Models\Project;
 use App\Models\SpecialAsset;
 use App\Models\User;
@@ -225,22 +227,23 @@ class ArchieveController extends Controller
         $archive->save();
 
         $files_ids = $request->formDataaaorgIdList;
+        if($files_ids ){
         foreach($files_ids as $id){
             $file = File::find($id);
             $file->archive_id = $archive->id;
             $file->model_name = "App\Models\Archive";
             $file->save();
         }
-
+        }
         if($request->copyToText[0] != null){
-            $copyTo = new CopyTo();
             for($i= 0 ; $i< count($request->copyToText) ; $i++){
+                $copyTo = new CopyTo();
                 $copyTo->archive_id =  $archive->id;
                 $copyTo->model_id =  $request->copyToID[$i];
                 $copyTo->name =  $request->copyToCustomer[$i];    
-                $copyTo->model_name =  $request->copyToType[$i];    
+                $copyTo->model_name =  $request->copyToType[$i];   
+                $copyTo->save();         
             }
-            $copyTo->save();        
         }
     // }
         if ($archive) {
@@ -332,8 +335,10 @@ class ArchieveController extends Controller
         $limitNumber = LimitNumber::get();
         $licenseRating = LicenseRating::get();
         $attachment_type = AttachmentType::get();
+        $setting = Setting::first();
+        $regions = Region::where('area_id',$setting->address->area->id)->get();
         return view('dashboard.archive.jobLicArchive',compact('type','attachment_type'
-       ,'url','craftType','limitNumber','licenseRating'));
+       ,'url','craftType','limitNumber','licenseRating','regions'));
     }
     public function reportArchive(){
         $type= 'reportArchive';

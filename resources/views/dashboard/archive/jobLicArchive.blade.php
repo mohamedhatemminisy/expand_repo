@@ -90,7 +90,9 @@
                                                         </span>
                                                     </div>
                                                     <select class="form-control" name="cityData" id="cityData" >
-                                                        <option value=""></option>
+                                                        @foreach($regions as $region)
+                                                        <option value="{{$region->name}}"> {{$region->name}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
