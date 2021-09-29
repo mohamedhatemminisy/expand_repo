@@ -68,6 +68,9 @@
                                 <li class="nav-item">
                                   <a class="nav-link" id="base-tab8" data-toggle="tab" aria-controls="tab8" href="#xtab8" aria-expanded="false">نسخة الى</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="base-tab10" data-toggle="tab" aria-controls="tab10" href="#xtab10" aria-expanded="false">أرشيف الجلسات </a>
+                                </li>
                               </ul>
                               
                                 <div class="tab-content px-1 pt-1">
@@ -186,6 +189,48 @@
                                             </table>
                                         </p>
                                     </div>
+                                    <div class="tab-pane" id="xtab10" aria-labelledby="base-tab10">
+                                        <p>
+                                            <table width="100%" class="detailsTB table jal_table">
+                                                {{-- <thead>
+                                                <tr>
+                                                <th width="30px">#</th>
+                                                <th width="50px">رقم الأرشيف</th>
+                                                <th width="200px">العنوان</th>
+                                                <th width="80px">التاريخ </th>
+                                                <th width="60px"> النوع </th>
+                                                <th width="260px">المرفقات </th>
+                                                </tr>
+                                            </thead> --}}
+                                            <thead>
+                                                <tr>
+                                                    <th  width="30px">
+                                                        #
+                                                    </th>
+                                                    <th width="120px" >
+                                                       اسم الاجتماع
+                                                    </th>
+                                                    <th  width="30px">
+                                                       رقم الجلسة
+                                                    </th>
+                                                    <th  width="50px">
+                                                        تاريخ الجلسة
+                                                    </th>                                                
+                                                    <th width="200px">
+                                                        مرتبط ب
+                                                    </th>
+                                                    
+                                                    <th width="200px">
+                                                        {{trans('archive.attach')}}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="jal_list">
+                                            </tbody>
+                                            </table>
+                                        </p>
+                                    </div>
+
                                     <div class="tab-pane" id="xtab3" aria-labelledby="base-tab3">
                                         <p>
                                             <table width="100%" class="detailsTB table waredTbla">
@@ -264,6 +309,10 @@ function drawTablesArchive($archives,$copyTo)
         $(".copyToTbl").dataTable().fnDestroy();
         $('#copyToList').empty();
     }
+    if ( $.fn.DataTable.isDataTable( '.jal_table' ) ) {
+        $(".jal_table").dataTable().fnDestroy();
+        $('#jal_list').empty();
+    }
     var s=1;
     var w=1;
     var c=1,p=1,lc=1,lf=1;
@@ -276,6 +325,10 @@ function drawTablesArchive($archives,$copyTo)
         if ( $.fn.DataTable.isDataTable( '.copyToTbl' ) ) {
         $(".copyToTbl").dataTable().fnDestroy();
         $('#copyToList').empty();
+        }
+        if ( $.fn.DataTable.isDataTable( '.jal_table' ) ) {
+        $(".jal_table").dataTable().fnDestroy();
+        $('#jal_list').empty();
         }
         var s=1;
         var w=1;
@@ -328,7 +381,7 @@ function drawTablesArchive($archives,$copyTo)
            }
         });
         $('.orgnization_table').DataTable({
-        dom: 'Bfltip',
+            dom: 'Bfltip',
             buttons: [
                 {
                     extend: 'excel',
@@ -383,11 +436,11 @@ function drawTablesArchive($archives,$copyTo)
                             "sSortDescending": ": تفعيل لترتيب العمود تنازلياً"
                         }
                     }
-            });
+        });
             @if($type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type=="project"||$type == 'equip')
             $copyTo.forEach(copy => {
                 if(copy.archive){
-            $row="<tr>"+
+                $row="<tr>"+
                 "<td>"+c+"</td>"+
                 "<td>"+copy.archive.serisal+"</td>"+
                 "<td>"+copy.archive.title+"</td>"+
@@ -427,8 +480,9 @@ function drawTablesArchive($archives,$copyTo)
                 
                
                 $row += "</td></tr>";
-            $('#copyToList').append($row)
-            c++;}
+                $('#copyToList').append($row)
+                c++;
+            }
             });
                 $('.copyToTbl').DataTable({
 
@@ -1048,62 +1102,62 @@ function drawTablesArchive($archives,$copyTo)
   });
   $('.copyToTbl').DataTable({
 
-                    dom: 'Bfltip',
-                        buttons: [
-                            {
-                                extend: 'excel',
-                                tag: 'img',
-                                title:'',
-                                attr:  {
-                                    title: 'excel',
-                                    src:'{{asset('assets/images/ico/excel.png')}}',
-                                    style: 'cursor:pointer;',
-                                },
+        dom: 'Bfltip',
+        buttons: [
+            {
+                extend: 'excel',
+                tag: 'img',
+                title:'',
+                attr:  {
+                    title: 'excel',
+                    src:'{{asset('assets/images/ico/excel.png')}}',
+                    style: 'cursor:pointer;',
+                },
 
-                            },
-                            {
-                                extend: 'print',
-                                tag: 'img',
-                                title:'',
-                                attr:  {
-                                    title: 'print',
-                                    src:'{{asset('assets/images/ico/Printer.png')}} ',
-                                    style: 'cursor:pointer;height: 32px;',
-                                    class:"fa fa-print"
-                                },
-                                customize: function ( win ) {
-                              
+            },
+            {
+                extend: 'print',
+                tag: 'img',
+                title:'',
+                attr:  {
+                    title: 'print',
+                    src:'{{asset('assets/images/ico/Printer.png')}} ',
+                    style: 'cursor:pointer;height: 32px;',
+                    class:"fa fa-print"
+                },
+                customize: function ( win ) {
+                
 
-                                $(win.document.body).find( 'table' ).find('tbody')
-                                    .css( 'font-size', '20pt' );
-                                }
-                            },
-                            ],
-                        
-                        "language": {
-                                    "sEmptyTable":     "ليست هناك بيانات متاحة في الجدول",
-                                    "sLoadingRecords": "جارٍ التحميل...",
-                                    "sProcessing":   "جارٍ التحميل...",
-                                    "sLengthMenu":   "أظهر _MENU_ مدخلات",
-                                    "sZeroRecords":  "لم يعثر على أية سجلات",
-                                    "sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
-                                    "sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
-                                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
-                                    "sInfoPostFix":  "",
-                                    "sSearch":       "ابحث:",
-                                    "sUrl":          "",
-                                    "oPaginate": {
-                                        "sFirst":    "الأول",
-                                        "sPrevious": "السابق",
-                                        "sNext":     "التالي",
-                                        "sLast":     "الأخير"
-                                    },
-                                    "oAria": {
-                                        "sSortAscending":  ": تفعيل لترتيب العمود تصاعدياً",
-                                        "sSortDescending": ": تفعيل لترتيب العمود تنازلياً"
-                                    }
-                                }
-                    });
+                $(win.document.body).find( 'table' ).find('tbody')
+                    .css( 'font-size', '20pt' );
+                }
+            },
+            ],
+
+        "language": {
+                    "sEmptyTable":     "ليست هناك بيانات متاحة في الجدول",
+                    "sLoadingRecords": "جارٍ التحميل...",
+                    "sProcessing":   "جارٍ التحميل...",
+                    "sLengthMenu":   "أظهر _MENU_ مدخلات",
+                    "sZeroRecords":  "لم يعثر على أية سجلات",
+                    "sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix":  "",
+                    "sSearch":       "ابحث:",
+                    "sUrl":          "",
+                    "oPaginate": {
+                        "sFirst":    "الأول",
+                        "sPrevious": "السابق",
+                        "sNext":     "التالي",
+                        "sLast":     "الأخير"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": تفعيل لترتيب العمود تصاعدياً",
+                        "sSortDescending": ": تفعيل لترتيب العمود تنازلياً"
+                    }
+                }
+    });
     @endif
 }
 </script>
