@@ -43,27 +43,27 @@ class ArchieveController extends Controller
         $emp_data = $request['term'];
         // $equip = Equpment::where('name', 'like', '%' . $emp_data . '%')
         // ->select("CONCAT('name','equip') AS label")->get();
-        $inArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
-        ->where('type','inArchive')
-        ->select('*',DB::raw("CONCAT(name , '( أرشيف الوارد )' )AS label"))->get();
-        $outArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
-        ->where('type','outArchive')
-        ->select('*',DB::raw("CONCAT(name , '(  أرشيف الصادر  )' )AS label"))->get();
-        $munArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
-        ->where('type','munArchive')
-        ->select('*',DB::raw("CONCAT(name , '(  أرشيف عنوان الوثيقة  )' )AS label"))->get();
-        $projArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
-        ->where('type','projArchive')
-        ->select('*',DB::raw("CONCAT(name , '(  أرشيف المشاريع   )' )AS label"))->get();
-        $empArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
-        ->where('type','empArchive')
-        ->select('*',DB::raw("CONCAT(name , '(  أرشيف الموظفين   )' )AS label"))->get();
-        $depArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
-        ->where('type','depArchive')
-        ->select('*',DB::raw("CONCAT(name , '(  أرشيف الاقسام   )' )AS label"))->get();
-        $citArchive =  Archive::where('name', 'like', '%' . $emp_data . '%')
-        ->where('type','citArchive')
-        ->select('*',DB::raw("CONCAT(name , '(  أرشيف المواطنين   )' )AS label"))->get();
+        // $inArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        // ->where('type','inArchive')
+        // ->select('*',DB::raw("CONCAT(name , '( أرشيف الوارد )' )AS label"))->get();
+        // $outArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        // ->where('type','outArchive')
+        // ->select('*',DB::raw("CONCAT(name , '(  أرشيف الصادر  )' )AS label"))->get();
+        // $munArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        // ->where('type','munArchive')
+        // ->select('*',DB::raw("CONCAT(name , '(  أرشيف عنوان الوثيقة  )' )AS label"))->get();
+        // $projArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        // ->where('type','projArchive')
+        // ->select('*',DB::raw("CONCAT(name , '(  أرشيف المشاريع   )' )AS label"))->get();
+        // $empArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        // ->where('type','empArchive')
+        // ->select('*',DB::raw("CONCAT(name , '(  أرشيف الموظفين   )' )AS label"))->get();
+        // $depArchive = Archive::where('name', 'like', '%' . $emp_data . '%')
+        // ->where('type','depArchive')
+        // ->select('*',DB::raw("CONCAT(name , '(  أرشيف الاقسام   )' )AS label"))->get();
+        // $citArchive =  Archive::where('name', 'like', '%' . $emp_data . '%')
+        // ->where('type','citArchive')
+        // ->select('*',DB::raw("CONCAT(name , '(  أرشيف المواطنين   )' )AS label"))->get();
 
         $equip = Equpment::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(اجهزه و معدات)' )AS label"))->get();
@@ -82,9 +82,10 @@ class ArchieveController extends Controller
         $user = User::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(المشتركين)' )AS label"))->get();
         $names = $equip->merge($vehicle)->merge($project)
-        ->merge($admin)->merge($department)->merge($inArchive)
-        ->merge($outArchive)->merge($munArchive)->merge($projArchive)
-        ->merge($empArchive)->merge($depArchive)->merge($citArchive)
+        ->merge($admin)->merge($department)
+        // ->merge($inArchive)
+        // ->merge($outArchive)->merge($munArchive)->merge($projArchive)
+        // ->merge($empArchive)->merge($depArchive)->merge($citArchive)
         ->merge($orgnization)->merge($specialAsset)->merge($user);
 
         return response()->json($names);
@@ -93,18 +94,18 @@ class ArchieveController extends Controller
     public function Linence_auto_complete(Request $request){
         $emp_data = $request['term'];
       
-        $licArchive= ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
-        ->where('type','licArchive')
-        ->select('*',DB::raw("CONCAT(name , '( أرشيف رخص البناء)' )AS label"))->get();
-        $licFileArchive= ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
-        ->where('type','licFileArchive')
-        ->select('*',DB::raw("CONCAT(name , '(أرشيف ملف الترخيص)' )AS label"))->get();
+        // $licArchive= ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
+        // ->where('type','licArchive')
+        // ->select('*',DB::raw("CONCAT(name , '( أرشيف رخص البناء)' )AS label"))->get();
+        // $licFileArchive= ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
+        // ->where('type','licFileArchive')
+        // ->select('*',DB::raw("CONCAT(name , '(أرشيف ملف الترخيص)' )AS label"))->get();
         $users = User::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(المشتركين)' )AS label"))->get();
 
-        $names =$licArchive->merge($users)->merge($licFileArchive);
+        // $names =$licArchive->merge($users)->merge($licFileArchive);
 
-        return response()->json($names);
+        return response()->json($users);
     
     }
     public function store_lince_archive(Request $request){

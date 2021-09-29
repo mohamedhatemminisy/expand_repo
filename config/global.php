@@ -35,6 +35,9 @@ return [
         'assets' => 'assets',
         'archieve' => 'archieve',
         "reports" => 'reports',
+        "permissions" => 'permissions',
+        "account" => 'account',
+        "volunteers" => 'Volunteers',
 
 
         ]

@@ -190,5 +190,7 @@ return [
     'archieve' => 'Archieve',
     "reports" => 'Reports',
     'meeting_deleted' => 'Meeting deleted',
+    'account' => 'Employee information',
+    'volunteers' => 'Volunteers',
 
 ];

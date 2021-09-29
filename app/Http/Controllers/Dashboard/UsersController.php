@@ -9,6 +9,11 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\User;
+use App\Models\Setting;
+use App\Models\Address;
+use App\Models\City;
+use App\Models\Region;
+use App\Models\Area;
 use Hash;
 use Auth;
 use App\Image;
@@ -22,7 +27,12 @@ class UsersController extends Controller {
     */
     public function index() {
          $users = Admin::latest()->where('id', '<>', auth()->id())->get(); //use pagination here
-        return view('dashboard.users.index', compact('users'));
+         $setting = Setting::first();
+         $address = Address::where('id',$setting->address_id)->first();
+         $city = City::get();
+         $area = Area::get();
+         $region = Region::get();
+        return view('dashboard.users.index', compact('users','city','area','region'));
     }
 
     public function create(){

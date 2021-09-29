@@ -416,7 +416,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" checked="" name="customCheck" id="customCheck2" onclick="$('#userlogin').toggle()">
+                                                    <input type="checkbox" class="custom-control-input" name="customCheck" id="customCheck2">
                                                     <label class="custom-control-label" for="customCheck2"> 
                                                     {{trans('admin.has_account')}}
 
@@ -448,6 +448,8 @@
                                             </div>
                                         </div> -->
                                     </div>
+                                    @can('account')
+
                                     <div class="row" id="userlogin">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -484,6 +486,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
@@ -517,6 +520,7 @@
                                 </div>
                         </div>
                     </div>
+                    @can('permissions')
 						<div class="col-sm-12">
 							<div class="card">
 								<div class="card-header">
@@ -561,6 +565,7 @@
 								</div>
 							</div>
 						</div>
+                    @endcan
 					</div>
 
                         
@@ -673,7 +678,14 @@ $( function() {
             $('#InternalPhone').val(response.info.InternalPhone);
             $('#EmailAddress').val(response.info.email);
             $("#DepartmentID").val(response.info.department_id);
-            $('#userProfileImg').attr('src', response.info.image);
+            if(response.info.image != window.location.origin){
+                $('#userProfileImg').attr('src', response.info.image);  
+            }else{
+                $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/user.png');
+            }
+            if(response.info.status == 'on'){
+                $('#customCheck2').prop('checked', true);
+            }
             $("#msgStatic").html(response.ArchiveCount);
             drawTablesArchive(response.Archive,response.copyTo);
 
@@ -730,6 +742,9 @@ function update($id)
             $('#Name').val(response.info.name);
             $('#NationalID').val(response.info.identification);
             $('#JobNumber').val(response.info.job_Number);
+            if(response.info.status == 'on'){
+                $('#customCheck2').prop('checked', true);
+            }
             $('#MobileNo1').val(response.info.phone_one);
             $('#MobileNo2').val(response.info.phone_two);
             $('#NickName').val(response.info.nick_name);
