@@ -5,13 +5,14 @@
             <form method="post" id="formDataaa" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-xl-6 col-lg-6">
+                <div class="col-xl-8 col-lg-6">
                     <div class="card rSide">
                         <div class="card-header">
                             <h4 class="card-title"><img src="{{asset('assets/images/ico/report32.png')}}" />
                                 رخص الحرف و الصناعات
                             </h4>
                         </div>
+                        <?php $types=$type;?>
                         <div class="card-body">
                             <div class="form-body">
                                     <div class="row">
@@ -102,13 +103,13 @@
     														رقم الحد
     													</span>
                                                     </div>
-                                                    
-                                                    <select class="form-control" name="LicBorder" id="LicBorder1">
+                                                    <input type="text" id="LicBorder1" name="LicBorder" class="form-control eng-sm  valid" value="" placeholder="" autocomplete="off">
+                                                    <select class="form-control hide" name="LicBorder" id="LicBorder1">
                                                      @foreach($limitNumber as $number)
                                                         <option value="{{$number->id}}">{{$number->name}}</option>  
                                                         @endforeach                                                      
                                                     </select>
-                                                    <div class="input-group-append" onclick="QuickAdd(56,'licType','رقم الحد')" style="cursor:pointer; margin-left: 0px !important;">
+                                                    <div class="input-group-append hide" onclick="QuickAdd(56,'licType','رقم الحد')" style="cursor:pointer; margin-left: 0px !important;">
                                                         <span class="input-group-text input-group-text2">
                                                             <i class="fa fa-external-link"></i>
                                                         </span>
@@ -169,7 +170,7 @@
                                         </div>
                                     
                                         <div class="row">
-                                        <div class="col-lg-10 col-md-12 pr-0 pr-s-12"  >
+                                        <div class="col-lg-10 col-md-12 pr-0 pr-s-12 hide"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
                                                     <div class="input-group-prepend">
@@ -191,7 +192,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2 col-md-12 pr-0 pr-s-12"  >
+                                        <div class="col-lg-6 col-md-12 pr-0 pr-s-12"  ></div>
+                                        <div class="col-lg-1 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
                                                     <div class="input-group-prepend">
@@ -204,20 +206,21 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div style="text-align: center;">
+                                        
+                                            <button type="submit" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
+                                                حفظ    
+                                            </button>
+                                                
+                                                
+                                            </div>
                                     </div>
-                                    <div style="text-align: center;">
-                                        
-                                    <button type="submit" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
-                                        حفظ    
-                                    </button>
-                                        
-                                        
-                                    </div>
+                                    
                                 </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6">
+                <div class="col-xl-4 col-lg-6">
                     @if ($type=='jobLicArchive')
                     <div class="card lSide" style="min-height:358.2px;">
                     @else
@@ -236,6 +239,7 @@
         </section>
     </form>
 </div>
+<?php $type=$types;?>
 @include('dashboard.component.fetch_table');
 @endsection
 

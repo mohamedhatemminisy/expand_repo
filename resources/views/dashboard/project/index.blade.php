@@ -238,21 +238,21 @@
                             </div>
                         
                         </div>
-            <div class="card-content collapse show">
-                <div class="card-body" style="padding-bottom: 0px;">
-                    <div class="row" style="text-align: center">
-                        <div class="col-md-2 w-s-50" style="padding: 0px;">
-                            <div class="form-group">
-                                <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#OrgArchModal').modal('show')" style="cursor:pointer">
-                                <div class="form-group">
-                                    <a onclick="$('#OrgArchModal').modal('show')" style="color:#000000"> {{trans('admin.archieve')}} 
-                                    <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
-                                </div>
+                        <div class="card-content collapse show">
+                            <div class="card-body" style="padding-bottom: 0px;">
+                                <div class="row" style="text-align: center">
+                                        <div class="col-md-2 w-s-50" style="padding: 0px;">
+                                            <div class="form-group">
+                                                <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#CertModal').modal('show')" style="cursor:pointer">
+                                                <div class="form-group">
+                                                    <a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}} 
+                                                    <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
                     </div>
                 </div>
             </div>

@@ -179,6 +179,7 @@ Route::group([
         Route::get('archieve_info', 'ArchieveController@archieve_info')->name('archieve_info');
         Route::get('archieveLic_info', 'ArchieveController@archieveLic_info')->name('archieveLic_info');
         Route::get('job_Lic_info', 'ArchieveController@job_Lic_info')->name('job_Lic_info');
+        Route::get('archieveJoblic_info_all', 'ArchieveController@archieveJoblic_info_all')->name('archieveJoblic_info_all');
 
         Route::get('Linence_auto_complete','ArchieveController@Linence_auto_complete')
         ->name('Linence_auto_complete');

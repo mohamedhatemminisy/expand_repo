@@ -36,4 +36,7 @@ class Admin  extends  Authenticatable
         }
         return false;
     }
+    public function adminDetails(){
+        return $this->hasOne(AdminDetail::class);
+    }
 }

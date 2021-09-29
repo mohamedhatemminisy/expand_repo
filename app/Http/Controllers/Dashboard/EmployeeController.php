@@ -213,7 +213,7 @@ class EmployeeController extends Controller
         ->leftJoin('addresses','addresses.id','admin_details.address_id')
         ->leftJoin('regions','addresses.region_id','regions.id')
         ->leftJoin('cities','addresses.city_id','cities.id')
-        ->leftJoin('areas','addresses.area_id','areas.id')->orderBy('id', 'DESC');
+        ->leftJoin('areas','addresses.area_id','areas.id')->with('adminDetails')->orderBy('id', 'DESC');
         return DataTables::of($admin)
                             ->addIndexColumn()
                             ->make(true);

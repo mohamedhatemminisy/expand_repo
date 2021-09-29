@@ -67,7 +67,7 @@ return [
     'employee_added' => 'تم اضافة الموظف بنجاح',
 
     'dept_info'  => 'معلومات القسم',
-    'department' => 'القسم',
+    'departmentt' => 'القسم',
     'manager'   => 'الموظف المسؤل ',
     'select_manager' => 'اختر المسؤل',
     'related_to' => 'مرتبط ب',

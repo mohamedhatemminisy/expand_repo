@@ -17,6 +17,7 @@ use Yajra\DataTables\DataTables;
 use App\Models\Archive;
 use App\Models\ArchiveLicense;
 use App\Models\Setting;
+use App\Models\jobLicArchieve;
 use App\Models\CopyTo;
 use Yajra\DataTables\Services\DataTable;
 class SubscriberController extends Controller
@@ -116,6 +117,16 @@ class SubscriberController extends Controller
         $user['ArchiveLic'] = $ArchiveLic;
         $ArchiveLicCount =count(ArchiveLicense::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->get());
+        $ArchiveJobLic =jobLicArchieve::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)
+        ->select('job_lic_archieves.*','craft_types.name as craft_name','license_ratings.name as license_ratings_name')
+        ->leftJoin('craft_types','craft_types.id','job_lic_archieves.craft_type_id')
+        ->leftJoin('license_ratings','license_ratings.id','job_lic_archieves.license_rating_id')
+        ->with('files')->get();
+        $user['ArchiveJobLic'] = $ArchiveJobLic;
+        $ArchiveJobLicCount =count(jobLicArchieve::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->get());
+        $user['ArchiveJobLicCount'] = $ArchiveJobLicCount;
         $user['Archive'] = $Archive;
         $CopyTo = CopyTo::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->with('archive','archive.files')->get();
