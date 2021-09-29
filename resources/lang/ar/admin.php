@@ -191,5 +191,7 @@ return [
     'archieve' => 'الارشيف',
     "reports" => 'التقارير',
     'meeting_deleted' => 'تم حذف الاجتماع',
+    'account' => 'بيانات الموظف',
+    'volunteers' => ' المتطوعين',
 ];
  

@@ -64,7 +64,6 @@ class EmployeeController extends Controller
             $admin->currency = $request->CurrencyID;
             $admin->username = $request->username;
             $admin->start_date = $request->HiringDate;
-            $admin->status = '1';
             $admin->add_by = Auth()->user()->id;
             $admin->url = 'employee';
             $admin->email  = $request->EmailAddress;
@@ -72,6 +71,11 @@ class EmployeeController extends Controller
             $admin->InternalPhone = $request->InternalPhone;
             $admin->admin_id  = $request->DirectManager;
             $admin->role_id = $role->id;
+            if($request->customCheck){
+                $admin->status = 'on';
+            }else{
+                $admin->status = 'off';
+            }
             $admin->save();
             $AdminDetail = new AdminDetail();
             $AdminDetail->admin_id =$admin->id; 
@@ -105,8 +109,12 @@ class EmployeeController extends Controller
             $admin->currency = $request->CurrencyID;
             $admin->username = $request->username;
             $admin->start_date = $request->HiringDate;
-            $admin->status = '1';
             $admin->email  = $request->EmailAddress;
+            if($request->customCheck){
+                $admin->status = 'on';
+            }else{
+                $admin->status = 'off';
+            }
             if($request->password){
                 $admin->password = bcrypt($request->password);
             }else{
@@ -160,7 +168,6 @@ class EmployeeController extends Controller
     public function emp_info(Request $request)
     {
         $admin['info'] = Admin::find($request['emp_id']);
-
         $model = $admin['info']->model;
         $ArchiveCount = count(Archive::where('model_id',$request['emp_id'])
         ->where('model_name',$model)->get());
@@ -177,7 +184,7 @@ class EmployeeController extends Controller
         $admin['details'] = AdminDetail::where('admin_id',$request['emp_id'])->first();
         $admin['job_title'] = JobTitle::where('id',$admin['details']->job_title_id )->first()->name;
         $admin['job_type'] = JobType::where('id',$admin['details']->job_type_id )->first()->name;
-        $admin['department_id'] = JobType::where('id',$admin['details']->job_type_id )->first()->name;
+        $admin['department_id'] = Department::where('id',$admin['details']->department_id )->first()->name;
         $admin['address'] = Address::where('id',$admin['details']->address_id  )->first();
         $admin['DirectManager'] = Admin::where('id',$admin['info']->admin_id  )->first()->name;
         $admin['Currency'] = trans('admin.'.$admin['info']->currency);

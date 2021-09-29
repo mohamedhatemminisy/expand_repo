@@ -21,10 +21,9 @@ class SettingsController extends Controller
         $setting = Setting::first();
         $address = Address::where('id',$setting->address_id)->first();
         $city = City::get();
-
-        
-
-        return view('dashboard.setting.index',compact('setting','city','address')); 
+        $area = Area::get();
+        $region = Region::get();
+        return view('dashboard.setting.index',compact('setting','city','address','area','region')); 
     }
 
     public function state(Request $request){
@@ -50,20 +49,21 @@ class SettingsController extends Controller
     }
 
     public function store_settings(Request $request){
-        $address = new Address();
-        $address->area_id = $request->area_data;
-        $address->city_id = $request->CityID;
-        $address->region_id = $request->region_data;
-        $address->details = $request->AddressDetails;
-        $address->notes = $request->Note;
-        $address->save();
         $setting = Setting::first();
         if($setting){
-            if ($request->file('logo')) {
-                $path = upload_image($request->file('logo'), 'emp_');
+            if ($request->file('imgPic')) {
+                $path = upload_image($request->file('imgPic'), 'setting_');
             }else{
-                $path = '';
+                $path = $setting->logo;
             }
+            $address = Address::where('id',$setting->address_id)->first();
+            $address->area_id = $request->TownID;
+            $address->city_id = $request->CityID;
+            $address->region_id = $request->AreaID;
+            $address->details = $request->AddressDetails;
+            $address->notes = $request->Note;
+            $address->save();
+
             $setting->logo = url($path);
             $setting->phone_one = $request->phone_one;
             $setting->phone_two = $request->phone_two;
@@ -96,8 +96,8 @@ class SettingsController extends Controller
 
         }else{
             $setting =new Setting();
-            if ($request->file('logo')) {
-                $path = upload_image($request->file('logo'), 'emp_');
+            if ($request->file('imgPic')) {
+                $path = upload_image($request->file('imgPic'), 'setting_');
             }else{
                 $path = public_path('assets/images/ico/user.png');
             }

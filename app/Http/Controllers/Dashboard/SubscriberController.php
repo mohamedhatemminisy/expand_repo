@@ -16,7 +16,7 @@ use App\Http\Requests\SubscribertRequest;
 use Yajra\DataTables\DataTables;
 use App\Models\Archive;
 use App\Models\ArchiveLicense;
-
+use App\Models\Setting;
 use App\Models\CopyTo;
 use Yajra\DataTables\Services\DataTable;
 class SubscriberController extends Controller
@@ -26,7 +26,12 @@ class SubscriberController extends Controller
         $groups = Group::get();
         $jobTitle = JobTitle::get();
         $type="subscriber";
-        return view('dashboard.subscriber.index',compact('city','groups','jobTitle','type'));    
+        $setting = Setting::first();
+        $address = Address::where('id',$setting->address_id)->first();
+        $area = Area::get();
+        $region = Region::get();
+        return view('dashboard.subscriber.index',compact('city','groups','area','region',
+        'jobTitle','type','setting','address'));    
     }
 
     public function store_subscriber (SubscribertRequest $request){

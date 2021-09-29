@@ -2,7 +2,9 @@
 @extends('layouts.admin')
 @section('content')
 <section class="horizontal-grid" id="horizontal-grid">
-<form id="ajaxform">
+
+<form method="post" id="setting_form" enctype="multipart/form-data">
+
     @csrf  
     <div class="row white-row">
         <div class="col-sm-12 col-lg-6 col-md-12">
@@ -95,7 +97,7 @@
                                 </div>
 
                                 <div class="col-sm-12 col-md-12 col-lg-4">
-                                    <img id="userProfileImg" src="https://db.expand.ps/uploads/16232479351317.png" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
+                                    <img id="userProfileImg" src="{{$setting->logo}}" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
                                     <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
                                     <input type="hidden" style="display: none" id="userimgpath" name="userimgpath">
                                 </div>
@@ -423,12 +425,144 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                        @include('dashboard.component.address')	
-                        
-                        <div class="form-actions" style="border-top:0px;">
+
+                    
+
+                    <div class="row">
+    <div class="col-md-4" style="padding-left:0px;">
+        <div class="row">
+            <div class="form-group col-10" style="padding-left:0px;">
+            <div class="input-group" >
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                        {{trans('admin.city')}}
+                    </span>
+                </div>  
+                <select id="CityID" name="CityID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),8,'TownID')">
+                    <option> -- {{trans('admin.city')}} --</option>     
+                    @foreach($city as $cit)
+                    <option value="{{$cit->id}}" @if($cit->id == $setting->address->city->id) selected @endif>
+                                                    {{$cit->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            </div>
+            <div class="input-group-append col-2" onclick="QuickAdd(10,'PositionID','City')" 
+            style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                <span class="input-group-text input-group-text2">
+                    <i class="fa fa-external-link"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4" style="padding-left:0px;">
+        <div class="row">
+            <div class="form-group col-10" style="padding-left:0px;">
+                <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                            {{trans('admin.state')}}
+                        </span>
+                    </div>  
+                <select id="area_data" name="TownID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),9,'AreaID')">
+                @foreach($area as $are)
+                    @if($setting->address->area_id != null)
+                        <option value="{{$are->id}}" @if($are->id == $setting->address->area->id) selected @endif>
+                                                        {{$are->name}}</option>
+                    @endif
+                @endforeach  
+                
+                <option value=""> -- {{trans('admin.state')}} -- </option>
+                </select>
+            </div>
+            </div>
+            <div class="input-group-append col-2" onclick="QuickAdd(33,$('#CityID').find(':selected').val(),'Area')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                <span class="input-group-text input-group-text2">
+                    <i class="fa fa-external-link"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4" style="padding-left:0px;">
+        <div class="row">  
+            <div class="form-group col-10" style="padding-left:0px;">
+                <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                            {{trans('admin.area')}}
+                        </span>
+                    </div>  
+                    <select id="region_data" name="AreaID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),10,'NeighborID')">
+                    @foreach($region as $reg)
+                    @if($setting->address->region_id != null)
+                    <option value="{{$reg->id}}" {{ $reg->id == $setting->address->region->id ? 'selected':'' }} >
+                     {{$reg->name}}</option>
+                    @endif
+                    @endforeach  
+                    <option value=""> -- {{trans('admin.area')}} --  </option>                                                                         
+                        </select>
+                    
+                </div>
+            </div>
+            <div class="input-group-append col-2" onclick="QuickAdd(77,$('#area_data').find(':selected').val(),'Resion')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+                <span class="input-group-text input-group-text2">
+                    <i class="fa fa-external-link"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="input-group" style="width: 98% !important;">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                    {{trans('admin.address_details')}}
+                    </span>
+                </div>
+                <textarea type="text" id="AddressDetails" class="form-control" 
+                placeholder="{{trans('admin.address_details')}}" name="AddressDetails"
+                    style="height: 40px;">{{$address->details}}</textarea>
+                <div class="input-group-append hidden-xs hidden-sm">
+                <span class="input-group-text input-group-text2" style="color:#ffffff">
+                <i class="fa fa-external-link-alt"></i>
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="input-group" style="width: 98% !important;">
+                <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                        {{trans('admin.notes')}}
+                        </span>
+                </div>
+                <textarea type="text" id="Note" class="form-control"
+                    placeholder="{{trans('admin.notes')}}" name="Note" 
+                    style="height: 40px;">{{$address->notes}}</textarea>
+                <div class="input-group-append hidden-xs hidden-sm">
+                    <span class="input-group-text input-group-text2" style="color:#ffffff">
+                    <i class="fa fa-external-link-alt"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                       				
+
+
+
+                        <div class="form-actions" style="border-top:0px; padding-bottom:44px;">
                             <div class="text-right">
-                                <button class="btn btn-primary save-data">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
-                                <button type="reset" class="btn btn-warning"> {{trans('admin.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+                                <button type="submit" class="btn btn-primary" id="saveBtn">{{trans('admin.save')}}  <i class="ft-thumbs-up position-right"></i></button>
+                                <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                             </div>
                         </div>
                     </div>
@@ -444,118 +578,163 @@
 <script>
 $(document).ready(function () {
 
-    $(".save-data").click(function(event){
-      event.preventDefault();
 
-      let name_ar = $("input[name=name_ar]").val();
-      let name_en = $("input[name=name_en]").val();
-      let phone_one = $("input[name=phone_one]").val();
-      let phone_two = $("input[name=phone_two]").val();
-      let userimgpath = $("input[name=imgPic]").val(); 
-      let website = $("input[name=website]").val();
-      let fax = $("input[name=fax]").val();
-      let email = $("input[name=email]").val();
-      let storage_path = $("input[name=storage_path]").val();
-      let max_upload = $("input[name=max_upload]").val();
-      let WorkinghoursFrom = $("input[name=WorkinghoursFrom]").val();
-      let WorkinghoursTo = $("input[name=WorkinghoursTo]").val();
-      let Holidays = $("input[name=Holidays]").val();
-      let from1 = $("input[name=from1]").val();
-      let to1 = $("input[name=to1]").val();
-      let from2 = $("input[name=from2]").val();
-      let to2 = $("input[name=to2]").val();
-      let from3 = $("input[name=from3]").val();
-      let to3 = $("input[name=to3]").val();
-      let from4 = $("input[name=from4]").val();
-      let to4 = $("input[name=to4]").val();
-      let from5 = $("input[name=from5]").val();
-      let to5 = $("input[name=to5]").val();
-      let from6 = $("input[name=from6]").val();
-      let to6 = $("input[name=to6]").val();      
-      let from7 = $("input[name=from7]").val();
-      let to7 = $("input[name=to7]").val();
-      var CityID = $('#CityID').find(":selected").val();
-      var area_data = $('#area_data').find(":selected").val();
-      var region_data = $('#region_data').find(":selected").val();
-      var AddressDetails = $('#AddressDetails').val();
-      var Note = $('#Note').val();
-      var _token ='{{csrf_token()}}';
-console.log(userimgpath);
-      $.ajax({
-        url: "store_settings",
-        type:"POST",
-        contentType: false,
+    $('#setting_form').submit(function(e) {
+       e.preventDefault();
+       let formData = new FormData(this);
+       $.ajax({
+          type:'POST',
+          url: "store_settings",
+           data: formData,
+           contentType: false,
            processData: false,
-        data:{
-            name_ar:name_ar,
-            name_en:name_en,
-            phone_one:phone_one,
-            phone_two:phone_two,
-            logo:userimgpath,
-            website:website,
-            fax:fax,
-            email:email,          
-            storage_path:storage_path,
-            max_upload:max_upload,
-            WorkinghoursFrom:WorkinghoursFrom,
-            WorkinghoursTo:WorkinghoursTo,
-            Holidays:Holidays,
-            from1:from1,
-            to1:to1,
-            from2:from2,            
-            to2:to2,
-            from3:from3,
-            to3:to3,
-            from4:from4,
-            to4:to4,
-            from5:from5,
-            to5:to5,   
-            from6:from6,
-            to6:to6,
-            from7:from7,
-            CityID:CityID, 
-            area_data:area_data,            
-            region_data:region_data,            
-            AddressDetails:AddressDetails,            
-            Note:Note,                       
-            _token: _token ,       
-         },
+           success: (response) => {
+            $('.wtbl').DataTable().ajax.reload();  
+             if (response) {
+                $(".loader").addClass('hide');
+			Swal.fire({
+				position: 'top-center',
+				icon: 'success',
+				title: '{{trans('admin.data_added')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
 
-        success:function(response){
-            $('#phone_one').val(blaresponse.phone_one);
-            $('#phone_two').val(blaresponse.phone_two);
-            $('#website').val(blaresponse.website);
-            $('#fax').val(blaresponse.fax);
-            $('#email').val(blaresponse.email);
-            $('#storage_path').val(blaresponse.storage_path);
-            $('#WorkinghoursFrom').val(blaresponse.WorkinghoursFrom);
-            $('#WorkinghoursTo').val(blaresponse.WorkinghoursTo);
-            $('#Holidays').val(blaresponse.Holidays);
-            $('#max_upload').val(blaresponse.max_upload);
-            $('#from1').val(blaresponse.from1);
-            $('#to1').val(blaresponse.to1);
-            $('#from2').val(blaresponse.from2);
-            $('#to2').val(blaresponse.to2);            
-            $('#from3').val(blaresponse.from3);
-            $('#to3').val(blaresponse.to3);            
-            $('#from4').val(blaresponse.from4);
-            $('#to4').val(blaresponse.to4);            
-            $('#from5').val(blaresponse.from5);
-            $('#to5').val(blaresponse.to5);            
-            $('#from6').val(blaresponse.from6);
-            $('#to6').val(blaresponse.to6);            
-            $('#from7').val(blaresponse.from7);
-            $('#to7').val(blaresponse.to7);
-            $('#AddressDetails').val(blaresponse.AddressDetails);
-            $('#Note').val(blaresponse.Note);
-            $('#name_ar').val(blaresponse.name_ar);
-            $('#name_en').val(blaresponse.name_en);
+               this.reset();
+             }
+             location.reload();
+
+           },
+           error: function(response){
+
+			Swal.fire({
+				position: 'top-center',
+				icon: 'error',
+				title: '{{trans('admin.error_save')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
+           }
+       });
+  });
+
+
+
+
+
+
+//     $(".save-data").click(function(event){
+//       event.preventDefault();
+
+//       let name_ar = $("input[name=name_ar]").val();
+//       let name_en = $("input[name=name_en]").val();
+//       let phone_one = $("input[name=phone_one]").val();
+//       let phone_two = $("input[name=phone_two]").val();
+//       let userimgpath = $("input[name=imgPic]").val(); 
+//       let website = $("input[name=website]").val();
+//       let fax = $("input[name=fax]").val();
+//       let email = $("input[name=email]").val();
+//       let storage_path = $("input[name=storage_path]").val();
+//       let max_upload = $("input[name=max_upload]").val();
+//       let WorkinghoursFrom = $("input[name=WorkinghoursFrom]").val();
+//       let WorkinghoursTo = $("input[name=WorkinghoursTo]").val();
+//       let Holidays = $("input[name=Holidays]").val();
+//       let from1 = $("input[name=from1]").val();
+//       let to1 = $("input[name=to1]").val();
+//       let from2 = $("input[name=from2]").val();
+//       let to2 = $("input[name=to2]").val();
+//       let from3 = $("input[name=from3]").val();
+//       let to3 = $("input[name=to3]").val();
+//       let from4 = $("input[name=from4]").val();
+//       let to4 = $("input[name=to4]").val();
+//       let from5 = $("input[name=from5]").val();
+//       let to5 = $("input[name=to5]").val();
+//       let from6 = $("input[name=from6]").val();
+//       let to6 = $("input[name=to6]").val();      
+//       let from7 = $("input[name=from7]").val();
+//       let to7 = $("input[name=to7]").val();
+//       var CityID = $('#CityID').find(":selected").val();
+//       var area_data = $('#area_data').find(":selected").val();
+//       var region_data = $('#region_data').find(":selected").val();
+//       var AddressDetails = $('#AddressDetails').val();
+//       var Note = $('#Note').val();
+//       var _token ='{{csrf_token()}}';
+// console.log(userimgpath);
+//       $.ajax({
+//         url: "store_settings",
+//         type:"POST",
+//         contentType: false,
+//            processData: false,
+//         data:{
+//             name_ar:name_ar,
+//             name_en:name_en,
+//             phone_one:phone_one,
+//             phone_two:phone_two,
+//             logo:userimgpath,
+//             website:website,
+//             fax:fax,
+//             email:email,          
+//             storage_path:storage_path,
+//             max_upload:max_upload,
+//             WorkinghoursFrom:WorkinghoursFrom,
+//             WorkinghoursTo:WorkinghoursTo,
+//             Holidays:Holidays,
+//             from1:from1,
+//             to1:to1,
+//             from2:from2,            
+//             to2:to2,
+//             from3:from3,
+//             to3:to3,
+//             from4:from4,
+//             to4:to4,
+//             from5:from5,
+//             to5:to5,   
+//             from6:from6,
+//             to6:to6,
+//             from7:from7,
+//             CityID:CityID, 
+//             area_data:area_data,            
+//             region_data:region_data,            
+//             AddressDetails:AddressDetails,            
+//             Note:Note,                       
+//             _token: _token ,       
+//          },
+
+//         success:function(response){
+//             $('#phone_one').val(blaresponse.phone_one);
+//             $('#phone_two').val(blaresponse.phone_two);
+//             $('#website').val(blaresponse.website);
+//             $('#fax').val(blaresponse.fax);
+//             $('#email').val(blaresponse.email);
+//             $('#storage_path').val(blaresponse.storage_path);
+//             $('#WorkinghoursFrom').val(blaresponse.WorkinghoursFrom);
+//             $('#WorkinghoursTo').val(blaresponse.WorkinghoursTo);
+//             $('#Holidays').val(blaresponse.Holidays);
+//             $('#max_upload').val(blaresponse.max_upload);
+//             $('#from1').val(blaresponse.from1);
+//             $('#to1').val(blaresponse.to1);
+//             $('#from2').val(blaresponse.from2);
+//             $('#to2').val(blaresponse.to2);            
+//             $('#from3').val(blaresponse.from3);
+//             $('#to3').val(blaresponse.to3);            
+//             $('#from4').val(blaresponse.from4);
+//             $('#to4').val(blaresponse.to4);            
+//             $('#from5').val(blaresponse.from5);
+//             $('#to5').val(blaresponse.to5);            
+//             $('#from6').val(blaresponse.from6);
+//             $('#to6').val(blaresponse.to6);            
+//             $('#from7').val(blaresponse.from7);
+//             $('#to7').val(blaresponse.to7);
+//             $('#AddressDetails').val(blaresponse.AddressDetails);
+//             $('#Note').val(blaresponse.Note);
+//             $('#name_ar').val(blaresponse.name_ar);
+//             $('#name_en').val(blaresponse.name_en);
 
             
 
-        },
-       });
-  });
+//         },
+//        });
+//   });
 
 
 

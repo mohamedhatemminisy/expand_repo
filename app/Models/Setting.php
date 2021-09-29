@@ -50,7 +50,10 @@ class Setting extends Model
         }
     }
 
-
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
     /**
      * Set the given setting.
      *
@@ -73,10 +76,6 @@ class Setting extends Model
         static::updateOrCreate(['key' => $key], ['plain_value' => $value]);
     }
 
-    public function address()
-    {
-        return $this->hasMany('App\Models\Address') ;
-    }
     /**
      * Set a translatable settings.
      *
