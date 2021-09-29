@@ -151,7 +151,7 @@
       </form>
     </section>
 </div>
-{{-- @include('dashboard.component.fetch_table'); --}}
+@include('dashboard.component.fetch_table');
 @section('script')
 <script>
 $.ajaxSetup({
@@ -314,6 +314,17 @@ $( function() {
                             +'        </div>'
                             +'    </div>'
                             +'</div>')
+                            $( ".cust_auto" ).autocomplete({
+                                source: 'archive_auto_complete',
+                                minLength: 1,
+                                
+                                select: function( event, ui ) {
+                                    var currentIndex=$("input[name^=copyToID]").length -1;
+                                    $('input[name="copyToID[]"]').eq(currentIndex).val(ui.item.id);
+                                    $('input[name="copyToCustomer[]"]').eq(currentIndex).val(ui.item.name);
+                                    $('input[name="copyToType[]"]').eq(currentIndex).val(ui.item.model);
+                                }
+                            });
     }
   
 </script>
