@@ -551,7 +551,5 @@ $.ajax({
        });
   });
 
-
-
 </script>
 @endsection
