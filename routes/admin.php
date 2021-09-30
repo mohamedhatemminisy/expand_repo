@@ -129,6 +129,7 @@ Route::group([
         Route::get('archive_auto_complete','ArchieveController@archive_auto_complete')
         ->name('archive_auto_complete');
         Route::post('store_archive','ArchieveController@store_archive')->name('store_archive');
+        Route::post('store_jal_archive','JalArchieveController@store_jal_archive')->name('store_jal_archive');
         Route::get('archieve_info_all','ArchieveController@archieve_info_all')
         ->name('archieve_info_all');
         Route::get('archievelic_info_all','ArchieveController@archievelic_info_all')
