@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
 
 <section id="hidden-label-form-layouts">
@@ -980,6 +985,8 @@ $.ajaxSetup({
     });
 
    $('#special_asset').submit(function(e) {
+    $(".loader").removeClass('hide');
+
        e.preventDefault();
        let formData = new FormData(this);
      $( "#BName" ).removeClass( "error" );
@@ -991,6 +998,7 @@ $.ajaxSetup({
            contentType: false,
            processData: false,
            success: (response) => {
+            $(".loader").addClass('hide');
             $('.wtbl').DataTable().ajax.reload(); 
              if (response) {
                 Swal.fire({
@@ -1006,6 +1014,7 @@ $.ajaxSetup({
               
            },
            error: function(response){
+            $(".loader").addClass('hide');
             Swal.fire({
 				position: 'top-center',
 				icon: 'error',
@@ -1013,6 +1022,16 @@ $.ajaxSetup({
 				showConfirmButton: false,
 				timer: 1500
 				})
+                $("#pich").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#pich" ).removeClass( "error" );
+                    }
+                });
+                $("#BName").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#BName" ).removeClass( "error" );
+                    }
+                });
             if(response.responseJSON.errors.pich){
                 $( "#pich" ).addClass( "error" );
             }

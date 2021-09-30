@@ -252,6 +252,7 @@ aria-hidden="true">
 <script>
 
 $('#store-modal').submit(function(e) {
+	$(".loader").removeClass('hide');
        e.preventDefault();
 	   $( "#NationalID" ).removeClass( "error" );
 
@@ -264,12 +265,13 @@ $('#store-modal').submit(function(e) {
            contentType: false,
            processData: false,
            success: (response) => {
+			$(".loader").addClass('hide');
              if (response) {
-				location.reload();
 
              }
            },
            error: function(response){
+			$(".loader").addClass('hide');
             if(response.responseJSON.errors.s_name_ar1){
                 $( "#s_name_ar1" ).addClass( "error" );
             }
@@ -387,6 +389,21 @@ $( function() {
 			var id = ui.item.id;
 			var url = ui.item.url;
 			var fullUrl = url+'?id'+'='+id;
+		    $(location).attr('href', fullUrl)
+		}
+	});
+});
+
+
+$( function() {
+    $( ".home_search" ).autocomplete({
+		source:'search',
+		minLength: 1,
+
+        select: function( event, ui ) {
+			var id = ui.item.id;
+			var url = ui.item.url;
+			var fullUrl ='admin/'+url+'?id'+'='+id;
 		    $(location).attr('href', fullUrl)
 		}
 	});

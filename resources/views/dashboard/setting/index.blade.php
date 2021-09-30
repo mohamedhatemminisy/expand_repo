@@ -30,6 +30,11 @@
 
 </style>
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
 <section class="horizontal-grid" id="horizontal-grid">
 
@@ -107,7 +112,7 @@
                                 </div>
 
                                 <div class="col-sm-12 col-md-12 col-lg-4">
-                                    <img id="userProfileImg" src="{{$setting->logo}}" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
+                                    <img id="userProfileImg" src="{{$setting->logo}}" style="height: 50px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
                                     <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
                                     <input type="hidden" style="display: none" id="userimgpath" name="userimgpath">
                                 </div>
@@ -587,7 +592,6 @@
 @section('script')
 <script>
 $(document).ready(function () {
-
 
     $('#setting_form').submit(function(e) {
        e.preventDefault();

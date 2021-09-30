@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
 
 <section class="horizontal-grid" id="horizontal-grid">
@@ -51,7 +56,7 @@
 														<select id="Incharge" name="Incharge" type="text" class="form-control selectFullCorner">
                                                             <option value="0"> -- {{trans('admin.select_manager')}}  --</option>
 														    @foreach($admins as $admin)
-															<option value="{{$admin->id}}"> {{$admin->name}} </option>
+															<option value="{{$admin->id}}"> {{$admin->nick_name}} </option>
 															@endforeach
 														</select>
 														<div class="input-group-append">
@@ -318,18 +323,7 @@
 							<div class="card-header" style="padding-top:0px;">
 								<h4 class="card-title"><img src="https://db.expand.ps/images/t8521_32.png">{{trans('admin.dep_tasks_info')}} </h4>
 								<a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a>
-								<div class="heading-elements1">
-									<ul class="list-inline mb-0">
-										<li>
-											<img src="https://db.expand.ps/images/right_arrow.png" width="32" height="32" onclick="GetNext()">
-										</li>
-										<li id="TotalEmp" class="card-title">
-											<span id="empStep">0</span>/17										</li>
-										<li>
-											<img src="https://db.expand.ps/images/left_arrow.png" width="32" height="32" onclick="GetPrev()">
-										</li>
-									</ul>
-								</div>
+								 
 							</div>
 							<div class="card-content collapse show ">
 								<div class="card-body">
@@ -636,7 +630,11 @@ $(".save-data").click(function(event){
             setTimeout(function(){
                 $(".alert-danger").addClass("hide");
             },2000)
-
+			$("#departmentName").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#departmentName" ).removeClass( "error" );
+                    }
+                });
             if(response.responseJSON.errors.departmentName){
                 $( "#departmentName" ).addClass( "error" );
             }

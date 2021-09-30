@@ -187,12 +187,15 @@ class ArchieveController extends Controller
         $archive->license_rating_id  =$request->lic_cat;
         $archive->save();
         $files_ids = $request->formDataaaorgIdList;
-        foreach($files_ids as $id){
-            $file = File::find($id);
-            $file->archive_id = $archive->id;
-            $file->model_name = "App\Models\jobLicArchieve";
-            $file->save();
-        }
+            if($files_ids){
+                foreach($files_ids as $id){
+                    $file = File::find($id);
+                    $file->archive_id = $archive->id;
+                    $file->model_name = "App\Models\jobLicArchieve";
+                    $file->save();
+                }
+            }
+ 
         }
         if ($archive) {
             return response()->json(['success'=>trans('admin.archive_added')]);

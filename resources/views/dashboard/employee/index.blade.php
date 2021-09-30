@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
 
 <link rel="stylesheet" type="text/css" href="https://template.expand.ps/app-assets/global/plugins/jquery-multi-select/css/multi-select-rtl.css"/>
@@ -841,6 +846,8 @@ $.ajax({
 
 
     $('#employee_form').submit(function(e) {
+        $(".loader").removeClass('hide');
+
        e.preventDefault();
        let formData = new FormData(this);
             $( "#Name" ).removeClass( "error" );
@@ -860,6 +867,8 @@ $.ajax({
            contentType: false,
            processData: false,
            success: (response) => {
+            $(".loader").addClass('hide');
+
             $('.wtbl').DataTable().ajax.reload();  
              if (response) {
                 $(".loader").addClass('hide');
@@ -876,6 +885,47 @@ $.ajax({
              
            },
            error: function(response){
+            $(".loader").addClass('hide');
+
+            $("#Name").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#Name" ).removeClass( "error" );
+                    }
+                });
+                $("#NationalID").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#NationalID" ).removeClass( "error" );
+                    }
+                });
+                $("#NickName").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#NickName" ).removeClass( "error" );
+                    }
+                });
+                $("#DepartmentID").on('change', function (e) {
+                        $( "#DepartmentID" ).removeClass( "error" );
+                    
+                });
+                $("#Position").on('change', function (e) {
+                        $( "#Position" ).removeClass( "error" );
+                });
+                $("#JobType").on('change', function (e) {
+                        $( "#JobType" ).removeClass( "error" );
+                });
+                $("#DirectManager").on('change', function (e) {
+                        $( "#DirectManager" ).removeClass( "error" );
+                });
+                $("#MobileNo1").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#MobileNo1" ).removeClass( "error" );
+                    }
+                });
+                $("#HiringDate").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#HiringDate" ).removeClass( "error" );
+                    }
+                });
+
             if(response.responseJSON.errors.Name){
                 $( "#Name" ).addClass( "error" );
             }
