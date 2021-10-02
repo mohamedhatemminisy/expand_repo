@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Archive;
 use App\Models\CopyTo;
+use App\Models\File;
 
 class SettingsController extends Controller
 {
@@ -143,6 +144,24 @@ class SettingsController extends Controller
         $Archivelist['Archive'] = $Archive;
         $Archivelist['ArchiveCount'] = $ArchiveCount;
         return response()->json($Archivelist);
+    }
+
+    public function uploadPic(Request $request){
+        if ($request->hasFile('imgPic')) {
+            $file=$request->file('imgPic');
+          
+
+                $url = upload_image($file, 'image_');
+                if ($url) 
+                {
+                    $uploaded_files = File::create([
+                        'url' => $url,
+                        'real_name' => $file->getClientOriginalName(),
+                        'extension' => $file->getClientOriginalExtension(),
+                    ]);
+                }
+            return response()->json($uploaded_files);
+        }
     }
 
 }

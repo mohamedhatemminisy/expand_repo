@@ -120,16 +120,28 @@ class AssetsController extends Controller
         $CopyTo = CopyTo::where('model_id',$request['equip_id'])
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $equipment['copyTo'] = $CopyTo;
-
-        $equipment['admin'] = Admin::where('id',$equipment['info']->admin_id)->first()->name;
-        $equipment['department'] = Department::where('id',$equipment['info']->department_id)->first()->name;
-        $equipment['sponser'] = Orgnization::where('org_type','orginzation')
-        ->where('id', $equipment['info']->sponser)->first()->name;
-        $equipment['supplyer'] = Orgnization::where('org_type','suppliers')->
-        where('id', $equipment['info']->supplyer)->first()->name;
-        $equipment['brand'] = Brand::where('id',$equipment['info']->brand_id)->first()->name;
-        $equipment['type'] = EqupmentType::where('id',$equipment['info']->equpment_type_id)->first()->name;
-        $equipment['status'] = EqupmentStatus::where('id',$equipment['info']->equpment_status_id)->first()->name;
+        if($equipment['info']->admin_id){
+            $equipment['admin'] = Admin::where('id',$equipment['info']->admin_id)->first()->name;
+        }if($equipment['info']->department_id){
+            $equipment['department'] = Department::where('id',$equipment['info']->department_id)->first()->name;
+        }
+        if($equipment['info']->sponser){
+            $equipment['sponser'] = Orgnization::where('org_type','orginzation')
+            ->where('id', $equipment['info']->sponser)->first()->name;
+        }
+        if($equipment['info']->supplyer){
+            $equipment['supplyer'] = Orgnization::where('org_type','suppliers')->
+            where('id', $equipment['info']->supplyer)->first()->name;
+        }
+        if($equipment['info']->brand_id){
+            $equipment['brand'] = Brand::where('id',$equipment['info']->brand_id)->first()->name;
+        }
+        if($equipment['info']->equpment_type_id){
+            $equipment['type'] = EqupmentType::where('id',$equipment['info']->equpment_type_id)->first()->name;
+        }
+        if($equipment['info']->equpment_status_id){
+            $equipment['status'] = EqupmentStatus::where('id',$equipment['info']->equpment_status_id)->first()->name;
+        }
         $equipment['Currency'] = trans('admin.'.$equipment['info']->currency);
 
         return response()->json($equipment);

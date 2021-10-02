@@ -176,12 +176,13 @@ th{
     
 	<div class="lds-dual-ring"></div>
 </div>
-<div class="alert alert-danger mb-2 hide" style="bottom: 50%; " onclick="$(this).toggle()" style="cursor:pointer" role="alert">
+<!-- <div class="alert alert-danger mb-2 hide" style="bottom: 50%; " onclick="$(this).toggle()" style="cursor:pointer" role="alert">
   <span id="errMsg"></span>
 </div>
 <div class="alert alert-success mb-2 hide" style="bottom: 50%; " onclick="$(this).toggle()" style="cursor:pointer" role="alert">
   <span id="succMsg"></span>
 </div>
+ -->
 
 <!-- begin header -->
 @include('dashboard.includes.header')
@@ -423,7 +424,55 @@ $("#QuickAdd").modal('show');
 
 $(".loader").addClass('hide');
 }
+function doUploadPic(){
+	$.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(".loader").removeClass('hide');
+        $(".form-actions").addClass('hide');
+        var formData = new FormData($("#setting_form")[0]);
+        $.ajax({
 
+            url: 'uploadPic',
+            type: 'POST',
+            data: formData,
+            dataType:"json",
+            async: true,
+            success: function (data) {
+                if(data){
+                    $(".alert-danger").addClass("hide");
+                    $(".alert-success").removeClass('hide');
+                    $("#userProfileImg").attr('src', window.location.origin+'/'+data.url);
+                    $("#userimgpath").val(data.url);
+                    $("#file_id").val(data.id);
+                    $("#userimgpath").trigger('change')
+                    setTimeout(function(){
+                        $(".alert-danger").addClass("hide");
+                        $(".alert-success").addClass("hide");
+                    },2000)
+                }
+                else {
+                    $(".alert-success").addClass("hide");
+                    $(".alert-danger").removeClass('hide');
+                    $("#errMsg").text(data.status.msg)
+                }
+                $(".loader").addClass('hide');
+                $(".form-actions").removeClass('hide');
+            },
+            error:function(){
+                $(".alert-success").addClass("hide");
+                $(".alert-danger").removeClass('hide');
+                $("#errMsg").text(data.status.msg)
+                $(".loader").addClass('hide');
+                $(".form-actions").removeClass('hide');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
 function doUploadAttach(formDataStr)
     {
         $.ajaxSetup({

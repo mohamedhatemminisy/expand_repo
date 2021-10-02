@@ -95,7 +95,7 @@ class EmployeeController extends Controller
             if ($request->file('imgPic')) {
                 $path = upload_image($request->file('imgPic'), 'emp_');
             }else{
-                $path = '';
+                $path = $admin->image;
             }
             $admin->role_id = $role->id;
             $admin->image = url($path);

@@ -7,7 +7,7 @@
 @section('content')
 
 <section id="hidden-label-form-layouts">
-<form method="post" id="upload-image-form" enctype="multipart/form-data">
+<form method="post" id="setting_form" enctype="multipart/form-data">
         @csrf
     <div class="row">
         <div class="col-xl-6 col-lg-6">
@@ -84,8 +84,9 @@
                             </div>
                             <div class="col-lg-4 col-md-12">
                                 <img src="https://db.expand.ps/images/equipment.jpg" style="cursor: pointer;" width="150" height="100" id="equipmentimg" onclick="document.getElementById('formDataimgPic2').click(); return false">
-                                <input type="hidden" id="equipmentimgpath" name="equipmentimgpath">
-                                <input type="file" class="form-control-file" id="formDataimgPic2" name="imgPic" style="display: none" onchange="doUploadPic1('formData1','equipmentimg','equipmentimgpath')">
+                                <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
+                                <input type="hidden" id="userimgpath" name="userimgpath">
+                                <meta name="csrf-token" content="{{ csrf_token() }}" />                             
                             </div>
                             <div class="col-lg-6 col-md-12">
                                 <div class="form-group">
@@ -516,7 +517,7 @@ $.ajaxSetup({
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-$('#upload-image-form').submit(function(e) {
+$('#setting_form').submit(function(e) {
     $(".loader").removeClass('hide');
 
        e.preventDefault();
@@ -542,6 +543,7 @@ $('#upload-image-form').submit(function(e) {
 				showConfirmButton: false,
 				timer: 1500
 				})
+                $('#equipmentimg').attr('src', 'https://db.expand.ps/images/equipment.jpg');
 
                this.reset();
              }
@@ -618,8 +620,13 @@ function update($id)
             $("#PHnum1").val(response.info.supply_phone);
             $("#msgStatic").html(response.ArchiveCount);
             drawTablesArchive(response.Archive,response.copyTo);
-            $('#equipmentimg').attr('src', response.info.image);
-
+ 
+            // $('#equipmentimg').attr('src', response.info.image);
+            if(response.info.image != window.location.origin){
+                $('#equipmentimg').attr('src', response.info.image);  
+            }else{
+                $('#equipmentimg').attr('src','https://db.expand.ps/images/equipment.jpg');
+            }
             $("select#brand option")
                  .each(function() { this.selected = (this.text == response.brand); 
             });
