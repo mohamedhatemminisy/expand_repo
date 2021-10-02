@@ -30,7 +30,7 @@ class EmployeeRequest extends FormRequest
             'DepartmentID' => 'required',
             'Position' => 'required|numeric|exists:job_titles,id',
             'JobType' => 'required|numeric|exists:job_types,id',
-            'HiringDate' => 'required|date',
+            'HiringDate' => 'required',
             'MobileNo1' => 'required|numeric',
             'DirectManager' => 'required|numeric',
             'email' => 'nullable|email| unique:admins',

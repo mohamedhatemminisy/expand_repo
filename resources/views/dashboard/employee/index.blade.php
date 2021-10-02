@@ -12,7 +12,7 @@
 
 <section class="horizontal-grid " id="horizontal-grid">
 
-<form method="post" id="employee_form" enctype="multipart/form-data">
+<form method="post" id="setting_form" enctype="multipart/form-data">
         @csrf        
                 <div class="row white-row">
                     
@@ -90,6 +90,8 @@
                                                 <img id="userProfileImg" src="{{ asset('assets/images/ico/user.png') }}" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
                                                 <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
                                                 <input type="hidden" id="userimgpath" name="userimgpath">
+                                                <meta name="csrf-token" content="{{ csrf_token() }}" />
+
                                             </div>
 
                                         </div>
@@ -845,7 +847,7 @@ $.ajax({
     });
 
 
-    $('#employee_form').submit(function(e) {
+    $('#setting_form').submit(function(e) {
         $(".loader").removeClass('hide');
 
        e.preventDefault();
@@ -879,6 +881,7 @@ $.ajax({
 				showConfirmButton: false,
 				timer: 1500
 				})
+            $('#userProfileImg').attr('src', 'http://127.0.0.1:8000/assets/images/ico/user.png');
 
                this.reset();
              }

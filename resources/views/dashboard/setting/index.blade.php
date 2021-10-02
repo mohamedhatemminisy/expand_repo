@@ -111,11 +111,14 @@
 
                                 </div>
 
-                                <div class="col-sm-12 col-md-12 col-lg-4">
-                                    <img id="userProfileImg" src="{{$setting->logo}}" style="height: 50px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
-                                    <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
-                                    <input type="hidden" style="display: none" id="userimgpath" name="userimgpath">
-                                </div>
+                                <div class="col-md-4" style="text-align: center;">
+                                                <img id="userProfileImg" src="{{$setting->logo}}" style="height: 50px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
+                                                <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
+                                                <input type="hidden" id="userimgpath" name="userimgpath">
+                                                <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+                                            </div>
+
                                 <div class="col-lg-8 col-md-12 pr-0 pr-s-12">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-12 pr-s-12 pr-0">
@@ -593,7 +596,12 @@
 <script>
 $(document).ready(function () {
 
+
+
+
     $('#setting_form').submit(function(e) {
+        $(".loader").removeClass('hide');
+
        e.preventDefault();
        let formData = new FormData(this);
        $.ajax({
@@ -620,6 +628,7 @@ $(document).ready(function () {
 
            },
            error: function(response){
+            $(".loader").addClass('hide');
 
 			Swal.fire({
 				position: 'top-center',

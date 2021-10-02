@@ -173,7 +173,7 @@ Route::group([
         Route::post('doEditMeetingTitle','AgendaArchieveController@doEditMeetingTitle')
         ->name('doEditMeetingTitle');
         
-        
+        Route::post('uploadPic','SettingsController@uploadPic')->name('uploadPic');
         
         
 
