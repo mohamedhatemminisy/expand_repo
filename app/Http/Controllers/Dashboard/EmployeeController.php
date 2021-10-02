@@ -17,6 +17,7 @@ use App\Models\Department;
 use App\Models\Archive;
 use App\Models\CopyTo;
 use App\Http\Requests\EmployeeRequest;
+use App\Models\linkedTo;
 use Yajra\DataTables\DataTables;
 use DB;
 
@@ -179,7 +180,13 @@ class EmployeeController extends Controller
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $admin['copyTo'] = $CopyTo;
         $admin['Archive'] = $Archive;
-        $admin['ArchiveCount'] = $ArchiveCount + $CopyToCount;
+        
+        $jalArchive = linkedTo::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->with('archive','archive.files')->get();
+        $admin['jalArchive'] = $jalArchive;
+        $jalArchiveCount = count(linkedTo::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->get());
+        $admin['ArchiveCount'] = $ArchiveCount + $CopyToCount+$jalArchiveCount;
 
         $admin['details'] = AdminDetail::where('admin_id',$request['emp_id'])->first();
         $admin['job_title'] = JobTitle::where('id',$admin['details']->job_title_id )->first()->name;

@@ -479,7 +479,7 @@ function update($id)
                 $("#PHnum1").val(response.info.supply_phone);
                 $('#carimg').attr('src', response.info.image);
                 $("#msgStatic").html(response.ArchiveCount);
-                drawTablesArchive(response.Archive,response.copyTo);
+                drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
                 $("select#vehiclebrand option")
                     .each(function() { this.selected = (this.text == response.brand); 
                 });

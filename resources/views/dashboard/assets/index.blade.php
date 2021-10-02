@@ -471,7 +471,7 @@ $( function() {
             $("#PHnum2").val(response.info.sponsor_phone);
             $("#PHnum1").val(response.info.supply_phone);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $('#equipmentimg').attr('src', response.info.image);
 
             $("select#brand option")
@@ -585,7 +585,7 @@ function update($id)
             $("#PHnum2").val(response.info.sponsor_phone);
             $("#PHnum1").val(response.info.supply_phone);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $('#equipmentimg').attr('src', response.info.image);
 
             $("select#brand option")

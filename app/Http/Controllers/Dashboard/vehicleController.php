@@ -14,6 +14,7 @@ use App\Http\Requests\VehcileRequest;
 use Yajra\DataTables\DataTables;
 use App\Models\Archive;
 use App\Models\CopyTo;
+use App\Models\linkedTo;
 
 class vehicleController extends Controller
 {
@@ -113,10 +114,17 @@ class vehicleController extends Controller
         $Archive =Archive::where('model_id',$request['vehcile_id'])
         ->where('model_name',$model)->with('files')->get();
         $vehicle['Archive'] = $Archive;
-        $vehicle['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $CopyTo = CopyTo::where('model_id',$request['vehcile_id'])
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $vehicle['copyTo'] = $CopyTo;
+
+        $jalArchive = linkedTo::where('model_id',$request['vehcile_id'])
+        ->where('model_name',$model)->with('archive','archive.files')->get();
+        $vehicle['jalArchive'] = $jalArchive;
+        $jalArchiveCount = count(linkedTo::where('model_id',$request['vehcile_id'])
+        ->where('model_name',$model)->get());
+        $vehicle['ArchiveCount'] = $ArchiveCount + $CopyToCount+$jalArchiveCount;
+
         $vehicle['admin'] = Admin::where('id',$vehicle['info']->admin_id)->first()->name;
         $vehicle['admin_two'] = Admin::where('id',$vehicle['info']->admin_two)->first()->name;
         $vehicle['department'] = Department::where('id',$vehicle['info']->department_id)->first()->name;

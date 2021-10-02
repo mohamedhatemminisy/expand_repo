@@ -374,7 +374,7 @@ class ArchieveController extends Controller
     }
     public function jalArchieve_info_all(Request $request)
     {
-        $archive= Archive::select('archives.*')->where('type','agArchive')->orderBy('id', 'DESC')->with('copyTo')->with('files')->get();
+        $archive= Archive::select('archives.*')->where('type','agArchive')->orderBy('id', 'DESC')->with('relatedTo')->with('files')->get();
         
         return DataTables::of($archive)
                         ->addIndexColumn()

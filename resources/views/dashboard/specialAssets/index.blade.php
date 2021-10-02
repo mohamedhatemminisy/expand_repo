@@ -849,7 +849,7 @@ $( function() {
                  .each(function() { this.selected = (this.text == response.admin); 
             });
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#ownType option")
                  .each(function() { this.selected = (this.text == response.asset_status); 
             });
@@ -894,7 +894,7 @@ function update($id)
                  .each(function() { this.selected = (this.text == response.admin); 
             });
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#ownType option")
                  .each(function() { this.selected = (this.text == response.asset_status); 
             });
