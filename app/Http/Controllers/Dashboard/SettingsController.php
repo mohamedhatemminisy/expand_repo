@@ -140,7 +140,7 @@ class SettingsController extends Controller
     {
 
         $ArchiveCount = count(Archive::where('type','munArchive')->get());
-        $Archive =Archive::where('type','munArchive')->get();
+        $Archive =Archive::where('type','munArchive')->with('files')->get();
         $Archivelist['Archive'] = $Archive;
         $Archivelist['ArchiveCount'] = $ArchiveCount;
         return response()->json($Archivelist);

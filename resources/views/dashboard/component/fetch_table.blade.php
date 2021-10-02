@@ -669,26 +669,28 @@
                 {data:'type_id'},
                 {data:'serisal'},
                 {data:'date'},
-                {
-                    data: null,
+                {data:'relatedTo'},
+                // {
+                //     data: null,
                     
-                    render:function(data,row,type){
-                        if(data.related_to.length>0){ 
-                            console.log(data.related_to);
-                            var i=1;
-                            $actionBtn="<div class='row' style='margin-left:0px;'>";
-                                data.related_to.forEach(related_to => {
-                                $actionBtn += '<div id="names" class=" col-sm-6 ">'
-                                      +'  <span class="attach-text">'+related_to.name+'</span>'
-                                    +'</div>'; 
-                            });
-                            $actionBtn += '</div>';
-                            return $actionBtn;
-                        }
-                        else{return '';}
-                    },
-                    name:'fileIDS',                    
-                },
+                //     render:function(data,row,type){
+                //         if(data.related_to.length>0){ 
+                //             console.log(data.related_to);
+                //             var i=1;
+                //             $actionBtn="<div class='row' style='margin-left:0px;'>";
+                //                 data.related_to.forEach(related_to => {
+                //                 $actionBtn += '<div id="names" class=" col-sm-6 ">'
+                //                       +'  <span class="attach-text">'+related_to.name+'</span>'
+                //                     +'</div>'; 
+                //             });
+                //             $actionBtn += '</div>';
+                //             return $actionBtn;
+                //         }
+                //         else{return '';}
+                //     },
+                //     name:'fileIDS',                    
+                // },
+
                 {
                     data: null,
                     
@@ -767,7 +769,6 @@
                             data.files.forEach(file => {
                                 shortCutName=file.real_name;
                                 urlfile='{{ asset('') }}';
-                                console.log(urlfile);
                                 urlfile+=file.url;
                                 if(file.extension=="jpg"||file.extension=="png")
                                 fileimage='{{ asset('assets/images/ico/image.png') }}';
@@ -836,7 +837,6 @@
                             data.files.forEach(file => {
                                 shortCutName=file.real_name;
                                 urlfile='{{ asset('') }}';
-                                console.log(urlfile);
                                 urlfile+=file.url;
                                 if(file.extension=="jpg"||file.extension=="png")
                                 fileimage='{{ asset('assets/images/ico/image.png') }}';
@@ -889,7 +889,8 @@
                 {data:'license_ratings_name',name:'license_ratings.name'},
                 {data:'start_date'},
                 {data:'expiry_ate'},
-                {data:'expiry_ate'},
+                {data:'status'},
+
                 {
                     data: null,
                     
@@ -901,7 +902,6 @@
                                 shortCutName=file.real_name;
                                 shortCutName=shortCutName.substring(0, 20);
                                 urlfile='{{ asset('') }}';
-                                console.log(urlfile);
                                 urlfile+=file.url;
                                 if(file.extension=="jpg"||file.extension=="png")
                                 fileimage='{{ asset('assets/images/ico/image.png') }}';
