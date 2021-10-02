@@ -181,6 +181,7 @@ $.ajaxSetup({
 				showConfirmButton: false,
 				timer: 1500
 				})
+                $(".formDataaaFilesArea").html('');
                this.reset();
                $('.wtbl').DataTable().ajax.reload();  
                $(".formDataaaFilesArea").html('');
