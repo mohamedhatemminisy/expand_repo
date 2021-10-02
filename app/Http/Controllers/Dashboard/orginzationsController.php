@@ -14,6 +14,7 @@ use App\Models\CopyTo;
 use App\Models\Archive;
 use App\Http\Requests\DepartmentRequest;
 use App\Http\Requests\OrgnizationRequest;
+use App\Models\linkedTo;
 use Yajra\DataTables\DataTables;
 
 class orginzationsController extends Controller
@@ -125,9 +126,15 @@ class orginzationsController extends Controller
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $orginzation['copyTo'] = $CopyTo;
         $orginzation['Archive'] = $Archive;
-        $orginzation['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $orginzation['job_title'] = JobTitle::where('id',$orginzation['info']->job_title_id)->first()->name;
         $orginzation['address'] = Address::where('id', $orginzation['info']['addresse_id'])->first();
+        
+        $jalArchive = linkedTo::where('model_id',$request['orginzation_id'])
+        ->where('model_name',$model)->with('archive','archive.files')->get();
+        $orginzation['jalArchive'] = $jalArchive;
+        $jalArchiveCount = count(linkedTo::where('model_id',$request['orginzation_id'])
+        ->where('model_name',$model)->get());
+        $orginzation['ArchiveCount'] = $ArchiveCount + $CopyToCount+$jalArchiveCount;
 
         if($orginzation['address']->city_id){
             $orginzation['city'] =City::where('id',$orginzation['address']->city_id)->first()->name;

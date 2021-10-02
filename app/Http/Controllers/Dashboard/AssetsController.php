@@ -15,6 +15,7 @@ use App\Http\Requests\EquipentRequest;
 use Yajra\DataTables\DataTables;
 use App\Models\Archive;
 use App\Models\CopyTo;
+use App\Models\linkedTo;
 
 class AssetsController extends Controller
 {
@@ -113,7 +114,6 @@ class AssetsController extends Controller
         ->where('model_name',$model)->get());
         $CopyToCount = count(CopyTo::where('model_id',$request['equip_id'])
         ->where('model_name',$model)->get());
-        $equipment['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $Archive =Archive::where('model_id',$request['equip_id'])
         ->where('model_name',$model)->with('files')->get();
         $equipment['Archive'] = $Archive;

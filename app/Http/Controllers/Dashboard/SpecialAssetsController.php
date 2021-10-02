@@ -15,6 +15,7 @@ use App\Http\Requests\AssetRequest;
 use Yajra\DataTables\DataTables;
 use App\Models\Archive;
 use App\Models\CopyTo;
+use App\Models\linkedTo;
 
 class SpecialAssetsController extends Controller
 {
@@ -119,7 +120,13 @@ class SpecialAssetsController extends Controller
         $Archive =Archive::where('model_id',$request['asset_id'])
         ->where('model_name',$model)->with('files')->get();
         $special['Archive'] = $Archive;
-        $special['ArchiveCount'] = $ArchiveCount + $CopyToCount;
+        
+        $jalArchive = linkedTo::where('model_id',$request['asset_id'])
+        ->where('model_name',$model)->with('archive','archive.files')->get();
+        $special['jalArchive'] = $jalArchive;
+        $jalArchiveCount = count(linkedTo::where('model_id',$request['asset_id'])
+        ->where('model_name',$model)->get());
+        $special['ArchiveCount'] = $ArchiveCount + $CopyToCount+$jalArchiveCount;
 
         $CopyTo = CopyTo::where('model_id',$request['asset_id'])
         ->where('model_name',$model)->with('archive','archive.files')->get();

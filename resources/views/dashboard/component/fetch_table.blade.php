@@ -673,13 +673,13 @@
                     data: null,
                     
                     render:function(data,row,type){
-                        if(data.copy_to.length>0){ 
-                            console.log(data.copy_to);
+                        if(data.related_to.length>0){ 
+                            console.log(data.related_to);
                             var i=1;
                             $actionBtn="<div class='row' style='margin-left:0px;'>";
-                                data.copy_to.forEach(copy_to => {
+                                data.related_to.forEach(related_to => {
                                 $actionBtn += '<div id="names" class=" col-sm-6 ">'
-                                      +'  <span class="attach-text">'+copy_to.name+'</span>'
+                                      +'  <span class="attach-text">'+related_to.name+'</span>'
                                     +'</div>'; 
                             });
                             $actionBtn += '</div>';

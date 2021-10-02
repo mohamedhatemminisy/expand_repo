@@ -356,7 +356,7 @@ $( function() {
             $('#phone2').val(response.info.whatsapp_two);
             $('#website').val(response.info.website);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#PositionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });
@@ -399,7 +399,7 @@ function update($id)
             $('#phone2').val(response.info.whatsapp_two);
             $('#website').val(response.info.website);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#PositionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });

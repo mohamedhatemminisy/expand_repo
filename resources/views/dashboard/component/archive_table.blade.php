@@ -179,7 +179,7 @@
                                                     <th width="50px">#</th>
                                                     <th width="50px">رقم الأرشيف</th>
                                                     <th width="200px">عنوان الأرشيف</th>
-                                                    <th width="120px"> صادر من </th>
+                                                    <th width="120px"> الوثيقة الاصلية مرتبطة ب </th>
                                                     <th width="80px">التاريخ </th>
                                                     <th width="260px">المرفقات </th>
                                                     </tr>
@@ -216,9 +216,7 @@
                                                     <th  width="50px">
                                                         تاريخ الجلسة
                                                     </th>                                                
-                                                    <th width="200px">
-                                                        مرتبط ب
-                                                    </th>
+                                                
                                                     
                                                     <th width="200px">
                                                         {{trans('archive.attach')}}
@@ -279,9 +277,9 @@
 @endif
 <script>
 @if ($type=="subscriber")
-function drawTablesArchive($archives,$copyTo,$archivesLic)
+function drawTablesArchive($archives,$copyTo,$archivesLic,$jalArchive)
 @else
-function drawTablesArchive($archives,$copyTo)
+function drawTablesArchive($archives,$copyTo,$jalArchive)
 @endif
 {   
     @if ($type=="subscriber"||$type == 'employee'||$type == 'depart'||$type == 'org')
@@ -542,6 +540,109 @@ function drawTablesArchive($archives,$copyTo)
                                     }
                                 }
             });
+            $jalArchive.forEach(copy => {
+    if(copy.archive){
+            $row="<tr>"+
+                "<td>"+c+"</td>"+
+                "<td>"+copy.archive.type_id+"</td>"+
+                "<td>"+copy.archive.serisal+"</td>"+
+                "<td>"+copy.archive.date+"</td>"+
+                "<td>";
+                    attach='';
+                    if(copy.archive.files.length>0){
+                    var j=0;
+                    for(j=0;j<copy.archive.files.length;j++){
+                        shortCutName=copy.archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=copy.archive.files[j].url;
+                        if(copy.archive.files[j].extension=="jpg"||copy.archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(copy.archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(copy.archive.files[j].extension=="excel"||copy.archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    attach='';
+                }
+                
+               
+                $row += "</td></tr>";
+                console.log($row);
+            $('#jal_list').append($row)
+            c++;}
+  });
+  $('.jal_table').DataTable({
+
+        dom: 'Bfltip',
+        buttons: [
+            {
+                extend: 'excel',
+                tag: 'img',
+                title:'',
+                attr:  {
+                    title: 'excel',
+                    src:'{{asset('assets/images/ico/excel.png')}}',
+                    style: 'cursor:pointer;',
+                },
+
+            },
+            {
+                extend: 'print',
+                tag: 'img',
+                title:'',
+                attr:  {
+                    title: 'print',
+                    src:'{{asset('assets/images/ico/Printer.png')}} ',
+                    style: 'cursor:pointer;height: 32px;',
+                    class:"fa fa-print"
+                },
+                customize: function ( win ) {
+                
+
+                $(win.document.body).find( 'table' ).find('tbody')
+                    .css( 'font-size', '20pt' );
+                }
+            },
+            ],
+
+        "language": {
+                    "sEmptyTable":     "ليست هناك بيانات متاحة في الجدول",
+                    "sLoadingRecords": "جارٍ التحميل...",
+                    "sProcessing":   "جارٍ التحميل...",
+                    "sLengthMenu":   "أظهر _MENU_ مدخلات",
+                    "sZeroRecords":  "لم يعثر على أية سجلات",
+                    "sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix":  "",
+                    "sSearch":       "ابحث:",
+                    "sUrl":          "",
+                    "oPaginate": {
+                        "sFirst":    "الأول",
+                        "sPrevious": "السابق",
+                        "sNext":     "التالي",
+                        "sLast":     "الأخير"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": تفعيل لترتيب العمود تصاعدياً",
+                        "sSortDescending": ": تفعيل لترتيب العمود تنازلياً"
+                    }
+                }
+    });
             @endif
     @endif
     @if ($type=="subscriber"||$type == 'employee'||$type == 'depart'||$type == 'org')
@@ -1101,6 +1202,109 @@ function drawTablesArchive($archives,$copyTo)
             c++;}
   });
   $('.copyToTbl').DataTable({
+
+        dom: 'Bfltip',
+        buttons: [
+            {
+                extend: 'excel',
+                tag: 'img',
+                title:'',
+                attr:  {
+                    title: 'excel',
+                    src:'{{asset('assets/images/ico/excel.png')}}',
+                    style: 'cursor:pointer;',
+                },
+
+            },
+            {
+                extend: 'print',
+                tag: 'img',
+                title:'',
+                attr:  {
+                    title: 'print',
+                    src:'{{asset('assets/images/ico/Printer.png')}} ',
+                    style: 'cursor:pointer;height: 32px;',
+                    class:"fa fa-print"
+                },
+                customize: function ( win ) {
+                
+
+                $(win.document.body).find( 'table' ).find('tbody')
+                    .css( 'font-size', '20pt' );
+                }
+            },
+            ],
+
+        "language": {
+                    "sEmptyTable":     "ليست هناك بيانات متاحة في الجدول",
+                    "sLoadingRecords": "جارٍ التحميل...",
+                    "sProcessing":   "جارٍ التحميل...",
+                    "sLengthMenu":   "أظهر _MENU_ مدخلات",
+                    "sZeroRecords":  "لم يعثر على أية سجلات",
+                    "sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix":  "",
+                    "sSearch":       "ابحث:",
+                    "sUrl":          "",
+                    "oPaginate": {
+                        "sFirst":    "الأول",
+                        "sPrevious": "السابق",
+                        "sNext":     "التالي",
+                        "sLast":     "الأخير"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": تفعيل لترتيب العمود تصاعدياً",
+                        "sSortDescending": ": تفعيل لترتيب العمود تنازلياً"
+                    }
+                }
+    });
+    $jalArchive.forEach(copy => {
+    if(copy.archive){
+            $row="<tr>"+
+                "<td>"+c+"</td>"+
+                "<td>"+copy.archive.type_id+"</td>"+
+                "<td>"+copy.archive.serisal+"</td>"+
+                "<td>"+copy.archive.date+"</td>"+
+                "<td>";
+                    attach='';
+                    if(copy.archive.files.length>0){
+                    var j=0;
+                    for(j=0;j<copy.archive.files.length;j++){
+                        shortCutName=copy.archive.files[j].real_name;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=copy.archive.files[j].url;
+                        if(copy.archive.files[j].extension=="jpg"||copy.archive.files[j].extension=="png")
+                        fileimage='{{ asset('assets/images/ico/image.png') }}';
+                        else if(copy.archive.files[j].extension=="pdf")
+                        fileimage='{{ asset('assets/images/ico/pdf.png') }}';
+                        else if(copy.archive.files[j].extension=="excel"||copy.archive.files[j].extension=="xsc")
+                        fileimage='{{ asset('assets/images/ico/excellogo.png') }}';
+                        else
+                        fileimage='{{ asset('assets/images/ico/file.png') }}';
+                            shortCutName=shortCutName.substring(0, 20);
+                            attach+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><img style="width: 20px;"src="'+fileimage+'"></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="formDataaaimgUploads[]" name="formDataaaimgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="formDataaaorgNameList[]" name="formDataaaorgNameList[]" value="'+shortCutName+'">'
+                                +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $row += attach;
+                    attach='';
+                }
+                
+               
+                $row += "</td></tr>";
+                console.log($row);
+            $('#jal_list').append($row)
+            c++;}
+  });
+  $('.jal_table').DataTable({
 
         dom: 'Bfltip',
         buttons: [

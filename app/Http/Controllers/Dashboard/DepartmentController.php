@@ -12,6 +12,8 @@ use App\Models\JobTitle;
 use Yajra\DataTables\DataTables;
 use App\Models\Archive;
 use App\Models\CopyTo;
+use App\Models\linkedTo;
+
 class DepartmentController extends Controller
 {
     public function index(){
@@ -90,8 +92,13 @@ class DepartmentController extends Controller
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $depaertment['copyTo'] = $CopyTo;
         $depaertment['Archive'] = $Archive;
-        $depaertment['ArchiveCount'] = $ArchiveCount + $CopyToCount;
-        
+
+        $jalArchive = linkedTo::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->with('archive','archive.files')->get();
+        $depaertment['jalArchive'] = $jalArchive;
+        $jalArchiveCount = count(linkedTo::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->get());
+        $depaertment['ArchiveCount'] = $ArchiveCount + $CopyToCount+$jalArchiveCount;
 
         $employees = AdminDetail::where('department_id',$request['dep_id'])->pluck('admin_id')->toArray();
         $employees_job_titles = AdminDetail::where('department_id',$request['dep_id'])->pluck('job_title_id')->toArray();
