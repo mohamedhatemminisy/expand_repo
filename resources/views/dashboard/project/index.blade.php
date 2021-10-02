@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
 
 <form id="ajaxform">
@@ -101,7 +106,7 @@
                                         <select type="text" id="pinc6" name="pich6" class="form-control valid" onchange="getEmpInfo($(this).val(),$('#Department'),$('#pos'),0);hideSelected($(this).val())" aria-invalid="false">
                                         <optgroup label=" ">
                                             @foreach($admins as $admin)
-                                            <option value="{{$admin->id}}"> {{$admin->name}}  </option>
+                                            <option value="{{$admin->id}}"> {{$admin->nick_name}}  </option>
                                             @endforeach
                                         </optgroup>
                                         </select>
@@ -606,6 +611,8 @@ $.ajax({
 
 
     $(".save-data").click(function(event){
+        $(".loader").removeClass('hide');
+
      $( "#ProjectName" ).removeClass( "error" );
      $( "#dateStart" ).removeClass( "error" );
      $( "#dateEnd" ).removeClass( "error" );
@@ -681,6 +688,21 @@ $.ajax({
             
         },
         error: function(response) {
+            $("#ProjectName").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#ProjectName" ).removeClass( "error" );
+                    }
+                });
+                $("#dateStart").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#dateStart" ).removeClass( "error" );
+                    }
+                });
+                $("#dateEnd").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#dateEnd" ).removeClass( "error" );
+                    }
+                });
             if(response.responseJSON.errors.ProjectName){
                 $( "#ProjectName" ).addClass( "error" );
             }

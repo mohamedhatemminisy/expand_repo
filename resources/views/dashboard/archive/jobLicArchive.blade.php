@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
 <div class="content-body">
         <section id="hidden-label-form-layouts">
@@ -257,6 +262,7 @@ $.ajaxSetup({
     });
 
    $('#formDataaa').submit(function(e) {
+    $(".loader").removeClass('hide');
        e.preventDefault();
        let formData = new FormData(this);
        $.ajax({
@@ -266,6 +272,7 @@ $.ajaxSetup({
            contentType: false,
            processData: false,
            success: (response) => {
+            $(".loader").addClass('hide');
             Swal.fire({
 				position: 'top-center',
 				icon: 'success',
@@ -274,10 +281,14 @@ $.ajaxSetup({
 				timer: 1500
 				})
 
-               this.reset();
                $('.wtbl').DataTable().ajax.reload();  
+               this.reset();
+               location.reload();
+
            },
            error: function(response){
+            $(".loader").addClass('hide');
+
             Swal.fire({
 				position: 'top-center',
 				icon: 'error',

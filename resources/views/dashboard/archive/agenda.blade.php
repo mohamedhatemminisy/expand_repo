@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
     <div role="tabpanel" class="tab-pane active show" id="activeIcon1" aria-labelledby="activeIcon1-tab1"
         aria-expanded="true">

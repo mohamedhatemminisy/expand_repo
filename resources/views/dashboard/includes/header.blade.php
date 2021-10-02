@@ -44,11 +44,11 @@
             <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <span class="mr-1">
                                 <font class="hideMob">{{trans('admin.hello')}} ,</font>
-                              <span class="user-name text-bold-700"> {{auth('admin') -> user() -> name}} </span>
+                              <span class="user-name text-bold-700"> {{auth('admin') -> user() -> nick_name}} </span>
                             </span>
               <span class="avatar avatar-online hideMob">
                 
-                  <img src="{{asset('assets/images/ico/16171327591279.jpg')}}" style="    max-height: 35px;" alt="avatar">
+                  <img src="{{auth('admin') -> user() -> image}}" style="    max-height: 35px;" alt="avatar">
                
               </span>
             </a>
@@ -74,9 +74,8 @@
         </ul>
 
         <ul class="nav navbar-nav float-right">
-          <li class="dropdown dropdown-language nav-item hideMob">
-            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
-          </li>
+          @yield('search')
+      
           <li class="dropdown dropdown-language nav-item" style=" display:none; margin-top: 14px;"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">{{trans('admin.languages')}}<span class="selected-language"></span></a>
             <div class="dropdown-menu" aria-labelledby="dropdown-flag">

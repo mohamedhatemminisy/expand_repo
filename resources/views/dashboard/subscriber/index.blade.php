@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
 
 <section class="horizontal-grid" id="horizontal-grid">
@@ -350,18 +355,7 @@
                     <!-- <a class="heading-elements-toggle">
                         <i class="ft-align-justify font-medium-3"></i></a> -->
 
-                    <div class="heading-elements1 heading-elements2">
-                        <ul class="list-inline mb-0">
-                            <li>
-                                <img src="https://db.expand.ps/images/right_arrow.png" width="32" height="32" onclick="GetNext()">
-                            </li>
-                            <li id="TotalEmp" class="card-title">
-                                <span id="empStep">0</span>/5428    										</li>
-                            <li>
-                                <img src="https://db.expand.ps/images/left_arrow.png" width="32" height="32" onclick="GetPrev()">
-                            </li>       
-                        </ul>
-                    </div>
+    
                 </div>
                 <div class="card-content collapse show">
                 <div class="card-body">
@@ -664,7 +658,7 @@ $("#area_data").change(function () {
 
 
     $(".save-data").click(function(event){
-        // $(".loader").removeClass('hide');
+        $(".loader").removeClass('hide');
      $( "#formDataNameAR" ).removeClass( "error" );
       event.preventDefault();
 
@@ -712,9 +706,8 @@ $("#area_data").change(function () {
          },
 
         success:function(response){
-            // $(".loader").addClass('hide');
-            // $(".alert-success").removeClass('hide');
-            // $("#succMsg").text('{{trans('admin.employee_added')}}')
+			$(".loader").addClass('hide');
+
              $('.wtbl').DataTable().ajax.reload(); 
             // setTimeout(function(){
             //     $(".alert-success").addClass("hide");
@@ -730,13 +723,7 @@ $("#area_data").change(function () {
               
         },
         error: function(response) {
-
-            // $(".alert-success").addClass("hide");
-			// $(".alert-danger").removeClass('hide');
-            // $("#errMsg").text('{{trans('admin.error_save')}}')
-            // setTimeout(function(){
-            //     $(".alert-danger").addClass("hide");
-            // },2000)
+			$(".loader").addClass('hide');
             Swal.fire({
 				position: 'top-center',
 				icon: 'error',
@@ -744,10 +731,15 @@ $("#area_data").change(function () {
 				showConfirmButton: false,
 				timer: 1500
 				})
-            // if(response.responseJSON.errors.formDataNameAR){
-            //     $( "#formDataNameAR" ).addClass( "error" );
-            //     alert(response.responseJSON.errors.formDataNameAR);
-            // }
+                $("#formDataNameAR").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#formDataNameAR" ).removeClass( "error" );
+                    }
+                });
+
+            if(response.responseJSON.errors.formDataNameAR){
+                $( "#formDataNameAR" ).addClass( "error" );
+            }
            
 
            }

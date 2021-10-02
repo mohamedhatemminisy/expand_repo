@@ -133,8 +133,12 @@ class ProjectController extends Controller
         $project['address'] = Address::where('id', $project['info']['addresse_id'])->first();
         $project['sponsers'] = Orgnization::where('org_type','orginzation')->where('id', $project['info']->sponser)->first()->name;
         $project['contract'] = Orgnization::where('org_type','suppliers')->where('id', $project['info']->contract)->first()->name;
-        $users = json_decode($project['info']->user_id);
-        $project['users'] = User::whereIn('id', $users)->get();
+        if($project['info']->user_id != "null"){
+            
+            $users = json_decode($project['info']->user_id);
+            $project['users'] = User::whereIn('id', $users)->get();
+        }
+
 
         if($project['address']->city_id){
             $project['city'] =City::where('id',$project['address']->city_id)->first()->name;

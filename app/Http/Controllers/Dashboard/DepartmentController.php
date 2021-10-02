@@ -25,13 +25,12 @@ class DepartmentController extends Controller
 
     public function depart_manger(Request $request){
         $department = Department::where('id',$request['val'])->first();
-        $admin = Admin::where('id',$department->admin_id)->first()->name;
+        $admin = Admin::where('id',$department->admin_id)->first()->nick_name;
         return response()->json($admin);
     }
 
 
     public function store_department(DepartmentRequest $request){
-
         if($request->department_id == null){
             $department = new Department();
             $department->name = $request->departmentName;
@@ -73,12 +72,14 @@ class DepartmentController extends Controller
     public function dep_info(Request $request)
     {
         $depaertment['info'] = Department::find($request['dep_id']);
-        $depaertment['admin'] = Admin::where('id',$depaertment['info']->admin_id)->first()->name;
+        if($depaertment['info']->admin_id){
+            $depaertment['admin'] = Admin::where('id',$depaertment['info']->admin_id)->first()->nick_name;
+        }
+
         if($depaertment['info']->department_id){
             $depaertment_info = Department::where('id',$depaertment['info']->department_id)->first();
             $depaertment['dep_parent'] = $depaertment_info->name;
-            $depaertment['dep_parent_manager'] = Admin::where('id', $depaertment_info->admin_id)->first()->name;
-
+            $depaertment['dep_parent_manager'] = Admin::where('id', $depaertment_info->admin_id)->first()->nick_name;
         }
         $model = $depaertment['info']->model;
         $ArchiveCount = count(Archive::where('model_id',$request['dep_id'])

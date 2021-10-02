@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
 
 <section id="hidden-label-form-layouts">
@@ -109,7 +114,6 @@
                                         
 
                                             <select type="text" id="oiltype" name="oiltype" class="form-control">
-                                                <option> - </option>
                                                 <option value="petrol">{{trans('admin.petrol')}}  </option>
                                                 <option value="diesel"> {{trans('admin.diesel')}}  </option>
                                         </select>
@@ -518,6 +522,8 @@ function update($id)
         });
 }
 $('#vehicle-form').submit(function(e) {
+    $(".loader").removeClass('hide');
+
        e.preventDefault();
        let formData = new FormData(this);
      $( "#Vehiclename" ).removeClass( "error" );
@@ -531,6 +537,7 @@ $('#vehicle-form').submit(function(e) {
            contentType: false,
            processData: false,
            success: (response) => {
+            $(".loader").addClass('hide');
             $('.wtbl').DataTable().ajax.reload();
              if (response) {
                 Swal.fire({
@@ -545,6 +552,8 @@ $('#vehicle-form').submit(function(e) {
               
            },
            error: function(response){
+            $(".loader").addClass('hide');
+
             Swal.fire({
 				position: 'top-center',
 				icon: 'error',
@@ -552,6 +561,17 @@ $('#vehicle-form').submit(function(e) {
 				showConfirmButton: false,
 				timer: 1500
 				})
+
+                $("#Vehiclename").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#Vehiclename" ).removeClass( "error" );
+                    }
+                });
+                $("#plateNo").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#plateNo" ).removeClass( "error" );
+                    }
+                });
             if(response.responseJSON.errors.Vehiclename){
                 $( "#Vehiclename" ).addClass( "error" );
             }

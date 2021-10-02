@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
 
 <section class="horizontal-grid" id="horizontal-grid">
@@ -128,7 +133,6 @@
                                         </span>
                                         </div>
                                         <select type="text" id="PositionID" name="PositionID" class="form-control">
-                                            <option> - </option>
                                             @foreach($jobTitle as $job)
                                             <option value="{{$job->id}}"> {{$job->name}}   </option>
                                             @endforeach
@@ -464,7 +468,8 @@ $.ajax({
 
 
     $(".save-data").click(function(event){
-            $( "#SponsorName" ).removeClass( "error" );
+    $(".loader").removeClass('hide');
+    $( "#SponsorName" ).removeClass( "error" );
       event.preventDefault();
 
       let SponsorName = $("input[name=SponsorName]").val();
@@ -532,7 +537,12 @@ $.ajax({
                 
         },
         error: function(response) {
-
+            $(".loader").addClass('hide');
+            $("#SponsorName").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#SponsorName" ).removeClass( "error" );
+                    }
+                });
             if(response.responseJSON.errors.SponsorName){
                 $( "#SponsorName" ).addClass( "error" );
             }

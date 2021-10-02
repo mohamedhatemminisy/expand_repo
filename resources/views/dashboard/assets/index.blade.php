@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('search')
+<li class="dropdown dropdown-language nav-item hideMob">
+            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
+          </li>
+@endsection
 @section('content')
 
 <section id="hidden-label-form-layouts">
@@ -184,7 +189,7 @@
                                             <select type="text" id="pinc3" name="pinc3" class="form-control">
                                             <optgroup label=" ">
                                             @foreach($admins as $admin)
-                                              <option value="{{$admin->id}}"> {{$admin->name}} </option>
+                                              <option value="{{$admin->id}}"> {{$admin->nick_name}} </option>
                                             @endforeach
                                         </select>
                                         </optgroup>
@@ -512,6 +517,8 @@ $.ajaxSetup({
         }
     });
 $('#upload-image-form').submit(function(e) {
+    $(".loader").removeClass('hide');
+
        e.preventDefault();
        let formData = new FormData(this);
      $( "#Equipment" ).removeClass( "error" );
@@ -525,6 +532,7 @@ $('#upload-image-form').submit(function(e) {
            contentType: false,
            processData: false,
            success: (response) => {
+            $(".loader").addClass('hide');
             $('.wtbl').DataTable().ajax.reload();  
              if (response) {
                 Swal.fire({
@@ -540,6 +548,7 @@ $('#upload-image-form').submit(function(e) {
              
            },
            error: function(response){
+            $(".loader").addClass('hide');
             Swal.fire({
 				position: 'top-center',
 				icon: 'error',
@@ -547,6 +556,29 @@ $('#upload-image-form').submit(function(e) {
 				showConfirmButton: false,
 				timer: 1500
 				})
+
+                $("#Equipment").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#Equipment" ).removeClass( "error" );
+                    }
+                });
+                $("#brand").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#brand" ).removeClass( "error" );
+                    }
+                });
+                $("#Eqtype").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#Eqtype" ).removeClass( "error" );
+                    }
+                });
+
+                $("#Department").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#Department" ).removeClass( "error" );
+                    }
+                });
+
             if(response.responseJSON.errors.Equipment){
                 $( "#Equipment" ).addClass( "error" );
             }
