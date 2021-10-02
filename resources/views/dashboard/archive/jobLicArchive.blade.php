@@ -280,7 +280,7 @@ $.ajaxSetup({
 				showConfirmButton: false,
 				timer: 1500
 				})
-
+                $(".formDataaaFilesArea").html('');
                $('.wtbl').DataTable().ajax.reload();  
                this.reset();
                location.reload();
@@ -332,28 +332,37 @@ $( function() {
             $('#customerid').val(response.info.model_id);
             $('#customername').val(response.info.name);
             $('#customerName').val(response.info.name);
-
+            $('#LicBorder').val(response.info.limit_number_id);
             $('#customerType').val(response.info.model_name);
             $('#licNo').val(response.info.license_number);
             $('#businessName').val(response.info.trade_name);
             $('#startAt').val(response.info.start_date);
             $('#endAt').val(response.info.expiry_ate);
-
-            attach='';
-            var i=1;
-            if(response.info.fileIDS&&typeof(response.info.fileIDS)=="object"){ 
-            response.info.fileIDS.forEach(file => {
-                attach+='<div id="attach" class=" col-sm-6 ">'
-                        +'<div class="attach">'
-                            +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
-                            +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
-                            +'  <i class="fa fa-eye"> </i>'
-                            +'</a><input type="hidden" value="" name="attach[]" >'
-                            +'</div>'
-                        +'</div>';
-                        i++;
-                    });}
-            $(".formDataaaFilesArea").html(attach)
+            $('#archieveid').val(response.info.id);
+            row='';
+                if(response.files){
+                    var j=0;
+                    for(j=0;j<response.files.length;j++){
+                        shortCutName=response.files[j].real_name;
+                        shortCutID=response.files[j].id;
+                        urlfile='{{ asset('') }}';
+                        urlfile+=response.files[j].url;
+                        formDataStr="formDataaa";
+                            shortCutName=shortCutName.substring(0, 20)
+                            row+='<div id="attach" class=" col-sm-6 ">' +
+                                '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
+                                +'    <span class="attach-text">'+shortCutName+'</span>'
+                                +'    <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank"><i class="fa fa-eye"></i></a>'
+                                +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
+                                +'      <input type="hidden" id="'+formDataStr+'imgUploads[]" name="'+formDataStr+'imgUploads[]" value="'+shortCutName+'">'
+                                +'             <input type="hidden" id="'+formDataStr+'orgNameList[]" name="'+formDataStr+'orgNameList[]" value="'+shortCutName+'">'
+								+'             <input type="hidden" id="'+formDataStr+'orgIdList[]" name="'+formDataStr+'orgIdList[]" value="'+shortCutID+'">'
+							    +'    </div>'
+                                +'  </div>' +
+                                '</div>'
+                    }
+                    $(".formDataaaFilesArea").html(row)
+                }
             
             },
         });
