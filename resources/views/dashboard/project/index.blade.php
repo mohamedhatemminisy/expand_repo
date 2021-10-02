@@ -419,7 +419,7 @@ $( function() {
             $('#dateEnd').val(response.info.dateEnd);
             $('#Projectcost').val(response.info.Projectcost);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#CurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency); 
             });
@@ -490,7 +490,7 @@ function update($id)
             $('#dateEnd').val(response.info.dateEnd);
             $('#Projectcost').val(response.info.Projectcost);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#CurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency); 
             });

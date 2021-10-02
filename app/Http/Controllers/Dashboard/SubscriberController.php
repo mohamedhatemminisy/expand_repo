@@ -19,6 +19,7 @@ use App\Models\ArchiveLicense;
 use App\Models\Setting;
 use App\Models\jobLicArchieve;
 use App\Models\CopyTo;
+use App\Models\linkedTo;
 use Yajra\DataTables\Services\DataTable;
 class SubscriberController extends Controller
 {
@@ -112,6 +113,7 @@ class SubscriberController extends Controller
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->with('files')->get();
+
         $ArchiveLic =ArchiveLicense::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->with('files')->get();
         $user['ArchiveLic'] = $ArchiveLic;
@@ -131,9 +133,15 @@ class SubscriberController extends Controller
         $CopyTo = CopyTo::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $user['copyTo'] = $CopyTo;
+        $jalArchive = linkedTo::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->with('archive','archive.files')->get();
+        $user['jalArchive'] = $jalArchive;
+        $jalArchiveCount = count(linkedTo::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->get());
+
         $CopyToCount = count(CopyTo::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->get());
-        $user['ArchiveCount'] = $ArchiveCount + $CopyToCount +$ArchiveLicCount;
+
         if($user['info']->job_title_id){
             $user['job_title'] = JobTitle::where('id',$user['info']->job_title_id)->first()->name;
         }
@@ -143,7 +151,10 @@ class SubscriberController extends Controller
         if($user['info']['addresse_id']){
             $user['address'] = Address::where('id', $user['info']['addresse_id'])->first();
         }
-
+        $user['ArchiveCount'] = $ArchiveCount + $CopyToCount +$ArchiveLicCount+$jalArchiveCount;
+        $user['job_title'] = JobTitle::where('id',$user['info']->job_title_id)->first()->name;
+        $user['group'] = Group::where('id',$user['info']->group_id)->first()->name;
+        $user['address'] = Address::where('id', $user['info']['addresse_id'])->first();
         if($user['address']->city_id){
             $user['city'] =City::where('id',$user['address']->city_id)->first()->name;
         }

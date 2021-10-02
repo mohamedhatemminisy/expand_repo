@@ -15,6 +15,7 @@ use App\Http\Requests\EquipentRequest;
 use Yajra\DataTables\DataTables;
 use App\Models\Archive;
 use App\Models\CopyTo;
+use App\Models\linkedTo;
 
 class AssetsController extends Controller
 {
@@ -113,14 +114,18 @@ class AssetsController extends Controller
         ->where('model_name',$model)->get());
         $CopyToCount = count(CopyTo::where('model_id',$request['equip_id'])
         ->where('model_name',$model)->get());
-        $equipment['ArchiveCount'] = $ArchiveCount + $CopyToCount;
         $Archive =Archive::where('model_id',$request['equip_id'])
         ->where('model_name',$model)->with('files')->get();
         $equipment['Archive'] = $Archive;
         $CopyTo = CopyTo::where('model_id',$request['equip_id'])
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $equipment['copyTo'] = $CopyTo;
-
+        $jalArchive = linkedTo::where('model_id',$request['equip_id'])
+        ->where('model_name',$model)->with('archive','archive.files')->get();
+        $equipment['jalArchive'] = $jalArchive;
+        $jalArchiveCount = count(linkedTo::where('model_id',$request['equip_id'])
+        ->where('model_name',$model)->get());
+        $equipment['ArchiveCount'] = $ArchiveCount + $CopyToCount+$jalArchiveCount;
         $equipment['admin'] = Admin::where('id',$equipment['info']->admin_id)->first()->name;
         $equipment['department'] = Department::where('id',$equipment['info']->department_id)->first()->name;
         $equipment['sponser'] = Orgnization::where('org_type','orginzation')

@@ -470,7 +470,7 @@ $( function() {
             $('#extphone').val(response.info.extphone);
             $('#inChargeLink').val(response.dep_parent_manager);
 			$("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#LinkDept option")
                  .each(function() { this.selected = (this.text == response.dep_parent); 
             });
@@ -519,7 +519,7 @@ function update($id)
             $('#extphone').val(response.info.extphone);
             $('#inChargeLink').val(response.dep_parent_manager);
 			$("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#LinkDept option")
                  .each(function() { this.selected = (this.text == response.dep_parent); 
             });

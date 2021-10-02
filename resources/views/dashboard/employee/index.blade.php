@@ -692,7 +692,7 @@ $( function() {
                 $('#customCheck2').prop('checked', true);
             }
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
 
             $("select#Position option")
                  .each(function() { this.selected = (this.text == response.job_title); 
@@ -758,7 +758,7 @@ function update($id)
             $("#DepartmentID").val(response.info.department_id);
             $('#userProfileImg').attr('src', response.info.image);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#Position option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });
