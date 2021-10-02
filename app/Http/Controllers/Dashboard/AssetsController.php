@@ -120,6 +120,12 @@ class AssetsController extends Controller
         $CopyTo = CopyTo::where('model_id',$request['equip_id'])
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $equipment['copyTo'] = $CopyTo;
+        $jalArchive = linkedTo::where('model_id',$request['equip_id'])
+        ->where('model_name',$model)->with('archive','archive.files')->get();
+        $equipment['jalArchive'] = $jalArchive;
+        $jalArchiveCount = count(linkedTo::where('model_id',$request['equip_id'])
+        ->where('model_name',$model)->get());
+        $equipment['ArchiveCount'] = $ArchiveCount + $CopyToCount+$jalArchiveCount;
         if($equipment['info']->admin_id){
             $equipment['admin'] = Admin::where('id',$equipment['info']->admin_id)->first()->name;
         }if($equipment['info']->department_id){
