@@ -54,7 +54,8 @@
 															</span>
 														</div>
 														<select id="Incharge" name="Incharge" type="text" class="form-control selectFullCorner">
-                                                            <option value="0"> -- {{trans('admin.select_manager')}}  --</option>
+                                                            <option value=""> -- {{trans('admin.select_manager')}}  --</option>
+															
 														    @foreach($admins as $admin)
 															<option value="{{$admin->id}}"> {{$admin->nick_name}} </option>
 															@endforeach

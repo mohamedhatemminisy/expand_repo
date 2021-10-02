@@ -91,7 +91,6 @@
                                                 <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
                                                 <input type="hidden" id="userimgpath" name="userimgpath">
                                                 <meta name="csrf-token" content="{{ csrf_token() }}" />
-
                                             </div>
 
                                         </div>
@@ -203,7 +202,7 @@
                                                     </div>
                                                     <select type="text" id="DepartmentID" name="DepartmentID" class="form-control" onchange="getDeptInfo($(this).val(),DirectManager)">
                                                         <option> اختر </option>
-                                                        <option value="0">  {{trans('admin.without')}} </option>
+                                                        <option value="">  {{trans('admin.without')}} </option>
 
                                                         @foreach($departments as $department)
                                                         <option value="{{$department->id}}">  {{$department->name}} </option>
@@ -230,13 +229,13 @@
                                                     </div>
                                                     <select type="text" id="Position" name="Position" class="form-control" placeholder="internal phone">
                                                         <option> اختر </option>
-                                                        <option value="0">  {{trans('admin.without')}} </option>
+                                                        <option value="">  {{trans('admin.without')}} </option>
                                                         @foreach($jobTitle as $title)
                                                         <option value="{{$title->id}}">  {{$title->name}}  </option>
                                                         @endforeach
                                                     </select>
 
-                                                    <div class="input-group-append" onclick="QuickAdd(17,'formDataProfessionID','Profession')">
+                                                    <div class="input-group-append" onclick="QuickAdd(17,'Position','Profession')">
                                                         <span class="input-group-text input-group-text2">
                                                             <i class="fa fa-external-link"></i>
                                                         </span>
@@ -256,7 +255,7 @@
                                                     </div>
                                                     <select type="text" id="DirectManager" name="DirectManager" class="form-control" placeholder="internal phone">
                                                         <option>  {{trans('admin.Task_Checker')}} </option>
-                                                        <option value="0">  {{trans('admin.without')}} </option>
+                                                        <option value="">  {{trans('admin.without')}} </option>
                                                         @foreach($admin as $adm)
                                                         <option value="{{$adm->id}}"> {{$adm->name}}  </option>
                                                         @endforeach
@@ -306,7 +305,7 @@
                                                         @endforeach
                                                     </select>
 
-                                                    <div class="input-group-append" onclick="QuickAdd(6,'formDataProfessionID','Profession')">
+                                                    <div class="input-group-append" onclick="QuickAdd(6,'JobType','Profession')">
                                                         <span class="input-group-text input-group-text2">
                                                             <i class="fa fa-external-link"></i>
                                                         </span>
@@ -881,7 +880,7 @@ $.ajax({
 				showConfirmButton: false,
 				timer: 1500
 				})
-            $('#userProfileImg').attr('src', 'http://127.0.0.1:8000/assets/images/ico/user.png');
+            $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/user.png');
 
                this.reset();
              }

@@ -7,7 +7,7 @@
 @section('content')
 
 <section id="hidden-label-form-layouts">
-<form method="post" id="special_asset" enctype="multipart/form-data">
+<form method="post" id="setting_form" enctype="multipart/form-data">
         @csrf
 <div class="row">
     <div class="col-xl-6 col-lg-6">
@@ -150,13 +150,15 @@
                                 </div>
                         </div>
                         <div class="col-lg-4 col-md-12">
+
                             <div class="col-lg-12">
-                                <img id="wareHouseImg" src="{{asset('assets/images/ico/park.png')}}" style="cursor: pointer;" width="150" height="100" onclick="document.getElementById('formDataimgPic5').click(); return false">
-
-
-                                <input type="hidden" id="warehouseimgpath" name="warehouseimgpath">
-                                <input type="file" class="form-control-file" id="formDataimgPic5" name="imgPic" style="display: none" onchange="doUploadPic1('formData4','wareHouseImg','warehouseimgpath')">
+                                <img id="userProfileImg" src="{{asset('assets/images/ico/park.png')}}" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
+                                <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
+                                <input type="hidden" id="userimgpath" name="userimgpath">
+                                <meta name="csrf-token" content="{{ csrf_token() }}" />
                             </div>
+
+
                             <div class="col-lg-12">
                                 <div class="form-group" style="margin-top: 8%; display: none; width: 112%;" id="warehousedvtext2">
                                     <div class="input-group" style="width: 100% !important;">
@@ -858,7 +860,11 @@ $( function() {
             $("select#ownType option")
                  .each(function() { this.selected = (this.text == response.asset_status); 
             });
-
+            if(response.info.image != window.location.origin){
+                $('#userProfileImg').attr('src', response.info.image);  
+            }else{
+                $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/park.png');
+            }
             $("select#OrgCurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency); 
             });
@@ -915,6 +921,7 @@ function update($id)
             $("select#CityID option")
                  .each(function() { this.selected = (this.text == response.city); 
             });
+            $('#userProfileImg').attr('src', response.info.image);
             $("select#TownID option")
                  .each(function() { this.selected = (this.text == response.area); 
             });
@@ -984,7 +991,7 @@ $.ajaxSetup({
         }
     });
 
-   $('#special_asset').submit(function(e) {
+   $('#setting_form').submit(function(e) {
     $(".loader").removeClass('hide');
 
        e.preventDefault();
@@ -1008,6 +1015,7 @@ $.ajaxSetup({
 				showConfirmButton: false,
 				timer: 1500
 				})
+                $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/park.png');
 
                this.reset();
              }

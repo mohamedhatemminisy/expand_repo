@@ -139,7 +139,7 @@
                                                                         </span>
                                         </div>
                                         <select type="text" id="formDataProfessionID" name="formDataProfessionID" class="form-control">
-                                            <option value="0"> - </option>
+                                            <option value=""> - </option>
                                             @foreach($jobTitle as $job)
                                             <option value="{{$job->id}}"> {{$job->name}} </option>
                                             @endforeach
@@ -174,12 +174,12 @@
                                             </span>
                                         </div>
                                         <select type="text" id="formDataIndustryID" name="formDataIndustryID" class="form-control">
-                                            <option value="0"> - </option>
+                                            <option value=""> - </option>
                                             @foreach($groups as $group)
                                             <option value="{{$group->id}}"> {{$group->name}}  </option>
                                             @endforeach
                                     </select>
-                                    <div class="input-group-append" onclick="QuickAdd(9,'formDataProfessionID','Profession')">
+                                    <div class="input-group-append" onclick="QuickAdd(9,'formDataIndustryID','Profession')">
                                         <span class="input-group-text input-group-text2">
                                             <i class="fa fa-external-link"></i>
 

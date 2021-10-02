@@ -67,7 +67,7 @@ class vehicleController extends Controller
             if ($request->file('imgPic')) {
                 $path = upload_image($request->file('imgPic'), 'Vehicle_');
             }else{
-                $path = '';
+                $path = $vehicle->image;
             }
             $vehicle->name = $request->Vehiclename;
             $vehicle->serial_number = $request->plateNo;

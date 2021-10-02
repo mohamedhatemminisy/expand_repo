@@ -232,7 +232,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
@@ -248,7 +248,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
@@ -263,7 +263,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
@@ -278,7 +278,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
@@ -293,7 +293,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
@@ -308,7 +308,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
@@ -323,7 +323,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
@@ -338,7 +338,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
@@ -353,7 +353,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
@@ -368,7 +368,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);
         }
@@ -385,7 +385,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
@@ -402,7 +402,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
@@ -419,7 +419,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
@@ -435,7 +435,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
@@ -450,7 +450,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
@@ -465,7 +465,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
@@ -480,7 +480,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
@@ -495,7 +495,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
@@ -510,7 +510,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
@@ -525,7 +525,7 @@ class ExtentionsController extends Controller
                 $job->save();
             }
             if ($job) {
-                return response()->json(['success'=>trans('admin.equpment_added')]);
+                return response()->json($job);
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }

@@ -83,7 +83,7 @@ class SpecialAssetsController extends Controller
             if ($request->file('imgPic')) {
                 $path = upload_image($request->file('imgPic'), 'special_asset_');
             }else{
-                $path = '';
+                $path = $specialAsset->image;
             }
             $specialAsset->name = $request->BName;
             $specialAsset->price = $request->OrgSalary;
