@@ -37,8 +37,13 @@ class ArchieveController extends Controller
     public function out_archieve(){
         $type= 'outArchive';
         $url = "out_archieve";
-        $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
+        $archive_type = ArchiveType::where('type','munArchive')->get();
+        $projArchive = ArchiveType::where('type','projArchive')->get();
+        $empArchive = ArchiveType::where('type','empArchive')->get();
+        $citArchive = ArchiveType::where('type','citArchive')->get();
+        $depArchive = ArchiveType::where('type','depArchive')->get();
+        return view('dashboard.archive.outArchive',compact('depArchive','citArchive','type','archive_type','url','projArchive','empArchive'));
+   
     }
 
     public function archive_auto_complete(Request $request){
@@ -269,51 +274,83 @@ class ArchieveController extends Controller
     public function in_archieve(){
         $type= 'inArchive';
         $url = "in_archieve";
-        $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
+        $archive_type = ArchiveType::where('type','munArchive')->get();
+        $projArchive = ArchiveType::where('type','projArchive')->get();
+        $empArchive = ArchiveType::where('type','empArchive')->get();
+        $citArchive = ArchiveType::where('type','citArchive')->get();
+        $depArchive = ArchiveType::where('type','depArchive')->get();
+        return view('dashboard.archive.outArchive',compact('depArchive','citArchive','type','archive_type','url','projArchive','empArchive'));
+   
     }
     public function mun_archieve(){
         $type= 'munArchive';
         $url = "mun_archieve";
-        $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
+        $archive_type = ArchiveType::where('type','munArchive')->get();
+        $projArchive = ArchiveType::where('type','projArchive')->get();
+        $empArchive = ArchiveType::where('type','empArchive')->get();
+        $citArchive = ArchiveType::where('type','citArchive')->get();
+        $depArchive = ArchiveType::where('type','depArchive')->get();
+        return view('dashboard.archive.outArchive',compact('depArchive','citArchive','type','archive_type','url','projArchive','empArchive'));
     }
     public function proj_archieve(){
         $type= 'projArchive';
         $url = "proj_archieve";
-        $archive_type = ArchiveType::get();
-
-        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
+        $archive_type = ArchiveType::where('type','munArchive')->get();
+        $projArchive = ArchiveType::where('type','projArchive')->get();
+        $empArchive = ArchiveType::where('type','empArchive')->get();
+        $citArchive = ArchiveType::where('type','citArchive')->get();
+        $depArchive = ArchiveType::where('type','depArchive')->get();
+        return view('dashboard.archive.outArchive',compact('depArchive','citArchive','type','archive_type','url','projArchive','empArchive'));
     }
     public function emp_archieve(){
         $type= 'empArchive';
         $url = "emp_archieve";
-        $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
+        $archive_type = ArchiveType::where('type','munArchive')->get();
+        $projArchive = ArchiveType::where('type','projArchive')->get();
+        $empArchive = ArchiveType::where('type','empArchive')->get();
+        $citArchive = ArchiveType::where('type','citArchive')->get();
+        $depArchive = ArchiveType::where('type','depArchive')->get();
+        return view('dashboard.archive.outArchive',compact('depArchive','citArchive','type','archive_type','url','projArchive','empArchive'));
     }
     public function cit_archieve(){
         $type= 'citArchive';
         $url = "cit_archieve";
-        $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
+        $archive_type = ArchiveType::where('type','munArchive')->get();
+        $projArchive = ArchiveType::where('type','projArchive')->get();
+        $empArchive = ArchiveType::where('type','empArchive')->get();
+        $citArchive = ArchiveType::where('type','citArchive')->get();
+        $depArchive = ArchiveType::where('type','depArchive')->get();
+        return view('dashboard.archive.outArchive',compact('depArchive','citArchive','type','archive_type','url','projArchive','empArchive'));
     }
     public function dep_archieve(){
         $type= 'depArchive';
         $url = "dep_archieve";
-        $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
+        $archive_type = ArchiveType::where('type','munArchive')->get();
+        $projArchive = ArchiveType::where('type','projArchive')->get();
+        $empArchive = ArchiveType::where('type','empArchive')->get();
+        $citArchive = ArchiveType::where('type','citArchive')->get();
+        $depArchive = ArchiveType::where('type','depArchive')->get();
+        return view('dashboard.archive.outArchive',compact('depArchive','citArchive','type','archive_type','url','projArchive','empArchive'));
     }
     public function projArchive(){
         $type= 'projArchive';
         $url = "proj_archieve";
-        $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));   
+        $archive_type = ArchiveType::where('type','munArchive')->get();
+        $projArchive = ArchiveType::where('type','projArchive')->get();
+        $empArchive = ArchiveType::where('type','empArchive')->get();
+        $citArchive = ArchiveType::where('type','citArchive')->get();
+        $depArchive = ArchiveType::where('type','depArchive')->get();
+        return view('dashboard.archive.outArchive',compact('depArchive','citArchive','type','archive_type','url','projArchive','empArchive'));  
     }
     public function munArchive(){
         $type= 'munArchive';
         $url = "mun_archieve";
-        $archive_type = ArchiveType::get();
-        return view('dashboard.archive.outArchive',compact('type','archive_type','url'));
+        $archive_type = ArchiveType::where('type','munArchive')->get();
+        $projArchive = ArchiveType::where('type','projArchive')->get();
+        $empArchive = ArchiveType::where('type','empArchive')->get();
+        $citArchive = ArchiveType::where('type','citArchive')->get();
+        $depArchive = ArchiveType::where('type','depArchive')->get();
+        return view('dashboard.archive.outArchive',compact('depArchive','citArchive','type','archive_type','url','projArchive','empArchive'));
     }
     public function licArchive(){
         $type= 'licArchive';
@@ -355,7 +392,8 @@ class ArchieveController extends Controller
         $agendaExtention = AgendaExtention::get();
         $type= 'agArchive';
         $url = "agenda_archieve";
-        $archive_type = ArchiveType::get();
+        $archive_type = AgendaExtention::get();
+
         return view('dashboard.archive.jalArchive',compact('type','archive_type','url','agendaExtention'));
     }
     public function agendaReportArchive(){
