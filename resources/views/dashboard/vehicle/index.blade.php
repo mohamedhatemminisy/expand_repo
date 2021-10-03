@@ -7,7 +7,7 @@
 @section('content')
 
 <section id="hidden-label-form-layouts">
-<form method="post" id="vehicle-form" enctype="multipart/form-data">
+<form method="post" id="setting_form" enctype="multipart/form-data">
         @csrf
     <div class="row">
         <div class="col-xl-6 col-lg-6">
@@ -59,7 +59,7 @@
                                             @endforeach
                                         </select>
                                         </optgroup>
-                                        <div class="input-group-append" onclick="QuickAdd(25,'Vehcilebrand','{{trans('assets.vehicles_brand')}}')">
+                                        <div class="input-group-append" onclick="QuickAdd(25,'vehiclebrand','{{trans('assets.vehicles_brand')}}')">
                                             <span class="input-group-text input-group-text2">
                                                 <i class="fa fa-external-link"></i>
                                             </span>
@@ -68,14 +68,14 @@
                                         </div>
                                     </div>
                             </div>
-                            <div class="col-lg-4 col-md-12">
-                                <img src="https://db.expand.ps/images/car.png" id="carimg" width="150" height="100" style="cursor: pointer;" onclick="document.getElementById('formDataimgPic3').click(); return false">
 
-
-                                <input type="hidden" id="carimgpath" name="carimgpath">
-                                <input type="file" class="form-control-file" id="formDataimgPic3" name="imgPic" style="display: none" onchange="doUploadPic1('formData2','carimg','carimgpath')">
-
+                            <div class="col-md-4" style="text-align: center;">
+                                <img id="userProfileImg" src="https://db.expand.ps/images/car.png" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
+                                <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
+                                <input type="hidden" id="userimgpath" name="userimgpath">
+                                <meta name="csrf-token" content="{{ csrf_token() }}" />
                             </div>
+
 
                             <div class="col-lg-8 col-md-12">
                                 <div class="form-group">
@@ -93,7 +93,7 @@
                                             @endforeach
                                         </select>
                                         </optgroup>
-                                        <div class="input-group-append" onclick="QuickAdd(26,'Vehciletype','{{trans('assets.vehicles_type')}}')">
+                                        <div class="input-group-append" onclick="QuickAdd(26,'vehicletype','{{trans('assets.vehicles_type')}}')">
                                             <span class="input-group-text input-group-text2">
                                                 <i class="fa fa-external-link"></i>
 
@@ -419,6 +419,11 @@ $( function() {
                 $("#PHnum1").val(response.info.supply_phone);
                 $('#carimg').attr('src', response.info.image);
                 $("#msgStatic").html(response.ArchiveCount);
+                if(response.info.image != window.location.origin){
+                $('#userProfileImg').attr('src', response.info.image);  
+                }else{
+                    $('#userProfileImg').attr('src','https://db.expand.ps/images/car.png');
+                }
                 drawTablesArchive(response.Archive,[]);
                 $("select#vehiclebrand option")
                     .each(function() { this.selected = (this.text == response.brand); 
@@ -478,6 +483,7 @@ function update($id)
                 $('#Wdateinput22').val(response.info.wdateinput);
                 $('#licensedate').val(response.info.licensedate);
                 $('#OrgSalary3').val(response.info.price);
+                $('#userProfileImg').attr('src', response.info.image);
                 $('#Inshurencedate').val(response.info.Inshurencedate);
                 $("#PHnum2").val(response.info.sponsor_phone);
                 $("#PHnum1").val(response.info.supply_phone);
@@ -521,7 +527,7 @@ function update($id)
             },
         });
 }
-$('#vehicle-form').submit(function(e) {
+$('#setting_form').submit(function(e) {
     $(".loader").removeClass('hide');
 
        e.preventDefault();
@@ -548,6 +554,8 @@ $('#vehicle-form').submit(function(e) {
 				timer: 1500
 				})
                this.reset();
+               $('#userProfileImg').attr('src', 'https://db.expand.ps/images/car.png');
+
              }
               
            },

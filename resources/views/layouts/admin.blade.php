@@ -254,6 +254,7 @@ aria-hidden="true">
 
 $('#store-modal').submit(function(e) {
 	$(".loader").removeClass('hide');
+	fillIn=$("#ctrlToRefresh").val();
        e.preventDefault();
 	   $( "#NationalID" ).removeClass( "error" );
 
@@ -265,11 +266,16 @@ $('#store-modal').submit(function(e) {
            data: formData,
            contentType: false,
            processData: false,
-           success: (response) => {
+           success: function (data) {
 			$(".loader").addClass('hide');
-             if (response) {
+				if (data) {
+						$("#" + fillIn).append(new Option(data.name, data.id));
+				}
 
-             }
+				$(".loader").addClass('hide');
+						//$(".form-actions").removeClass('hide');
+						$("#s_name_ar1").val('')
+						$("#QuickAdd").modal('hide');
            },
            error: function(response){
 			$(".loader").addClass('hide');

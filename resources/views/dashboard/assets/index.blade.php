@@ -82,12 +82,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-12">
-                                <img src="https://db.expand.ps/images/equipment.jpg" style="cursor: pointer;" width="150" height="100" id="equipmentimg" onclick="document.getElementById('formDataimgPic2').click(); return false">
-                                <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
-                                <input type="hidden" id="userimgpath" name="userimgpath">
+                            <!-- <div class="col-lg-4 col-md-12">
+                                <img src="https://db.expand.ps/images/equipment.jpg" style="cursor: pointer;" width="150" height="100" id="equipmentimg" onclick="document.getElementById('userimgpath').click(); return false">
+                                <input type="hidden" id="equipmentimgpath" name="equipmentimgpath">
+                                <input type="file" class="form-control-file" id="userimgpath" name="imgPic" style="display: none" onchange="doUploadPic()">
                                 <meta name="csrf-token" content="{{ csrf_token() }}" />                             
-                            </div>
+
+                            </div> -->
+                            <div class="col-md-4" style="text-align: center;">
+                                                <img id="userProfileImg" src="https://db.expand.ps/images/equipment.jpg" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
+                                                <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
+                                                <input type="hidden" id="userimgpath" name="userimgpath">
+                                                <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+                                            </div>
                             <div class="col-lg-6 col-md-12">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -476,6 +484,11 @@ $( function() {
             $("#AddressDetailsAR").val(response.info.address);
             $("#PHnum2").val(response.info.sponsor_phone);
             $("#PHnum1").val(response.info.supply_phone);
+            if(response.info.image != window.location.origin){
+                $('#userProfileImg').attr('src', response.info.image);  
+            }else{
+                $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/user.png');
+            }
             $("#msgStatic").html(response.ArchiveCount);
             drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $('#equipmentimg').attr('src', response.info.image);
@@ -543,8 +556,7 @@ $('#setting_form').submit(function(e) {
 				showConfirmButton: false,
 				timer: 1500
 				})
-                $('#equipmentimg').attr('src', 'https://db.expand.ps/images/equipment.jpg');
-
+                $('#userProfileImg').attr('src', 'https://db.expand.ps/images/equipment.jpg');
                this.reset();
              }
              
@@ -620,13 +632,14 @@ function update($id)
             $("#PHnum1").val(response.info.supply_phone);
             $("#msgStatic").html(response.ArchiveCount);
             drawTablesArchive(response.Archive,response.copyTo);
- 
             // $('#equipmentimg').attr('src', response.info.image);
             if(response.info.image != window.location.origin){
-                $('#equipmentimg').attr('src', response.info.image);  
+                $('#userProfileImg').attr('src', response.info.image);  
             }else{
-                $('#equipmentimg').attr('src','https://db.expand.ps/images/equipment.jpg');
+                $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/user.png');
             }
+
+
             drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $('#equipmentimg').attr('src', response.info.image);
 

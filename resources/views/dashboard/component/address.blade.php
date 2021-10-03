@@ -9,14 +9,14 @@
                     </span>
                 </div>  
                 <select id="CityID" name="CityID" type="text" class="form-control selectFullCorner" onchange="doGetChild($(this).val(),8,'TownID')">
-                    <option> -- {{trans('admin.city')}} --</option>     
+                    <option value=""> -- {{trans('admin.city')}} --</option>     
                     @foreach($city as $cit)
                         <option  value="{{$cit->id}}">  {{$cit->name}} </option>
                     @endforeach
                 </select>
             </div>
             </div>
-            <div class="input-group-append col-2" onclick="QuickAdd(10,'PositionID','City')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
+            <div class="input-group-append col-2" onclick="QuickAdd(10,'CityID','City')" style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
                 <span class="input-group-text input-group-text2">
                     <i class="fa fa-external-link"></i>
                 </span>

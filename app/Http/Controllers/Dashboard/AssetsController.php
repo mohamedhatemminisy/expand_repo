@@ -70,7 +70,7 @@ class AssetsController extends Controller
             if ($request->file('imgPic')) {
                 $path = upload_image($request->file('imgPic'), 'quipent_');
             }else{
-                $path = '';
+                $path = $equpment->image;
             }
             $equpment->name = $request->Equipment;
             $equpment->serial_number = $request->SerialNo;
