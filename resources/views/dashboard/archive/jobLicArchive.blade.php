@@ -37,6 +37,7 @@
                                                     <input type="hidden" id="customerType" name="customerType" value="0">
                                                     <input type="hidden" id="msgType" name="msgType" value="">
                                                     <input type="hidden" id="pk_i_id" name="pk_i_id" value="0">
+                                                    <input type="hidden" id="ArchiveID" name="ArchiveID" value="0">
                                                     <input type="hidden" id="type" name="type" value="{{$type}}">
                                                 </div>
                                             </div>
@@ -283,8 +284,6 @@ $.ajaxSetup({
                 $(".formDataaaFilesArea").html('');
                $('.wtbl').DataTable().ajax.reload();  
                this.reset();
-               location.reload();
-
            },
            error: function(response){
             $(".loader").addClass('hide');
@@ -330,6 +329,7 @@ $( function() {
             success:function(response){
                 console.log(response.info);
             $('#customerid').val(response.info.model_id);
+            $('#ArchiveID').val(response.info.model_id);
             $('#customername').val(response.info.name);
             $('#customerName').val(response.info.name);
             $('#LicBorder').val(response.info.limit_number_id);

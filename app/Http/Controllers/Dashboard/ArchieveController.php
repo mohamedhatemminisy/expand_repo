@@ -116,9 +116,7 @@ class ArchieveController extends Controller
     
     }
     public function store_lince_archive(Request $request){
-        $archive = ArchiveLicense::where('id',$request->customerid)
-        ->where('model_name','App\Models\ArchiveLicense')
-        ->where('type',$request->type)->first();
+        $archive = ArchiveLicense::where('id',$request->ArchiveID)->first();
         if($archive){
             $archive->name =$request->customername;
             $archive->licn =$request->licn;
@@ -128,6 +126,13 @@ class ArchieveController extends Controller
             $archive->license_id =$request->BuildingTypeData;
             $archive->attachment_id =$request->AttahType;
             $archive->save();  
+            $files_ids = $request->formDataaaorgIdList;
+            foreach($files_ids as $id){
+                $file = File::find($id);
+                $file->archive_id = $archive->id;
+                $file->model_name = "App\Models\ArchiveLicense";
+                $file->save();
+            }
         }else{
         $archive = new ArchiveLicense();
         $archive->url =  $request->url;
@@ -158,9 +163,7 @@ class ArchieveController extends Controller
     }
 
     public function store_jobLic_archieve(Request $request){
-
-        $archive = jobLicArchieve::where('id',$request->archieveid)
-        ->where('model_name','App\Models\jobLicArchieve')->first();
+        $archive = jobLicArchieve::where('id',$request->ArchiveID)->first();
         if($archive){
             $archive->name =$request->customerName;
             $archive->region =$request->cityData;
@@ -173,8 +176,16 @@ class ArchieveController extends Controller
             $archive->attachment_id   =$request->AttahType;
             $archive->license_rating_id  =$request->lic_cat;
             $archive->save();  
+            $files_ids = $request->formDataaaorgIdList;
+            if($files_ids){
+                foreach($files_ids as $id){
+                    $file = File::find($id);
+                    $file->archive_id = $archive->id;
+                    $file->model_name = "App\Models\jobLicArchieve";
+                    $file->save();
+                }
+            }
         }else{
-        
         $archive = new jobLicArchieve();
         $archive->url =  $request->url;
         $archive->added_by  = Auth()->user()->id;
@@ -419,14 +430,6 @@ class ArchieveController extends Controller
         $archive_type = ArchiveType::get();
         return view('dashboard.archive.agendaReport',compact('type','archive_type','url'));
     }
-    public function jobLicReport(){
-        $type= 'jobLicReport';
-        $url = "jobLic_report";
-        $attachment_type = AttachmentType::get();
-        $license_type = LicenseType::get();
-        return view('dashboard.archive.jobLicReport',compact('type','attachment_type'
-       ,'license_type','url'));
-    }
 
       public function archieve_info_all(Request $request)
     {
@@ -468,7 +471,6 @@ class ArchieveController extends Controller
         ->with('files')->get();
         
         return DataTables::of($archive)
-                        ->addIndexColumn()
                         ->make(true);
 
     }
@@ -579,38 +581,6 @@ class ArchieveController extends Controller
             $archive['result']= $archive['result']->with('files')->get();
         }
         return response()->json($archive);
-
-    }
-    public function jobLic_reports(Request $request)
-    {   
-            $archive = jobLicArchieve::query();
-            
-            if($request->get('customerId')){
-                $archive->where('model_id','=',$request->get('customerId'));
-            }
-            else{}        
-            $archive= $archive->select('job_lic_archieves.*','craft_types.name as craft_name','license_ratings.name as license_ratings_name')
-        ->leftJoin('craft_types','craft_types.id','job_lic_archieves.craft_type_id')
-        ->leftJoin('license_ratings','license_ratings.id','job_lic_archieves.license_rating_id')
-        ->orderBy('id', 'DESC')
-        ->with('files')->get();        
-        return DataTables::of($archive)
-                        ->addIndexColumn()
-                        ->addColumn('status', function($archive) {
-                            $from = explode('/', ($archive->start_date)); 
-                            $from = $from[2].'-'.$from[1].'-'.$from[0];
-                            $to = explode('/', ($archive->expiry_ate)); 
-                            $to = $to[2].'-'.$to[1].'-'.$to[0];
-                            if ($from < $to) {
-                                return 'فعالة';
-                            }   
-
-                            return 'منتهية';
-                        })
-                        ->make(true);           
-            return DataTables::of($archive)
-                            ->addIndexColumn()
-                            ->make(true);
 
     }
     public function archieveLic_info(Request $request)
