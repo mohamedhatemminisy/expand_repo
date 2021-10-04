@@ -207,20 +207,37 @@ class ArchieveController extends Controller
         }
     }
     public function store_archive(ArchiveRequest $request){
-        // $archive = Archive::where('id',$request->customerid)->first();
-        // if($archive){
-        //     $archive->model_id =$request->customerid;
-        //     $archive->type_id =$request->archive_type   ;
-        //     $archive->name =$request->customername;
-        //     $archive->model_name =$request->customerType;
-        //     $archive->date =$request->msgDate;
-        //     $archive->title =$request->msgTitle;
-        //     $archive->type =$request->msgType;
-        //     $archive->serisal =$request->msgid;
-        //     $archive->url =  $request->url;
-        //     $archive->add_by = Auth()->user()->id;
-        //     $archive->save();
-        // }else{
+        $archive = Archive::where('id',$request->ArchiveID)->first();
+        if($archive){
+            $archive->model_id =$request->customerid;
+            $archive->type_id =$request->archive_type   ;
+            $archive->name =$request->customername;
+            $archive->model_name =$request->customerType;
+            $archive->date =$request->msgDate;
+            $archive->title =$request->msgTitle;
+            $archive->type =$request->msgType;
+            $archive->serisal =$request->msgid;
+            $archive->save();
+            $files_ids = $request->formDataaaorgIdList;
+            if($files_ids ){
+            foreach($files_ids as $id){
+                $file = File::find($id);
+                $file->archive_id = $archive->id;
+                $file->model_name = "App\Models\Archive";
+                $file->save();
+               }
+            }
+            if($request->copyToText[0] != null){
+                for($i= 0 ; $i< count($request->copyToText) ; $i++){
+                    $copyTo = new CopyTo();
+                    $copyTo->archive_id =  $archive->id;
+                    $copyTo->model_id =  $request->copyToID[$i];
+                    $copyTo->name =  $request->copyToCustomer[$i];    
+                    $copyTo->model_name =  $request->copyToType[$i];   
+                    $copyTo->save();         
+                }
+            }
+        }else{
         $archive = new Archive();
         $archive->model_id =$request->customerid;
         $archive->type_id =$request->archive_type   ;
@@ -241,7 +258,7 @@ class ArchieveController extends Controller
             $file->archive_id = $archive->id;
             $file->model_name = "App\Models\Archive";
             $file->save();
-        }
+           }
         }
         if($request->copyToText[0] != null){
             for($i= 0 ; $i< count($request->copyToText) ; $i++){
@@ -253,7 +270,7 @@ class ArchieveController extends Controller
                 $copyTo->save();         
             }
         }
-    // }
+     }
         if ($archive) {
             return response()->json(['success'=>trans('admin.archive_added')]);
         }

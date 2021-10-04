@@ -40,6 +40,7 @@
                                                     <input type="hidden" id="customerType" name="customerType" value="0">
                                                     <input type="hidden" id="msgType" name="msgType" value="">
                                                     <input type="hidden" id="pk_i_id" name="pk_i_id" value="0">
+                                                    <input type="hidden" id="ArchiveID" name="ArchiveID" value="">
                                                     <input type="hidden" id="type" name="type" value="{{$type}}">
                                                 </div>
                                             </div>
@@ -277,6 +278,7 @@ $( function() {
                 archive_id: archive_id,
             },
             success:function(response){
+            $('#ArchiveID').val(response.info.id);
             $('#customerid').val(response.info.model_id);
             $('#customername').val(response.info.name);
             $('#customerName').val(response.info.name);
