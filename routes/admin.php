@@ -41,9 +41,14 @@ Route::group([
         Route::get('emp_info', 'EmployeeController@emp_info')->name('emp_info');
         Route::get('emp_info_all', 'EmployeeController@emp_info_all')->name('emp_info_all');
 
-        
-        
-        
+
+        Route::get('volunteer', 'VolunteerController@index')->name('volunteer');
+        Route::post('store_volunteer', 'VolunteerController@store_volunteer')->name('store_volunteer');
+
+        Route::get('volunteerReport', 'ArchieveController@volunteerReport')->name('volunteer_report');
+
+        Route::get('assets_archieve','ArchieveController@assets_archieve')->name('assets_archieve');
+
 
         Route::get('department', 'DepartmentController@index')->name('department')->middleware('can:department');
         Route::get('department/id/{id}', 'DepartmentController@index');
@@ -53,7 +58,7 @@ Route::group([
         Route::get('dept_auto_complete', 'DepartmentController@dept_auto_complete')->name('dept_auto_complete');
         Route::get('dep_info', 'DepartmentController@dep_info')->name('dep_info');
         Route::get('dep_info_all', 'DepartmentController@dep_info_all')->name('dep_info_all');
-        
+
         Route::get('subscribers', 'SubscriberController@index')->name('subscribers')->middleware('can:subscribers');
         Route::get('subscribers/id/{id}', 'SubscriberController@index')->name('subscriber');
         Route::post('store_subscriber', 'SubscriberController@store_subscriber')->name('store_subscriber');
@@ -69,9 +74,9 @@ Route::group([
         Route::get('project_info', 'ProjectController@project_info')->name('project_info');
         Route::get('project_info_all', 'ProjectController@project_info_all')->name('project_info_all');
 
-        
 
-        
+
+
         Route::get('enginering', 'orginzationsController@enginering')->name('enginering')->middleware('can:enginering');
         Route::get('enginering/id/{id}', 'orginzationsController@enginering');
         Route::get('space/id/{id}', 'orginzationsController@space');
@@ -96,8 +101,8 @@ Route::group([
         ->name('equip_auto_complete');
         Route::get('equip_info', 'AssetsController@equip_info')->name('equip_info');
         Route::get('equip_info_all', 'AssetsController@equip_info_all')->name('equip_info_all');
-        
-  
+
+
         Route::get('buildings', 'SpecialAssetsController@buildings')->name('buildings')->middleware('can:buildings');
         Route::get('buildings/id/{id}', 'SpecialAssetsController@buildings');
         Route::get('Gardens_lands/id/{id}', 'SpecialAssetsController@Gardens_lands');
@@ -125,7 +130,7 @@ Route::group([
 
         Route::get('search','SearchController@full_search');
         Route::get('out_archieve','ArchieveController@out_archieve')->name('out_archieve')->middleware('can:out_archieve');
-      
+
         Route::get('archive_auto_complete','ArchieveController@archive_auto_complete')
         ->name('archive_auto_complete');
         Route::post('store_archive','ArchieveController@store_archive')->name('store_archive');
@@ -172,10 +177,10 @@ Route::group([
         ->name('getMeetingDetailsByID');
         Route::post('doEditMeetingTitle','AgendaArchieveController@doEditMeetingTitle')
         ->name('doEditMeetingTitle');
-        
+
         Route::post('uploadPic','SettingsController@uploadPic')->name('uploadPic');
-        
-        
+
+
 
         Route::get('archieve_info', 'ArchieveController@archieve_info')->name('archieve_info');
         Route::get('archieveLic_info', 'ArchieveController@archieveLic_info')->name('archieveLic_info');
@@ -190,7 +195,7 @@ Route::group([
 
         Route::post('store_jobLic_archieve','ArchieveController@store_jobLic_archieve')
         ->name('store_jobLic_archieve');
-        
+
         /**
          * admins Routes
          */

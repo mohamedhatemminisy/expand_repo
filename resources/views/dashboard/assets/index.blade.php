@@ -28,7 +28,7 @@
                                                 {{trans('assets.equp_name')}}
                                             </span>
                                         </div>
-                                        <input type="text" id="Equipment" 
+                                        <input type="text" id="Equipment"
                                         class="form-control ac ui-autocomplete-input"
                                          placeholder="" name="Equipment" autocomplete="off">
                                     </div>
@@ -40,7 +40,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                {{trans('assets.brand')}} 
+                                                {{trans('assets.brand')}}
                                             </span>
                                         </div>
                                         <select type="text" id="brand" name="brand" class="form-control">
@@ -86,7 +86,7 @@
                                 <img src="https://db.expand.ps/images/equipment.jpg" style="cursor: pointer;" width="150" height="100" id="equipmentimg" onclick="document.getElementById('userimgpath').click(); return false">
                                 <input type="hidden" id="equipmentimgpath" name="equipmentimgpath">
                                 <input type="file" class="form-control-file" id="userimgpath" name="imgPic" style="display: none" onchange="doUploadPic()">
-                                <meta name="csrf-token" content="{{ csrf_token() }}" />                             
+                                <meta name="csrf-token" content="{{ csrf_token() }}" />
 
                             </div> -->
                             <div class="col-md-4" style="text-align: center;">
@@ -148,7 +148,7 @@
                                     <div class="input-group w-s-87" style="width: 100% !important;">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                {{trans('assets.internal_No')}} 
+                                                {{trans('assets.internal_No')}}
                                             </span>
                                         </div>
                                         <input type="text" id="InternalNo" class="form-control " placeholder="" name="InternalNo">
@@ -167,7 +167,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-lg-6 col-md-12">
                                     <div class="form-group">
                                         <div class="input-group">
@@ -207,11 +207,25 @@
                                     </div>
                                 </div>
                         </div>
-                        
-                        
+
+
 
                         <div class="EnabledItem" style="direction: rtl;border:1px solid #ff0000; color:#ff0000; text-align: center;display: none">UserDisable</div>
-                        
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="input-group w-s-87" style="width:100% !important">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                {{trans('assets.note_repair')}}
+                                            </span>
+                                        </div>
+                                        <textarea type="text" id="MantinanceNote" class="form-control" placeholder="{{trans('assets.note_repair')}}" name="MantinanceNote" style="border-radius:3px !important;height: 35px;" aria-invalid="false"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row" style="margin-left: 0">
                             <div class="form-group col-md-4 mb-2" id="equipmentdvtext1" style="display: block">
                                 <label class="sr-only" for="dateinput">{{trans('assets.date_sale')}}</label>
@@ -242,24 +256,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <div class="input-group w-s-87" style="width:100% !important">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                {{trans('assets.note_repair')}}
-                                            </span>
-                                        </div>
-                                        <textarea type="text" id="MantinanceNote" class="form-control" placeholder="{{trans('assets.note_repair')}}" name="MantinanceNote" style="border-radius:3px !important;height: 35px;" aria-invalid="false"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -313,7 +311,7 @@
 
                                 </div>
                             </div>
-                           
+
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
@@ -376,11 +374,11 @@
                             <textarea type="text" id="MantinanceNote1" class="form-control" placeholder="ملاحظات الصيانة" name="MantinanceNote1" style="border-radius:3px !important;height: 35px;"></textarea>
                         </div>
                     </div>
-                            
-                    
+
+
                         <div class="card-header" style="padding-top:0px;">
                             <h4 class="card-title">
-                                <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
+                                <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32">
                                 {{trans('assets.archive')}}
                         </h4>
                             <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
@@ -392,7 +390,7 @@
                                     <li><a data-action="close"><i class="ft-x"></i></a></li>
                                 </ul>
                             </div>
-                        
+
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body" style="padding-bottom: 0px;">
@@ -408,7 +406,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                                
+                        </div>
                     <div class="row" style="display: none">
                         <div class="col-md attachs-section">
                             <img src="https://db.expand.ps/images/upload.png" width="40" height="40">
@@ -462,7 +460,7 @@ $( function() {
     $( ".ac" ).autocomplete({
 		source: 'equip_auto_complete',
 		minLength: 1,
-		
+
         select: function( event, ui ) {
             let equip_id = ui.item.id
             $.ajax({
@@ -485,7 +483,7 @@ $( function() {
             $("#PHnum2").val(response.info.sponsor_phone);
             $("#PHnum1").val(response.info.supply_phone);
             if(response.info.image != window.location.origin){
-                $('#userProfileImg').attr('src', response.info.image);  
+                $('#userProfileImg').attr('src', response.info.image);
             }else{
                 $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/user.png');
             }
@@ -494,30 +492,30 @@ $( function() {
             $('#equipmentimg').attr('src', response.info.image);
 
             $("select#brand option")
-                 .each(function() { this.selected = (this.text == response.brand); 
+                 .each(function() { this.selected = (this.text == response.brand);
             });
             $("select#Eqtype option")
-                 .each(function() { this.selected = (this.text == response.type); 
+                 .each(function() { this.selected = (this.text == response.type);
             });
 
             $("select#EqtStatus option")
-                 .each(function() { this.selected = (this.text == response.status); 
+                 .each(function() { this.selected = (this.text == response.status);
             });
             $("select#Department option")
-                 .each(function() { this.selected = (this.text == response.department); 
+                 .each(function() { this.selected = (this.text == response.department);
             });
             $("select#pinc3 option")
-                 .each(function() { this.selected = (this.text == response.admin); 
+                 .each(function() { this.selected = (this.text == response.admin);
             });
 
             $("select#OrgCurrencyID option")
-                 .each(function() { this.selected = (this.text == response.Currency); 
+                 .each(function() { this.selected = (this.text == response.Currency);
             });
             $("select#Supplier option")
-                 .each(function() { this.selected = (this.text == response.supplyer); 
+                 .each(function() { this.selected = (this.text == response.supplyer);
             });
             $("select#SponsorName option")
-                 .each(function() { this.selected = (this.text == response.sponser); 
+                 .each(function() { this.selected = (this.text == response.sponser);
             });
 
          },
@@ -547,7 +545,7 @@ $('#setting_form').submit(function(e) {
            processData: false,
            success: (response) => {
             $(".loader").addClass('hide');
-            $('.wtbl').DataTable().ajax.reload();  
+            $('.wtbl').DataTable().ajax.reload();
              if (response) {
                 Swal.fire({
 				position: 'top-center',
@@ -559,7 +557,7 @@ $('#setting_form').submit(function(e) {
                 $('#userProfileImg').attr('src', 'https://db.expand.ps/images/equipment.jpg');
                this.reset();
              }
-             
+
            },
            error: function(response){
             $(".loader").addClass('hide');
@@ -634,7 +632,7 @@ function update($id)
             drawTablesArchive(response.Archive,response.copyTo);
             // $('#equipmentimg').attr('src', response.info.image);
             if(response.info.image != window.location.origin){
-                $('#userProfileImg').attr('src', response.info.image);  
+                $('#userProfileImg').attr('src', response.info.image);
             }else{
                 $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/user.png');
             }
@@ -644,30 +642,30 @@ function update($id)
             $('#equipmentimg').attr('src', response.info.image);
 
             $("select#brand option")
-                 .each(function() { this.selected = (this.text == response.brand); 
+                 .each(function() { this.selected = (this.text == response.brand);
             });
             $("select#Eqtype option")
-                 .each(function() { this.selected = (this.text == response.type); 
+                 .each(function() { this.selected = (this.text == response.type);
             });
 
             $("select#EqtStatus option")
-                 .each(function() { this.selected = (this.text == response.status); 
+                 .each(function() { this.selected = (this.text == response.status);
             });
             $("select#Department option")
-                 .each(function() { this.selected = (this.text == response.department); 
+                 .each(function() { this.selected = (this.text == response.department);
             });
             $("select#pinc3 option")
-                 .each(function() { this.selected = (this.text == response.admin); 
+                 .each(function() { this.selected = (this.text == response.admin);
             });
 
             $("select#OrgCurrencyID option")
-                 .each(function() { this.selected = (this.text == response.Currency); 
+                 .each(function() { this.selected = (this.text == response.Currency);
             });
             $("select#Supplier option")
-                 .each(function() { this.selected = (this.text == response.supplyer); 
+                 .each(function() { this.selected = (this.text == response.supplyer);
             });
             $("select#SponsorName option")
-                 .each(function() { this.selected = (this.text == response.sponser); 
+                 .each(function() { this.selected = (this.text == response.sponser);
             });
 
          },
