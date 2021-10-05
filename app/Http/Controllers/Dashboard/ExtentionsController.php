@@ -128,7 +128,12 @@ class ExtentionsController extends Controller
             return response()->json($data);
         }
         elseif($request->pk_i_id == '46'){
-            $data['data'] = AttachmentType::get();
+            $data['data'] = AttachmentType::where('type','lic_archieve')->get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+        elseif($request->pk_i_id == '64'){
+            $data['data'] = AttachmentType::where('type','licFile_archieve')->get();
             $data['pj_i_id'] = $request->pk_i_id;
             return response()->json($data);
         }
@@ -232,7 +237,11 @@ class ExtentionsController extends Controller
             return response()->json($data);
         }
         elseif($request->fk_i_constant_id == '46'){
-            $data = AttachmentType::findOrFail($request->pk_i_id)->delete();
+            $data = AttachmentType::where('type','lic_archieve')->findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '64'){
+            $data = AttachmentType::where('type','licFile_archieve')->findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
         }
         elseif($request->fk_i_constant_id == '66'){
@@ -571,10 +580,12 @@ class ExtentionsController extends Controller
             if($request->fk_i_constantdet_id1 == null){
                 $job = new AttachmentType();
                 $job->name = $request->s_name_ar1;
+                $job->type = 'lic_archieve';
                 $job->save();
             }else{
                 $job = AttachmentType::find($request->fk_i_constantdet_id1);
                 $job->name = $request->s_name_ar1;
+                $job->type = 'lic_archieve';
                 $job->save();
             }
             if ($job) {
@@ -582,6 +593,26 @@ class ExtentionsController extends Controller
             }
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
+        elseif($request->fk_i_constant_id1 == '64'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new AttachmentType();
+                $job->name = $request->s_name_ar1;
+                $job->type = 'licFile_archieve';
+                $job->save();
+            }else{
+                $job = AttachmentType::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->type = 'licFile_archieve';
+                $job->save();
+            }
+            if ($job) {
+                return response()->json($job);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);            
+        }
+
+
+
         elseif($request->fk_i_constant_id1 == '66'){
             if($request->fk_i_constantdet_id1 == null){
                 $job = new CraftType();

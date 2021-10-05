@@ -148,9 +148,7 @@
                                                         <input type="hidden" id="msgType" name="msgType" value="<?php echo $type ?>">
                                                         <input type="hidden" id="url" name="url" value="<?php echo $url ?>">
                                                         <input type="hidden" id="pk_i_id" name="pk_i_id" value="">
-                                                        <input type="hidden" id="ArchiveID" name="ArchiveID" value="">
-                                                        <!-- 2166  -->
-                                                        
+                                                        <input type="hidden" id="ArchiveID" name="ArchiveID" value="">                                                        
                                                     </div>
                                                 </div>
                                             </div>

@@ -20,7 +20,6 @@ use App\Models\CopyTo;
 use App\Models\ArchiveType;
 use App\Models\AgendaExtention;
 use App\Models\File;
-use Session;
 use DB;
 use App\Http\Requests\ArchiveRequest;
 use App\Models\AttachmentType;
@@ -383,14 +382,14 @@ class ArchieveController extends Controller
     public function licArchive(){
         $type= 'licArchive';
         $url = "lic_archieve";
-        $attachment_type = AttachmentType::get();
+        $attachment_type = AttachmentType::where('type','lic_archieve')->get();
         $license_type = LicenseType::get();
         return view('dashboard.archive.licArchive',compact('type','attachment_type'
         ,'license_type','url'));
     }
     public function licFileArchive(){
         $type= 'licFileArchive';
-        $attachment_type = AttachmentType::get();
+        $attachment_type = AttachmentType::where('type','licFile_archieve')->get();
         $license_type = LicenseType::get();
         $url = "licFile_archieve";
         return view('dashboard.archive.licArchive',compact('type','attachment_type',
@@ -434,8 +433,8 @@ class ArchieveController extends Controller
       public function archieve_info_all(Request $request)
     {
         $type=$request['type'];
-        $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC')->with('files')->get();
-        
+        $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC')
+        ->with('files')->get();
         return DataTables::of($archive)
                         ->addIndexColumn()
                         ->make(true);
@@ -626,8 +625,6 @@ class ArchieveController extends Controller
             foreach($data as $row){
                 $files_ids[] = $row['files']->id;
             }
-            Session::put('files_ids', $files_ids);
-
             $all_files['all_files'] = File::whereIn('id',$files_ids)->get();
             return response()->json($all_files);
         }

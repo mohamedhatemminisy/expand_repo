@@ -216,9 +216,9 @@
                                         </div>
                                         <div style="text-align: center;">
                                         
-                                            <button type="submit" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
-                                                حفظ    
-                                            </button>
+                                        <button type="submit" class="btn btn-primary" id="" style="" >
+                                    {{ trans('admin.save') }}    
+                                    </button> 
                                                 
                                                 
                                             </div>
@@ -329,7 +329,7 @@ $( function() {
             success:function(response){
                 console.log(response.info);
             $('#customerid').val(response.info.model_id);
-            $('#ArchiveID').val(response.info.model_id);
+            $('#ArchiveID').val(response.info.id);
             $('#customername').val(response.info.name);
             $('#customerName').val(response.info.name);
             $('#LicBorder').val(response.info.limit_number_id);

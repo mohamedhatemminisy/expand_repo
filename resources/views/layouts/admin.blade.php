@@ -240,6 +240,7 @@ aria-hidden="true">
 			  <input type="hidden" id="pj_i_id" class="form-control" placeholder="Label (En)" name="pj_i_id">
 			  
 			  <input type="hidden" id="ctrlToRefresh" class="form-control" placeholder="Label (En)" name="ctrlToRefresh">
+			  <input type="hidden" id="contid" class="form-control" placeholder="Label (En)" name="contid">
 		  </div>
 		  <div class="form-group" style="text-align:center">
 			  <button type="submit" class="btn btn-info modalBtn" >حفظ</button>
@@ -254,7 +255,16 @@ aria-hidden="true">
 
 $('#store-modal').submit(function(e) {
 	$(".loader").removeClass('hide');
-	fillIn=$("#ctrlToRefresh").val();
+
+	contid=$("#contid").val();
+	if(contid == 33){
+		fillIn = 'area_data';
+	}else if(contid == 77){
+		fillIn = 'region_data';
+	}else{
+		fillIn=$("#ctrlToRefresh").val();
+	}
+
        e.preventDefault();
 	   $( "#NationalID" ).removeClass( "error" );
 
@@ -417,18 +427,18 @@ $( function() {
 });
 
   function QuickAdd(contid,ctrl,title){
-
 $(".loader").removeClass('hide');
 //$(".form-actions").addClass('hide');
 
 DrawTable(contid)
 $("#fk_i_constant_id1").val(contid);
 $("#ctrlToRefresh").val(ctrl);
+$("#contid").val(contid);
 $("#ModalTitle").html(title);
 $("#ModalTitle1").html(title);
 $("#QuickAdd").modal('show');
 
-$(".loader").addClass('hide');
+$(".loader").addClass('hide');	
 }
 function doUploadPic(){
 	$.ajaxSetup({

@@ -149,6 +149,8 @@
                                                         </span>
                                                     </div>
                                                     
+
+                                                    @if ($type=='licArchive')
                                                     <select class="form-control" name="AttahType" id="AttahType">
                                                             @foreach($attachment_type as $attachment)
                                                             <option value="{{$attachment->id}}"> {{$attachment->name}}   </option>
@@ -159,6 +161,25 @@
                                                             <i class="fa fa-external-link"></i>
                                                         </span>
                                                     </div>
+
+                                                    @elseif ($type=='licFileArchive')
+                                                    <select class="form-control" name="AttahType" id="AttahType">
+                                                        @if($attachment_type)
+                                                            @foreach($attachment_type as $attachment)
+                                                            <option value="{{$attachment->id}}"> {{$attachment->name}}   </option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                    <div class="input-group-append" onclick="QuickAdd(64,'AttahType','نوع المرفق')" style="cursor:pointer">
+                                                        <span class="input-group-text input-group-text2">
+                                                            <i class="fa fa-external-link"></i>
+                                                        </span>
+                                                    </div>
+
+                                                    @endif
+
+
+                                             
                                                 </div>
                                             </div>
                                         </div>
