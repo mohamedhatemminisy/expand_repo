@@ -86,7 +86,7 @@ class ArchieveController extends Controller
         $specialAsset = SpecialAsset::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(المباني و المستودعات و الاراضي)' )AS label"))->get();
         $user = User::where('name', 'like', '%' . $emp_data . '%')
-        ->select('*',DB::raw("CONCAT(name , '(المشتركين)' )AS label"))->get();
+        ->select('*',DB::raw("CONCAT(name  )AS label"))->get();
         $names = $equip->merge($vehicle)->merge($project)
         ->merge($admin)->merge($department)
         // ->merge($inArchive)
@@ -107,7 +107,7 @@ class ArchieveController extends Controller
         // ->where('type','licFileArchive')
         // ->select('*',DB::raw("CONCAT(name , '(أرشيف ملف الترخيص)' )AS label"))->get();
         $users = User::where('name', 'like', '%' . $emp_data . '%')
-        ->select('*',DB::raw("CONCAT(name , '(المشتركين)' )AS label"))->get();
+        ->select('*',DB::raw("CONCAT(name )AS label"))->get();
 
         // $names =$licArchive->merge($users)->merge($licFileArchive);
 
