@@ -197,16 +197,12 @@ th{
     @if ($type=='intro')
   <div class="content-wrapper" style="
     display: block;
-    border: 15px solid #F4F5FA;
-    border-bottom: 0px solid #F4F5FA;
     background-color: #ffffff;
     min-height: 700px;
 ">
       @else 
   <div class="content-wrapper" style="
     display: block;
-    border: 15px solid #F4F5FA;
-    border-bottom: 0px solid #F4F5FA;
 ">
     @endif
 @yield('content')
@@ -467,7 +463,9 @@ function doUploadPic(){
                 if(data){
                     $(".alert-danger").addClass("hide");
                     $(".alert-success").removeClass('hide');
-                    $("#userProfileImg").attr('src', window.location.origin+'/'+data.url);
+                    //$("#userProfileImg").attr('src', window.location.origin+'/'+data.url);
+
+					$("#userProfileImg").attr('src', "{{ asset('') }}"+data.url);
                     $("#userimgpath").val(data.url);
                     $("#file_id").val(data.id);
                     $("#userimgpath").trigger('change')

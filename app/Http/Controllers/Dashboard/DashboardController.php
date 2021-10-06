@@ -11,7 +11,6 @@ class DashboardController extends Controller
     {
         $type='intro';
        return view('dashboard.index',compact('type'));
-
     }
 
 }
