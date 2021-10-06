@@ -48,7 +48,6 @@ return [
     'lic_type'   =>  'نوع الترخيص ',
     'build_type'   =>  'نوع البناء ',
     'attach'   =>  'المرفقات ',
-    'jobLic_report'   =>  'تقرير رخص الحرف والصناعات ',
 
     'build_type1'   =>  'قائم ',
     'build_type2'   =>  'مقترح ',

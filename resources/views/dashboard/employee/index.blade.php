@@ -556,13 +556,15 @@
 												<div class="col-md-12" >
 												<div class="form-group">
 													<input type="hidden" id="pk_i_id" name="pk_i_id" value="1" />
+													<div id="ana">
 														<select multiple="multiple" class="multi-select" id="my_multi_select3" name="my_multi_select3[]">
 															<optgroup label="نظام الصلاحيات"></optgroup>
                                                               @foreach(config('global.permissions') as $name => $value)
 																<option value='{{$name}}'selected> @lang('admin.'.$name)
                                                                 </option>
                                                              @endforeach
-														</select>								
+														</select>
+													</div>								
 													</div>
 												</div>
 											</div>
@@ -584,17 +586,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-12 col-md-12">
+                
+<?php  $type=$types;  ?>
+@include('dashboard.component.archive_table');
+@include('dashboard.component.fetch_table');
+            </div>
         </div>
-    </div>
 
 
 
     
   </form>
 </section>
-<?php  $type=$types;  ?>
-@include('dashboard.component.archive_table');
-@include('dashboard.component.fetch_table');
 
 
 @stop
@@ -660,6 +664,9 @@ function SavePer(){
 	<!--<script src="https://template.expand.ps/assets/pages/scripts/components-multi-select.min.js" type="text/javascript"></script>
     -->
 <script>
+
+var arrKey=new Array();
+var arrVal=new Array();
 $( function() {
     $( ".ac" ).autocomplete({
 		source: 'emp_auto_complete',
@@ -684,10 +691,10 @@ $( function() {
             $('#InternalPhone').val(response.info.InternalPhone);
             $('#EmailAddress').val(response.info.email);
             $("#DepartmentID").val(response.info.department_id);
-            if(response.info.image != window.location.origin){
+            if(response.info.image != 'https://expand-archive.com/expand_repo/public'/*window.location.origin*/){
                 $('#userProfileImg').attr('src', response.info.image);  
             }else{
-                $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/user.png');
+                $('#userProfileImg').attr('src', '{{asset("assets/images/ico/user.png")}}');
             }
             if(response.info.status == 'on'){
                 $('#customCheck2').prop('checked', true);
@@ -728,11 +735,43 @@ $( function() {
             $("select#region_data option")
                  .each(function() { this.selected = (this.text == response.region); 
             });
+            console.log(response.per)
+            
+            $("#ana").html()
+            ctrl='<select multiple="multiple" class="multi-select" id="my_multi_select3" name="my_multi_select3[]">'
+            for(srchKey=0;srchKey<arrKey.length;srchKey++){
+                
+                flage=false;
+                for(i=0;i<response.per.length;i++)
+                    if(response.per[i]==arrKey[srchKey]){
+                        flage=true;
+                    }
+                    
+                    if(!flage)
+                        ctrl+='<option value="'+arrKey[srchKey]+'">'+arrVal[srchKey]+'</option>'
+                    else
+                        ctrl+='<option value="'+arrKey[srchKey]+'" selected>'+arrVal[srchKey]+'</option>'
+            }
+            ctrl+='</select>';
+            $("#ana").html(ctrl)
+            $("#my_multi_select3").multiSelect({
+              selectableHeader: "<div class='custom-header' style='color:#4267B2'><b>الصلاحيات المحجوبة</b></div>",
+  selectionHeader: "<div class='custom-header' style='color:#4267B2'><b>الصلاحيات الممنوحة</b></div>"
+      });
                     },
                     });
         }
 	});
 } );
+
+<?php 
+$i=0; 
+foreach(config('global.permissions') as $name => $value)
+{?>
+	arrKey[<?php echo $i?>]='{{$name}}'
+	arrVal[<?php echo $i?>]="@lang('admin.'.$name)"
+	<?php  $i++; ?>
+<?php }?>	
 
 function update($id)
 {

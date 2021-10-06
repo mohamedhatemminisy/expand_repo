@@ -20,6 +20,7 @@ use App\Models\CopyTo;
 use App\Models\ArchiveType;
 use App\Models\AgendaExtention;
 use App\Models\File;
+use Session;
 use DB;
 use App\Http\Requests\ArchiveRequest;
 use App\Models\AttachmentType;
@@ -86,7 +87,7 @@ class ArchieveController extends Controller
         $specialAsset = SpecialAsset::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name , '(المباني و المستودعات و الاراضي)' )AS label"))->get();
         $user = User::where('name', 'like', '%' . $emp_data . '%')
-        ->select('*',DB::raw("CONCAT(name  )AS label"))->get();
+        ->select('*',DB::raw("CONCAT(name , '(المشتركين)' )AS label"))->get();
         $names = $equip->merge($vehicle)->merge($project)
         ->merge($admin)->merge($department)
         // ->merge($inArchive)
@@ -107,7 +108,7 @@ class ArchieveController extends Controller
         // ->where('type','licFileArchive')
         // ->select('*',DB::raw("CONCAT(name , '(أرشيف ملف الترخيص)' )AS label"))->get();
         $users = User::where('name', 'like', '%' . $emp_data . '%')
-        ->select('*',DB::raw("CONCAT(name )AS label"))->get();
+        ->select('*',DB::raw("CONCAT(name , '(المشتركين)' )AS label"))->get();
 
         // $names =$licArchive->merge($users)->merge($licFileArchive);
 
@@ -115,7 +116,9 @@ class ArchieveController extends Controller
     
     }
     public function store_lince_archive(Request $request){
-        $archive = ArchiveLicense::where('id',$request->ArchiveID)->first();
+        $archive = ArchiveLicense::where('id',$request->customerid)
+        ->where('model_name','App\Models\ArchiveLicense')
+        ->where('type',$request->type)->first();
         if($archive){
             $archive->name =$request->customername;
             $archive->licn =$request->licn;
@@ -125,13 +128,6 @@ class ArchieveController extends Controller
             $archive->license_id =$request->BuildingTypeData;
             $archive->attachment_id =$request->AttahType;
             $archive->save();  
-            $files_ids = $request->formDataaaorgIdList;
-            foreach($files_ids as $id){
-                $file = File::find($id);
-                $file->archive_id = $archive->id;
-                $file->model_name = "App\Models\ArchiveLicense";
-                $file->save();
-            }
         }else{
         $archive = new ArchiveLicense();
         $archive->url =  $request->url;
@@ -162,7 +158,9 @@ class ArchieveController extends Controller
     }
 
     public function store_jobLic_archieve(Request $request){
-        $archive = jobLicArchieve::where('id',$request->ArchiveID)->first();
+
+        $archive = jobLicArchieve::where('id',$request->archieveid)
+        ->where('model_name','App\Models\jobLicArchieve')->first();
         if($archive){
             $archive->name =$request->customerName;
             $archive->region =$request->cityData;
@@ -175,16 +173,8 @@ class ArchieveController extends Controller
             $archive->attachment_id   =$request->AttahType;
             $archive->license_rating_id  =$request->lic_cat;
             $archive->save();  
-            $files_ids = $request->formDataaaorgIdList;
-            if($files_ids){
-                foreach($files_ids as $id){
-                    $file = File::find($id);
-                    $file->archive_id = $archive->id;
-                    $file->model_name = "App\Models\jobLicArchieve";
-                    $file->save();
-                }
-            }
         }else{
+        
         $archive = new jobLicArchieve();
         $archive->url =  $request->url;
         $archive->added_by  = Auth()->user()->id;
@@ -217,37 +207,20 @@ class ArchieveController extends Controller
         }
     }
     public function store_archive(ArchiveRequest $request){
-        $archive = Archive::where('id',$request->ArchiveID)->first();
-        if($archive){
-            $archive->model_id =$request->customerid;
-            $archive->type_id =$request->archive_type   ;
-            $archive->name =$request->customername;
-            $archive->model_name =$request->customerType;
-            $archive->date =$request->msgDate;
-            $archive->title =$request->msgTitle;
-            $archive->type =$request->msgType;
-            $archive->serisal =$request->msgid;
-            $archive->save();
-            $files_ids = $request->formDataaaorgIdList;
-            if($files_ids ){
-            foreach($files_ids as $id){
-                $file = File::find($id);
-                $file->archive_id = $archive->id;
-                $file->model_name = "App\Models\Archive";
-                $file->save();
-               }
-            }
-            if($request->copyToText[0] != null){
-                for($i= 0 ; $i< count($request->copyToText) ; $i++){
-                    $copyTo = new CopyTo();
-                    $copyTo->archive_id =  $archive->id;
-                    $copyTo->model_id =  $request->copyToID[$i];
-                    $copyTo->name =  $request->copyToCustomer[$i];    
-                    $copyTo->model_name =  $request->copyToType[$i];   
-                    $copyTo->save();         
-                }
-            }
-        }else{
+        // $archive = Archive::where('id',$request->customerid)->first();
+        // if($archive){
+        //     $archive->model_id =$request->customerid;
+        //     $archive->type_id =$request->archive_type   ;
+        //     $archive->name =$request->customername;
+        //     $archive->model_name =$request->customerType;
+        //     $archive->date =$request->msgDate;
+        //     $archive->title =$request->msgTitle;
+        //     $archive->type =$request->msgType;
+        //     $archive->serisal =$request->msgid;
+        //     $archive->url =  $request->url;
+        //     $archive->add_by = Auth()->user()->id;
+        //     $archive->save();
+        // }else{
         $archive = new Archive();
         $archive->model_id =$request->customerid;
         $archive->type_id =$request->archive_type   ;
@@ -268,7 +241,7 @@ class ArchieveController extends Controller
             $file->archive_id = $archive->id;
             $file->model_name = "App\Models\Archive";
             $file->save();
-           }
+        }
         }
         if($request->copyToText[0] != null){
             for($i= 0 ; $i< count($request->copyToText) ; $i++){
@@ -280,7 +253,7 @@ class ArchieveController extends Controller
                 $copyTo->save();         
             }
         }
-     }
+    // }
         if ($archive) {
             return response()->json(['success'=>trans('admin.archive_added')]);
         }
@@ -382,14 +355,14 @@ class ArchieveController extends Controller
     public function licArchive(){
         $type= 'licArchive';
         $url = "lic_archieve";
-        $attachment_type = AttachmentType::where('type','lic_archieve')->get();
+        $attachment_type = AttachmentType::get();
         $license_type = LicenseType::get();
         return view('dashboard.archive.licArchive',compact('type','attachment_type'
         ,'license_type','url'));
     }
     public function licFileArchive(){
         $type= 'licFileArchive';
-        $attachment_type = AttachmentType::where('type','licFile_archieve')->get();
+        $attachment_type = AttachmentType::get();
         $license_type = LicenseType::get();
         $url = "licFile_archieve";
         return view('dashboard.archive.licArchive',compact('type','attachment_type',
@@ -433,10 +406,23 @@ class ArchieveController extends Controller
       public function archieve_info_all(Request $request)
     {
         $type=$request['type'];
-        $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC')
-        ->with('files')->get();
+        $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC')->with('files')->get();
+        
         return DataTables::of($archive)
                         ->addIndexColumn()
+                        ->addColumn('copyTo', function($archive) {
+                            if($archive->copyTo){ 
+                                $actionBtn=" ";
+                                foreach ($archive->copyTo as $copyTo){ 
+                                    $actionBtn .=' '.$copyTo->name.' ';
+                                }
+                               
+                                return $actionBtn;
+                            }
+                            else
+                              { return '';}
+                            
+                        })
                         ->make(true);
 
     }
@@ -470,6 +456,7 @@ class ArchieveController extends Controller
         ->with('files')->get();
         
         return DataTables::of($archive)
+                        ->addIndexColumn()
                         ->make(true);
 
     }
@@ -625,6 +612,8 @@ class ArchieveController extends Controller
             foreach($data as $row){
                 $files_ids[] = $row['files']->id;
             }
+            Session::put('files_ids', $files_ids);
+
             $all_files['all_files'] = File::whereIn('id',$files_ids)->get();
             return response()->json($all_files);
         }

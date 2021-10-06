@@ -9,7 +9,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-       return view('dashboard.index');
+        $type='intro';
+       return view('dashboard.index',compact('type'));
 
     }
 

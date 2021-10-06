@@ -194,9 +194,6 @@
                 <a class="dropdown-item" href="{{route('agenda_report')}}" data-toggle="dropdown">{{trans('archive.agenda_report')}}</a>
               </li>
               @endcan
-              <li data-menu="">
-                <a class="dropdown-item" href="{{route('jobLicReport')}}" data-toggle="dropdown">{{trans('archive.jobLic_report')}}</a>
-              </li>
             </ul>
         </li>
       @endcan

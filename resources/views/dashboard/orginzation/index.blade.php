@@ -183,7 +183,7 @@
                                                 <img src="https://db.expand.ps/images/fax35.png">
                                             </span>
                                             </div>
-                                            <input type="text" id="faxNo" name="faxNo" maxlength="9" class="form-control noleft numFeild" placeholder="000000000" aria-describedby="basic-addon1">
+                                            <input type="text" id="faxNo" name="faxNo" maxlength="9" class="form-control noleft numFeild" placeholder="000000000" aria-describedby="basic-addon1" style="margin-left: 12px;">
 
                                             <div class="input-group-append hide hidden-xs hidden-sm">
                                     <span class="input-group-text input-group-text2" style="color:#ffffff">

@@ -194,6 +194,8 @@ class EmployeeController extends Controller
         $admin['department_id'] = Department::where('id',$admin['details']->department_id )->first()->name;
         $admin['address'] = Address::where('id',$admin['details']->address_id  )->first();
         $admin['DirectManager'] = Admin::where('id',$admin['info']->admin_id  )->first()->name;
+        
+        $admin['per']=(Role::where('id',$admin['info']->role_id  )->first()->permissions);
         $admin['Currency'] = trans('admin.'.$admin['info']->currency);
         if($admin['address']->city_id){
             $admin['city'] =City::where('id',$admin['address']->city_id)->first()->name;
