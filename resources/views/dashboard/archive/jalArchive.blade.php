@@ -49,7 +49,7 @@
                                                             @endif                                                    
                                                         </select>
 
-                                                        <div class="input-group-append" onclick="QuickAdd(42,'OrgType','نوع الاجتماع')" style="cursor:pointer">
+                                                        <div class="input-group-append" onclick="QuickAdd(99,'archive_type','نوع الاجتماع')" style="cursor:pointer">
                                                                 <span class="input-group-text input-group-text2">
                                                                     <i class="fa fa-external-link"></i>
                                                                 </span>
