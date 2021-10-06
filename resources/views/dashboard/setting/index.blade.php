@@ -465,7 +465,7 @@
                 </select>
             </div>
             </div>
-            <div class="input-group-append col-2" onclick="QuickAdd(10,'PositionID','City')" 
+            <div class="input-group-append col-2" onclick="QuickAdd(10,'CityID','City')" 
             style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
                 <span class="input-group-text input-group-text2">
                     <i class="fa fa-external-link"></i>

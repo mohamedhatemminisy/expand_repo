@@ -40,6 +40,7 @@
                                                     <input type="hidden" id="customerType" name="customerType" value="0">
                                                     <input type="hidden" id="msgType" name="msgType" value="">
                                                     <input type="hidden" id="pk_i_id" name="pk_i_id" value="0">
+                                                    <input type="hidden" id="ArchiveID" name="ArchiveID" value="">
                                                     <input type="hidden" id="type" name="type" value="{{$type}}">
                                                 </div>
                                             </div>
@@ -148,6 +149,8 @@
                                                         </span>
                                                     </div>
                                                     
+
+                                                    @if ($type=='licArchive')
                                                     <select class="form-control" name="AttahType" id="AttahType">
                                                             @foreach($attachment_type as $attachment)
                                                             <option value="{{$attachment->id}}"> {{$attachment->name}}   </option>
@@ -158,6 +161,25 @@
                                                             <i class="fa fa-external-link"></i>
                                                         </span>
                                                     </div>
+
+                                                    @elseif ($type=='licFileArchive')
+                                                    <select class="form-control" name="AttahType" id="AttahType">
+                                                        @if($attachment_type)
+                                                            @foreach($attachment_type as $attachment)
+                                                            <option value="{{$attachment->id}}"> {{$attachment->name}}   </option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                    <div class="input-group-append" onclick="QuickAdd(64,'AttahType','نوع المرفق')" style="cursor:pointer">
+                                                        <span class="input-group-text input-group-text2">
+                                                            <i class="fa fa-external-link"></i>
+                                                        </span>
+                                                    </div>
+
+                                                    @endif
+
+
+                                             
                                                 </div>
                                             </div>
                                         </div>
@@ -277,6 +299,7 @@ $( function() {
                 archive_id: archive_id,
             },
             success:function(response){
+            $('#ArchiveID').val(response.info.id);
             $('#customerid').val(response.info.model_id);
             $('#customername').val(response.info.name);
             $('#customerName').val(response.info.name);

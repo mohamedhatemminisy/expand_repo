@@ -57,19 +57,88 @@
                                                         
                                                         @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
                                                             <input type="text" id="msgTitle" class="form-control" name="msgTitle" style="width: 30%;">
+                                                    
+                                                            @if($type=='munArchive')
                                                             <select name="archive_type" id="archive_type" class="form-control">
                                                                     
-                                                                <option value="">-- نوع الارشيف --</option>
-                                                                @foreach($archive_type as $archive)
-                                                                <option value="{{$archive->id}}"> {{$archive->name}}   </option>
-                                                                @endforeach
-
-                                                            </select>
-                                                            <div class="input-group-append" onclick="QuickAdd(42,'OrgType','نوع الأرشيف')" style="cursor:pointer">
+                                                                    <option value="">-- نوع الارشيف --</option>
+                                                                    @if(count($projArchive) > 0)
+                                                                    @foreach($archive_type as $archive)
+                                                                    <option value="{{$archive->id}}"> {{$archive->name}}   </option>
+                                                                    @endforeach
+                                                                    @endif
+    
+                                                                </select>
+                                                            <div class="input-group-append" onclick="QuickAdd(42,'archive_type','نوع الأرشيف')" style="cursor:pointer">
                                                                 <span class="input-group-text input-group-text2">
                                                                     <i class="fa fa-external-link"></i>
                                                                 </span>
                                                             </div>
+                                                            @elseif($type=='empArchive')
+                                                            <select name="archive_type" id="archive_type" class="form-control">
+                                                                    
+                                                                    <option value="">-- نوع الارشيف --</option>
+                                                                    @if(count($empArchive) > 0)
+                                                                    @foreach($empArchive as $archive)
+                                                                    <option value="{{$archive->id}}"> {{$archive->name}}   </option>
+                                                                    @endforeach
+                                                                    @endif
+    
+                                                                </select>
+                                                            <div class="input-group-append" onclick="QuickAdd(52,'archive_type','نوع الأرشيف')" style="cursor:pointer">
+                                                                <span class="input-group-text input-group-text2">
+                                                                    <i class="fa fa-external-link"></i>
+                                                                </span>
+                                                            </div>
+                                                            @elseif($type=='depArchive')
+                                                            <select name="archive_type" id="archive_type" class="form-control">
+                                                                    
+                                                                    <option value="">- نوع الارشيف --</option>
+                                                                    @if(count($depArchive) > 0)
+                                                                    @foreach($depArchive as $archive)
+                                                                    <option value="{{$archive->id}}"> {{$archive->name}}   </option>
+                                                                    @endforeach
+                                                                    @endif
+    
+                                                                </select>
+                                                            <div class="input-group-append" onclick="QuickAdd(62,'archive_type','نوع الأرشيف')" style="cursor:pointer">
+                                                                <span class="input-group-text input-group-text2">
+                                                                    <i class="fa fa-external-link"></i>
+                                                                </span>
+                                                            </div>
+                                                            @elseif($type=='citArchive')
+                                                            <select name="archive_type" id="archive_type" class="form-control">
+                                                                    
+                                                                    <option value="">-- نوع الارشيف --</option>
+                                                                    @if(count($citArchive) > 0)
+                                                                    @foreach($citArchive as $archive)
+                                                                    <option value="{{$archive->id}}"> {{$archive->name}}   </option>
+                                                                    @endforeach
+                                                                    @endif
+    
+                                                                </select>
+                                                            <div class="input-group-append" onclick="QuickAdd(72,'archive_type','نوع الأرشيف')" style="cursor:pointer">
+                                                                <span class="input-group-text input-group-text2">
+                                                                    <i class="fa fa-external-link"></i>
+                                                                </span>
+                                                            </div>
+                                                            @elseif($type=='projArchive')
+                                                            <select name="archive_type" id="archive_type" class="form-control">
+                                                                    
+                                                                    <option value="">-- نوع الارشيف --</option>
+                                                                    @if(count($projArchive)>0)
+                                                                    @foreach($projArchive as $archive)
+                                                                    <option value="{{$archive->id}}"> {{$archive->name}}   </option>
+                                                                    @endforeach
+                                                                    @endif
+    
+                                                                </select>
+                                                            <div class="input-group-append" onclick="QuickAdd(82,'archive_type','نوع الأرشيف')" style="cursor:pointer">
+                                                                <span class="input-group-text input-group-text2">
+                                                                    <i class="fa fa-external-link"></i>
+                                                                </span>
+                                                            </div>
+                                                            @endif
                                                         @elseif ($type=='inArchive'||$type=='outArchive')
                                                         <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
                                                         @endif
@@ -78,9 +147,8 @@
                                                         <input type="hidden" id="customerType" name="customerType" value="0">
                                                         <input type="hidden" id="msgType" name="msgType" value="<?php echo $type ?>">
                                                         <input type="hidden" id="url" name="url" value="<?php echo $url ?>">
-                                                        <input type="hidden" id="pk_i_id" name="pk_i_id" value="0">
-                                                        <!-- 2166  -->
-                                                        
+                                                        <input type="hidden" id="pk_i_id" name="pk_i_id" value="">
+                                                        <input type="hidden" id="ArchiveID" name="ArchiveID" value="">                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -300,6 +368,7 @@ $( function() {
             },
             success:function(response){
             $('#customerid').val(response.info.id);
+            $('#ArchiveID').val(response.info.id);
             $('#customerName').val(response.info.name);
             $('#customername').val(response.info.name);
             $('#customerType').val(response.info.model_name);
