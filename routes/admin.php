@@ -44,7 +44,8 @@ Route::group([
 
         Route::get('volunteer', 'VolunteerController@index')->name('volunteer');
         Route::post('store_volunteer', 'VolunteerController@store_volunteer')->name('store_volunteer');
-
+        Route::get('volunteer_auto_complete', 'VolunteerController@volunteer_auto_complete')->name('volunteer_auto_complete');
+        Route::get('volunteer_info', 'VolunteerController@volunteer_info')->name('volunteer_info');
         Route::get('volunteerReport', 'ArchieveController@volunteerReport')->name('volunteer_report');
 
         Route::get('assets_archieve','ArchieveController@assets_archieve')->name('assets_archieve');

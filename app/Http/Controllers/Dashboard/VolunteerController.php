@@ -65,10 +65,10 @@ class VolunteerController extends Controller
             $volunteer->url = 'volunteer';
             $volunteer->email  = $request->EmailAddress;
             $volunteer->marital_status  = $request->MaritalStatus;
-            $volunteer->address_id  = $request->AddressId;
-            $volunteer->job_title_id  = $request->JobTitleID;
+            $volunteer->address_id  = $address->id;
+            $volunteer->job_title_id  = $request->Position;
             $volunteer->department_id  = $request->DepartmentID;
-            $volunteer->license_types_id  = $request->LicenseTypesID;
+            $volunteer->license_types_id  = $request->DrivingLicense;
             $volunteer->birthdate  = $request->Birthdate;
             $volunteer->blood_type  = $request->BloodType;
             $volunteer->save();
@@ -97,7 +97,7 @@ class VolunteerController extends Controller
         }else{
             $volunteer = Volunteer::find($request->volunteer_id);
             if ($request->file('imgPic')) {
-                $path = upload_image($request->file('imgPic'), 'emp_');
+                $path = upload_image($request->file('imgPic'), 'volunteer_');
             }else{
                 $path = '';
             }
@@ -106,23 +106,10 @@ class VolunteerController extends Controller
             $volunteer->identification = $request->NationalID;
             $volunteer->phone_one = $request->MobileNo1;
             $volunteer->phone_two = $request->MobileNo2;
-            // $volunteer->job_Number = $request->JobNumber;
             $volunteer->nick_name = $request->NickName;
-            // $volunteer->salary = $request->Salary;
-            // $volunteer->currency = $request->CurrencyID;
-            // $volunteer->username = $request->username;
             $volunteer->joining_date = $request->JoiningDate;
             $volunteer->status = '1';
             $volunteer->email  = $request->EmailAddress;
-            // if($request->password){
-            //     $volunteer->password = bcrypt($request->password);
-            // }else{
-            //     $volunteer->password = $volunteer->password;
-            // }
-            // $volunteer->InternalPhone = $request->InternalPhone;
-            // $volunteer->admin_id  = $request->DirectManager;
-            // $volunteer->role_id = $role->id;
-
             $volunteer->marital_status  = $request->MaritalStatus;
             $volunteer->address_id  = $request->AddressId;
             $volunteer->job_title_id  = $request->JobTitleID;
@@ -165,53 +152,48 @@ class VolunteerController extends Controller
         return response()->json(['error'=>$validator->errors()->all()]);
     }
 
-    public function emp_auto_complete(Request $request)
+    public function volunteer_auto_complete(Request $request)
     {
-        // $vol_data = $request['term'];
-        // $names = Volunteer::where('name', 'like', '%' . $vol_data . '%')->select('*','name as label')->get();
-        // //$html = view('dashboard.component.auto_complete', compact('names'))->render();
-        // return response()->json($names);
+        $vol_data = $request['term'];
+        $names = Volunteer::where('name', 'like', '%' . $vol_data . '%')->select('*','name as label')->get();
+        $html = view('dashboard.component.auto_complete', compact('names'))->render();
+        return response()->json($names);
     }
 
-    public function emp_info(Request $request)
+    public function volunteer_info(Request $request)
     {
-        // $admin['info'] = Volunteer::find($request['emp_id']);
-        // // $admin['details'] = AdminDetail::where('admin_id',$request['emp_id'])->first();
-        // $admin['job_title'] = JobTitle::where('id',$admin['details']->job_title_id )->first()->name;
-        // // $admin['job_type'] = JobType::where('id',$admin['details']->job_type_id )->first()->name;
-        // $admin['department_id'] = JobType::where('id',$admin['details']->job_type_id )->first()->name;
-        // $admin['address'] = Address::where('id',$admin['details']->address_id  )->first();
-        // $admin['DirectManager'] = Volunteer::where('id',$admin['info']->admin_id  )->first()->name;
-        // $admin['Currency'] = trans('admin.'.$admin['info']->currency);
-        // if($admin['address']->city_id){
-        //     $admin['city'] =City::where('id',$admin['address']->city_id)->first()->name;
-        // }
-        // if($admin['address']->area_id){
-        //     $admin['area'] =Area::where('id',$admin['address']->area_id)->first()->name;
-        // }
-        // if($admin['address']->region_id){
-        //     $admin['region'] =Region::where('id',$admin['address']->region_id)->first()->name;
-        // }
+        // dd($request->all);
+        $volunteer['info'] = Volunteer::find($request['volunteer_id']);
+        $volunteer['info']->marital_status=$volunteer['info']->marital_status==1?'متزوج':'اعزب';
+        $volunteer['address'] = Address::where('id',$volunteer['info']->address_id)->first();
+        $volunteer['info']->department_id=Department::where('id',$volunteer['info']->department_id )->first()->name;
+        $volunteer['info']->job_title_id=JobTitle::where('id',$volunteer['info']->job_title_id )->first()->name;
+        $volunteer['cources']=Volunteer_Courses::where('volunteer_id',$volunteer['info']->id)->get();
+        if($volunteer['address']){
+            $volunteer['city'] =City::where('id',$volunteer['address']->city_id)->first()->name??'';
+            $volunteer['area'] =Area::where('id',$volunteer['address']->area_id)->first()->name??'';
+            $volunteer['region'] =Region::where('id',$volunteer['address']->region_id)->first()->name??'';
+        }
 
-        // return response()->json($admin);
+
+        return response()->json($volunteer);
 
     }
 
-    public function emp_info_all()
+    public function volunteer_info_all()
     {
-        // $admin= Volunteer::select('admins.*','addresses.notes','addresses.region_id','addresses.area_id',
-        // 'addresses.city_id','addresses.details','regions.name as region_name','cities.name as city_name',
-        // 'areas.name as area_name','job_types.name as job_type_name','job_titles.name as job_title_name')
-        // ->leftJoin('admin_details','admins.id','admin_details.admin_id')
-        // ->leftJoin('job_types','job_types.id','admin_details.job_type_id')
-        // ->leftJoin('job_titles','job_titles.id','admin_details.job_title_id')
-        // ->leftJoin('addresses','addresses.id','admin_details.address_id')
-        // ->leftJoin('regions','addresses.region_id','regions.id')
-        // ->leftJoin('cities','addresses.city_id','cities.id')
-        // ->leftJoin('areas','addresses.area_id','areas.id')->orderBy('id', 'DESC');
-        // return DataTables::of($admin)
-        //                     ->addIndexColumn()
-        //                     ->make(true);
+        $volunteer= Volunteer::select('volunteers.*','addresses.notes','addresses.region_id','addresses.area_id',
+        'addresses.city_id','addresses.details','regions.name as region_name','cities.name as city_name',
+        'areas.name as area_name','job_titles.name as job_title_name')
+        ->leftJoin('admin_details','admins.id','admin_details.admin_id')
+        ->leftJoin('job_titles','job_titles.id','admin_details.job_title_id')
+        ->leftJoin('addresses','addresses.id','admin_details.address_id')
+        ->leftJoin('regions','addresses.region_id','regions.id')
+        ->leftJoin('cities','addresses.city_id','cities.id')
+        ->leftJoin('areas','addresses.area_id','areas.id')->orderBy('id', 'DESC');
+        return DataTables::of($volunteer)
+                            ->addIndexColumn()
+                            ->make(true);
 
     }
     function upload_image($file, $prefix){

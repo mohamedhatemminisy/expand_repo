@@ -323,14 +323,16 @@
                                             <table width="100%" class="detailsTB table archTbl">
                                                           <thead>
                                                               <tr>
-                                                                  <th width="80px" style="text-align: center!important;">{{trans('admin.educational_attainment')}} </th>
-                                                                  <th width="80px" style="text-align: center!important;">{{trans('admin.educational_institution')}} </th>
-                                                                  <th width="80px" style="text-align: center!important;">{{trans('admin.graduation_date')}} </th>
-                                                                  <th width="20px"></th>
+                                                                  <th class="col-md-4" style="text-align: center!important;">{{trans('admin.educational_attainment')}} </th>
+                                                                  <th class="col-md-4" style="text-align: center!important;">{{trans('admin.educational_institution')}} </th>
+                                                                  <th class="col-md-3" style="text-align: center!important;">{{trans('admin.graduation_date')}} </th>
+                                                                  <th width="20px">
+                                                                    <i class="fa fa-plus-circle" id="plusElement2" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color: aliceblue;font-size: 15pt;"></i>
+                                                                  </th>
                                                               </tr>
                                                           </thead>
                                                           <tbody id="msgRList2">
-                                                            <tr>
+                                                            {{-- <tr>
                                                                 <td width="80px">
                                                                     <input  class="form-control" type="text" name="education[]" >
                                                                     </td>
@@ -343,7 +345,7 @@
                                                                 <td>
                                                                     <i class="fa fa-plus-circle" id="plusElement2" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color: #1E9FF2;font-size: 15pt;"></i>
                                                                 </td>
-                                                            </tr>
+                                                            </tr> --}}
                                                           </tbody>
                                                       </table>
 
@@ -353,14 +355,18 @@
                                             <table width="100%" class="detailsTB table archTbl" >
                                                           <thead >
                                                               <tr>
-                                                                  <th width="80px" style="text-align: center!important;" >{{trans('admin.trining_course')}} </th>
-                                                                  <th width="80px" style="text-align: center!important;">{{trans('admin.educational_institution')}} </th>
-                                                                  <th width="80px" style="text-align: center!important;">{{trans('admin.course_completion_date')}} </th>
-                                                                  <th width="20px"></th>
+                                                                  <th class="col-md-4" style="text-align: center!important;" >{{trans('admin.trining_course')}} </th>
+                                                                  <th class="col-md-4" style="text-align: center!important;">{{trans('admin.educational_institution')}} </th>
+                                                                  <th class="col-md-3" style="text-align: center!important;">{{trans('admin.course_completion_date')}} </th>
+                                                                  <th width="20px">
+                                                                    <i class="fa fa-plus-circle" id="plusElement3" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color: aliceblue;font-size: 15pt;">
+
+                                                                    </i>
+                                                                  </th>
                                                               </tr>
                                                           </thead>
                                                           <tbody id="msgRList3">
-                                                            <tr>
+                                                            {{-- <tr>
                                                                 <td width="80px">
                                                                     <input  class="form-control" type="text" name="courses[]">
                                                                     </td>
@@ -375,7 +381,7 @@
 
                                                                     </i>
                                                                 </td>
-                                                            </tr>
+                                                            </tr> --}}
 
                                                           </tbody>
                                                       </table>
@@ -717,16 +723,16 @@ function SavePer(){
 <script>
 $( function() {
     $( ".ac" ).autocomplete({
-		source: 'emp_auto_complete',
+		source: 'volunteer_auto_complete',
 		minLength: 2,
 
         select: function( event, ui ) {
-            let emp_id = ui.item.id
+            let volunteer_id = ui.item.id
             $.ajax({
             type: 'get', // the method (could be GET btw)
-            url: "emp_info",
+            url: "volunteer_info",
             data: {
-                emp_id: emp_id,
+                volunteer_id: volunteer_id,
             },
             success:function(response){
             $('#employee_id').val(response.info.id);
@@ -736,35 +742,58 @@ $( function() {
             $('#JobNumber').val(response.info.job_Number);
             $('#MobileNo1').val(response.info.phone_one);
             $('#MobileNo2').val(response.info.phone_two);
+            $('#BloodType').val(response.info.blood_type);
             $('#NickName').val(response.info.nick_name);
-            // $('#InternalPhone').val(response.info.InternalPhone);
-            $('#EmailAddress').val(response.info.email);
-            $("#DepartmentID").val(response.info.department_id);
-            $('#userProfileImg').attr('src', response.info.image);
-            $("select#Position option")
-                 .each(function() { this.selected = (this.text == response.job_title);
-            });
-            // $("select#JobType option")
-            //      .each(function() { this.selected = (this.text == response.job_type);
-            // });
-
-            // $("select#DirectManager option")
-            //      .each(function() { this.selected = (this.text == response.DirectManager);
-            // });
-            $("select#DepartmentID option")
-                 .each(function() { this.selected = (this.text == response.department_id);
-            });
-            // $("select#CurrencyID option")
-            //      .each(function() { this.selected = (this.text == response.Currency);
-            // });
-            // $('#HiringDate').val(response.info.start_date);
-            // $('#Salary').val(response.info.salary);
-            // $('#vac_year').val(response.details.year);
-            // $('#vac_annual').val(response.details.balance);
-            // $('#emr_blanace').val(response.details.emergency);
+            $('#JoiningDate').val(response.info.joining_date);
             $('#username').val(response.info.username);
             $('#AddressDetails').val(response.address.details);
             $('#Note').val(response.address.notes);
+
+            $("select#MaritalStatus option").each(
+                function() { this.selected = (this.text == response.info.marital_status);
+            });
+            $('#EmailAddress').val(response.info.email);
+            $('#userProfileImg').attr('src', response.info.image);
+            $("select#DepartmentID option")
+                 .each(function() { this.selected = (this.text == response.info.department_id);
+            });
+            $("select#Position option")
+                 .each(function() { this.selected = (this.text == response.info.job_title_id);
+            });
+
+
+
+            var len = response.cources.length;
+        for(var i=0; i<len; i++){
+			    var index = i+1;
+
+                var name = response.cources[i].name;
+                var institution = response.cources[i].institution;
+                var completion_date = response.cources[i].completion_date;
+                if (response.cources[i].type=="course") {
+                    var coursesList = '<tr>'+
+                        '<td class="col-md-4" style="text-align: center!important;">'+name+'</td>'+
+                        '<td class="col-md-4" style="text-align: center!important;">'+institution+'</td>'+
+                        '<td class="col-md-3" style="text-align: center!important;">'+completion_date+'</td>'+
+                        '<td onclick="$(this).parent().remove()" >'+
+                        '  <i class="fa fa-trash" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;  color:#1E9FF2;font-size: 15pt; "></i>'+
+                        '</td>'+
+                        '</tr>'
+                    $("#msgRList3").append(coursesList);
+                } else {
+                    var coursesList = '<tr>'+
+                        '<td class="col-md-4" style="text-align: center!important;">'+name+'</td>'+
+                        '<td class="col-md-4" style="text-align: center!important;">'+institution+'</td>'+
+                        '<td class="col-md-3" style="text-align: center!important;">'+completion_date+'</td>'+
+                        '<td onclick="$(this).parent().remove()" >'+
+                        '  <i class="fa fa-trash" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;  color:#1E9FF2;font-size: 15pt; "></i>'+
+                        '</td>'+
+                        '</tr>'
+                    $("#msgRList2").append(coursesList);
+                }
+
+            }
+
             $("select#CityID option")
                  .each(function() { this.selected = (this.text == response.city);
             });
@@ -1126,13 +1155,13 @@ $(document).ready(function () {
     $('#plusElement2').click(function(){
             $("#msgRList2").append(''
                 +'<tr>'
-                + '<td width="80px">'
+                + '<td class="col-md-4">'
                  +      ' <input  class="form-control" type="text" name="education[]">'
                   +     ' </td>'
-                  +  '<td width="80px" >'
+                  +  '<td class="col-md-4" >'
                   +     '<input class="form-control" type="text" name="institution1[]" >'
                   +        '</td>'
-                  + '<td width="60px" >'
+                  + '<td class="col-md-3" >'
                   +  ' <input  class="form-control" type="text" name="graduation_date[]">'
                   + '</td>'
                   +'<td onclick="$(this).parent().remove()" >'
@@ -1147,13 +1176,13 @@ $(document).ready(function () {
     $('#plusElement3').click(function(){
             $("#msgRList3").append(''
                 +'<tr>'
-                + '<td width="80px">'
+                + '<td class="col-md-4">'
                  +      ' <input  class="form-control"  type="text" name="courses[]">'
                   +     ' </td>'
-                  +  '<td width="80px" >'
+                  +  '<td class="col-md-4" >'
                   +     '<input class="form-control"   type="text" name="institution2[]">'
                   +        '</td>'
-                  + '<td width="60px" >'
+                  + '<td class="col-md-3" >'
                   +  ' <input  class="form-control" type="text" name="completion_date[]">'
                   + '</td>'
                   +'<td onclick="$(this).parent().remove()" >'

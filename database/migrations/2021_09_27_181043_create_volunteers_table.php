@@ -20,25 +20,15 @@ class CreateVolunteersTable extends Migration
             $table->string('nick_name')->nullable();
             $table->string('identification')->nullable();
             $table->string('image')->nullable();
-            // $table->string('job_Number')->nullable();
             $table->string('phone_one')->nullable();
             $table->string('phone_two')->nullable();
-            // $table->string('InternalPhone')->nullable();
-            // $table->string('salary')->nullable();
-            // $table->string('currency')->nullable();
-            // $table->string('username')->nullable();
             $table->string('joining_date')->nullable();
             $table->string('status')->nullable();
             $table->string('email')->unique();
-            // $table->string('password');
             $table->string('url')->nullable();
+            
             $table->integer('added_by')->unsigned()->nullable();
             $table->foreign('added_by')->references('id')->on('admins')->onDelete('cascade');
-            // $table->integer('admin_id')->unsigned();
-            // $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
-            // $table->integer('role_id')->unsigned();
-            // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-
             $table->string('marital_status')->nullable();
             $table->integer('address_id')->unsigned()->nullable();
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');

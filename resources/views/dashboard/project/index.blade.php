@@ -122,7 +122,6 @@
                                     </div>
 
                                     <select type="text" disabled="" id="Department" name="Department" class="form-control">
-
                                     @foreach($departments as $department)
                                        <option value="{{ $department->id }}">{{ $department->name}}</option>
                                     @endforeach
@@ -542,9 +541,6 @@ $( function() {
                     +name+'</td><td>'+bussniess_name+'</td><td>'+national_id+'</td><td></tr>'
                     $("#userList").append(userList);
             }
-
-
-
 			},
 			});
 
