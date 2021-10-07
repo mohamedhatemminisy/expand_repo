@@ -169,7 +169,7 @@ class EmployeeController extends Controller
     public function emp_info(Request $request)
     {
         $admin['info'] = Admin::find($request['emp_id']);
-        dd($admin['info']);
+        // dd($admin['info']);
         $model = $admin['info']->model;
         $ArchiveCount = count(Archive::where('model_id',$request['emp_id'])
         ->where('model_name',$model)->get());
@@ -195,7 +195,7 @@ class EmployeeController extends Controller
         $admin['department_id'] = Department::where('id',$admin['details']->department_id )->first()->name;
         $admin['address'] = Address::where('id',$admin['details']->address_id  )->first();
         $admin['DirectManager'] = Admin::where('id',$admin['info']->admin_id  )->first()->name;
-        
+
         $admin['per']=(Role::where('id',$admin['info']->role_id  )->first()->permissions);
         $admin['Currency'] = trans('admin.'.$admin['info']->currency);
         if($admin['address']->city_id){
