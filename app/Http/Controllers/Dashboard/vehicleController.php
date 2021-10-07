@@ -107,6 +107,13 @@ class vehicleController extends Controller
     {
         $vehicle['info'] = Vehicle::find($request['vehcile_id']);
         $model = $vehicle['info']->model;
+        $vehicle['copyToCount']  = count(CopyTo::where('model_id',$request['vehcile_id'])
+        ->where('model_name',$model)->get());
+        $vehicle['linkToCount']  = count(linkedTo::where('model_id',$request['vehcile_id'])
+        ->where('model_name',$model)->get());
+        $vehicle['archiveCount'] = count(Archive::where('model_id',$request['vehcile_id'])
+        ->where('model_name',$model)->get());
+
         $ArchiveCount = count(Archive::where('model_id',$request['vehcile_id'])
         ->where('model_name',$model)->get());
         $CopyToCount = count(CopyTo::where('model_id',$request['vehcile_id'])

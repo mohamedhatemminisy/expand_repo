@@ -113,6 +113,21 @@ class SubscriberController extends Controller
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->with('files')->get();
+        
+        $user['outArchiveCount'] = count(Archive::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->where('type','outArchive')->get());
+        $user['inArchiveCount']  = count(Archive::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->where('type','inArchive')->get());
+        $user['otherArchiveCount']  = count(Archive::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->whereNotIn('type', ['outArchive','inArchive'])->get());
+        $user['licArchiveCount'] = count(ArchiveLicense::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->where('type','licArchive')->get());
+        $user['licFileArchiveCount'] = count(ArchiveLicense::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->where('type','licFileArchive')->get());
+        $user['copyToCount']  = count(CopyTo::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->get());
+        $user['linkToCount']  = count(linkedTo::where('model_id',$request['subscribe_id'])
+        ->where('model_name',$model)->get());
 
         $ArchiveLic =ArchiveLicense::where('model_id',$request['subscribe_id'])
         ->where('model_name',$model)->with('files')->get();

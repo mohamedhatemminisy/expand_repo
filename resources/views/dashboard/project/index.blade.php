@@ -456,7 +456,7 @@
             <div class="form-actions" style="border-top:0px;">
                 <div class="text-right">
                     <button class="btn btn-primary save-data">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
-                    <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+                    <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right reset-data"></i></button>
                 </div>
           </div>
 
@@ -474,7 +474,9 @@
 @section('script')
 
 <script>
-
+$('.reset-data').click(function(event){
+	$("#msgStatic").html("(0)");
+});
 $( function() {
     $( ".ac" ).autocomplete({
 		source: 'project_auto_complete',
@@ -497,7 +499,8 @@ $( function() {
             $('#dateEnd').val(response.info.dateEnd);
             $('#Projectcost').val(response.info.Projectcost);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive,
+                            response.copyToCount,response.linkToCount,response.archiveCount);  
             $("select#CurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency);
             });
@@ -565,7 +568,8 @@ function update($id)
             $('#dateEnd').val(response.info.dateEnd);
             $('#Projectcost').val(response.info.Projectcost);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive,
+                            response.copyToCount,response.linkToCount,response.archiveCount);  
             $("select#CurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency);
             });
@@ -760,7 +764,8 @@ $.ajax({
 				timer: 1500
 				})
             $("#ajaxform")[0].reset();
-
+            $("#region_data").val([]);
+            $("#area_data").val([]);
         },
         error: function(response) {
             $("#ProjectName").on('keyup', function (e) {
