@@ -40,10 +40,8 @@ Route::group([
         Route::get('emp_auto_complete', 'EmployeeController@emp_auto_complete')->name('emp_auto_complete');
         Route::get('emp_info', 'EmployeeController@emp_info')->name('emp_info');
         Route::get('emp_info_all', 'EmployeeController@emp_info_all')->name('emp_info_all');
-
         
-        
-        
+        Route::get('license', 'LicenseController@index')->name('license');
 
         Route::get('department', 'DepartmentController@index')->name('department')->middleware('can:department');
         Route::get('department/id/{id}', 'DepartmentController@index');
