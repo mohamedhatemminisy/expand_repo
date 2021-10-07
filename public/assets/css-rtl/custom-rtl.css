@@ -308,7 +308,7 @@ h3, h4{
   max-height:40px;
 }
 select.form-control:not([size]):not([multiple]) {
-  height: calc(2.3rem + 2px) !important;
+  height: calc(2.6rem + 2px) !important;
 }
 .card .card-title {
   font-weight: 400;

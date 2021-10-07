@@ -131,8 +131,14 @@ class ProjectController extends Controller
         $project['admin'] = Admin::where('id',$project['info']->admin_id)->first()->name;
         $project['department'] = Department::where('id',$project['info']->department_id)->first()->name;
         $project['address'] = Address::where('id', $project['info']['addresse_id'])->first();
-        $project['sponsers'] = Orgnization::where('org_type','orginzation')->where('id', $project['info']->sponser)->first()->name;
-        $project['contract'] = Orgnization::where('org_type','suppliers')->where('id', $project['info']->contract)->first()->name;
+        if(sizeof(Orgnization::where('org_type','suppliers')->where('id', $project['info']->contract)->get())==0)
+            $project['sponsers'] =array();
+        else
+            $project['sponsers'] = Orgnization::where('org_type','orginzation')->where('id', $project['info']->sponser)->first()->name;
+        if(sizeof(Orgnization::where('org_type','suppliers')->where('id', $project['info']->contract)->get())==0)
+            $project['contract'] =array();
+        else
+            $project['contract'] = Orgnization::where('org_type','suppliers')->where('id', $project['info']->contract)->first()->name;
         if($project['info']->user_id != "null"){
             
             $users = json_decode($project['info']->user_id);

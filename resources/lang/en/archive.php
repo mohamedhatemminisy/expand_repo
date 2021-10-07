@@ -46,7 +46,6 @@ return [
     'build_type'   =>  'building type ',
     'attach'   =>  'attachment ',
     'licfile_num'   =>  'number of license file',
-    'jobLic_report'   =>  'report of job license',
 
     'jobLic_archive'   =>  'archive of job license ',
     'agenda_archieve'   =>  'archive of meeting ',

@@ -34,7 +34,7 @@
 <div class="content-body resultTblaa">
     <div class="row">
             <div class="col-xl-12 col-lg-12">
-                <div class="card">
+                <div class="card" >
                     <div class="card-header" style="direction: rtl;">
                         <h4 class="card-title datatable_header"><img src="{{asset('assets/images/ico/report32.png')}}" /> 
                             @if ($type=="outArchive")
@@ -109,8 +109,8 @@
                                                 <th>
                                                     {{trans('admin.date_con')}}
                                                 </th>
-                                                <th style="width: 33%;">
-                                                    {{trans('archive.attach')}}
+                                                <th style="width: 300px;">
+                                                    {{trans('assets.archive')}}
                                                 </th>
                                                 <th>
                                                 </th>
@@ -141,7 +141,7 @@
                                                 <th>
                                                     {{trans('archive.build_type')}}
                                                 </th>
-                                                <th style="width: 33%;">
+                                                <th style="width: 300px;">
                                                     {{trans('archive.attach')}}
                                                 </th>
                                                 <th>
@@ -167,7 +167,7 @@
                                                     مرتبط ب
                                                 </th>
                                                 
-                                                <th style="width: 33%;">
+                                                <th style="width: 200px;">
                                                     {{trans('archive.attach')}}
                                                 </th>
                                                 <th>
@@ -202,8 +202,8 @@
                                                 <th >
                                                     حالة الرخصة
                                                 </th>
-                                                <th style="width: 33%;">
-                                                    {{trans('archive.attach')}}
+                                                <th >
+                                                    المرفقات
                                                 </th>
                                                 <th >
                                                     
@@ -597,7 +597,7 @@
                 @if ($type=="employee")
                 {data:'identification'},
                 {data:'identification'},
-                {data:'job_title_name',name:'job_titles.name'},
+                {data:'job_title_name'},
                 @elseif ($type=="subscriber")
                 {data:'national_id'},
                 @endif
@@ -700,7 +700,6 @@
                             $actionBtn="<div class='row' style='margin-left:0px;'>";
                             data.files.forEach(file => {
                                 shortCutName=file.real_name;
-                                shortCutName=shortCutName.substring(0, 20);
                                 urlfile='{{ asset('') }}';
                                 urlfile+=file.url;
                                 if(file.extension=="jpg"||file.extension=="png")
@@ -712,9 +711,9 @@
                                 else
                                 fileimage='{{ asset('assets/images/ico/file.png') }}';
                                 $actionBtn += '<div id="attach" class=" col-sm-6 ">'
-                                    +'<div class="attach">'                                        
-                                      +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
-                                        +'  <span class="attach-text">'+shortCutName+'</span>'
+                                    +'<div class="attach">'
+                                      +'  <span class="attach-text">'+shortCutName+'</span>'
+                                       +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
                                         +'    <img style="width: 20px;"src="'+fileimage+'">'
                                         +'</a>'
                                     +'</div>'
@@ -759,6 +758,7 @@
                 
                 },
                 // {data:'model_id'},
+
                 {data:'copyTo'},
                 {data:'date'},
                 {
@@ -770,7 +770,6 @@
                             $actionBtn="<div class='row' style='margin-left:0px;'>";
                             data.files.forEach(file => {
                                 shortCutName=file.real_name;
-                                shortCutName=shortCutName.substring(0, 20);
                                 urlfile='{{ asset('') }}';
                                 urlfile+=file.url;
                                 if(file.extension=="jpg"||file.extension=="png")
@@ -783,8 +782,8 @@
                                 fileimage='{{ asset('assets/images/ico/file.png') }}';
                                 $actionBtn += '<div id="attach" class=" col-sm-6 ">'
                                     +'<div class="attach">'
-                                      +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
-                                        +'  <span class="attach-text">'+shortCutName+'</span>'
+                                      +'  <span class="attach-text">'+shortCutName+'</span>'
+                                       +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
                                         +'    <img style="width: 20px;"src="'+fileimage+'">'
                                         +'</a>'
                                     +'</div>'
@@ -839,7 +838,6 @@
                             $actionBtn="<div class='row' style='margin-left:0px;'>";
                             data.files.forEach(file => {
                                 shortCutName=file.real_name;
-                                shortCutName=shortCutName.substring(0, 20);
                                 urlfile='{{ asset('') }}';
                                 urlfile+=file.url;
                                 if(file.extension=="jpg"||file.extension=="png")
@@ -852,8 +850,8 @@
                                 fileimage='{{ asset('assets/images/ico/file.png') }}';
                                 $actionBtn += '<div id="attach" class=" col-sm-6 ">'
                                     +'<div class="attach">'
-                                      +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
-                                        +'  <span class="attach-text">'+shortCutName+'</span>'
+                                      +'  <span class="attach-text">'+shortCutName+'</span>'
+                                       +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
                                         +'    <img style="width: 20px;"src="'+fileimage+'">'                                        +'</a>'
                                     +'</div>'
                                     +'</div>'; 
@@ -917,8 +915,8 @@
                                 fileimage='{{ asset('assets/images/ico/file.png') }}';
                                 $actionBtn += '<div id="attach" class=" col-sm-6 ">'
                                     +'<div class="attach">'
-                                      +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
-                                        +'  <span class="attach-text">'+shortCutName+'</span>'
+                                      +'  <span class="attach-text">'+shortCutName+'</span>'
+                                       +' <a class="attach-close1" href="'+urlfile+'" style="color: #74798D; float:left;" target="_blank">'
                                         +'    <img style="width: 20px;"src="'+fileimage+'">'                                        +'</a>'
                                     +'</div>'
                                     +'</div>'; 

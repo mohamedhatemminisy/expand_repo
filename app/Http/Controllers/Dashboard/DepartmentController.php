@@ -79,7 +79,10 @@ class DepartmentController extends Controller
         if($depaertment['info']->department_id){
             $depaertment_info = Department::where('id',$depaertment['info']->department_id)->first();
             $depaertment['dep_parent'] = $depaertment_info->name;
-            $depaertment['dep_parent_manager'] = Admin::where('id', $depaertment_info->admin_id)->first()->nick_name;
+            if(sizeof(Admin::where('id', $depaertment_info->admin_id)->get())==0)
+                $depaertment['dep_parent_manager']=array();
+            else
+                $depaertment['dep_parent_manager'] = Admin::where('id', $depaertment_info->admin_id)->first()->nick_name;
         }
         $model = $depaertment['info']->model;
         $ArchiveCount = count(Archive::where('model_id',$request['dep_id'])

@@ -147,8 +147,9 @@
                                                         <input type="hidden" id="customerType" name="customerType" value="0">
                                                         <input type="hidden" id="msgType" name="msgType" value="<?php echo $type ?>">
                                                         <input type="hidden" id="url" name="url" value="<?php echo $url ?>">
-                                                        <input type="hidden" id="pk_i_id" name="pk_i_id" value="">
-                                                        <input type="hidden" id="ArchiveID" name="ArchiveID" value="">                                                        
+                                                        <input type="hidden" id="pk_i_id" name="pk_i_id" value="0">
+                                                        <!-- 2166  -->
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -368,7 +369,6 @@ $( function() {
             },
             success:function(response){
             $('#customerid').val(response.info.id);
-            $('#ArchiveID').val(response.info.id);
             $('#customerName').val(response.info.name);
             $('#customername').val(response.info.name);
             $('#customerType').val(response.info.model_name);
