@@ -34,13 +34,7 @@
                                             </div>
                                             <div id="auto-complete-barcode" class="divKayUP barcode-suggestion "></div>
                                         </div>
-                                        <input type="text" id="Equipment"
-                                        class="form-control ac ui-autocomplete-input"
-                                         placeholder="" name="Equipment" autocomplete="off">
-                                    </div>
-                                    <div id="auto-complete-barcode" class="divKayUP barcode-suggestion "></div>
-                                </div>
-                                <input type="hidden" id="equpiment_id" name="equpiment_id" value="">
+                                        <input type="hidden" id="equpiment_id" name="equpiment_id" value="">
 
                                         <div class="form-group">
                                             <div class="input-group">
