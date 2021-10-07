@@ -758,7 +758,8 @@
                 
                 },
                 // {data:'model_id'},
-                 {data:'copyTo'},
+
+                {data:'copyTo'},
                 {data:'date'},
                 {
                     data: null,

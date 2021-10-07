@@ -34,6 +34,7 @@ return [
     'notes' => 'Notes',
     'reset' => 'Reset',
     'save' => 'Save',
+    "store_archive" => 'store archive',
 
     'dep_emp' => 'Employees and departments',
     'emp' => 'Employees ',
