@@ -48,7 +48,7 @@
                                                                 </div>
                                                     </div>
                                                 </div>
-                                                {{-- <input type="hidden" name="employee_id" id="volunteer_id" > --}}
+                                                <input type="hidden" name="volunteer_id" id="volunteer_id" >
                                                 <div class="row" style="position: relative;">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -278,15 +278,16 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6" >
+
+                                        <div class="col-md-6" style="padding-left: 40px">
                                             <div class="form-group">
-                                                <div class="input-group" style="width: 98% !important;">
-                                                    <div class="input-group-prepend">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend" style="height: 38px;" >
                                                         <span class="input-group-text" id="basic-addon1">
                                                         {{trans('admin.email')}}
                                                         </span>
                                                     </div>
-                                                    <input type="email" id="EmailAddress" name="EmailAddress" class="form-control" placeholder="user@domian.com" onkeydown="returnCd(event,this)" onkeyup="ClearArabic($(this))">
+                                                    <input type="email" id="EmailAddress" name="EmailAddress" class="form-control" placeholder="user@domian.com" onkeydown="returnCd(event,this)" onkeyup="ClearArabic($(this))" >
                                                     <div class="input-group-append">
                                                     <span class="input-group-text input-group-text2">
                                                         <i class="fa fa-external-link-alt" style="color: #ffffff"></i>
@@ -324,7 +325,7 @@
                                             </div>
                                         </div> --}}
 
-                                        <div class="col-md-6" >
+                                        <div class="col-md-6" style="padding-right: 0px;">
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
@@ -350,7 +351,7 @@
                                         </div>
 
                                         <div class="col-md-12" >
-                                            <table width="100%" class="detailsTB table archTbl">
+                                            <table width="100%" class="detailsTB table archTbl" name="Education" id="Education">
                                                           <thead>
                                                               <tr>
                                                                   <th class="col-md-4" style="text-align: center!important;">{{trans('admin.educational_attainment')}} </th>
@@ -382,7 +383,7 @@
                                                       </div>
 
                                             <div class="col-md-12" >
-                                            <table width="100%" class="detailsTB table archTbl" >
+                                            <table width="100%" class="detailsTB table archTbl" name="Courses" id="Courses">
                                                           <thead >
                                                               <tr>
                                                                   <th class="col-md-4" style="text-align: center!important;" >{{trans('admin.trining_course')}} </th>
@@ -398,7 +399,7 @@
                                                           <tbody id="msgRList3">
                                                             {{-- <tr>
                                                                 <td width="80px">
-                                                                    <input  class="form-control" type="text" name="courses[]">
+                                                                    <input  class="form-control" type="text" name="courses[]" value="testtest">
                                                                     </td>
                                                                 <td width="80px" >
                                                                     <input class="form-control" type="text" name="institution2[]" >
@@ -671,7 +672,7 @@
                         <div class="form-actions" style="border-top:0px; padding-bottom:44px;">
                             <div class="text-right">
                                 <button type="submit" class="btn btn-primary" id="saveBtn">{{trans('admin.save')}}  <i class="ft-thumbs-up position-right"></i></button>
-                                <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+                                <button type="reset" onclick="$('#msgRList2').html(''); $('#msgRList3').html('');" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                             </div>
                         </div>
                     </div>
@@ -751,6 +752,9 @@ function SavePer(){
 	<!--<script src="https://template.expand.ps/assets/pages/scripts/components-multi-select.min.js" type="text/javascript"></script>
     -->
 <script>
+
+
+
 $( function() {
     $( ".ac" ).autocomplete({
 		source: 'volunteer_auto_complete',
@@ -765,7 +769,7 @@ $( function() {
                 volunteer_id: volunteer_id,
             },
             success:function(response){
-            $('#employee_id').val(response.info.id);
+            $('#volunteer_id').val(response.info.id);
             $('#Name').val(response.info.name);
             $('#NationalID').val(response.info.identification);
             $('#Birthdate').val(response.info.birthdate);
@@ -778,7 +782,6 @@ $( function() {
             $('#username').val(response.info.username);
             $('#AddressDetails').val(response.address.details);
             $('#Note').val(response.address.notes);
-
             $("select#MaritalStatus option").each(
                 function() { this.selected = (this.text == response.info.marital_status);
             });
@@ -790,10 +793,15 @@ $( function() {
             $("select#Position option")
                  .each(function() { this.selected = (this.text == response.info.job_title_id);
             });
-
-
+            $("select#DrivingLicense option")
+                 .each(function() { this.selected = (this.text == response.info.license_types_id);
+            });
 
             var len = response.cources.length;
+            //manualy empty tabls content//////
+            $('#msgRList2').html('');
+            $('#msgRList3').html('');
+            //////////////////////////////////
         for(var i=0; i<len; i++){
 			    var index = i+1;
 
@@ -801,24 +809,44 @@ $( function() {
                 var institution = response.cources[i].institution;
                 var completion_date = response.cources[i].completion_date;
                 if (response.cources[i].type=="course") {
-                    var coursesList = '<tr>'+
-                        '<td class="col-md-4" style="text-align: center!important;">'+name+'</td>'+
-                        '<td class="col-md-4" style="text-align: center!important;">'+institution+'</td>'+
-                        '<td class="col-md-3" style="text-align: center!important;">'+completion_date+'</td>'+
-                        '<td onclick="$(this).parent().remove()" >'+
-                        '  <i class="fa fa-trash" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;  color:#1E9FF2;font-size: 15pt; "></i>'+
+                    var coursesList =
+                    '<tr>'+
+                        '<td class="col-md-4">'+
+                             '<input  class="form-control" type="text" name="courses[]" value="'+name+'">' +
                         '</td>'+
-                        '</tr>'
+
+                        '<td class="col-md-4">'+
+                            '<input  class="form-control" type="text" name="institution2[]" value="'+institution+'">'+
+                        '</td>'+
+
+                        '<td class="col-md-3">'+
+                            '<input  class="form-control" type="text" name="completion_date[]" value="'+completion_date+'">'+
+                        '</td>'+
+
+                        '<td onclick="$(this).parent().remove()" >'+
+                            '<i class="fa fa-trash" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;  color:#1E9FF2;font-size: 15pt; "></i>'+
+                        '</td>'+
+                    '</tr>'
                     $("#msgRList3").append(coursesList);
                 } else {
-                    var coursesList = '<tr>'+
-                        '<td class="col-md-4" style="text-align: center!important;">'+name+'</td>'+
-                        '<td class="col-md-4" style="text-align: center!important;">'+institution+'</td>'+
-                        '<td class="col-md-3" style="text-align: center!important;">'+completion_date+'</td>'+
-                        '<td onclick="$(this).parent().remove()" >'+
-                        '  <i class="fa fa-trash" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;  color:#1E9FF2;font-size: 15pt; "></i>'+
+                    var coursesList =
+                    '<tr>'+
+                        '<td class="col-md-4">'+
+                            '<input  class="form-control" type="text" name="education[]" value="'+name+'">' +
                         '</td>'+
-                        '</tr>'
+
+                        '<td class="col-md-4">'+
+                            '<input  class="form-control" type="text" name="institution1[]" value="'+institution+'">'+
+                        '</td>'+
+
+                        '<td class="col-md-3">'+
+                            '<input  class="form-control" type="text" name="graduation_date[]" value="'+completion_date+'">'+
+                        '</td>'+
+
+                        '<td onclick="$(this).parent().remove()" >'+
+                            '  <i class="fa fa-trash" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;  color:#1E9FF2;font-size: 15pt; "></i>'+
+                        '</td>'+
+                    '</tr>'
                     $("#msgRList2").append(coursesList);
                 }
 
@@ -849,7 +877,7 @@ function update($id)
                 emp_id: emp_id,
             },
             success:function(response){
-            $('#employee_id').val(response.info.id);
+            $('#volunteer_id').val(response.info.id);
             $('#Name').val(response.info.name);
             $('#NationalID').val(response.info.identification);
             $('#JobNumber').val(response.info.job_Number);
@@ -938,9 +966,6 @@ $.ajax({
             $( "#NickName" ).removeClass( "error" );
             $( "#DepartmentID" ).removeClass( "error" );
             $( "#Position" ).removeClass( "error" );
-            // $( "#HiringDate" ).removeClass( "error" );
-            // $( "#DirectManager" ).removeClass( "error" );
-            // $( "#JobType" ).removeClass( "error" );
             $( "#MobileNo1" ).removeClass( "error" );
 
        $.ajax({
@@ -960,7 +985,10 @@ $.ajax({
 				showConfirmButton: false,
 				timer: 1500
 				})
-
+                //manualy empty tabls content//////
+                $('#msgRList2').html('');
+                $('#msgRList3').html('');
+                //////////////////////////////////
                this.reset();
              }
 
@@ -981,15 +1009,6 @@ $.ajax({
             if(response.responseJSON.errors.Position){
                 $( "#Position" ).addClass( "error" );
             }
-            // if(response.responseJSON.errors.JobType){
-            //     $( "#JobType" ).addClass( "error" );
-            // }
-            // if(response.responseJSON.errors.HiringDate){
-            //     // $( "#HiringDate" ).addClass( "error" );
-            // }
-            // if(response.responseJSON.errors.DirectManager){
-            //     $( "#DirectManager" ).addClass( "error" );
-            // }
             if(response.responseJSON.errors.MobileNo1){
                 $( "#MobileNo1" ).addClass( "error" );
             }

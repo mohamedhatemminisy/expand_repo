@@ -73,29 +73,66 @@ class VolunteerController extends Controller
             $volunteer->birthdate  = $request->Birthdate;
             $volunteer->blood_type  = $request->BloodType;
             $volunteer->save();
-            for($i=0 ; $i< count($request->education) ; $i++){
-                // dd(count($request->education));
-                // print_r();
-                $VolunteerCourses = new Volunteer_Courses();
-                $VolunteerCourses->volunteer_id =$volunteer->id;
-                $VolunteerCourses->name =$request->education[$i];
-                $VolunteerCourses->institution =$request->institution1[$i];
-                $VolunteerCourses->type ='qulification';
-                $VolunteerCourses->completion_date = $request->graduation_date[$i];
-                $VolunteerCourses->save();
+            if(isset($request->courses)){
+                for($i=0 ; $i< count($request->education) ; $i++){
+                    // dd(count($request->education));
+                    // print_r();
+                    $VolunteerCourses = new Volunteer_Courses();
+                    $VolunteerCourses->volunteer_id =$volunteer->id;
+                    $VolunteerCourses->name =$request->education[$i];
+                    $VolunteerCourses->institution =$request->institution1[$i];
+                    $VolunteerCourses->type ='qulification';
+                    $VolunteerCourses->completion_date = $request->graduation_date[$i];
+                    $VolunteerCourses->save();
+                }
             }
-            for($i=0 ; $i< count($request->courses) ; $i++){
-                $VolunteerCourses = new Volunteer_Courses();
-                $VolunteerCourses->volunteer_id =$volunteer->id;
-                $VolunteerCourses->name =$request->courses[$i];
-                $VolunteerCourses->institution =$request->institution2[$i];
-                $VolunteerCourses->type ='course';
-                $VolunteerCourses->completion_date = $request->completion_date[$i];
-                $VolunteerCourses->save();
+            if(isset($request->courses)){
+                for($i=0 ; $i< count($request->courses) ; $i++){
+                    $VolunteerCourses = new Volunteer_Courses();
+                    $VolunteerCourses->volunteer_id =$volunteer->id;
+                    $VolunteerCourses->name =$request->courses[$i];
+                    $VolunteerCourses->institution =$request->institution2[$i];
+                    $VolunteerCourses->type ='course';
+                    $VolunteerCourses->completion_date = $request->completion_date[$i];
+                    $VolunteerCourses->save();
+                }
             }
-
 
         }else{
+            // dd($request->all());
+            $address = Address::where('id',$request->volunteer_id)->first();
+            $address->area_id = $request->area_data;
+            $address->city_id = $request->CityID;
+            $address->region_id = $request->region_data;
+            $address->details = $request->AddressDetails;
+            $address->notes = $request->Note;
+            $address->save();
+
+            Volunteer_Courses::where('volunteer_id',$request->volunteer_id)->delete();
+            if(isset($request->courses)){
+                for($i=0 ; $i< count($request->education) ; $i++){
+                    // dd(count($request->education));
+                    // print_r();
+                    $VolunteerCourses = new Volunteer_Courses();
+                    $VolunteerCourses->volunteer_id =$request->volunteer_id;
+                    $VolunteerCourses->name =$request->education[$i];
+                    $VolunteerCourses->institution =$request->institution1[$i];
+                    $VolunteerCourses->type ='qulification';
+                    $VolunteerCourses->completion_date = $request->graduation_date[$i];
+                    $VolunteerCourses->save();
+                }
+            }
+            if(isset($request->courses)){
+                for($i=0 ; $i< count($request->courses) ; $i++){
+                    $VolunteerCourses = new Volunteer_Courses();
+                    $VolunteerCourses->volunteer_id =$request->volunteer_id;
+                    $VolunteerCourses->name =$request->courses[$i];
+                    $VolunteerCourses->institution =$request->institution2[$i];
+                    $VolunteerCourses->type ='course';
+                    $VolunteerCourses->completion_date = $request->completion_date[$i];
+                    $VolunteerCourses->save();
+                }
+            }
             $volunteer = Volunteer::find($request->volunteer_id);
             if ($request->file('imgPic')) {
                 $path = upload_image($request->file('imgPic'), 'volunteer_');
@@ -112,29 +149,15 @@ class VolunteerController extends Controller
             $volunteer->status = '1';
             $volunteer->email  = $request->EmailAddress;
             $volunteer->marital_status  = $request->MaritalStatus;
-            $volunteer->address_id  = $request->AddressId;
-            $volunteer->job_title_id  = $request->JobTitleID;
+            $volunteer->address_id  = $address->id;
+            $volunteer->job_title_id  = $request->Position;
             $volunteer->department_id  = $request->DepartmentID;
-            $volunteer->license_types_id  = $request->LicenseTypesID;
+            $volunteer->license_types_id  = $request->DrivingLicense;
             $volunteer->birthdate  = $request->Birthdate;
             $volunteer->blood_type  = $request->BloodType;
-
             $volunteer->save();
-            $volunteerCourses = Volunteer_Courses::where('volunteer_id',$volunteer->id)->first();
-            $address = Address::where('id',$volunteer->address_id)->first();
-            $address->area_id = $request->area_data;
-            $address->city_id = $request->CityID;
-            $address->region_id = $request->region_data;
-            $address->details = $request->AddressDetails;
-            $address->notes = $request->Note;
-            $address->save();
-            $volunteerCourses->volunteer_id =$volunteer->id;
-            $volunteerCourses->name =$request->CourseName;
-            $volunteerCourses->institution =$request->Institution;
-            $volunteerCourses->job_type_id =$request->JobType;
-            $volunteerCourses->type =$request->Type;
-            $volunteerCourses->completion_date = $request->CompletionDate;
-            $volunteerCourses->save();
+
+
         }
 
         DB::commit();
@@ -169,6 +192,7 @@ class VolunteerController extends Controller
         $volunteer['address'] = Address::where('id',$volunteer['info']->address_id)->first();
         $volunteer['info']->department_id=Department::where('id',$volunteer['info']->department_id )->first()->name;
         $volunteer['info']->job_title_id=JobTitle::where('id',$volunteer['info']->job_title_id )->first()->name;
+        $volunteer['info']->license_types_id=LicenseType::where('id',$volunteer['info']->license_types_id )->first()->name;
         $volunteer['cources']=Volunteer_Courses::where('volunteer_id',$volunteer['info']->id)->get();
         if($volunteer['address']){
             $volunteer['city'] =City::where('id',$volunteer['address']->city_id)->first()->name??'';
