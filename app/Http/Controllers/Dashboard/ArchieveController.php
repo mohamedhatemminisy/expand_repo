@@ -306,7 +306,7 @@ class ArchieveController extends Controller
         $type= 'volunteerReport';
         $url = "volunteer_report";
         $attachment_type = AttachmentType::get();
-        $license_type = LicenseType::get();
+        $license_type = LicenseType::where('type','drive_lic')->get();
         return view('dashboard.archive.volunteerReport',compact('type','attachment_type'
        ,'license_type','url'));
     }
@@ -371,14 +371,14 @@ class ArchieveController extends Controller
         $type= 'licArchive';
         $url = "lic_archieve";
         $attachment_type = AttachmentType::get();
-        $license_type = LicenseType::get();
+        $license_type = LicenseType::where('type','archive_lic')->get();
         return view('dashboard.archive.licArchive',compact('type','attachment_type'
         ,'license_type','url'));
     }
     public function licFileArchive(){
         $type= 'licFileArchive';
         $attachment_type = AttachmentType::get();
-        $license_type = LicenseType::get();
+        $license_type = LicenseType::where('type','archive_lic')->get();
         $url = "licFile_archieve";
         return view('dashboard.archive.licArchive',compact('type','attachment_type',
         'license_type','url'));
@@ -399,7 +399,7 @@ class ArchieveController extends Controller
         $type= 'reportArchive';
         $url = "report_archieve";
         $attachment_type = AttachmentType::get();
-        $license_type = LicenseType::get();
+        $license_type = LicenseType::where('type','archive_lic')->get();
         return view('dashboard.archive.rptArchive',compact('type','attachment_type'
        ,'license_type','url'));
     }

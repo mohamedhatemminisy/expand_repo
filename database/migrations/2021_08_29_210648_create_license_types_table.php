@@ -16,6 +16,7 @@ class CreateLicenseTypesTable extends Migration
         Schema::create('license_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
+            $table->string('type', 100)->nullable();
             $table->timestamps();
         });
     }

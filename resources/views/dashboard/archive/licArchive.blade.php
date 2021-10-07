@@ -44,7 +44,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-lg-5 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
@@ -76,7 +76,7 @@
                                                                 <option value="{{$license->id}}"> {{$license->name}}   </option>
                                                                 @endforeach
                                                     </select>
-                                                
+
                                                     <div class="input-group-append" onclick="QuickAdd(16,'BuildingTypeData','نوع الترخيص')" style="cursor:pointer;max-width: 15px;
                                                     margin-left: 0px !important;
                                                     padding-left: 0px !important;
@@ -90,7 +90,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                      
+
                                         <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
@@ -99,7 +99,7 @@
                                                             نوع البناء
                                                         </span>
                                                     </div>
-                                                    
+
 
 
 
@@ -147,7 +147,7 @@
                                                             نوع المرفق
                                                         </span>
                                                     </div>
-                                                    
+
                                                     <select class="form-control" name="AttahType" id="AttahType">
                                                             @foreach($attachment_type as $attachment)
                                                             <option value="{{$attachment->id}}"> {{$attachment->name}}   </option>
@@ -169,19 +169,19 @@
                                                     </div>
                                                     <input type="hidden" name="fromname" value="formDataaa">
                                                     <input type="file" class="form-control-file" id="formDataaaupload-file[]" multiple="" name="formDataaaUploadFile[]"
-                                                    onchange="doUploadAttach('formDataaa')" 
+                                                    onchange="doUploadAttach('formDataaa')"
                                                     style="display: none" >
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div style="text-align: center;">
-                                        
+
                                     <button type="submit" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
-                                        حفظ    
+                                        حفظ
                                     </button>
-                                        
-                                        
+
+
                                     </div>
                                 </div>
                         </div>
@@ -235,7 +235,7 @@ $.ajaxSetup({
 				})
                 $(".formDataaaFilesArea").html('');
                this.reset();
-               $('.wtbl').DataTable().ajax.reload();  
+               $('.wtbl').DataTable().ajax.reload();
            },
            error: function(response){
             Swal.fire({
@@ -255,7 +255,7 @@ $( function() {
     $( ".cust" ).autocomplete({
 		source: 'Linence_auto_complete',
 		minLength: 1,
-		
+
         select: function( event, ui ) {
             console.log(ui.item.model);
             $('#customerid').val(ui.item.id);
@@ -310,12 +310,12 @@ $( function() {
                     }
                     $(".formDataaaFilesArea").html(row)
                 }
-            
+
             },
         });
     }
-    
-  
+
+
 
 
 </script>

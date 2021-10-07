@@ -8,7 +8,7 @@ use App\Models\City;
 use App\Models\volunteer;
 use App\Models\Address;
 use App\Models\Role;
-// use App\Models\JobType;
+use App\Models\LicenseType;
 use App\Models\JobTitle;
 use App\Models\Area;
 use App\Models\Region;
@@ -18,16 +18,17 @@ use App\Http\Requests\VolunteerRequest;
 use Yajra\DataTables\DataTables;
 use DB;
 
+
 class VolunteerController extends Controller
 {
     public function index(){
         $city = City::get();
         $admin = Volunteer::get();
-        // $jobType = JobType::get();
+        $licenseType = LicenseType::where('type','drive_lic')->get();
         $jobTitle = JobTitle::get();
         $departments = Department::get();
         $type = 'volunteer';
-        return view('dashboard.volunteer.index',compact('type','city','admin','jobTitle','departments'));
+        return view('dashboard.volunteer.index',compact('type','city','admin','jobTitle','departments','licenseType'));
     }
 
     public function store_volunteer(VolunteerRequest $request){
