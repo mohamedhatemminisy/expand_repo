@@ -122,7 +122,6 @@
                                     </div>
 
                                     <select type="text" disabled="" id="Department" name="Department" class="form-control">
-                                  
                                     @foreach($departments as $department)
                                        <option value="{{ $department->id }}">{{ $department->name}}</option>
                                     @endforeach
@@ -141,7 +140,7 @@
                                             </span>
                                         </div>
                                         <select type="text" id="subscribers" name="subscribers[]" multiple class="form-control valid" onchange="getEmpInfo($(this).val(),$('#Department'),$('#pos'),0);hideSelected($(this).val())" aria-invalid="false">
-                                         @foreach($users as $user)   
+                                         @foreach($users as $user)
                                         <option value="{{$user->id}}"> {{$user->name}}  </option>
                                         @endforeach
 
@@ -175,15 +174,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                         <div class="EnabledItem" style="direction: rtl;border:1px solid #ff0000; color:#ff0000; text-align: center;display: none">المستخدم معطل</div>
 
-                        <div  id="ParticipatedEmployees">
+                        {{-- <div  id="ParticipatedEmployees">
                         <div class="row" style="margin-left: 0;">
                             <h5> {{trans('admin.subscribers')}}</h5>
                             <table style="width:100%; margin-top: 0;margin-left: 3%;" class="detailsTB table">
                                 <tbody><tr>
-                                <th scope="col"># </th>                                    
+                                <th scope="col"># </th>
                                     <th scope="col">{{trans('admin.subscriber_name')}} </th>
                                     <th scope="col">{{trans('admin.business_name')}}</th>
                                     <th scope="col">{{trans('admin.emp_id')}}</th>
@@ -196,7 +195,44 @@
                                 </tbody>
                             </table>
                         </div>
-                        </div>
+                        </div> --}}
+
+                        <div  id="ParticipatedEmployees">
+                            <div class="row" style="margin-left: 0;">
+                                <h5> {{trans('admin.subscribers')}}</h5>
+                                <table style="width:100%; margin-top: 0;margin-left: 3%;" class="detailsTB table">
+                                    <tbody><tr>
+                                    <th scope="col"># </th>
+                                        <th scope="col">{{trans('admin.subscriber_name')}} </th>
+                                        <th scope="col">{{trans('admin.phone')}}</th>
+                                        <th scope="col">{{trans('admin.emp_id')}}</th>
+                                        <th scope="col">
+                                            <i class="fa fa-plus-circle" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color:aliceblue;font-size: 15pt; "></i>
+                                        </th>
+                                    </tr>
+
+
+                                    </tbody>
+                                    <tbody id="userList">
+                                        {{-- <tr>
+                                            <td ></td>
+                                            <td class="col-md-3">
+                                                <input  class="form-control" >
+                                                </td>
+                                            <td class="col-md-3" >
+                                                <input class="form-control"  >
+                                                 </td>
+                                            <td class="col-md-3" >
+                                                <input  class="form-control" >
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr> --}}
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+
                         <div class="card" style=" margin-left: -3%; display: none;">
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -216,7 +252,7 @@
                                                                                                         <option value="149"> كفاله حسن تنفيذ </option>
                                                                                                         <option value="152"> بعد الانتهاء </option>
                                                                                                         <option value="157">        كل يو م </option>
-                                        
+
                                     </select>
                                     <div class="input-group-append" onclick="QuickAdd(28,'PaymentTerm','Payment Term')">
                                         <span class="input-group-text input-group-text2">
@@ -229,7 +265,7 @@
                         </div>
                         <div class="card-header" style="padding-top:0px;">
                             <h4 class="card-title">
-                                <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
+                                <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32">
                                 {{trans('admin.archieve')}}
                             </h4>
                             <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
@@ -241,17 +277,17 @@
                                     <li><a data-action="close"><i class="ft-x"></i></a></li>
                                 </ul>
                             </div>
-                        
+
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body" style="padding-bottom: 0px;">
                                 <div class="row" style="text-align: center">
                                         <div class="col-md-2 w-s-50" style="padding: 0px;">
                                             <div class="form-group">
-                                                <img src="{{asset('assets/images/ico/msg.png')}}" 
+                                                <img src="{{asset('assets/images/ico/msg.png')}}"
                                                 onclick="$('#CertModal').modal('show')" style="cursor:pointer">
                                                 <div class="form-group">
-                                                    <a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}} 
+                                                    <a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}}
                                                     <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
                                                 </div>
                                             </div>
@@ -272,7 +308,7 @@
                 </div>
             <div class="card-content collapse show">
                 <div class="card-body">
-                @include('dashboard.component.address')		
+                @include('dashboard.component.address')
                     <div class="row">
                         <table style="margin-left: 2% !important;width:100%; margin-top: 0;" class="detailsTB  tablesj">
                             <tbody>
@@ -316,6 +352,28 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <div  id="Financiers">
+                        <div class="row" style="margin-left: 0;">
+                            <table style="width:100%; margin-top: 0;margin-left: 3%;" class="detailsTB table">
+                                <tbody><tr>
+                                <th scope="col"># </th>
+                                    <th scope="col">{{trans('admin.select_financier')}} </th>
+                                    <th scope="col">{{trans('admin.financie_percentage')}}</th>
+                                    <th scope="col">
+                                        <i class="fa fa-plus-circle" id="plusElement2" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color:aliceblue;font-size: 15pt; "></i>
+                                    </th>
+                                </tr>
+
+
+                                </tbody>
+                                <tbody id="Financier">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+
                     <div class="row">
                         <table style="    margin-left: 2% !important;width:100%; margin-top: 0;" class="detailsTB tablesj">
                             <tbody>
@@ -325,15 +383,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
                                             {{trans('admin.supplier_company')}}
-                                            
+
                                             </span>
                                         </div>
                                         <select type="text" id="Contractor" name="Contractor" class="form-control" onchange="getSupplierInfo($(this).val(),$('#pinc8'))" style="padding-right: 0 !important;padding-left: 0rem !important;">
                                         <optgroup label=" ">
                                             @foreach($Contractor as $Contract)
                                                 <option value="{{$Contract->id}}">  {{$Contract->name}}  </option>
-                                            @endforeach    
-                                        </optgroup>                                  
+                                            @endforeach
+                                        </optgroup>
                                       </select>
                                     </div>
                                 </td>
@@ -358,10 +416,30 @@
                             </tbody>
                         </table>
                     </div>
+                    <div  id="Supplieres">
+                        <div class="row" style="margin-left: 0;">
+                            <table style="width:100%; margin-top: 0;margin-left: 3%;" class="detailsTB table">
+                                <tbody><tr>
+                                <th scope="col"># </th>
+                                    <th scope="col">{{trans('admin.supplier_company')}} </th>
+                                    <th scope="col">{{trans('admin.Contact')}}</th>
+                                    <th scope="col">
+                                        <i class="fa fa-plus-circle" id="plusElement4" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;color:aliceblue;font-size: 15pt; "></i>
+                                    </th>
+                                </tr>
+
+
+                                </tbody>
+                                <tbody id="Supplier">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
                 </div>
             </div>
             <div class="card-header" style="padding-top:0px;">
-                <h4 class="card-title" style="    height: 36px;"> 
+                <h4 class="card-title" style="    height: 36px;">
                 </h4>
                 <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
                 <div class="heading-elements" style="display: none">
@@ -372,9 +450,9 @@
                         <li><a data-action="close"><i class="ft-x"></i></a></li>
                     </ul>
                 </div>
-            
+
             </div>
-            
+
             <div class="form-actions" style="border-top:0px;">
                 <div class="text-right">
                     <button class="btn btn-primary save-data">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
@@ -401,7 +479,7 @@ $( function() {
     $( ".ac" ).autocomplete({
 		source: 'project_auto_complete',
 		minLength: 1,
-		
+
         select: function( event, ui ) {
 
             let project_id = ui.item.id
@@ -412,7 +490,7 @@ $( function() {
                 project_id: project_id,
             },
             success:function(response){
-            $('#project_id').val(response.info.id); 
+            $('#project_id').val(response.info.id);
             $('#ProjectNo').val(response.info.ProjectNo);
             $('#ProjectName').val(response.info.name);
             $('#dateStart').val(response.info.dateStart);
@@ -421,34 +499,34 @@ $( function() {
             $("#msgStatic").html(response.ArchiveCount);
             drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#CurrencyID option")
-                 .each(function() { this.selected = (this.text == response.Currency); 
+                 .each(function() { this.selected = (this.text == response.Currency);
             });
             $("select#pich6 option")
-                 .each(function() { this.selected = (this.text == response.admin); 
+                 .each(function() { this.selected = (this.text == response.admin);
             });
             $("select#Department option")
-                 .each(function() { this.selected = (this.text == response.department); 
+                 .each(function() { this.selected = (this.text == response.department);
             });
 
             $("select#sponsor option")
-                 .each(function() { this.selected = (this.text == response.sponsers); 
+                 .each(function() { this.selected = (this.text == response.sponsers);
             });
             $('#cost1').val(response.info.cost1);
             $('#pinc8').val(response.info.pinc8);
 
             $("select#Contractor option")
-                 .each(function() { this.selected = (this.text == response.contract); 
+                 .each(function() { this.selected = (this.text == response.contract);
             });
             $('#AddressDetails').val(response.address.details);
             $('#Note').val(response.address.notes);
             $("select#CityID option")
-                 .each(function() { this.selected = (this.text == response.city); 
+                 .each(function() { this.selected = (this.text == response.city);
             });
             $("select#area_data option")
-                 .each(function() { this.selected = (this.text == response.area); 
+                 .each(function() { this.selected = (this.text == response.area);
             });
             $("select#region_data option")
-                 .each(function() { this.selected = (this.text == response.region); 
+                 .each(function() { this.selected = (this.text == response.region);
             });
 
             var len = response.users.length;
@@ -463,9 +541,6 @@ $( function() {
                     +name+'</td><td>'+bussniess_name+'</td><td>'+national_id+'</td><td></tr>'
                     $("#userList").append(userList);
             }
-
-
-
 			},
 			});
 
@@ -483,7 +558,7 @@ function update($id)
                 project_id: project_id,
             },
             success:function(response){
-            $('#project_id').val(response.info.id); 
+            $('#project_id').val(response.info.id);
             $('#ProjectNo').val(response.info.ProjectNo);
             $('#ProjectName').val(response.info.name);
             $('#dateStart').val(response.info.dateStart);
@@ -492,35 +567,35 @@ function update($id)
             $("#msgStatic").html(response.ArchiveCount);
             drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
             $("select#CurrencyID option")
-                 .each(function() { this.selected = (this.text == response.Currency); 
+                 .each(function() { this.selected = (this.text == response.Currency);
             });
-            
+
             $("select#pich6 option")
-                 .each(function() { this.selected = (this.text == response.admin); 
+                 .each(function() { this.selected = (this.text == response.admin);
             });
             $("select#Department option")
-                 .each(function() { this.selected = (this.text == response.department); 
+                 .each(function() { this.selected = (this.text == response.department);
             });
 
             $("select#sponsor option")
-                 .each(function() { this.selected = (this.text == response.sponsers); 
+                 .each(function() { this.selected = (this.text == response.sponsers);
             });
             $('#cost1').val(response.info.cost1);
             $('#pinc8').val(response.info.pinc8);
 
             $("select#Contractor option")
-                 .each(function() { this.selected = (this.text == response.contract); 
+                 .each(function() { this.selected = (this.text == response.contract);
             });
             $('#AddressDetails').val(response.address.details);
             $('#Note').val(response.address.notes);
             $("select#CityID option")
-                 .each(function() { this.selected = (this.text == response.city); 
+                 .each(function() { this.selected = (this.text == response.city);
             });
             $("select#area_data option")
-                 .each(function() { this.selected = (this.text == response.area); 
+                 .each(function() { this.selected = (this.text == response.area);
             });
             $("select#region_data option")
-                 .each(function() { this.selected = (this.text == response.region); 
+                 .each(function() { this.selected = (this.text == response.region);
             });
 
             var len = response.users.length;
@@ -552,7 +627,7 @@ $.ajax({
    },
    success:function(response){
     $("select#Department option")
-                 .each(function() { this.selected = (this.text == response); 
+                 .each(function() { this.selected = (this.text == response);
             });
          },
         });
@@ -652,30 +727,30 @@ $.ajax({
             dateEnd:dateEnd,
             pinc6:pinc6,
             Department:Department,
-            subscribers:subscribers, 
-            Projectcost:Projectcost,                              
-            CurrencyID:CurrencyID,                                            
-            _token: _token ,   
-            project_id:project_id, 
-            CityID:CityID, 
-            area_data:area_data,            
-            region_data:region_data,            
-            AddressDetails:AddressDetails,            
-            Note:Note,      
-            sponsor:sponsor, 
-            cost1:cost1,            
-            Contractor:Contractor,            
-            pinc8:pinc8,            
-           
+            subscribers:subscribers,
+            Projectcost:Projectcost,
+            CurrencyID:CurrencyID,
+            _token: _token ,
+            project_id:project_id,
+            CityID:CityID,
+            area_data:area_data,
+            region_data:region_data,
+            AddressDetails:AddressDetails,
+            Note:Note,
+            sponsor:sponsor,
+            cost1:cost1,
+            Contractor:Contractor,
+            pinc8:pinc8,
+
          },
 
         success:function(response){
             $('.success_alert').css('visibility', 'visible');
-            $('.wtbl').DataTable().ajax.reload();  
+            $('.wtbl').DataTable().ajax.reload();
 
             setTimeout(function() {
             $('.success_alert').fadeOut();
-            }, 3000 ); 
+            }, 3000 );
         $(".loader").addClass('hide');
 			Swal.fire({
 				position: 'top-center',
@@ -684,8 +759,8 @@ $.ajax({
 				showConfirmButton: false,
 				timer: 1500
 				})
-            $("#ajaxform")[0].reset();   
-            
+            $("#ajaxform")[0].reset();
+
         },
         error: function(response) {
             $("#ProjectName").on('keyup', function (e) {
@@ -727,6 +802,69 @@ $.ajax({
 
        });
   });
+
+  $(document).ready(function () {
+    $('#plusElement1').click(function(){
+            $("#userList").append(''
+                +'<tr>'
+                  +'<td  >'
+                  + '</td>'
+                  + '<td class="col-md-3">'
+                  +      ' <input  class="form-control" >'
+                  +     ' </td>'
+                  +  '<td class="col-md-3" >'
+                  +     '<input class="form-control"  >'
+                  +        '</td>'
+                  + '<td class="col-md-3" >'
+                  +  ' <input  class="form-control" >'
+                  + '</td>'
+                  +'<td onclick="$(this).parent().remove()" >'
+                  +'  <i class="fa fa-trash" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;  color:#1E9FF2;font-size: 15pt; "></i>'
+                  + '</td>'
+                +' </tr>'
+            );
+        });
+});
+
+$(document).ready(function () {
+    $('#plusElement2').click(function(){
+            $("#Financier").append(''
+                +'<tr>'
+                  +'<td  >'
+                  + '</td>'
+                  + '<td class="col-md-6">'
+                  +      ' <input  class="form-control" >'
+                  +     ' </td>'
+                  + '<td class="col-md-6" >'
+                  +  ' <input  class="form-control" >'
+                  + '</td>'
+                  +'<td onclick="$(this).parent().remove()" >'
+                  +'  <i class="fa fa-trash" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;  color:#1E9FF2;font-size: 15pt; "></i>'
+                  + '</td>'
+                +' </tr>'
+            );
+        });
+});
+
+$(document).ready(function () {
+    $('#plusElement4').click(function(){
+            $("#Supplier").append(''
+                +'<tr>'
+                  +'<td  >'
+                  + '</td>'
+                  + '<td class="col-md-6">'
+                  +      ' <input  class="form-control" >'
+                  +     ' </td>'
+                  + '<td class="col-md-6" >'
+                  +  ' <input  class="form-control" >'
+                  + '</td>'
+                  +'<td onclick="$(this).parent().remove()" >'
+                  +'  <i class="fa fa-trash" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;  color:#1E9FF2;font-size: 15pt; "></i>'
+                  + '</td>'
+                +' </tr>'
+            );
+        });
+});
 
 </script>
 @endsection

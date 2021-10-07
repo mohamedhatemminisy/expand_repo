@@ -40,7 +40,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                {{trans('assets.brand')}} 
+                                                {{trans('assets.brand')}}
                                             </span>
                                                 </div>
                                                 <select type="text" id="brand" name="brand" class="form-control">
@@ -86,7 +86,7 @@
                                 <img src="https://db.expand.ps/images/equipment.jpg" style="cursor: pointer;" width="150" height="100" id="equipmentimg" onclick="document.getElementById('userimgpath').click(); return false">
                                 <input type="hidden" id="equipmentimgpath" name="equipmentimgpath">
                                 <input type="file" class="form-control-file" id="userimgpath" name="imgPic" style="display: none" onchange="doUploadPic()">
-                                <meta name="csrf-token" content="{{ csrf_token() }}" />                             
+                                <meta name="csrf-token" content="{{ csrf_token() }}" />
 
                             </div> -->
                                     <div class="col-md-4" style="text-align: center;">
@@ -148,7 +148,7 @@
                                             <div class="input-group w-s-87" style="width: 100% !important;">
                                                 <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                                {{trans('assets.internal_No')}} 
+                                                {{trans('assets.internal_No')}}
                                             </span>
                                                 </div>
                                                 <input type="text" id="InternalNo" class="form-control " placeholder="" name="InternalNo">

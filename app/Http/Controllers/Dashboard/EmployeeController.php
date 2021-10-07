@@ -30,7 +30,7 @@ class EmployeeController extends Controller
         $jobTitle = JobTitle::get();
         $departments = Department::get();
         $type = 'employee';
-        return view('dashboard.employee.index',compact('type','city','admin','jobType','jobTitle','departments'));         
+        return view('dashboard.employee.index',compact('type','city','admin','jobType','jobTitle','departments'));
     }
 
     public function store_employee(EmployeeRequest $request){
@@ -79,11 +79,11 @@ class EmployeeController extends Controller
             }
             $admin->save();
             $AdminDetail = new AdminDetail();
-            $AdminDetail->admin_id =$admin->id; 
-            $AdminDetail->address_id =$address->id; 
-            $AdminDetail->job_title_id =$request->Position; 
-            $AdminDetail->job_type_id =$request->JobType; 
-            $AdminDetail->department_id =$request->DepartmentID; 
+            $AdminDetail->admin_id =$admin->id;
+            $AdminDetail->address_id =$address->id;
+            $AdminDetail->job_title_id =$request->Position;
+            $AdminDetail->job_type_id =$request->JobType;
+            $AdminDetail->department_id =$request->DepartmentID;
             $AdminDetail->year = $request->vac_year;
             $AdminDetail->balance = $request->vac_annual;
             $AdminDetail->emergency = $request->emr_blanace;
@@ -132,10 +132,10 @@ class EmployeeController extends Controller
             $address->details = $request->AddressDetails;
             $address->notes = $request->Note;
             $address->save();
-            $AdminDetail->admin_id =$admin->id; 
-            $AdminDetail->job_title_id =$request->Position; 
-            $AdminDetail->job_type_id =$request->JobType; 
-            $AdminDetail->department_id =$request->DepartmentID; 
+            $AdminDetail->admin_id =$admin->id;
+            $AdminDetail->job_title_id =$request->Position;
+            $AdminDetail->job_type_id =$request->JobType;
+            $AdminDetail->department_id =$request->DepartmentID;
             $AdminDetail->year = $request->vac_year;
             $AdminDetail->balance = $request->vac_annual;
             $AdminDetail->emergency = $request->emr_blanace;
@@ -143,10 +143,10 @@ class EmployeeController extends Controller
         }
 
         DB::commit();
-        $admin->address_id =$address->id; 
-        $admin->job_title_id =$request->Position; 
-        $admin->job_type_id =$request->JobType; 
-        $admin->department_id =$request->DepartmentID; 
+        $admin->address_id =$address->id;
+        $admin->job_title_id =$request->Position;
+        $admin->job_type_id =$request->JobType;
+        $admin->department_id =$request->DepartmentID;
         $admin->year = $request->vac_year;
         $admin->balance = $request->vac_annual;
         $admin->emergency = $request->emr_blanace;
@@ -154,7 +154,7 @@ class EmployeeController extends Controller
 
             return response()->json(['success'=>trans('admin.employee_added')]);
         }
-     
+
         return response()->json(['error'=>$validator->errors()->all()]);
     }
 
@@ -164,11 +164,12 @@ class EmployeeController extends Controller
         $names = Admin::where('name', 'like', '%' . $emp_data . '%')->select('*','name as label')->get();
         //$html = view('dashboard.component.auto_complete', compact('names'))->render();
         return response()->json($names);
-    }    
+    }
 
     public function emp_info(Request $request)
     {
         $admin['info'] = Admin::find($request['emp_id']);
+        dd($admin['info']);
         $model = $admin['info']->model;
         $ArchiveCount = count(Archive::where('model_id',$request['emp_id'])
         ->where('model_name',$model)->get());
@@ -180,7 +181,7 @@ class EmployeeController extends Controller
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $admin['copyTo'] = $CopyTo;
         $admin['Archive'] = $Archive;
-        
+
         $jalArchive = linkedTo::where('model_id',$request['emp_id'])
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $admin['jalArchive'] = $jalArchive;
@@ -237,5 +238,5 @@ class EmployeeController extends Controller
             $getValue = $image;
             return $getValue;
         }
-    }  
+    }
 }
