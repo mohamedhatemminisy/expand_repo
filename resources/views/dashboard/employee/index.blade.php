@@ -13,9 +13,9 @@
 <section class="horizontal-grid " id="horizontal-grid">
 
 <form method="post" id="setting_form" enctype="multipart/form-data">
-        @csrf        
+        @csrf
                 <div class="row white-row">
-                    
+
                     <div class="col-sm-12 col-lg-6 col-md-12">
                         <div class="card leftSide">
                             <div class="card-header">
@@ -24,7 +24,7 @@
                                     {{trans('admin.emp_info')}}
                                      </h4>
                                 <div class="heading-elements1" style="display: none;left: 87px; top: 10px;">
-                                {{trans('admin.status')}}  
+                                {{trans('admin.status')}}
                                 </div>
                                 <div class="heading-elements1 onOffArea form-group mt-1" style="display: none;    top: -5px;">
                                         <input type="checkbox" id="myonoffswitchHeader" class="switchery" data-size="xs" checked="">
@@ -44,14 +44,14 @@
                                                                     {{trans('admin.emp_name')}}
                                                                     </span>
                                                                 </div>
-                                                                <input type="text" id="Name" 
+                                                                <input type="text" id="Name"
                                                                 class="form-control alphaFeild ac ui-autocomplete-input"
                                                                  placeholder="{{trans('admin.emp_name')}}" name="Name" autocomplete="off">
                                                                  </div>
                                                                  <div id="auto-complete-barcode" class="divKayUP barcode-suggestion "></div>
                                                                 </div>
 
-                                                        
+
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="employee_id" id="employee_id" >
@@ -64,7 +64,7 @@
                                                                     {{trans('admin.emp_id')}}
                                                                     </span>
                                                                 </div>
-                                                                <input type="text" id="NationalID" maxlength="9" class="form-control numFeild" 
+                                                                <input type="text" id="NationalID" maxlength="9" class="form-control numFeild"
                                                                 placeholder="{{trans('admin.emp_id')}}" name="NationalID" onblur="$('#password').val($(this).val())">
                                                                 <input type="hidden" id="emp_id" name="emp_id" value="0">
 
@@ -79,7 +79,7 @@
                                                                     {{trans('admin.job_num')}}
                                                                     </span>
                                                                 </div>
-                                                                <input type="text" id="JobNumber" class="form-control" 
+                                                                <input type="text" id="JobNumber" class="form-control"
                                                                 placeholder="{{trans('admin.job_num')}}" name="JobNumber">
                                                             </div>
                                                         </div>
@@ -154,7 +154,7 @@
                                                     <div class="input-group" style="width: 98% !important;">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">
-                                                            {{trans('admin.email')}} 
+                                                            {{trans('admin.email')}}
                                                             </span>
                                                         </div>
                                                         <input type="email" id="EmailAddress" name="EmailAddress" class="form-control" placeholder="user@domian.com" onkeydown="returnCd(event,this)" onkeyup="ClearArabic($(this))"><div class="input-group-append">
@@ -173,10 +173,10 @@
                                 </div>
                             </div>
 
-                          
+
                             <div class="card-header" style="padding-top:0px;">
-                                <h4 class="card-title"><img src="https://db.expand.ps/images/workHrs.png" width="32" height="32"> 
-                                {{trans('admin.working_info')}} 
+                                <h4 class="card-title"><img src="https://db.expand.ps/images/workHrs.png" width="32" height="32">
+                                {{trans('admin.working_info')}}
                             </h4>
 
                                 <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a>
@@ -208,11 +208,11 @@
                                                         <option value="{{$department->id}}">  {{$department->name}} </option>
                                                         @endforeach
 
-                                              
+
                                                     </select>
                                                     <div class="input-group-append" style="visibility: hidden;">
                                                         <span class="input-group-text input-group-text2">
-                                                            <a href="https://db.expand.ps/addDepartment" target="_blank"> 
+                                                            <a href="https://db.expand.ps/addDepartment" target="_blank">
 															<i class="fa fa-external-link"></i>
 															</a>
                                                         </span>
@@ -262,7 +262,7 @@
                                                     </select>
                                                     <div class="input-group-append" style="visibility: hidden;">
                                                         <span class="input-group-text input-group-text2">
-                                                            <a href="https://db.expand.ps/addDepartment" target="_blank"> 
+                                                            <a href="https://db.expand.ps/addDepartment" target="_blank">
 															<i class="fa fa-external-link"></i>
 															</a>
                                                         </span>
@@ -315,7 +315,6 @@
                                         </div>
                                         <div class="col-md-5" style="padding-right: 0px;padding-left: 0px;">
                                             <div class="form-group">
-                                                
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">
@@ -330,7 +329,6 @@
                                                                 <option value="dinar">{{trans('admin.dinar')}}  </option>
                                                                 <option value="euro">{{trans('admin.euro')}}  </option>
                                                             </select>
-                                                            
                                                         </div>
                                             </div>
                                         </div>
@@ -341,7 +339,7 @@
 
 
                             <div class="card-header hide" style="padding-top:0px;">
-                                <h4 class="card-title"><img src="https://db.expand.ps/images/workHrs.png" width="32" height="32"> 
+                                <h4 class="card-title"><img src="https://db.expand.ps/images/workHrs.png" width="32" height="32">
                                 {{trans('admin.Holiday_info')}}
                                  </h4>
 
@@ -377,7 +375,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">
                                                         {{trans('admin.vac_annual')}}
-                                                           
+
                                                         </span>
                                                     </div>
                                                     <input id="vac_annual" name="vac_annual" maxlength="2" class="form-control valid" placeholder="" value="">
@@ -390,7 +388,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">
                                                         {{trans('admin.emr_blanace')}}
-                                                           
+
                                                         </span>
                                                     </div>
                                                     <input id="emr_blanace" name="emr_blanace" maxlength="2" class="form-control valid" placeholder="" value="">
@@ -403,7 +401,7 @@
 
 
                             <div class="card-header" style="padding-top:0px;">
-                                <h4 class="card-title"><i class="fa fa-key"></i> 
+                                <h4 class="card-title"><i class="fa fa-key"></i>
                                 {{trans('admin.user_info')}}
                                 </h4>
                                 <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a>
@@ -423,7 +421,7 @@
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input" name="customCheck" id="customCheck2">
-                                                    <label class="custom-control-label" for="customCheck2"> 
+                                                    <label class="custom-control-label" for="customCheck2">
                                                     {{trans('admin.has_account')}}
 
                                                         </label>
@@ -504,10 +502,10 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                    @include('dashboard.component.address')	
+                    @include('dashboard.component.address')
                     <div class="card-header" style="padding-top:0px;">
                         <h4 class="card-title">
-                            <img src="{{ asset('assets/images/ico/msg.png') }}" width="32" height="32"> 
+                            <img src="{{ asset('assets/images/ico/msg.png') }}" width="32" height="32">
                         الأرشيف
                         </h4>
                     </div>
@@ -518,7 +516,7 @@
                                         <div class="form-group">
                                             <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#CertModal').modal('show')" style="cursor:pointer">
                                             <div class="form-group">
-                                                <a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}} 
+                                                <a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}}
                                                 <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
                                             </div>
                                         </div>
@@ -530,16 +528,16 @@
 						<div class="col-sm-12">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="card-title" style="padding-bottom: 10px !important;padding-top: 5px;">			
-										<i class="fa fa-key" style="color:#4267B2"></i> 									
+									<h4 class="card-title" style="padding-bottom: 10px !important;padding-top: 5px;">
+										<i class="fa fa-key" style="color:#4267B2"></i>
                                         <a onclick="$('#salahiat').toggle();">
                                             &nbsp;قائمة الصلاحيات
                                         </a>
                                     </h4>
-                                        
+
                                         <a class="heading-elements-toggle">
 									    <i class="ft-align-justify font-medium-3">
-									        
+
 									    </i>
 									</a>
 									<div class="heading-elements">
@@ -564,7 +562,7 @@
                                                                 </option>
                                                              @endforeach
 														</select>
-													</div>								
+													</div>
 													</div>
 												</div>
 											</div>
@@ -576,7 +574,6 @@
                     @endcan
 					</div>
 
-                        
                         <div class="form-actions" style="border-top:0px; padding-bottom:44px;">
                             <div class="text-right">
                                 <button type="submit" class="btn btn-primary" id="saveBtn">{{trans('admin.save')}}  <i class="ft-thumbs-up position-right"></i></button>
@@ -587,7 +584,6 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-12">
-                
 <?php  $type=$types;  ?>
 @include('dashboard.component.archive_table');
 @include('dashboard.component.fetch_table');
@@ -596,7 +592,7 @@
 
 
 
-    
+
   </form>
 </section>
 
@@ -614,8 +610,8 @@
               selectableHeader: "<div class='custom-header' style='color:#4267B2'><b>الصلاحيات المحجوبة</b></div>",
   selectionHeader: "<div class='custom-header' style='color:#4267B2'><b>الصلاحيات الممنوحة</b></div>"
       })
-      
-      
+
+
                 $('#salahiat').hide()
     }
 
@@ -629,7 +625,7 @@ function SavePer(){
 					dataType:"json",
 					async: false,
 					success: function (data) {
-						if(data.status.success){	
+						if(data.status.success){
 							$(".alert-danger").hide();
 							$(".alert-success").show();
 							$("#succMsg").text(data.status.msg)
@@ -659,8 +655,8 @@ function SavePer(){
   selectionHeader: "<div class='custom-header' style='color:#4267B2'><b>موظفون داخل المجموعة </b></div>"
       });
     })
-    
-    
+
+
     $(document).ready(function (){
         $('#my_multi_select3').multiSelect({
               selectableHeader: "<div class='custom-header' style='color:#4267B2'><b>الصلاحيات المحجوبة</b></div>",
@@ -683,7 +679,7 @@ $( function() {
     $( ".ac" ).autocomplete({
 		source: 'emp_auto_complete',
 		minLength: 2,
-		
+
         select: function( event, ui ) {
             let emp_id = ui.item.id
             $.ajax({
@@ -705,7 +701,7 @@ $( function() {
             $('#EmailAddress').val(response.info.email);
             $("#DepartmentID").val(response.info.department_id);
             if(response.info.image != 'https://expand-archive.com/expand_repo/public'/*window.location.origin*/){
-                $('#userProfileImg').attr('src', response.info.image);  
+                $('#userProfileImg').attr('src', response.info.image);
             }else{
                 $('#userProfileImg').attr('src', '{{asset("assets/images/ico/user.png")}}');
             }
@@ -718,20 +714,20 @@ $( function() {
                 ,response.licFileArchiveCount
                 ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#Position option")
-                 .each(function() { this.selected = (this.text == response.job_title); 
+                 .each(function() { this.selected = (this.text == response.job_title);
             });
             $("select#JobType option")
-                 .each(function() { this.selected = (this.text == response.job_type); 
+                 .each(function() { this.selected = (this.text == response.job_type);
             });
 
             $("select#DirectManager option")
-                 .each(function() { this.selected = (this.text == response.DirectManager); 
+                 .each(function() { this.selected = (this.text == response.DirectManager);
             });
             $("select#DepartmentID option")
-                 .each(function() { this.selected = (this.text == response.department_id); 
+                 .each(function() { this.selected = (this.text == response.department_id);
             });
             $("select#CurrencyID option")
-                 .each(function() { this.selected = (this.text == response.Currency); 
+                 .each(function() { this.selected = (this.text == response.Currency);
             });
             $('#HiringDate').val(response.info.start_date);
             $('#Salary').val(response.info.salary);
@@ -742,26 +738,25 @@ $( function() {
             $('#AddressDetails').val(response.address.details);
             $('#Note').val(response.address.notes);
             $("select#CityID option")
-                 .each(function() { this.selected = (this.text == response.city); 
+                 .each(function() { this.selected = (this.text == response.city);
             });
             $("select#TownID option")
-                 .each(function() { this.selected = (this.text == response.area); 
+                 .each(function() { this.selected = (this.text == response.area);
             });
             $("select#region_data option")
-                 .each(function() { this.selected = (this.text == response.region); 
+                 .each(function() { this.selected = (this.text == response.region);
             });
             console.log(response.per)
-            
+
             $("#ana").html()
             ctrl='<select multiple="multiple" class="multi-select" id="my_multi_select3" name="my_multi_select3[]">'
             for(srchKey=0;srchKey<arrKey.length;srchKey++){
-                
+
                 flage=false;
                 for(i=0;i<response.per.length;i++)
                     if(response.per[i]==arrKey[srchKey]){
                         flage=true;
                     }
-                    
                     if(!flage)
                         ctrl+='<option value="'+arrKey[srchKey]+'">'+arrVal[srchKey]+'</option>'
                     else
@@ -779,14 +774,14 @@ $( function() {
 	});
 } );
 
-<?php 
-$i=0; 
+<?php
+$i=0;
 foreach(config('global.permissions') as $name => $value)
 {?>
 	arrKey[<?php echo $i?>]='{{$name}}'
 	arrVal[<?php echo $i?>]="@lang('admin.'.$name)"
 	<?php  $i++; ?>
-<?php }?>	
+<?php }?>
 
 function update($id)
 {
@@ -818,20 +813,20 @@ function update($id)
                 ,response.licFileArchiveCount
                 ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#Position option")
-                 .each(function() { this.selected = (this.text == response.job_title); 
+                 .each(function() { this.selected = (this.text == response.job_title);
             });
             $("select#JobType option")
-                 .each(function() { this.selected = (this.text == response.job_type); 
+                 .each(function() { this.selected = (this.text == response.job_type);
             });
 
             $("select#DirectManager option")
-                 .each(function() { this.selected = (this.text == response.DirectManager); 
+                 .each(function() { this.selected = (this.text == response.DirectManager);
             });
             $("select#DepartmentID option")
-                 .each(function() { this.selected = (this.text == response.department_id); 
+                 .each(function() { this.selected = (this.text == response.department_id);
             });
             $("select#CurrencyID option")
-                 .each(function() { this.selected = (this.text == response.Currency); 
+                 .each(function() { this.selected = (this.text == response.Currency);
             });
             $('#HiringDate').val(response.info.start_date);
             $('#Salary').val(response.info.salary);
@@ -842,25 +837,24 @@ function update($id)
             $('#AddressDetails').val(response.address.details);
             $('#Note').val(response.address.notes);
             $("select#CityID option")
-                 .each(function() { this.selected = (this.text == response.city); 
+                 .each(function() { this.selected = (this.text == response.city);
             });
             $("select#TownID option")
-                 .each(function() { this.selected = (this.text == response.area); 
+                 .each(function() { this.selected = (this.text == response.area);
             });
             $("select#region_data option")
-                 .each(function() { this.selected = (this.text == response.region); 
+                 .each(function() { this.selected = (this.text == response.region);
             });
-            
+
             $("#ana").html()
             ctrl='<select multiple="multiple" class="multi-select" id="my_multi_select3" name="my_multi_select3[]">'
             for(srchKey=0;srchKey<arrKey.length;srchKey++){
-                
+
                 flage=false;
                 for(i=0;i<response.per.length;i++)
                     if(response.per[i]==arrKey[srchKey]){
                         flage=true;
                     }
-                    
                     if(!flage)
                         ctrl+='<option value="'+arrKey[srchKey]+'">'+arrVal[srchKey]+'</option>'
                     else
@@ -949,7 +943,7 @@ $.ajax({
            success: (response) => {
             $(".loader").addClass('hide');
 
-            $('.wtbl').DataTable().ajax.reload();  
+            $('.wtbl').DataTable().ajax.reload();
              if (response) {
                 $(".loader").addClass('hide');
 			Swal.fire({
@@ -963,7 +957,6 @@ $.ajax({
 
                this.reset();
              }
-             
            },
            error: function(response){
             $(".loader").addClass('hide');
@@ -985,7 +978,6 @@ $.ajax({
                 });
                 $("#DepartmentID").on('change', function (e) {
                         $( "#DepartmentID" ).removeClass( "error" );
-                    
                 });
                 $("#Position").on('change', function (e) {
                         $( "#Position" ).removeClass( "error" );
@@ -1024,7 +1016,7 @@ $.ajax({
             }
             if(response.responseJSON.errors.JobType){
                 $( "#JobType" ).addClass( "error" );
-            }           
+            }
             if(response.responseJSON.errors.HiringDate){
                 $( "#HiringDate" ).addClass( "error" );
             }
@@ -1048,7 +1040,7 @@ $.ajax({
 
 
 
-  
+
 $(document).ready(function () {
 
 });
