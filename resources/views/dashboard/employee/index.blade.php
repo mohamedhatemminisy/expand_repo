@@ -87,7 +87,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4" style="text-align: center;">
-                                                <img id="userProfileImg" src="{{ asset('assets/images/ico/user.png') }}" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
+                                                <img id="userProfileImg" 
+                                                 style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
                                                 <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
                                                 <input type="hidden" id="userimgpath" name="userimgpath">
                                                 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -589,7 +590,6 @@
 
 
 
-    
   </form>
 </section>
 <?php  $type=$types;  ?>

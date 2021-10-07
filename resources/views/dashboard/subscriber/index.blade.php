@@ -578,8 +578,9 @@ function update($id)
             $('#formDataEmailAddress').val(response.info.email);
             $('#formDataBussniessName').val(response.info.bussniess_name);
             $("#certListCnt").html(response.ArchiveCount);
+            $("#licListCnt").html("("+response.ArchiveJobLicCount+")");
             drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive);
-            
+            drawTableJoblic(response.ArchiveJobLic);
             $("select#formDataProfessionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });

@@ -433,10 +433,22 @@ class ArchieveController extends Controller
       public function archieve_info_all(Request $request)
     {
         $type=$request['type'];
-        $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC')
-        ->with('files')->get();
+        $archive= Archive::select('archives.*')->where('type',$type)->orderBy('id', 'DESC')->with('copyTo')->with('files')->get();
         return DataTables::of($archive)
                         ->addIndexColumn()
+                        ->addColumn('copyTo', function($archive) {
+                            if($archive->copyTo){ 
+                                $actionBtn=" ";
+                                foreach ($archive->copyTo as $copyTo){ 
+                                    $actionBtn .=' '.$copyTo->name.' ';
+                                }
+                               
+                                return $actionBtn;
+                            }
+                            else
+                              { return '';}
+                            
+                        })
                         ->make(true);
 
     }
