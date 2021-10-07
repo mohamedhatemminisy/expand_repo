@@ -33,7 +33,6 @@
 
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css-rtl/vendors.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css-rtl/app.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{asset('assets/css-rtl/custom-rtl.css')}}">
   <!-- END MODERN CSS-->
   <!-- BEGIN Page Level CSS-->
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css-rtl/core/menu/menu-types/horizontal-menu.css')}}">
@@ -69,11 +68,15 @@
 @endif
  
 
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css-rtl/custom-rtl.css')}}">
 <style>
 	.progress { position:relative; width:100%; 
     height: 20px;  display:none;}
 	.bar { background-color: #b5076f; width:0%; height:20px; }
 	.percent { position:absolute; display:inline-block; left:50%; color: #040608;}
+	.fa-external-link{
+	    font-size: 24px;
+	}
 </style>
 </head>
 <body class="horizontal-layout horizontal-menu horizontal-menu-padding 2-columns   menu-expanded"
@@ -191,7 +194,17 @@ th{
 @include('dashboard.includes.navbar')
 <!-- end sidebar -->
 <div class="app-content content">
-  <div class="content-wrapper">
+    @if ($type=='intro')
+  <div class="content-wrapper" style="
+    display: block;
+    background-color: #ffffff;
+    min-height: 700px;
+">
+      @else 
+  <div class="content-wrapper" style="
+    display: block;
+">
+    @endif
 @yield('content')
   </div>
 </div>
@@ -450,7 +463,9 @@ function doUploadPic(){
                 if(data){
                     $(".alert-danger").addClass("hide");
                     $(".alert-success").removeClass('hide');
-                    $("#userProfileImg").attr('src', window.location.origin+'/'+data.url);
+                    //$("#userProfileImg").attr('src', window.location.origin+'/'+data.url);
+
+					$("#userProfileImg").attr('src', "{{ asset('') }}"+data.url);
                     $("#userimgpath").val(data.url);
                     $("#file_id").val(data.id);
                     $("#userimgpath").trigger('change')
@@ -667,10 +682,23 @@ function deleteConstant(id){
      
   });
 
-  
+leftSide=$(".leftSide").height()
+		rightSide=$(".rightSide").height()
 
+		setTimeout(function() {
+		    if(screen.width>600){
+			if (leftSide > rightSide)
+				$(".rightSide").attr("style", "min-height:" + ($(".leftSide").height() + "px"))
+			else
+				$(".leftSide").attr("style", "min-height:" + ($(".rightSide").height() + "px"))
+			
+			$(".selectize-input .item").html('')
+		    }
+			
+		},1000)
 
 });
+		
 
 </script>
 

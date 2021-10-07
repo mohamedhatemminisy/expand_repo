@@ -34,7 +34,7 @@
 <div class="content-body resultTblaa">
     <div class="row">
             <div class="col-xl-12 col-lg-12">
-                <div class="card">
+                <div class="card" >
                     <div class="card-header" style="direction: rtl;">
                         <h4 class="card-title datatable_header"><img src="{{asset('assets/images/ico/report32.png')}}" /> 
                             @if ($type=="outArchive")
@@ -757,7 +757,9 @@
                     name:'name',
                 
                 },
-                {data:'model_id'},
+                // {data:'model_id'},
+
+                {data:'copyTo'},
                 {data:'date'},
                 {
                     data: null,

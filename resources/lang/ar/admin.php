@@ -88,6 +88,7 @@ return [
     'enter_name_task' => 'ادخل اسم المهمة',
     'expire_date' => 'وقت الانتهاء',
     'attachements' => 'مرفقات',
+    "store_archive" => 'حفظ ارشيف',
 
     'shekel' => 'شيكل',
     'dollar' => 'دولار',

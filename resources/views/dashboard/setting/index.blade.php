@@ -141,7 +141,7 @@
                                                     <img src="https://db.expand.ps/images/fax35.png" style="max-width: 35px;">
                                                     </span>
                                                     </div>
-                                                    <input type="text" id="fax" name="fax" class="form-control noleft" maxlength="9" placeholder="090000000" aria-describedby="basic-addon1" value="{{$setting->fax}}">
+                                                    <input type="text" id="fax" name="fax" class="form-control noleft" maxlength="9" placeholder="090000000" aria-describedby="basic-addon1" value="{{$setting->fax}}"  style="margin-left: 12px;">
                                                 </div>
                                             </div>
                                         </div>
@@ -437,7 +437,7 @@
 
 
         <div class="col-sm-12 col-lg-6 col-md-12">
-            <div class="card rightSide" style="min-height: 1035.75px;">
+            <div class="card rightSide">
                 <div class="card-header">
                     <h4 class="card-title"><img src="https://db.expand.ps/images/maps-icon.png" width="32" height="32"> {{trans('admin.address')}}</h4>
                 </div>
@@ -465,7 +465,7 @@
                 </select>
             </div>
             </div>
-            <div class="input-group-append col-2" onclick="QuickAdd(10,'PositionID','City')" 
+            <div class="input-group-append col-2" onclick="QuickAdd(10,'CityID','اسم المدينة')" 
             style="max-width:15px; margin-left:0px !important;padding-left:0px !important;padding-right:0px !important;padding-bottom: 18px;">
                 <span class="input-group-text input-group-text2">
                     <i class="fa fa-external-link"></i>

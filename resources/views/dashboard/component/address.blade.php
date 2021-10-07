@@ -25,7 +25,7 @@
     </div>
     <div class="col-md-4" style="padding-left:0px;">
         <div class="row">
-            <div class="form-group col-10" style="padding-left:0px;">
+            <div class="form-group col-10" style="padding-left:0px;margin-left: -5px;">
                 <div class="input-group" >
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">
