@@ -33,7 +33,6 @@
 
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css-rtl/vendors.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css-rtl/app.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{asset('assets/css-rtl/custom-rtl.css')}}">
   <!-- END MODERN CSS-->
   <!-- BEGIN Page Level CSS-->
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css-rtl/core/menu/menu-types/horizontal-menu.css')}}">
@@ -69,11 +68,15 @@
 @endif
  
 
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css-rtl/custom-rtl.css')}}">
 <style>
 	.progress { position:relative; width:100%; 
     height: 20px;  display:none;}
 	.bar { background-color: #b5076f; width:0%; height:20px; }
 	.percent { position:absolute; display:inline-block; left:50%; color: #040608;}
+	.fa-external-link{
+	    font-size: 24px;
+	}
 </style>
 </head>
 <body class="horizontal-layout horizontal-menu horizontal-menu-padding 2-columns   menu-expanded"
@@ -191,7 +194,17 @@ th{
 @include('dashboard.includes.navbar')
 <!-- end sidebar -->
 <div class="app-content content">
-  <div class="content-wrapper">
+    @if ($type=='intro')
+  <div class="content-wrapper" style="
+    display: block;
+    background-color: #ffffff;
+    min-height: 700px;
+">
+      @else 
+  <div class="content-wrapper" style="
+    display: block;
+">
+    @endif
 @yield('content')
   </div>
 </div>
@@ -238,9 +251,8 @@ aria-hidden="true">
 			  <input type="hidden" id="fk_i_constant_id1" class="form-control" placeholder="Label (En)" name="fk_i_constant_id1">
 			  <input type="hidden" id="fk_i_constantdet_id1" class="form-control" placeholder="Label (En)" name="fk_i_constantdet_id1">
 			  <input type="hidden" id="pj_i_id" class="form-control" placeholder="Label (En)" name="pj_i_id">
-			  
-			  <input type="hidden" id="ctrlToRefresh" class="form-control" placeholder="Label (En)" name="ctrlToRefresh">
 			  <input type="hidden" id="contid" class="form-control" placeholder="Label (En)" name="contid">
+			  <input type="hidden" id="ctrlToRefresh" class="form-control" placeholder="Label (En)" name="ctrlToRefresh">
 		  </div>
 		  <div class="form-group" style="text-align:center">
 			  <button type="submit" class="btn btn-info modalBtn" >حفظ</button>
@@ -252,10 +264,8 @@ aria-hidden="true">
 	</div>
 </div>
 <script>
-
 $('#store-modal').submit(function(e) {
 	$(".loader").removeClass('hide');
-
 	contid=$("#contid").val();
 	if(contid == 33){
 		fillIn = 'area_data';
@@ -264,12 +274,9 @@ $('#store-modal').submit(function(e) {
 	}else{
 		fillIn=$("#ctrlToRefresh").val();
 	}
-
        e.preventDefault();
 	   $( "#NationalID" ).removeClass( "error" );
-
        let formData = new FormData(this);
-
        $.ajax({
           type:'POST',
           url: "store_model",
@@ -281,7 +288,6 @@ $('#store-modal').submit(function(e) {
 				if (data) {
 						$("#" + fillIn).append(new Option(data.name, data.id));
 				}
-
 				$(".loader").addClass('hide');
 						//$(".form-actions").removeClass('hide');
 						$("#s_name_ar1").val('')
@@ -296,7 +302,8 @@ $('#store-modal').submit(function(e) {
            }
        });
   });
-</script>
+  
+  </script>
 
 <div class="modal fade text-left" id="addLingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
 	 aria-hidden="true">
@@ -427,6 +434,7 @@ $( function() {
 });
 
   function QuickAdd(contid,ctrl,title){
+
 $(".loader").removeClass('hide');
 //$(".form-actions").addClass('hide');
 
@@ -438,7 +446,7 @@ $("#ModalTitle").html(title);
 $("#ModalTitle1").html(title);
 $("#QuickAdd").modal('show');
 
-$(".loader").addClass('hide');	
+$(".loader").addClass('hide');
 }
 function doUploadPic(){
 	$.ajaxSetup({
@@ -460,7 +468,9 @@ function doUploadPic(){
                 if(data){
                     $(".alert-danger").addClass("hide");
                     $(".alert-success").removeClass('hide');
-                    $("#userProfileImg").attr('src', window.location.origin+'/'+data.url);
+                    //$("#userProfileImg").attr('src', window.location.origin+'/'+data.url);
+
+					$("#userProfileImg").attr('src', "{{ asset('') }}"+data.url);
                     $("#userimgpath").val(data.url);
                     $("#file_id").val(data.id);
                     $("#userimgpath").trigger('change')
@@ -677,10 +687,23 @@ function deleteConstant(id){
      
   });
 
-  
+leftSide=$(".leftSide").height()
+		rightSide=$(".rightSide").height()
 
+		setTimeout(function() {
+		    if(screen.width>600){
+			if (leftSide > rightSide)
+				$(".rightSide").attr("style", "min-height:" + ($(".leftSide").height() + "px"))
+			else
+				$(".leftSide").attr("style", "min-height:" + ($(".rightSide").height() + "px"))
+			
+			$(".selectize-input .item").html('')
+		    }
+			
+		},1000)
 
 });
+		
 
 </script>
 

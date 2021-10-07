@@ -1,9 +1,4 @@
 @extends('layouts.admin')
-@section('search')
-<li class="dropdown dropdown-language nav-item hideMob">
-            <input id="searchContent" name="searchContent" class="form-control SubPagea round full_search" placeholder="بحث" style="text-align: center;width: 350px; margin-top: 15px !important;">
-          </li>
-@endsection
 @section('content')
 <div class="content-body">
     <section id="hidden-label-form-layouts">
@@ -14,157 +9,63 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title"><img src="{{asset('assets/images/ico/report32.png')}}" />
-                            @if ($type=='outArchive')
-                            {{trans('archive.out_archive')}} 
-                            @elseif ($type=='inArchive')
-                            {{trans('archive.in_archive')}} 
-                            @elseif ($type=='projArchive')
-                            {{trans('archive.proj_archive')}}
-                            @elseif ($type=='munArchive')
-                            {{trans('archive.mun_archive')}} 
-                            @elseif ($type=='empArchive')
-                            {{trans('archive.emp_archive')}} 
-                            @elseif ($type=='depArchive')
-                            {{trans('archive.dep_archive')}} 
-                            @elseif ($type=='assetsArchive')
-                            {{trans('archive.assets_archive')}} 
-                            @elseif ($type=='citArchive')
-                            {{trans('archive.cit_archive')}} 
-                            @endif
-                           
+                            {{trans('archive.assets_archive')}}
                         </h4>
                     </div>
                     <div class="card-body">
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-lg-7 col-md-12 pr-0 pr-s-12"  >
+                                    <div class="col-lg-6 col-md-12 pr-0 pr-s-12"  >
                                         <div class="row">
                                             <div class="col-lg-8 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">
-                                                                @if ($type=='outArchive')
-                                                                {{trans('archive.export_to')}} 
-                                                                @elseif ($type=='inArchive')
-                                                                {{trans('archive.import_from')}} 
-                                                                @elseif ($type=='projArchive'||'munArchive')
-                                                                {{trans('archive.title')}} 
-                                                                @endif
+                                                                {{trans('archive.title')}}
                                                             </span>
-                                                            
                                                         </div>
-                                                        
-                                                        @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
+
+                                                        {{-- @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive') --}}
                                                             <input type="text" id="msgTitle" class="form-control" name="msgTitle" style="width: 30%;">
-                                                    
-                                                            @if($type=='munArchive')
                                                             <select name="archive_type" id="archive_type" class="form-control">
-                                                                    
-                                                                    <option value="">-- نوع الارشيف --</option>
-                                                                    @if(count($projArchive) > 0)
-                                                                    @foreach($archive_type as $archive)
-                                                                    <option value="{{$archive->id}}"> {{$archive->name}}   </option>
-                                                                    @endforeach
-                                                                    @endif
-    
-                                                                </select>
-                                                            <div class="input-group-append" onclick="QuickAdd(42,'archive_type','نوع الأرشيف')" style="cursor:pointer">
+
+                                                                <option value="">-- نوع الاصل --</option>
+                                                                @foreach($archive_type as $archive)
+                                                                <option value="{{$archive->id}}"> {{$archive->name}}   </option>
+                                                                @endforeach
+
+                                                            </select>
+                                                            <div class="input-group-append" onclick="QuickAdd(42,'OrgType','نوع الأرشيف')" style="cursor:pointer">
                                                                 <span class="input-group-text input-group-text2">
                                                                     <i class="fa fa-external-link"></i>
                                                                 </span>
                                                             </div>
-                                                            @elseif($type=='empArchive')
-                                                            <select name="archive_type" id="archive_type" class="form-control">
-                                                                    
-                                                                    <option value="">-- نوع الارشيف --</option>
-                                                                    @if(count($empArchive) > 0)
-                                                                    @foreach($empArchive as $archive)
-                                                                    <option value="{{$archive->id}}"> {{$archive->name}}   </option>
-                                                                    @endforeach
-                                                                    @endif
-    
-                                                                </select>
-                                                            <div class="input-group-append" onclick="QuickAdd(52,'archive_type','نوع الأرشيف')" style="cursor:pointer">
-                                                                <span class="input-group-text input-group-text2">
-                                                                    <i class="fa fa-external-link"></i>
-                                                                </span>
-                                                            </div>
-                                                            @elseif($type=='depArchive')
-                                                            <select name="archive_type" id="archive_type" class="form-control">
-                                                                    
-                                                                    <option value="">- نوع الارشيف --</option>
-                                                                    @if(count($depArchive) > 0)
-                                                                    @foreach($depArchive as $archive)
-                                                                    <option value="{{$archive->id}}"> {{$archive->name}}   </option>
-                                                                    @endforeach
-                                                                    @endif
-    
-                                                                </select>
-                                                            <div class="input-group-append" onclick="QuickAdd(62,'archive_type','نوع الأرشيف')" style="cursor:pointer">
-                                                                <span class="input-group-text input-group-text2">
-                                                                    <i class="fa fa-external-link"></i>
-                                                                </span>
-                                                            </div>
-                                                            @elseif($type=='citArchive')
-                                                            <select name="archive_type" id="archive_type" class="form-control">
-                                                                    
-                                                                    <option value="">-- نوع الارشيف --</option>
-                                                                    @if(count($citArchive) > 0)
-                                                                    @foreach($citArchive as $archive)
-                                                                    <option value="{{$archive->id}}"> {{$archive->name}}   </option>
-                                                                    @endforeach
-                                                                    @endif
-    
-                                                                </select>
-                                                            <div class="input-group-append" onclick="QuickAdd(72,'archive_type','نوع الأرشيف')" style="cursor:pointer">
-                                                                <span class="input-group-text input-group-text2">
-                                                                    <i class="fa fa-external-link"></i>
-                                                                </span>
-                                                            </div>
-                                                            @elseif($type=='projArchive')
-                                                            <select name="archive_type" id="archive_type" class="form-control">
-                                                                    
-                                                                    <option value="">-- نوع الارشيف --</option>
-                                                                    @if(count($projArchive)>0)
-                                                                    @foreach($projArchive as $archive)
-                                                                    <option value="{{$archive->id}}"> {{$archive->name}}   </option>
-                                                                    @endforeach
-                                                                    @endif
-    
-                                                                </select>
-                                                            <div class="input-group-append" onclick="QuickAdd(82,'archive_type','نوع الأرشيف')" style="cursor:pointer">
-                                                                <span class="input-group-text input-group-text2">
-                                                                    <i class="fa fa-external-link"></i>
-                                                                </span>
-                                                            </div>
-                                                            @endif
-                                                        @elseif ($type=='inArchive'||$type=='outArchive')
+                                                        {{-- @elseif ($type=='inArchive'||$type=='outArchive')
                                                         <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
-                                                        @endif
+                                                        @endif --}}
                                                         <input type="hidden" id="customerid" name="customerid" value="0">
                                                         <input type="hidden" id="customername" name="customername" value="0">
                                                         <input type="hidden" id="customerType" name="customerType" value="0">
                                                         <input type="hidden" id="msgType" name="msgType" value="<?php echo $type ?>">
                                                         <input type="hidden" id="url" name="url" value="<?php echo $url ?>">
-                                                        <input type="hidden" id="pk_i_id" name="pk_i_id" value="">
-                                                        <input type="hidden" id="ArchiveID" name="ArchiveID" value="">
+                                                        <input type="hidden" id="pk_i_id" name="pk_i_id" value="0">
                                                         <!-- 2166  -->
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">
                                                                 @if ($type=='projArchive'||$type=='munArchive')
                                                                 {{trans('archive.date')}}
-                                                                @elseif ($type=='outArchive'||'inArchive')  
+                                                                @elseif ($type=='outArchive'||'inArchive')
                                                                 {{trans('archive.date_send')}}
                                                                 @endif
-                                                                
+
                                                             </span>
                                                         </div>
                                                         <input type="text" id="msgDate" name="msgDate" data-mask="00/00/0000" maxlength="10" class="form-control eng-sm  valid" value="<?php echo date('d/m/Y')?>" placeholder="" autocomplete="off">
@@ -176,43 +77,20 @@
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">
-                                                                @if ($type=='projArchive')
-                                                                {{trans('archive.proj_name')}} 
-                                                                @elseif($type=='empArchive')
-                                                                {{trans('archive.name_emp')}}
-                                                                @elseif ($type=='depArchive')  
-                                                                {{trans('archive.name_dep')}}
-                                                                @elseif ($type=='citArchive')  
-                                                                {{trans('archive.name_cit')}}
-                                                                @elseif ($type=='assetsArchive')  
                                                                 {{trans('archive.name_assets')}}
-                                                                @elseif ($type=='munArchive')  
-                                                                {{trans('admin.related_to')}}
-                                                                @elseif ($type=='outArchive'||$type=='inArchive')  
-                                                                {{trans('archive.title_send')}}
-                                                                @endif
                                                             </span>
                                                         </div>
-                                                        @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
                                                         <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
-                                                        @elseif ($type=='inArchive'||$type=='outArchive')
-                                                        <input type="text" id="msgTitle" class="form-control" name="msgTitle">
-                                                        @endif
                                                         <input type="hidden" id="OrgType" class="form-control" name="OrgType" value="2076">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
                                                 <div class="form-group">
                                                     <div class="input-group w-s-87">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">
-                                                                @if ($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
                                                                 {{trans('archive.num')}}
-                                                                @elseif ($type=='outArchive'||$type=='inArchive')  
-                                                                {{trans('archive.num_send')}}
-                                                                @endif
-                                                                
                                                             </span>
                                                         </div>
                                                         <input type="text" id="msgid" name="msgid" class="form-control eng-sm valid" style="text-align: left;direction: ltr;">
@@ -247,7 +125,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
+                                    <div class="col-lg-5 col-md-12 pr-0 pr-s-12"  >
                                         <div class="row attachs-body">
                                             <div class="form-group col-12 mb-2">
                                                 <div class="progress">
@@ -257,7 +135,7 @@
                                                 <input type="hidden" name="fromname" value="formDataaa">
                                                 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-                                                <input type="file" class="form-control-file" id="formDataaaupload-file[]" multiple="" name="formDataaaUploadFile[]" onchange="doUploadAttach('formDataaa')" 
+                                                <input type="file" class="form-control-file" id="formDataaaupload-file[]" multiple="" name="formDataaaUploadFile[]" onchange="doUploadAttach('formDataaa')"
                                                 style="display: none" >
                                                 <div class="row formDataaaFilesArea" style="margin-left: 0px;">
                                                 </div>
@@ -273,8 +151,8 @@
                                 </div>
                                 <div style="text-align: center;">
                                     <button type="submit" class="btn btn-primary" id="" style="" >
-                                    {{ trans('admin.save') }}    
-                                    </button>                                    
+                                    {{ trans('admin.save') }}
+                                    </button>
                                 </div>
                             </div>
                     </div>
@@ -312,7 +190,7 @@ $.ajaxSetup({
 				timer: 1500
 				})
                this.reset();
-               $('.wtbl').DataTable().ajax.reload();  
+               $('.wtbl').DataTable().ajax.reload();
                $(".formDataaaFilesArea").html('');
            },
            error: function(response){
@@ -323,7 +201,6 @@ $.ajaxSetup({
 				showConfirmButton: false,
 				timer: 1500
 				})
-                $(".formDataaaFilesArea").html('');
             // if(response.responseJSON.errors.customerName){
             //     $( "#customerName" ).addClass( "error" );
             // }
@@ -331,13 +208,11 @@ $.ajaxSetup({
        });
   });
   $( function() {
-      
     $( ".cust_auto" ).autocomplete({
 		source: 'archive_auto_complete',
 		minLength: 1,
-		
+
         select: function( event, ui ) {
-           
             var currentIndex=$("input[name^=copyToID]").length -1;
             $('input[name="copyToID[]"]').eq(currentIndex).val(ui.item.id);
             $('input[name="copyToCustomer[]"]').eq(currentIndex).val(ui.item.name);
@@ -349,7 +224,7 @@ $( function() {
     $( ".cust" ).autocomplete({
 		source: 'archive_auto_complete',
 		minLength: 1,
-		
+
         select: function( event, ui ) {
             console.log(ui.item);
             $('#customerid').val(ui.item.id);
@@ -370,7 +245,6 @@ $( function() {
             },
             success:function(response){
             $('#customerid').val(response.info.id);
-            $('#ArchiveID').val(response.info.id);
             $('#customerName').val(response.info.name);
             $('#customername').val(response.info.name);
             $('#customerType').val(response.info.model_name);
@@ -378,14 +252,16 @@ $( function() {
             $('#msgDate').val(response.info.date);
             $('#msgid').val(response.info.serisal);
             row='';
-                if(response.files){
+            console.log(response);
+                // console.log(response.info.all_files);
+                if(response.info.all_files){
                     var j=0;
-                    for(j=0;j<response.files.length;j++){
-                        shortCutName=response.files[j].real_name;
-                        shortCutID=response.files[j].id;
+                    for(j=0;j<response.info.all_files.length;j++){
+                        shortCutName=response.info.all_files[j].real_name;
                         urlfile='{{ asset('') }}';
-                        urlfile+=response.files[j].url;
-                        formDataStr="formDataaa";
+                        console.log(urlfile);
+                        urlfile+=response.info.all_files[j].url;
+                        console.log(urlfile);
                             shortCutName=shortCutName.substring(0, 20)
                             row+='<div id="attach" class=" col-sm-6 ">' +
                                 '   <div class="attach" onmouseover="$(this).children().first().next().show()">'
@@ -394,18 +270,34 @@ $( function() {
                                 +'    <a class="attach-close1" style="color: #74798D; float:left;" onclick="$(this).parent().parent().remove()">×</a>'
                                 +'      <input type="hidden" id="'+formDataStr+'imgUploads[]" name="'+formDataStr+'imgUploads[]" value="'+shortCutName+'">'
                                 +'             <input type="hidden" id="'+formDataStr+'orgNameList[]" name="'+formDataStr+'orgNameList[]" value="'+shortCutName+'">'
-								+'             <input type="hidden" id="'+formDataStr+'orgIdList[]" name="'+formDataStr+'orgIdList[]" value="'+shortCutID+'">'
-							    +'    </div>'
+                                +'    </div>'
                                 +'  </div>' +
                                 '</div>'
                     }
                     $(".formDataaaFilesArea").html(row)
                 }
+
+            // attach='';
+            // var i=1;
+            // if(response.info.fileIDS&&typeof(response.info.fileIDS)=="object"){
+            // response.info.fileIDS.forEach(file => {
+            //     attach+='<div id="attach" class=" col-sm-6 ">'
+            //             +'<div class="attach">'
+            //                 +'<span class="attach-text">مرفق '+i+'</span><a onclick="delAttach()"><i class="fa fa-trash"></i></a>'
+            //                 +'<a class="attach-close1" href="'+file+'" style="color: #74798D; float:left;" target="_blank">'
+            //                 +'  <i class="fa fa-eye"> </i>'
+            //                 +'</a><input type="hidden" value="" name="attach[]" >'
+            //                 +'</div>'
+            //             +'</div>';
+            //             i++;
+            //         });}
+            // $(".formDataaaFilesArea").html(attach)
+
             },
         });
     }
     function CopyRec(id){
-        
+
 		var formData =  {'id':id};
 		$.ajax({
 			url:'c_archive/GetMunArchByID',
@@ -415,7 +307,7 @@ $( function() {
 			async: true,
 			success: function (data) {
 			    if(data.inCharge.length>0){
-			        
+
                     for(i=0;i<data.inCharge.length;i++){
                         attach='';
                         for(j=0;j<data.inCharge[i].attach.length;j++)
@@ -434,7 +326,7 @@ $( function() {
                         $("#customerName").val(data.inCharge[i].receiver_name)
                         $("#msgTitle").val(data.inCharge[i].arch_title)
                         $("#msgid").val(data.inCharge[i].arch_no)
-                        
+
                     }
 			    }
 			    else
@@ -463,21 +355,8 @@ $( function() {
                             +'        </div>'
                             +'    </div>'
                             +'</div>')
-                            $( ".cust_auto" ).autocomplete({
-                                source: 'archive_auto_complete',
-                                minLength: 1,
-                                
-                                select: function( event, ui ) {
-                                
-                                    var currentIndex=$("input[name^=copyToID]").length -1;
-                                    $('input[name="copyToID[]"]').eq(currentIndex).val(ui.item.id);
-                                    $('input[name="copyToCustomer[]"]').eq(currentIndex).val(ui.item.name);
-                                    $('input[name="copyToType[]"]').eq(currentIndex).val(ui.item.model);
-                                }
-                            });
-
     }
-   
+
 </script>
 @endsection
 @endsection

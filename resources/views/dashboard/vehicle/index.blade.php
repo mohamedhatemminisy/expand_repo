@@ -375,7 +375,7 @@
                         <div class="text-right">
                             
                         <button type="submit" class="btn btn-primary">{{trans('assets.save')}} <i class="ft-thumbs-up position-right"></i></button>
-                        <button type="reset" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+                        <button type="reset" class="btn btn-warning reset-data"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -392,6 +392,10 @@
 
 @section('script')
 <script>
+$('.reset-data').click(function(event){
+    $("#msgStatic").html("(0)");
+
+});
 $( function() {
     $( ".ac" ).autocomplete({
             source: 'vehicle_auto_complete',
@@ -424,8 +428,8 @@ $( function() {
                 }else{
                     $('#userProfileImg').attr('src','https://db.expand.ps/images/car.png');
                 }
-                drawTablesArchive(response.Archive,[]);
-                $("select#vehiclebrand option")
+                drawTablesArchive(response.Archive,response.copyTo,response.jalArchive,
+                            response.copyToCount,response.linkToCount,response.archiveCount);                   $("select#vehiclebrand option")
                     .each(function() { this.selected = (this.text == response.brand); 
                 });
                 $("select#vehicletype option")
@@ -489,8 +493,8 @@ function update($id)
                 $("#PHnum1").val(response.info.supply_phone);
                 $('#carimg').attr('src', response.info.image);
                 $("#msgStatic").html(response.ArchiveCount);
-                drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
-                $("select#vehiclebrand option")
+                drawTablesArchive(response.Archive,response.copyTo,response.jalArchive,
+                            response.copyToCount,response.linkToCount,response.archiveCount);                 $("select#vehiclebrand option")
                     .each(function() { this.selected = (this.text == response.brand); 
                 });
                 $("select#vehicletype option")

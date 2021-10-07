@@ -123,7 +123,7 @@ class ExtentionsController extends Controller
             return response()->json($data);
         }
         elseif($request->pk_i_id == '16'){
-            $data['data'] = LicenseType::get();
+            $data['data'] = LicenseType::where('type','archive_lic')->get();
             $data['pj_i_id'] = $request->pk_i_id;
             return response()->json($data);
         }
@@ -158,7 +158,12 @@ class ExtentionsController extends Controller
             $data['pj_i_id'] = $request->pk_i_id;
             return response()->json($data);
         }
-        
+        elseif($request->pk_i_id == '100'){
+            $data['data'] = LicenseType::where('type','drive_lic')->get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
+
     }
 
 
@@ -203,7 +208,7 @@ class ExtentionsController extends Controller
             $data = City::findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
         }
-        
+
         elseif($request->fk_i_constant_id == '33'){
             $data = Area::findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
@@ -233,7 +238,11 @@ class ExtentionsController extends Controller
             return response()->json($data);
         }
         elseif($request->fk_i_constant_id == '16'){
-            $data = LicenseType::findOrFail($request->pk_i_id)->delete();
+            $data = LicenseType::where('type','archive_lic')->findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '100'){
+            $data = LicenseType::where('type','drive_lic')->findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
         }
         elseif($request->fk_i_constant_id == '46'){
@@ -261,7 +270,7 @@ class ExtentionsController extends Controller
             return response()->json($data);
         }
 
-        
+
     }
 
 
@@ -432,7 +441,7 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
         elseif($request->fk_i_constant_id1 == '33'){
             if($request->fk_i_constantdet_id1 == null){
@@ -449,7 +458,7 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
         elseif($request->fk_i_constant_id1 == '77'){
             if($request->fk_i_constantdet_id1 == null){
@@ -466,7 +475,7 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
 
         elseif($request->fk_i_constant_id1 == '42'){
@@ -484,7 +493,7 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
 
         elseif($request->fk_i_constant_id1 == '52'){
@@ -502,7 +511,7 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
 
 
@@ -521,7 +530,7 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
 
         elseif($request->fk_i_constant_id1 == '72'){
@@ -539,7 +548,7 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
 
 
@@ -558,23 +567,41 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
-
         elseif($request->fk_i_constant_id1 == '16'){
             if($request->fk_i_constantdet_id1 == null){
                 $job = new LicenseType();
                 $job->name = $request->s_name_ar1;
+                $job->type = 'archive_lic';
                 $job->save();
             }else{
                 $job = LicenseType::find($request->fk_i_constantdet_id1);
                 $job->name = $request->s_name_ar1;
+                $job->type = 'archive_lic';
                 $job->save();
             }
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
+        }
+        elseif($request->fk_i_constant_id1 == '100'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new LicenseType();
+                $job->name = $request->s_name_ar1;
+                $job->type = 'drive_lic';
+                $job->save();
+            }else{
+                $job = LicenseType::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->type = 'drive_lic';
+                $job->save();
+            }
+            if ($job) {
+                return response()->json($job);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
         elseif($request->fk_i_constant_id1 == '46'){
             if($request->fk_i_constantdet_id1 == null){
@@ -611,8 +638,6 @@ class ExtentionsController extends Controller
             return response()->json(['error'=>$validator->errors()->all()]);            
         }
 
-
-
         elseif($request->fk_i_constant_id1 == '66'){
             if($request->fk_i_constantdet_id1 == null){
                 $job = new CraftType();
@@ -626,7 +651,7 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
         elseif($request->fk_i_constant_id1 == '49'){
             if($request->fk_i_constantdet_id1 == null){
@@ -641,7 +666,7 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
         elseif($request->fk_i_constant_id1 == '56'){
             if($request->fk_i_constantdet_id1 == null){
@@ -656,7 +681,7 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
         elseif($request->fk_i_constant_id1 == '99'){
             if($request->fk_i_constantdet_id1 == null){
@@ -671,10 +696,10 @@ class ExtentionsController extends Controller
             if ($job) {
                 return response()->json($job);
             }
-            return response()->json(['error'=>$validator->errors()->all()]);            
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
-        
-        
+
+
     }
 
 }

@@ -149,6 +149,7 @@
                                                         </span>
                                                     </div>
                                                     
+  
 
                                                     @if ($type=='licArchive')
                                                     <select class="form-control" name="AttahType" id="AttahType">
@@ -179,7 +180,6 @@
                                                     @endif
 
 
-                                             
                                                 </div>
                                             </div>
                                         </div>

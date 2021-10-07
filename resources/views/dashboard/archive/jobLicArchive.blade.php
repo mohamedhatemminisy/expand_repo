@@ -216,9 +216,9 @@
                                         </div>
                                         <div style="text-align: center;">
                                         
-                                        <button type="submit" class="btn btn-primary" id="" style="" >
-                                    {{ trans('admin.save') }}    
-                                    </button> 
+                                            <button type="submit" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
+                                                حفظ    
+                                            </button>
                                                 
                                                 
                                             </div>

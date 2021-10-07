@@ -183,7 +183,7 @@
                                                 <img src="https://db.expand.ps/images/fax35.png">
                                             </span>
                                             </div>
-                                            <input type="text" id="faxNo" name="faxNo" maxlength="9" class="form-control noleft numFeild" placeholder="000000000" aria-describedby="basic-addon1">
+                                            <input type="text" id="faxNo" name="faxNo" maxlength="9" class="form-control noleft numFeild" placeholder="000000000" aria-describedby="basic-addon1" style="margin-left: 12px;">
 
                                             <div class="input-group-append hide hidden-xs hidden-sm">
                                     <span class="input-group-text input-group-text2" style="color:#ffffff">
@@ -302,7 +302,7 @@
                             <div class="form-actions" style="border-top:0px;">
                                 <div class="text-right">
                                     <button class="btn btn-primary save-data">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
-                                    <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+                                    <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning  reset-data"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -319,7 +319,10 @@
 @stop
 @section('script')
 <script>
+$('.reset-data').click(function(event){
+    $("#msgStatic").html("(0)");
 
+});
 $( function() {
     let type = $("input[name=type]").val();
     $( ".ac" ).autocomplete({
@@ -356,7 +359,10 @@ $( function() {
             $('#phone2').val(response.info.whatsapp_two);
             $('#website').val(response.info.website);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
+            drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive,
+                response.outArchiveCount,response.inArchiveCount,response.otherArchiveCount
+                ,response.licFileArchiveCount
+                ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#PositionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });
@@ -399,7 +405,10 @@ function update($id)
             $('#phone2').val(response.info.whatsapp_two);
             $('#website').val(response.info.website);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
+            drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive,
+                response.outArchiveCount,response.inArchiveCount,response.otherArchiveCount
+                ,response.licFileArchiveCount
+                ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#PositionID option")
                  .each(function() { this.selected = (this.text == response.job_title); 
             });
@@ -553,10 +562,7 @@ $.ajax({
 				showConfirmButton: false,
 				timer: 1500
 				})
-
            }
-
-
 
        });
   });

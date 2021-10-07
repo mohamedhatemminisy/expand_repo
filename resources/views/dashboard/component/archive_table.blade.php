@@ -39,13 +39,22 @@
                                 @elseif ($type=="subscriber"||$type == 'employee'||$type == 'depart'||$type=="project"||$type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type=="project"||$type == 'equip'||$type == 'org')
                                     @if ($type=="subscriber"||$type == 'employee'||$type == 'depart'||$type == 'org')
                                     <li class="nav-item">
-                                    <a class="nav-link active" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#xtab2" aria-expanded="true">أرشيف الصادر</a>
+                                    <a class="nav-link active" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#xtab2" aria-expanded="true">
+                                    أرشيف الصادر
+                                    <span id="outArchiveCount" style="color: #1e9ff2"></span>    
+                                    </a>
                                     </li>
                                     <li class="nav-item">
-                                    <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#xtab3" aria-expanded="false">أرشيف الوارد</a>
+                                    <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#xtab3" aria-expanded="false">
+                                        أرشيف الوارد
+                                        <span id="inArchiveCount" style="color: #1e9ff2"></span>    
+                                    </a>
                                     </li>
                                     <li class="nav-item">
-                                    <a class="nav-link" id="base-tab4" data-toggle="tab" aria-controls="tab4" href="#xtab4" aria-expanded="false">أخرى </a>
+                                    <a class="nav-link" id="base-tab4" data-toggle="tab" aria-controls="tab4" href="#xtab4" aria-expanded="false">
+                                        أخرى 
+                                        <span id="otherArchiveCount" style="color: #1e9ff2"></span>    
+                                    </a>
                                     </li>
                                     @if ($type=="subscriber")
                                     {{-- <li class="nav-item">
@@ -53,23 +62,39 @@
                                     </li> --}}
                                     
                                     <li class="nav-item">
-                                    <a class="nav-link" id="base-tab6" data-toggle="tab" aria-controls="tab6" href="#xtab6" aria-expanded="false">أرشيف رخص البناء</a>
+                                    <a class="nav-link" id="base-tab6" data-toggle="tab" aria-controls="tab6" href="#xtab6" aria-expanded="false">
+                                        أرشيف رخص البناء
+                                        <span id="licArchiveCount" style="color: #1e9ff2"></span>    
+                                    </a>
                                     </li>
                                     <li class="nav-item">
-                                    <a class="nav-link" id="base-tab7" data-toggle="tab" aria-controls="tab7" href="#xtab7" aria-expanded="false">أرشيف ملف الترخيص</a>
+                                    <a class="nav-link" id="base-tab7" data-toggle="tab" aria-controls="tab7" href="#xtab7" aria-expanded="false">
+                                        أرشيف ملف الترخيص
+                                        <span id="licFileArchiveCount" style="color: #1e9ff2"></span>    
+                                    </a>
                                     </li>
                                     @endif
                                     @endif
                                 @if ($type=="project"||$type=='vehicle'||$type == 'buildings'||$type == 'warehouses'||$type == 'Gardens_lands'||$type=="project"||$type == 'equip')
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="base-tab9" data-toggle="tab" aria-controls="tab9" href="#xtab9" aria-expanded="false">الأرشيف</a>
+                                    <a class="nav-link active" id="base-tab9" data-toggle="tab" aria-controls="tab9" href="#xtab9" aria-expanded="false">
+                                        الأرشيف
+                                        <span id="archiveCount" style="color: #1e9ff2"></span>    
+                                    </a>
                                 </li>
                                 @endif
                                 <li class="nav-item">
-                                  <a class="nav-link" id="base-tab8" data-toggle="tab" aria-controls="tab8" href="#xtab8" aria-expanded="false">نسخة الى</a>
+                                  <a class="nav-link" id="base-tab8" data-toggle="tab" aria-controls="tab8" href="#xtab8" aria-expanded="false">
+                                      نسخة الى
+                                      <span id="copyToCount" style="color: #1e9ff2"></span>    
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="base-tab10" data-toggle="tab" aria-controls="tab10" href="#xtab10" aria-expanded="false">أرشيف الجلسات </a>
+                                    <a class="nav-link" id="base-tab10" data-toggle="tab" aria-controls="tab10" href="#xtab10" aria-expanded="false"
+                                    >أرشيف الجلسات 
+                                    <span id="linkToCount" style="color: #1e9ff2"></span>    
+
+                                </a>
                                 </li>
                               </ul>
                               
@@ -276,12 +301,29 @@
 </div>
 @endif
 <script>
-@if ($type=="subscriber")
-function drawTablesArchive($archives,$copyTo,$archivesLic,$jalArchive)
+
+
+
+
+
+@if ($type=="subscriber"||$type == 'employee'||$type == 'depart'||$type == 'org')
+function drawTablesArchive($archives,$copyTo,$archivesLic,$jalArchive,$outArchiveCount
+,$inArchiveCount,$otherArchiveCount,$licFileArchiveCount,$licArchiveCount,$copyToCount,$linkToCount){ 
+                $("#outArchiveCount").html("("+$outArchiveCount+")");
+                $("#inArchiveCount").html("("+$inArchiveCount+")");
+                $("#otherArchiveCount").html("("+$otherArchiveCount+")");
+                $("#licArchiveCount").html("("+$licArchiveCount+")");
+                $("#licFileArchiveCount").html("("+$licFileArchiveCount+")");
+                $("#copyToCount").html("("+$copyToCount+")");
+                $("#linkToCount").html("("+$linkToCount+")");
 @else
-function drawTablesArchive($archives,$copyTo,$jalArchive)
+function drawTablesArchive($archives,$copyTo,$jalArchive,$copyToCount,$linkToCount,$archiveCount){ 
+                $("#copyToCount").html("("+$copyToCount+")");
+                $("#archiveCount").html("("+$archiveCount+")");
+                $("#linkToCount").html("("+$linkToCount+")");
 @endif
-{   
+
+
     @if ($type=="subscriber"||$type == 'employee'||$type == 'depart'||$type == 'org')
     if ( $.fn.DataTable.isDataTable( '.SaderTbla' ) ) {
         $(".SaderTbla").dataTable().fnDestroy();

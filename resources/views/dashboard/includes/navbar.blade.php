@@ -1,4 +1,4 @@
-<div class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-dark navbar-without-dd-arrow navbar-shadow hide" id="nav_expanded_nav" 
+<div class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-dark navbar-without-dd-arrow navbar-shadow hide" id="nav_expanded_nav"
   role="navigation" data-menu="menu-wrapper">
     <div class="navbar-container main-menu-content container center-layout" data-menu="menu-container">
       <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
@@ -9,6 +9,12 @@
           </a>
         </li>
         @endcan
+
+        <li class="dropdown nav-item" data-menu="dropdown">
+            <a class="dropdown-toggle nav-link" href="{{route('volunteer')}}">
+              <span>{{trans('admin.volunteer')}}</span>
+            </a>
+          </li>
 
         @can('employeeDepartment')
         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><span>
@@ -65,7 +71,7 @@
             </li>
             @endcan
           @can('orginzation')
-            </li>           
+            </li>
            <li data-menu="">
               <a class="dropdown-item" href="{{route('orginzation')}}" data-toggle="dropdown">{{trans('admin.orginzations')}}</a>
             </li>
@@ -92,7 +98,7 @@
           @can('buildings')
             <li data-menu="">
               <a class="dropdown-item" href="{{route('buildings')}}" data-toggle="dropdown">{{trans('admin.buildings')}}</a>
-            </li> 
+            </li>
             @endcan
           @can('Gardens_lands')
             <li data-menu="">
@@ -140,6 +146,9 @@
               <a class="dropdown-item" href="{{route('proj_archieve')}}" data-toggle="dropdown">{{trans('archive.proj_archive')}}</a>
             </li>
             @endcan
+            <li data-menu="">
+                <a class="dropdown-item" href="{{route('assets_archieve')}}" data-toggle="dropdown">{{trans('archive.assets_archive')}}</a>
+              </li>
           @can('emp_archieve')
             <li data-menu="">
               <a class="dropdown-item" href="{{route('emp_archieve')}}" data-toggle="dropdown">{{trans('archive.emp_archive')}}</a>
@@ -183,10 +192,15 @@
         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><span>
             {{trans('archive.reports')}}
               </span></a>
-            <ul class="dropdown-menu">  
+            <ul class="dropdown-menu">
             @can('report_archieve')
               <li data-menu="">
                 <a class="dropdown-item" href="{{route('report_archieve')}}" data-toggle="dropdown">{{trans('archive.report_archive')}}</a>
+              </li>
+              @endcan
+              @can('report_archieve')
+              <li data-menu="">
+                <a class="dropdown-item" href="{{route('volunteer_report')}}" data-toggle="dropdown">{{trans('archive.volunteer_report')}}</a>
               </li>
               @endcan
               @can('agenda_report')
@@ -194,13 +208,9 @@
                 <a class="dropdown-item" href="{{route('agenda_report')}}" data-toggle="dropdown">{{trans('archive.agenda_report')}}</a>
               </li>
               @endcan
-              <li data-menu="">
-                <a class="dropdown-item" href="{{route('jobLicReport')}}" data-toggle="dropdown">{{trans('archive.jobLic_report')}}</a>
-              </li>
             </ul>
         </li>
       @endcan
       </ul>
     </div>
   </div>
-  

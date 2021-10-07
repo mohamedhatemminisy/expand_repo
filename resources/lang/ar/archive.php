@@ -48,7 +48,6 @@ return [
     'lic_type'   =>  'نوع الترخيص ',
     'build_type'   =>  'نوع البناء ',
     'attach'   =>  'المرفقات ',
-    'jobLic_report'   =>  'تقرير رخص الحرف والصناعات ',
 
     'build_type1'   =>  'قائم ',
     'build_type2'   =>  'مقترح ',
@@ -60,4 +59,12 @@ return [
     'reports'   =>  'التقارير ',
     'report_archive'   =>  'تقرير الأرشيف ',
     'title_name'   =>  'العنوان  ',
+
+    'jobLic_archive'   =>  'أرشيف رخص الحرف والصناعات ',
+    'agenda_archieve'   =>  'أرشيف الجلسات ',
+    'agenda_report'   =>  'تقرير أرشيف الجلسات ',
+    'reports'   =>  'التقارير ',
+    'report_archive'   =>  'تقرير الأرشيف ',
+    'title_name'   =>  'العنوان  ',
+    'volunteer_report' => 'تفرير المتطوعين',
 ];

@@ -487,7 +487,7 @@
                         <div class="form-actions" style="border-top:0px;">
                             <div class="text-right">
                                 <button class="btn btn-primary save-data">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
-                                <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+                                <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning reset-dats"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                             </div>
                         </div>
                     </div>
@@ -529,7 +529,11 @@ $( function() {
                 $('#formDataBussniessName').val(response.info.bussniess_name);
                 $("#certListCnt").html("("+response.ArchiveCount+")");
                 $("#licListCnt").html("("+response.ArchiveJobLicCount+")");
-                drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive);
+               
+                drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive,
+                response.outArchiveCount,response.inArchiveCount,response.otherArchiveCount
+                ,response.licFileArchiveCount
+                ,response.licArchiveCount,response.copyToCount,response.linkToCount);
                 drawTableJoblic(response.ArchiveJobLic);
                 $("select#formDataProfessionID option")
                     .each(function() { this.selected = (this.text == response.job_title); 
@@ -656,7 +660,9 @@ $("#area_data").change(function () {
         },
     });
 });
-
+$('.reset-dats').click(function(event){
+    $("#certListCnt").html("(0)");
+});
 
     $(".save-data").click(function(event){
         $(".loader").removeClass('hide');

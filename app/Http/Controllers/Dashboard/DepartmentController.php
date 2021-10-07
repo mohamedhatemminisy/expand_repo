@@ -13,6 +13,7 @@ use Yajra\DataTables\DataTables;
 use App\Models\Archive;
 use App\Models\CopyTo;
 use App\Models\linkedTo;
+use App\Models\ArchiveLicense;
 
 class DepartmentController extends Controller
 {
@@ -79,9 +80,26 @@ class DepartmentController extends Controller
         if($depaertment['info']->department_id){
             $depaertment_info = Department::where('id',$depaertment['info']->department_id)->first();
             $depaertment['dep_parent'] = $depaertment_info->name;
-            $depaertment['dep_parent_manager'] = Admin::where('id', $depaertment_info->admin_id)->first()->nick_name;
+            if(sizeof(Admin::where('id', $depaertment_info->admin_id)->get())==0)
+                $depaertment['dep_parent_manager']=array();
+            else
+                $depaertment['dep_parent_manager'] = Admin::where('id', $depaertment_info->admin_id)->first()->nick_name;
         }
         $model = $depaertment['info']->model;
+
+        $depaertment['outArchiveCount'] = count(Archive::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->where('type','outArchive')->get());
+        $depaertment['inArchiveCount']  = count(Archive::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->where('type','inArchive')->get());
+        $depaertment['otherArchiveCount']  = count(Archive::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->whereNotIn('type', ['outArchive','inArchive'])->get());
+        $depaertment['licArchiveCount'] = 0;
+        $depaertment['licFileArchiveCount'] = 0;
+        $depaertment['copyToCount']  = count(CopyTo::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->get());
+        $depaertment['linkToCount']  = count(linkedTo::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->get());
+
         $ArchiveCount = count(Archive::where('model_id',$request['dep_id'])
         ->where('model_name',$model)->get());
         $CopyToCount = count(CopyTo::where('model_id',$request['dep_id'])
