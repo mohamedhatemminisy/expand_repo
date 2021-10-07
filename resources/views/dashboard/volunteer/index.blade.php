@@ -295,6 +295,35 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {{-- <div class="col-lg-4 col-md-12 pr-0 pr-s-12"  >
+                                            <div class="form-group">
+                                                <div class="input-group w-s-87">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            نوع الترخيص
+                                                        </span>
+                                                    </div>
+                                                    <select class="form-control" name="DrivingLicense" id="DrivingLicense">
+                                                                @foreach($license_type as $license)
+                                                                <option value="{{$license->id}}"> {{$license->name}}   </option>
+                                                                @endforeach
+                                                    </select>
+
+                                                    <div class="input-group-append" onclick="QuickAdd(16,'BuildingTypeData','نوع الترخيص')" style="cursor:pointer;max-width: 15px;
+                                                    margin-left: 0px !important;
+                                                    padding-left: 0px !important;
+                                                    padding-right: 0px !important;
+                                                    margin-right:15px;
+                                                     ">
+                                                        <span class="input-group-text input-group-text2">
+                                                            <i class="fa fa-external-link"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> --}}
+
                                         <div class="col-md-6" >
                                             <div class="form-group">
                                                 <div class="input-group">
@@ -303,15 +332,15 @@
                                                             {{trans('admin.driving_license')}}
                                                         </span>
                                                     </div>
-                                                    <select type="text" id="DrivingLicense" name="DrivingLicense" class="form-control" placeholder="internal phone">
+                                                    <select type="text" id="DrivingLicense" name="DrivingLicense" class="form-control" >
                                                         <option> اختر </option>
-                                                        <option value="0">  {{trans('admin.without')}} </option>
-                                                        @foreach($jobTitle as $title)
-                                                        <option value="{{$title->id}}">  {{$title->name}}  </option>
+                                                        {{-- <option value="0">  {{trans('admin.without')}} </option> --}}
+                                                        @foreach($licenseType as $license)
+                                                        <option value="{{$license->id}}">  {{$license->name}}  </option>
                                                         @endforeach
                                                     </select>
 
-                                                    <div class="input-group-append" onclick="QuickAdd(17,'formDataProfessionID','Profession')">
+                                                    <div class="input-group-append" onclick="QuickAdd(100,'DrivingLicense','license type')">
                                                         <span class="input-group-text input-group-text2">
                                                             <i class="fa fa-external-link"></i>
                                                         </span>
@@ -319,6 +348,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-md-12" >
                                             <table width="100%" class="detailsTB table archTbl">
                                                           <thead>
@@ -814,7 +844,7 @@ function update($id)
     let emp_id = $id;
             $.ajax({
             type: 'get', // the method (could be GET btw)
-            url: "emp_info",
+            url: "volunteer_info",
             data: {
                 emp_id: emp_id,
             },
@@ -826,31 +856,15 @@ function update($id)
             $('#MobileNo1').val(response.info.phone_one);
             $('#MobileNo2').val(response.info.phone_two);
             $('#NickName').val(response.info.nick_name);
-            // $('#InternalPhone').val(response.info.InternalPhone);
             $('#EmailAddress').val(response.info.email);
             $("#DepartmentID").val(response.info.department_id);
             $('#userProfileImg').attr('src', response.info.image);
             $("select#Position option")
                  .each(function() { this.selected = (this.text == response.job_title);
             });
-            // $("select#JobType option")
-            //      .each(function() { this.selected = (this.text == response.job_type);
-            // });
-
-            // $("select#DirectManager option")
-            //      .each(function() { this.selected = (this.text == response.DirectManager);
-            // });
             $("select#DepartmentID option")
                  .each(function() { this.selected = (this.text == response.department_id);
             });
-            // $("select#CurrencyID option")
-            //      .each(function() { this.selected = (this.text == response.Currency);
-            // });
-            // $('#HiringDate').val(response.info.start_date);
-            // $('#Salary').val(response.info.salary);
-            // $('#vac_year').val(response.details.year);
-            // $('#vac_annual').val(response.details.balance);
-            // $('#emr_blanace').val(response.details.emergency);
             $('#username').val(response.info.username);
             $('#AddressDetails').val(response.address.details);
             $('#Note').val(response.address.notes);
