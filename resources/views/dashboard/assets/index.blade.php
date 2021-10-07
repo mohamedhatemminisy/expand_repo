@@ -453,7 +453,7 @@
                             <div class="form-actions" style="border-top:0px;">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary">{{trans('assets.save')}} <i class="ft-thumbs-up position-right"></i></button>
-                                    <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+                                    <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning reset-data"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -471,7 +471,10 @@
 @section('script')
 
     <script>
+$('.reset-data').click(function(event){
+    $("#msgStatic").html("(0)");
 
+});
         $( function() {
             $( ".ac" ).autocomplete({
                 source: 'equip_auto_complete',
@@ -504,7 +507,8 @@
                                 $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/user.png');
                             }
                             $("#msgStatic").html(response.ArchiveCount);
-                            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
+                            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive,
+                            response.copyToCount,response.linkToCount,response.archiveCount);
                             $('#equipmentimg').attr('src', response.info.image);
 
                             $("select#brand option")
@@ -645,16 +649,14 @@
                     $("#PHnum2").val(response.info.sponsor_phone);
                     $("#PHnum1").val(response.info.supply_phone);
                     $("#msgStatic").html(response.ArchiveCount);
-                    drawTablesArchive(response.Archive,response.copyTo);
-                    // $('#equipmentimg').attr('src', response.info.image);
+                    drawTablesArchive(response.Archive,response.copyTo,response.jalArchive,
+                            response.copyToCount,response.linkToCount,response.archiveCount);                    // $('#equipmentimg').attr('src', response.info.image);
                     if(response.info.image != window.location.origin){
                         $('#userProfileImg').attr('src', response.info.image);
                     }else{
                         $('#userProfileImg').attr('src', window.location.origin+'/assets/images/ico/user.png');
                     }
 
-
-                    drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
                     $('#equipmentimg').attr('src', response.info.image);
 
                     $("select#brand option")

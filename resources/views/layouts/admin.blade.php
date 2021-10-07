@@ -251,7 +251,7 @@ aria-hidden="true">
 			  <input type="hidden" id="fk_i_constant_id1" class="form-control" placeholder="Label (En)" name="fk_i_constant_id1">
 			  <input type="hidden" id="fk_i_constantdet_id1" class="form-control" placeholder="Label (En)" name="fk_i_constantdet_id1">
 			  <input type="hidden" id="pj_i_id" class="form-control" placeholder="Label (En)" name="pj_i_id">
-			  
+			  <input type="hidden" id="contid" class="form-control" placeholder="Label (En)" name="contid">
 			  <input type="hidden" id="ctrlToRefresh" class="form-control" placeholder="Label (En)" name="ctrlToRefresh">
 		  </div>
 		  <div class="form-group" style="text-align:center">
@@ -264,15 +264,19 @@ aria-hidden="true">
 	</div>
 </div>
 <script>
-
 $('#store-modal').submit(function(e) {
 	$(".loader").removeClass('hide');
-	fillIn=$("#ctrlToRefresh").val();
+	contid=$("#contid").val();
+	if(contid == 33){
+		fillIn = 'area_data';
+	}else if(contid == 77){
+		fillIn = 'region_data';
+	}else{
+		fillIn=$("#ctrlToRefresh").val();
+	}
        e.preventDefault();
 	   $( "#NationalID" ).removeClass( "error" );
-
        let formData = new FormData(this);
-
        $.ajax({
           type:'POST',
           url: "store_model",
@@ -284,7 +288,6 @@ $('#store-modal').submit(function(e) {
 				if (data) {
 						$("#" + fillIn).append(new Option(data.name, data.id));
 				}
-
 				$(".loader").addClass('hide');
 						//$(".form-actions").removeClass('hide');
 						$("#s_name_ar1").val('')
@@ -299,7 +302,8 @@ $('#store-modal').submit(function(e) {
            }
        });
   });
-</script>
+  
+  </script>
 
 <div class="modal fade text-left" id="addLingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
 	 aria-hidden="true">
@@ -437,6 +441,7 @@ $(".loader").removeClass('hide');
 DrawTable(contid)
 $("#fk_i_constant_id1").val(contid);
 $("#ctrlToRefresh").val(ctrl);
+$("#contid").val(contid);
 $("#ModalTitle").html(title);
 $("#ModalTitle1").html(title);
 $("#QuickAdd").modal('show');

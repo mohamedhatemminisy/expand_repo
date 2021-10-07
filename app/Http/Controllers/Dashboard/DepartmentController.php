@@ -13,6 +13,7 @@ use Yajra\DataTables\DataTables;
 use App\Models\Archive;
 use App\Models\CopyTo;
 use App\Models\linkedTo;
+use App\Models\ArchiveLicense;
 
 class DepartmentController extends Controller
 {
@@ -85,6 +86,20 @@ class DepartmentController extends Controller
                 $depaertment['dep_parent_manager'] = Admin::where('id', $depaertment_info->admin_id)->first()->nick_name;
         }
         $model = $depaertment['info']->model;
+
+        $depaertment['outArchiveCount'] = count(Archive::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->where('type','outArchive')->get());
+        $depaertment['inArchiveCount']  = count(Archive::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->where('type','inArchive')->get());
+        $depaertment['otherArchiveCount']  = count(Archive::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->whereNotIn('type', ['outArchive','inArchive'])->get());
+        $depaertment['licArchiveCount'] = 0;
+        $depaertment['licFileArchiveCount'] = 0;
+        $depaertment['copyToCount']  = count(CopyTo::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->get());
+        $depaertment['linkToCount']  = count(linkedTo::where('model_id',$request['dep_id'])
+        ->where('model_name',$model)->get());
+
         $ArchiveCount = count(Archive::where('model_id',$request['dep_id'])
         ->where('model_name',$model)->get());
         $CopyToCount = count(CopyTo::where('model_id',$request['dep_id'])

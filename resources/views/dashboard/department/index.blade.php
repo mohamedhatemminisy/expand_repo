@@ -430,7 +430,7 @@
 									<div class="form-actions" style="border-top:0px;">
 										<div class="text-right">
 											<button type="submit" class="btn btn-primary save-data" id="saveBtn">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
-											<button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+											<button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning reset-data"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
 
 										</div>
 									</div>
@@ -449,7 +449,9 @@
 @section('script')
 
 <script>
-
+$('.reset-data').click(function(event){
+	$("#msgStatic").html("(0)");
+});
 $( function() {
     $( ".ac" ).autocomplete({
 		source: 'dept_auto_complete',
@@ -471,7 +473,10 @@ $( function() {
             $('#extphone').val(response.info.extphone);
             $('#inChargeLink').val(response.dep_parent_manager);
 			$("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
+            drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive,
+                response.outArchiveCount,response.inArchiveCount,response.otherArchiveCount
+                ,response.licFileArchiveCount
+                ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#LinkDept option")
                  .each(function() { this.selected = (this.text == response.dep_parent); 
             });
@@ -520,7 +525,10 @@ function update($id)
             $('#extphone').val(response.info.extphone);
             $('#inChargeLink').val(response.dep_parent_manager);
 			$("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
+            drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive,
+                response.outArchiveCount,response.inArchiveCount,response.otherArchiveCount
+                ,response.licFileArchiveCount
+                ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#LinkDept option")
                  .each(function() { this.selected = (this.text == response.dep_parent); 
             });

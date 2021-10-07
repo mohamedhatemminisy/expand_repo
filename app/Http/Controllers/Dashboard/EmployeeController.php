@@ -171,6 +171,19 @@ class EmployeeController extends Controller
         $admin['info'] = Admin::find($request['emp_id']);
         // dd($admin['info']);
         $model = $admin['info']->model;
+
+        $admin['outArchiveCount'] = count(Archive::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->where('type','outArchive')->get());
+        $admin['inArchiveCount']  = count(Archive::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->where('type','inArchive')->get());
+        $admin['otherArchiveCount']  = count(Archive::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->whereNotIn('type', ['outArchive','inArchive'])->get());
+        $admin['licArchiveCount'] = 0;
+        $admin['licFileArchiveCount'] = 0;
+        $admin['copyToCount']  = count(CopyTo::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->get());
+        $admin['linkToCount']  = count(linkedTo::where('model_id',$request['emp_id'])
+        ->where('model_name',$model)->get());
         $ArchiveCount = count(Archive::where('model_id',$request['emp_id'])
         ->where('model_name',$model)->get());
         $CopyToCount = count(CopyTo::where('model_id',$request['emp_id'])

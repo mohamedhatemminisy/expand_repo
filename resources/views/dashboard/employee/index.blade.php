@@ -315,7 +315,6 @@
                                         </div>
                                         <div class="col-md-5" style="padding-right: 0px;padding-left: 0px;">
                                             <div class="form-group">
-
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">
@@ -330,7 +329,6 @@
                                                                 <option value="dinar">{{trans('admin.dinar')}}  </option>
                                                                 <option value="euro">{{trans('admin.euro')}}  </option>
                                                             </select>
-
                                                         </div>
                                             </div>
                                         </div>
@@ -576,7 +574,6 @@
                     @endcan
 					</div>
 
-
                         <div class="form-actions" style="border-top:0px; padding-bottom:44px;">
                             <div class="text-right">
                                 <button type="submit" class="btn btn-primary" id="saveBtn">{{trans('admin.save')}}  <i class="ft-thumbs-up position-right"></i></button>
@@ -587,7 +584,6 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-12">
-
 <?php  $type=$types;  ?>
 @include('dashboard.component.archive_table');
 @include('dashboard.component.fetch_table');
@@ -713,8 +709,10 @@ $( function() {
                 $('#customCheck2').prop('checked', true);
             }
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
-
+            drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive,
+                response.outArchiveCount,response.inArchiveCount,response.otherArchiveCount
+                ,response.licFileArchiveCount
+                ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#Position option")
                  .each(function() { this.selected = (this.text == response.job_title);
             });
@@ -759,7 +757,6 @@ $( function() {
                     if(response.per[i]==arrKey[srchKey]){
                         flage=true;
                     }
-
                     if(!flage)
                         ctrl+='<option value="'+arrKey[srchKey]+'">'+arrVal[srchKey]+'</option>'
                     else
@@ -811,7 +808,10 @@ function update($id)
             $("#DepartmentID").val(response.info.department_id);
             $('#userProfileImg').attr('src', response.info.image);
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
+            drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive,
+                response.outArchiveCount,response.inArchiveCount,response.otherArchiveCount
+                ,response.licFileArchiveCount
+                ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#Position option")
                  .each(function() { this.selected = (this.text == response.job_title);
             });
@@ -855,7 +855,6 @@ function update($id)
                     if(response.per[i]==arrKey[srchKey]){
                         flage=true;
                     }
-
                     if(!flage)
                         ctrl+='<option value="'+arrKey[srchKey]+'">'+arrVal[srchKey]+'</option>'
                     else
@@ -958,7 +957,6 @@ $.ajax({
 
                this.reset();
              }
-
            },
            error: function(response){
             $(".loader").addClass('hide');
@@ -980,7 +978,6 @@ $.ajax({
                 });
                 $("#DepartmentID").on('change', function (e) {
                         $( "#DepartmentID" ).removeClass( "error" );
-
                 });
                 $("#Position").on('change', function (e) {
                         $( "#Position" ).removeClass( "error" );

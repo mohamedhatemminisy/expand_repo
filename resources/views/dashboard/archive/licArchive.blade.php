@@ -40,11 +40,12 @@
                                                     <input type="hidden" id="customerType" name="customerType" value="0">
                                                     <input type="hidden" id="msgType" name="msgType" value="">
                                                     <input type="hidden" id="pk_i_id" name="pk_i_id" value="0">
+                                                    <input type="hidden" id="ArchiveID" name="ArchiveID" value="">
                                                     <input type="hidden" id="type" name="type" value="{{$type}}">
                                                 </div>
                                             </div>
                                         </div>
-
+                                        
                                         <div class="col-lg-5 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
@@ -76,7 +77,7 @@
                                                                 <option value="{{$license->id}}"> {{$license->name}}   </option>
                                                                 @endforeach
                                                     </select>
-
+                                                
                                                     <div class="input-group-append" onclick="QuickAdd(16,'BuildingTypeData','نوع الترخيص')" style="cursor:pointer;max-width: 15px;
                                                     margin-left: 0px !important;
                                                     padding-left: 0px !important;
@@ -90,7 +91,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                      
                                         <div class="col-lg-3 col-md-12 pr-0 pr-s-12"  >
                                             <div class="form-group">
                                                 <div class="input-group w-s-87">
@@ -99,7 +100,7 @@
                                                             نوع البناء
                                                         </span>
                                                     </div>
-
+                                                    
 
 
 
@@ -147,7 +148,10 @@
                                                             نوع المرفق
                                                         </span>
                                                     </div>
+                                                    
+  
 
+                                                    @if ($type=='licArchive')
                                                     <select class="form-control" name="AttahType" id="AttahType">
                                                             @foreach($attachment_type as $attachment)
                                                             <option value="{{$attachment->id}}"> {{$attachment->name}}   </option>
@@ -158,6 +162,24 @@
                                                             <i class="fa fa-external-link"></i>
                                                         </span>
                                                     </div>
+
+                                                    @elseif ($type=='licFileArchive')
+                                                    <select class="form-control" name="AttahType" id="AttahType">
+                                                        @if($attachment_type)
+                                                            @foreach($attachment_type as $attachment)
+                                                            <option value="{{$attachment->id}}"> {{$attachment->name}}   </option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                    <div class="input-group-append" onclick="QuickAdd(64,'AttahType','نوع المرفق')" style="cursor:pointer">
+                                                        <span class="input-group-text input-group-text2">
+                                                            <i class="fa fa-external-link"></i>
+                                                        </span>
+                                                    </div>
+
+                                                    @endif
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -169,19 +191,19 @@
                                                     </div>
                                                     <input type="hidden" name="fromname" value="formDataaa">
                                                     <input type="file" class="form-control-file" id="formDataaaupload-file[]" multiple="" name="formDataaaUploadFile[]"
-                                                    onchange="doUploadAttach('formDataaa')"
+                                                    onchange="doUploadAttach('formDataaa')" 
                                                     style="display: none" >
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div style="text-align: center;">
-
+                                        
                                     <button type="submit" class="btn btn-primary" id="" style="" onclick="SaveMasterArch()">
-                                        حفظ
+                                        حفظ    
                                     </button>
-
-
+                                        
+                                        
                                     </div>
                                 </div>
                         </div>
@@ -235,7 +257,7 @@ $.ajaxSetup({
 				})
                 $(".formDataaaFilesArea").html('');
                this.reset();
-               $('.wtbl').DataTable().ajax.reload();
+               $('.wtbl').DataTable().ajax.reload();  
            },
            error: function(response){
             Swal.fire({
@@ -255,7 +277,7 @@ $( function() {
     $( ".cust" ).autocomplete({
 		source: 'Linence_auto_complete',
 		minLength: 1,
-
+		
         select: function( event, ui ) {
             console.log(ui.item.model);
             $('#customerid').val(ui.item.id);
@@ -277,6 +299,7 @@ $( function() {
                 archive_id: archive_id,
             },
             success:function(response){
+            $('#ArchiveID').val(response.info.id);
             $('#customerid').val(response.info.model_id);
             $('#customername').val(response.info.name);
             $('#customerName').val(response.info.name);
@@ -310,12 +333,12 @@ $( function() {
                     }
                     $(".formDataaaFilesArea").html(row)
                 }
-
+            
             },
         });
     }
-
-
+    
+  
 
 
 </script>

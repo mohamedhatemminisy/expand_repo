@@ -807,7 +807,7 @@
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary" id="saveBtn"> {{trans('assets.save')}} <i class="ft-thumbs-up position-right"></i></button>
                         <button type="button" class="btn btn-primary" id="updateBtn" style="display: none" onclick="UpdateForm3()">تعديل <i class="ft-thumbs-up position-right"></i></button>
-                        <button type="reset" onclick="redirectURL('activeIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+                        <button type="reset" onclick="redirectURL('activeIcon1-tab1')" class="btn btn-warning reset-data"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
                     </div>
                 </div>
 
@@ -825,6 +825,10 @@
 
 @section('script')
 <script>
+$('.reset-data').click(function(event){
+    $("#msgStatic").html("(0)");
+
+});
 $( function() {
     let type = $("input[name=type]").val();
     $( ".ac" ).autocomplete({
@@ -856,7 +860,8 @@ $( function() {
                  .each(function() { this.selected = (this.text == response.admin); 
             });
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive,
+                            response.copyToCount,response.linkToCount,response.archiveCount); 
             $("select#ownType option")
                  .each(function() { this.selected = (this.text == response.asset_status); 
             });
@@ -905,8 +910,8 @@ function update($id)
                  .each(function() { this.selected = (this.text == response.admin); 
             });
             $("#msgStatic").html(response.ArchiveCount);
-            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive);
-            $("select#ownType option")
+            drawTablesArchive(response.Archive,response.copyTo,response.jalArchive,
+                            response.copyToCount,response.linkToCount,response.archiveCount);             $("select#ownType option")
                  .each(function() { this.selected = (this.text == response.asset_status); 
             });
 

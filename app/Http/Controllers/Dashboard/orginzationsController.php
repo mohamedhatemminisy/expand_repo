@@ -122,6 +122,21 @@ class orginzationsController extends Controller
         ->where('model_name',$model)->get());
         $Archive =Archive::where('model_id',$request['orginzation_id'])
         ->where('model_name',$model)->with('files')->get();
+
+        $orginzation['copyToCount']  = count(CopyTo::where('model_id',$request['orginzation_id'])
+        ->where('model_name',$model)->get());
+        $orginzation['linkToCount']  = count(linkedTo::where('model_id',$request['orginzation_id'])
+        ->where('model_name',$model)->get());
+        $orginzation['outArchiveCount'] = count(Archive::where('model_id',$request['orginzation_id'])
+        ->where('model_name',$model)->where('type','outArchive')->get());
+        $orginzation['inArchiveCount']  = count(Archive::where('model_id',$request['orginzation_id'])
+        ->where('model_name',$model)->where('type','inArchive')->get());
+        $orginzation['otherArchiveCount']  = count(Archive::where('model_id',$request['orginzation_id'])
+        ->where('model_name',$model)->whereNotIn('type', ['outArchive','inArchive'])->get());
+        $orginzation['licFileArchiveCount'] = 0;
+        $orginzation['licArchiveCount'] = 0;
+
+
         $CopyTo = CopyTo::where('model_id',$request['orginzation_id'])
         ->where('model_name',$model)->with('archive','archive.files')->get();
         $orginzation['copyTo'] = $CopyTo;
