@@ -690,8 +690,7 @@ $.ajax({
 
 
     $(".save-data").click(function(event){
-        $(".loader").removeClass('hide');
-
+     $(".loader").removeClass('hide');
      $( "#ProjectName" ).removeClass( "error" );
      $( "#dateStart" ).removeClass( "error" );
      $( "#dateEnd" ).removeClass( "error" );

@@ -165,6 +165,7 @@ $.ajaxSetup({
         }
     });
    $('#formDataaa').submit(function(e) {
+    $(".loader").removeClass('hide');
        e.preventDefault();
        let formData = new FormData(this);
        $.ajax({
@@ -174,6 +175,7 @@ $.ajaxSetup({
            contentType: false,
            processData: false,
            success: (response) => {
+            $(".loader").addClass('hide');
             Swal.fire({
 				position: 'top-center',
 				icon: 'success',
@@ -187,6 +189,7 @@ $.ajaxSetup({
                $(".formDataaaFilesArea").html('');
            },
            error: function(response){
+            $(".loader").addClass('hide');
             Swal.fire({
 				position: 'top-center',
 				icon: 'error',

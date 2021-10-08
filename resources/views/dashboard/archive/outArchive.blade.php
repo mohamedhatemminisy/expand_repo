@@ -193,8 +193,11 @@
                                                                 @endif
                                                             </span>
                                                         </div>
-                                                        @if($type=='projArchive'||$type=='munArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
+                                                        @if($type=='projArchive'||$type=='empArchive'||$type=='depArchive'||$type=='assetsArchive'||$type=='citArchive')
                                                         <input type="text" id="customerName" class="form-control cust" name="customerName" style="width: 30%;">
+                                                        @elseif($type=='munArchive')
+                                                        <input type="text" id="customerName" class="form-control cust" name="customerName2" style="width: 30%;">
+                                                        <input type="hidden" name="customerName" value="0">
                                                         @elseif ($type=='inArchive'||$type=='outArchive')
                                                         <input type="text" id="msgTitle" class="form-control" name="msgTitle">
                                                         @endif
@@ -294,6 +297,7 @@ $.ajaxSetup({
         }
     });
    $('#formDataaa').submit(function(e) {
+    $(".loader").removeClass('hide');
        e.preventDefault();
        let formData = new FormData(this);
      $( "#customerName" ).removeClass( "error" );
@@ -304,6 +308,7 @@ $.ajaxSetup({
            contentType: false,
            processData: false,
            success: (response) => {
+            $(".loader").addClass('hide');
             Swal.fire({
 				position: 'top-center',
 				icon: 'success',
@@ -316,6 +321,12 @@ $.ajaxSetup({
                $(".formDataaaFilesArea").html('');
            },
            error: function(response){
+            $(".loader").addClass('hide');
+            $("#customerName").on('keyup', function (e) {
+                    if ($(this).val().length > 0) {
+                        $( "#customerName" ).removeClass( "error" );
+                    }
+                });
             Swal.fire({
 				position: 'top-center',
 				icon: 'error',
@@ -324,9 +335,9 @@ $.ajaxSetup({
 				timer: 1500
 				})
                 $(".formDataaaFilesArea").html('');
-            // if(response.responseJSON.errors.customerName){
-            //     $( "#customerName" ).addClass( "error" );
-            // }
+            if(response.responseJSON.errors.customerName){
+                $( "#customerName" ).addClass( "error" );
+            }
            }
        });
   });

@@ -13,7 +13,11 @@ class Archive extends Model
     public function relatedTo(){
         return $this->hasMany(linkedTo::class);
     }
-    public function files(){
+    public function archiveFiles(){
         return $this->hasMany(File::class);
+    }
+ 
+    public function files() {
+        return $this->archiveFiles()->where('model_name','App\Models\Archive');
     }
 }
