@@ -30,7 +30,7 @@
                                     <th width="200px">العنوان</th>
                                     <th width="80px">التاريخ </th>
                                     <th width="60px"> النوع </th>
-                                    <th width="260px">المرفقات </th>
+                                    <th width="33%">المرفقات </th>>
                                     </tr>
                                 </thead>
                                 <tbody id="orgnization_list">
@@ -116,7 +116,7 @@
                                                         <th width="80px">
                                                             نوع البناء
                                                         </th>
-                                                        <th width="300px">
+                                                        <th width="33%">
                                                             المرفقات
                                                         </th>
                                                     </tr>
@@ -143,7 +143,7 @@
                                                         <th width="80px">
                                                             نوع البناء
                                                         </th>
-                                                        <th width="300px">
+                                                        <th width="33%">
                                                             المرفقات
                                                         </th>
                                                     </tr>
@@ -167,7 +167,7 @@
                                                 <th width="200px">العنوان</th>
                                                 <th width="80px">التاريخ </th>
                                                 <th width="60px"> النوع </th>
-                                                <th width="260px">المرفقات </th>
+                                                <th width="33%">المرفقات </th>>
                                                 </tr>
                                             </thead>
                                             <tbody id="orgnization_list">
@@ -188,7 +188,7 @@
                                                     <th width="50px">رقم المراسلة</th>
                                                     <th width="200px">عنوان المراسلة</th>
                                                     <th width="80px">التاريخ </th>
-                                                    <th width="260px">المرفقات </th>
+                                                    <th width="33%">المرفقات </th>>
                                                 </tr>
                                             </thead>
                                             <tbody id="msgList1">
@@ -206,7 +206,7 @@
                                                     <th width="200px">عنوان الأرشيف</th>
                                                     <th width="120px"> الوثيقة الاصلية مرتبطة ب </th>
                                                     <th width="80px">التاريخ </th>
-                                                    <th width="260px">المرفقات </th>
+                                                    <th width="33%">المرفقات </th>>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="copyToList">
@@ -224,7 +224,7 @@
                                                 <th width="200px">العنوان</th>
                                                 <th width="80px">التاريخ </th>
                                                 <th width="60px"> النوع </th>
-                                                <th width="260px">المرفقات </th>
+                                                <th width="33%">المرفقات </th>>
                                                 </tr>
                                             </thead> --}}
                                             <thead>
@@ -263,7 +263,7 @@
                                                     <th width="50px">رقم المراسلة</th>
                                                     <th width="200px">عنوان المراسلة</th>
                                                     <th width="80px">التاريخ </th>
-                                                    <th width="260px">المرفقات </th>
+                                                    <th width="33%">المرفقات </th>>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="msgRList1">
@@ -281,7 +281,7 @@
                                                     <th width="200px">عنوان المراسلة</th>
                                                     <th width="80px">انوعها</th>
                                                     <th width="80px">التاريخ </th>
-                                                    <th width="260px">المرفقات </th>
+                                                    <th width="33%">المرفقات </th>>
                                                 </tr>
                                             </thead>
                                             <tbody id="msgOList11">
