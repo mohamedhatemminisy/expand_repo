@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class LicenseController extends Controller
 {
     public function index(){
-       
-        return view('dashboard.license.licenseAdd');    
+        $type="license_view";  
+        return view('dashboard.license.licenseAdd',compact('type'));    
     }
 }
