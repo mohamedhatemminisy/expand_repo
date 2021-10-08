@@ -17,7 +17,7 @@
 									<span1> {{trans('admin.dept_info')}}</span1>
 								</h4>
 
-								
+
                                     <div class="heading-elements1 onOffArea form-group mt-1" style="display: none;    top: -5px;">
                                         <input type="checkbox" id="myonoffswitchHeader" class="switchery" data-size="xs" checked="">
                                     </div>
@@ -34,7 +34,7 @@
 															{{trans('admin.department')}}
 															</span>
 														</div>
-														<input type="text" id="departmentName" 
+														<input type="text" id="departmentName"
 														class="form-control alphaFeild ac ui-autocomplete-input" placeholder="{{trans('admin.department')}}"
 														 name="departmentName" aria-invalid="false" autocomplete="off">
 													</div>
@@ -50,12 +50,12 @@
 														<div class="input-group-prepend">
 															<span class="input-group-text" id="basic-addon1">
 															{{trans('admin.manager')}}
-																 
+
 															</span>
 														</div>
 														<select id="Incharge" name="Incharge" type="text" class="form-control selectFullCorner">
                                                             <option value=""> -- {{trans('admin.select_manager')}}  --</option>
-															
+
 														    @foreach($admins as $admin)
 															<option value="{{$admin->id}}"> {{$admin->nick_name}} </option>
 															@endforeach
@@ -65,12 +65,12 @@
 																<a target="_blank">
 																	<i class="fa fa-external-link-alt" style="color:#ffffff"></i></a>
 															</span>
-														</div>															
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									
+
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
@@ -94,19 +94,19 @@
 															</span>
 														</div>
 														<input type="text" id="phone" class="form-control numFeild" placeholder="022000000" name="phone" aria-invalid="false" maxlength="9" style="width:78px;border-top-right-radius: 0 !important;border-bottom-right-radius: 0 !important;">
-													
+
 														<input type="text" id="extphone" class="form-control numFeild" placeholder="123" name="extphone" aria-invalid="false">
-													
+
 														<div class="input-group-append">
 															<span class="input-group-text input-group-text2 ">
 																<i class="fa fa-external-link-alt" style="color:#ffffff"></i>
 															</span>
-														</div>															
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									
+
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
@@ -139,7 +139,7 @@
 															<span class="input-group-text input-group-text2">
 																<i class="fa fa-external-link-alt" style="color:#ffffff"></i>
 															</span>
-														</div>															
+														</div>
 													</div>
 												</div>
 											</div>
@@ -179,7 +179,7 @@
 															<th scope="col">{{trans('admin.working_years')}}  </th>
 														</tr>
 														</tbody><tbody id="employees_data">
-															
+
 														</tbody>
 													</table>
 
@@ -232,14 +232,14 @@
 							</div>
 						</div>
                     </div>
-                    
-					
-					
+
+
+
 					<div class="col-sm-12 col-md-6">
                         <div class="card rightSide" style="min-height:453.875px">
                             <div class="card-header hide">
                                 <h4 class="card-title"><img src="https://db.expand.ps/images/41254_32.png">
-								{{trans('admin.employee_dep_info')}} 
+								{{trans('admin.employee_dep_info')}}
 								</h4>
                                 <a class="heading-elements-toggle">
                                     <i class="ft-align-justify font-medium-3"></i></a>
@@ -268,7 +268,7 @@
 																<td>
 																	Rabiee
 																</td>
-																<td>													
+																<td>
 																	Accounting
 																</td>
 																<td>
@@ -285,7 +285,7 @@
 																<td>
 																	Razan
 																</td>
-																<td>													
+																<td>
 																	programming
 																</td>
 																<td>
@@ -302,7 +302,7 @@
 																<td>
 																	Mustafa
 																</td>
-																<td>													
+																<td>
 																	programming
 																</td>
 																<td>
@@ -316,7 +316,7 @@
 																</td>
 															</tr>
 														</tbody></table>
-											
+
 										</div>
                                     </div>
 								</div>
@@ -324,7 +324,7 @@
 							<div class="card-header" style="padding-top:0px;">
 								<h4 class="card-title"><img src="https://db.expand.ps/images/t8521_32.png">{{trans('admin.dep_tasks_info')}} </h4>
 								<a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a>
-								 
+
 							</div>
 							<div class="card-content collapse show ">
 								<div class="card-body">
@@ -404,10 +404,10 @@
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="card-header" style="padding-top:0px;">
 										<h4 class="card-title">
-											<img src="{{ asset('assets/images/ico/msg.png') }}" width="32" height="32"> 
+											<img src="{{ asset('assets/images/ico/msg.png') }}" width="32" height="32">
 										الأرشيف
 										</h4>
 									</div>
@@ -418,7 +418,7 @@
 														<div class="form-group">
 															<img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#CertModal').modal('show')" style="cursor:pointer">
 															<div class="form-group">
-																<a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}} 
+																<a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}}
 																<span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
 															</div>
 														</div>
@@ -430,7 +430,7 @@
 									<div class="form-actions" style="border-top:0px;">
 										<div class="text-right">
 											<button type="submit" class="btn btn-primary save-data" id="saveBtn">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
-											<button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning reset-data"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
+											<button type="reset" onclick="$('#employees_data').html('');" class="btn btn-warning reset-data"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right"></i></button>
 
 										</div>
 									</div>
@@ -456,7 +456,7 @@ $( function() {
     $( ".ac" ).autocomplete({
 		source: 'dept_auto_complete',
 		minLength: 2,
-		
+
         select: function( event, ui ) {
 			let dep_id = ui.item.id
             $.ajax({
@@ -478,11 +478,15 @@ $( function() {
                 ,response.licFileArchiveCount
                 ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#LinkDept option")
-                 .each(function() { this.selected = (this.text == response.dep_parent); 
+                 .each(function() { this.selected = (this.text == response.dep_parent);
             });
             $("select#Incharge option")
-                 .each(function() { this.selected = (this.text == response.admin); 
+                 .each(function() { this.selected = (this.text == response.admin);
             });
+
+             //////manualy reset table/////
+             $('#employees_data').html('');
+            //////////////////////////////
 
 			var len = response.employees.length;
         for(var i=0; i<len; i++){
@@ -490,7 +494,7 @@ $( function() {
                 var name = response.employees[i].name;
                 var start_date = response.employees[i].start_date;
                 var job_title = response.job_title[i];
-				
+
 				var start = new Date(start_date).getFullYear();
 				var end   = new Date().getFullYear();
                 var years = end - start;
@@ -530,11 +534,15 @@ function update($id)
                 ,response.licFileArchiveCount
                 ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#LinkDept option")
-                 .each(function() { this.selected = (this.text == response.dep_parent); 
+                 .each(function() { this.selected = (this.text == response.dep_parent);
             });
             $("select#Incharge option")
-                 .each(function() { this.selected = (this.text == response.admin); 
+                 .each(function() { this.selected = (this.text == response.admin);
             });
+
+             //////manualy reset table/////
+             $('#employees_data').html('');
+            //////////////////////////////
 
 			var len = response.employees.length;
         for(var i=0; i<len; i++){
@@ -542,7 +550,7 @@ function update($id)
                 var name = response.employees[i].name;
                 var start_date = response.employees[i].start_date;
                 var job_title = response.job_title[i];
-				
+
 				var start = new Date(start_date).getFullYear();
 				var end   = new Date().getFullYear();
                 var years = end - start;
@@ -574,7 +582,7 @@ $.ajax({
 
 
 $(".save-data").click(function(event){
-	
+
 	$(".loader").removeClass('hide');
      $( "#departmentName" ).removeClass( "error" );
       event.preventDefault();
@@ -598,8 +606,8 @@ $(".save-data").click(function(event){
             phone:phone,
             extphone:extphone,
             Incharge:Incharge,
-            LinkDept:LinkDept,                              
-            _token: _token ,       
+            LinkDept:LinkDept,
+            _token: _token ,
          },
 
         success:function(response){
@@ -613,12 +621,12 @@ $(".save-data").click(function(event){
 				})
             // $(".alert-success").removeClass('hide');
             // $("#succMsg").text('{{trans('admin.department_added')}}')
-			$('.wtbl').DataTable().ajax.reload(); 
+			$('.wtbl').DataTable().ajax.reload();
             setTimeout(function(){
                 $(".alert-success").addClass("hide");
             },2000)
-            $("#ajaxform")[0].reset();          
-			 
+            $("#ajaxform")[0].reset();
+
         },
         error: function(response) {
 			$(".loader").addClass('hide');
@@ -647,7 +655,7 @@ $(".save-data").click(function(event){
             if(response.responseJSON.errors.departmentName){
                 $( "#departmentName" ).addClass( "error" );
             }
-           
+
 
            }
 

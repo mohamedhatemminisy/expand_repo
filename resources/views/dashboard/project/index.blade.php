@@ -456,7 +456,7 @@
             <div class="form-actions" style="border-top:0px;">
                 <div class="text-right">
                     <button class="btn btn-primary save-data">{{trans('admin.save')}} <i class="ft-thumbs-up position-right"></i></button>
-                    <button type="reset" onclick="redirectURL('linkIcon1-tab1')" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right reset-data"></i></button>
+                    <button type="reset" onclick="$('#userList').html('');" class="btn btn-warning"> {{trans('assets.reset')}} <i class="ft-refresh-cw position-right reset-data"></i></button>
                 </div>
           </div>
 
@@ -500,7 +500,7 @@ $( function() {
             $('#Projectcost').val(response.info.Projectcost);
             $("#msgStatic").html(response.ArchiveCount);
             drawTablesArchive(response.Archive,response.copyTo,response.jalArchive,
-                            response.copyToCount,response.linkToCount,response.archiveCount);  
+                            response.copyToCount,response.linkToCount,response.archiveCount);
             $("select#CurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency);
             });
@@ -531,7 +531,9 @@ $( function() {
             $("select#region_data option")
                  .each(function() { this.selected = (this.text == response.region);
             });
-
+            //////manualy reset table/////
+            $('#userList').html('');
+            //////////////////////////////
             var len = response.users.length;
         for(var i=0; i<len; i++){
 			    var index = i+1;
@@ -569,7 +571,7 @@ function update($id)
             $('#Projectcost').val(response.info.Projectcost);
             $("#msgStatic").html(response.ArchiveCount);
             drawTablesArchive(response.Archive,response.copyTo,response.jalArchive,
-                            response.copyToCount,response.linkToCount,response.archiveCount);  
+                            response.copyToCount,response.linkToCount,response.archiveCount);
             $("select#CurrencyID option")
                  .each(function() { this.selected = (this.text == response.Currency);
             });
@@ -601,7 +603,9 @@ function update($id)
             $("select#region_data option")
                  .each(function() { this.selected = (this.text == response.region);
             });
-
+            //////manualy reset table/////
+            $('#userList').html('');
+            //////////////////////////////
             var len = response.users.length;
         for(var i=0; i<len; i++){
 			    var index = i+1;

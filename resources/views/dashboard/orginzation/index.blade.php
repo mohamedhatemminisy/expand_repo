@@ -33,30 +33,30 @@
                                             @if($type == 'orginzation')
                                             <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                            {{trans('admin.orgnization_name')}} 
+                                            {{trans('admin.orgnization_name')}}
                                             </span>
                                             </div>
-                                            <input type="text" id="SponsorName" 
+                                            <input type="text" id="SponsorName"
                                             class="form-control alphaFeild ac ui-autocomplete-input"
                                              placeholder=" {{trans('admin.orgnization_name')}} "
                                               name="SponsorName" autocomplete="off">
                                               @elseif($type == 'enginering')
                                               <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                            {{trans('admin.enginer_office')}} 
+                                            {{trans('admin.enginer_office')}}
                                             </span>
                                             </div>
-                                            <input type="text" id="SponsorName" 
+                                            <input type="text" id="SponsorName"
                                             class="form-control alphaFeild ac ui-autocomplete-input"
                                              placeholder=" {{trans('admin.enginer_office')}} "
                                               name="SponsorName" autocomplete="off">
                                               @elseif($type == 'banks')
                                               <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                            {{trans('admin.bank_name')}} 
+                                            {{trans('admin.bank_name')}}
                                             </span>
                                             </div>
-                                            <input type="text" id="SponsorName" 
+                                            <input type="text" id="SponsorName"
                                             class="form-control alphaFeild ac ui-autocomplete-input"
                                              placeholder=" {{trans('admin.bank_name')}} "
                                               name="SponsorName" autocomplete="off">
@@ -64,24 +64,24 @@
                                               @elseif($type == 'space')
                                               <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                            {{trans('admin.space_office')}} 
+                                            {{trans('admin.space_office')}}
                                             </span>
                                             </div>
-                                            <input type="text" id="SponsorName" 
+                                            <input type="text" id="SponsorName"
                                             class="form-control alphaFeild ac ui-autocomplete-input"
                                              placeholder=" {{trans('admin.space_office')}} "
                                               name="SponsorName" autocomplete="off">
                                               @elseif($type == 'suppliers')
                                               <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                            {{trans('admin.supplier_name')}} 
+                                            {{trans('admin.supplier_name')}}
                                             </span>
                                             </div>
-                                            <input type="text" id="SponsorName" 
+                                            <input type="text" id="SponsorName"
                                             class="form-control alphaFeild ac ui-autocomplete-input"
                                              placeholder=" {{trans('admin.supplier_name')}} "
                                               name="SponsorName" autocomplete="off">
-                                              
+
                                               @endif
 
 
@@ -99,7 +99,7 @@
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
-                                            {{trans('admin.ZIP_code')}} 
+                                            {{trans('admin.ZIP_code')}}
                                             </span>
                                             </div>
                                             <input type="text" id="LisenceNo" class="form-control " placeholder=" {{trans('admin.ZIP_code')}} " name="LisenceNo">
@@ -145,7 +145,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-lg-7 col-md-12 pr-0 pr-s-12">
                                     <div class="row">
@@ -169,7 +169,7 @@
                                                         <img src="https://db.expand.ps/images/w35.png" style="max-width: 35px;">
                                                     </span>
                                                     </div>
-                                                    <input type="text" id="MobileNo2" maxlength="10" name="MobileNo2" class="form-control noleft numFeild" placeholder="0560000000" aria-describedby="basic-addon1">
+                                                    <input type="text" id="MobileNo2" maxlength="10" name="MobileNo2" class="form-control noleft numFeild" placeholder="0560000000" aria-describedby="basic-addon1" style="margin-left: 12px;">
                                                 </div>
                                             </div>
                                         </div>
@@ -183,7 +183,7 @@
                                                 <img src="https://db.expand.ps/images/fax35.png">
                                             </span>
                                             </div>
-                                            <input type="text" id="faxNo" name="faxNo" maxlength="9" class="form-control noleft numFeild" placeholder="000000000" aria-describedby="basic-addon1" style="margin-left: 12px;">
+                                            <input type="text" id="faxNo" name="faxNo" maxlength="9" class="form-control noleft numFeild" placeholder="000000000" aria-describedby="basic-addon1" >
 
                                             <div class="input-group-append hide hidden-xs hidden-sm">
                                     <span class="input-group-text input-group-text2" style="color:#ffffff">
@@ -256,7 +256,7 @@
                 </div>
                 <div class="card-header" style="padding-top:0px;">
                         <h4 class="card-title">
-                            <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32"> 
+                            <img src="{{asset('assets/images/ico/msg.png')}}" width="32" height="32">
                             {{trans('admin.archieve')}}
                         </h4>
                         <!--  <a class="heading-elements-toggle"><i class="ft-align-justify font-medium-3"></i></a> -->
@@ -270,7 +270,7 @@
                         </div>
 
                     </div>
-                    
+
                 <div class="card-content collapse show">
                     <div class="card-body" style="padding-bottom: 0px;">
                         <div class="row" style="text-align: center">
@@ -278,7 +278,7 @@
                                     <div class="form-group">
                                         <img src="{{asset('assets/images/ico/msg.png')}}" onclick="$('#CertModal').modal('show')" style="cursor:pointer">
                                         <div class="form-group">
-                                            <a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}} 
+                                            <a onclick="$('#msgModal').modal('show')" style="color:#000000">{{trans('admin.archieve')}}
                                             <span id="msgStatic" style="color:#1E9FF2"><b>(0)</b></span></a>
                                         </div>
                                     </div>
@@ -295,9 +295,9 @@
             </div>
                     <div class="card-content collapse show">
                         <div class="card-body">
-                        @include('dashboard.component.address')		
-                            
-                        
+                        @include('dashboard.component.address')
+
+
 
                             <div class="form-actions" style="border-top:0px;">
                                 <div class="text-right">
@@ -335,7 +335,7 @@ $( function() {
                     dataType: 'json'
                 });
                 },
-       
+
 		minLength: 1,
 
         select: function( event, ui ) {
@@ -347,7 +347,7 @@ $( function() {
                 orginzation_id: orginzation_id,
             },
             success:function(response){
-            $('#orgnization_id').val(response.info.id); 
+            $('#orgnization_id').val(response.info.id);
             $('#SponsorName').val(response.info.name);
             $('#MobileNo1').val(response.info.phone_one);
             $('#MobileNo2').val(response.info.phone_two);
@@ -364,18 +364,18 @@ $( function() {
                 ,response.licFileArchiveCount
                 ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#PositionID option")
-                 .each(function() { this.selected = (this.text == response.job_title); 
+                 .each(function() { this.selected = (this.text == response.job_title);
             });
             $('#AddressDetails').val(response.address.details);
             $('#Note').val(response.address.notes);
             $("select#CityID option")
-                 .each(function() { this.selected = (this.text == response.city); 
+                 .each(function() { this.selected = (this.text == response.city);
             });
             $("select#area_data option")
-                 .each(function() { this.selected = (this.text == response.area); 
+                 .each(function() { this.selected = (this.text == response.area);
             });
             $("select#region_data option")
-                 .each(function() { this.selected = (this.text == response.region); 
+                 .each(function() { this.selected = (this.text == response.region);
             });
 			},
 			});
@@ -393,7 +393,7 @@ function update($id)
                 orginzation_id: orginzation_id,
             },
             success:function(response){
-            $('#orgnization_id').val(response.info.id); 
+            $('#orgnization_id').val(response.info.id);
             $('#SponsorName').val(response.info.name);
             $('#MobileNo1').val(response.info.phone_one);
             $('#MobileNo2').val(response.info.phone_two);
@@ -410,18 +410,18 @@ function update($id)
                 ,response.licFileArchiveCount
                 ,response.licArchiveCount,response.copyToCount,response.linkToCount);
             $("select#PositionID option")
-                 .each(function() { this.selected = (this.text == response.job_title); 
+                 .each(function() { this.selected = (this.text == response.job_title);
             });
             $('#AddressDetails').val(response.address.details);
             $('#Note').val(response.address.notes);
             $("select#CityID option")
-                 .each(function() { this.selected = (this.text == response.city); 
+                 .each(function() { this.selected = (this.text == response.city);
             });
             $("select#area_data option")
-                 .each(function() { this.selected = (this.text == response.area); 
+                 .each(function() { this.selected = (this.text == response.area);
             });
             $("select#region_data option")
-                 .each(function() { this.selected = (this.text == response.region); 
+                 .each(function() { this.selected = (this.text == response.region);
             });
 			},
 			});
@@ -512,27 +512,27 @@ $.ajax({
             LisenceNo:LisenceNo,
             personInCharge:personInCharge,
             faxNo:faxNo,
-            EmailAddress:EmailAddress,          
+            EmailAddress:EmailAddress,
             phone1:phone1,
             website:website,
             phone2:phone2,
             type,type,
             PositionID:PositionID,
-            CityID:CityID, 
-            area_data:area_data,            
-            region_data:region_data,            
-            AddressDetails:AddressDetails,            
-            Note:Note,                       
-            _token: _token ,       
+            CityID:CityID,
+            area_data:area_data,
+            region_data:region_data,
+            AddressDetails:AddressDetails,
+            Note:Note,
+            _token: _token ,
          },
 
         success:function(response){
             $('.success_alert').css('visibility', 'visible');
 
             setTimeout(function() {
-                $('.wtbl').DataTable().ajax.reload();    
+                $('.wtbl').DataTable().ajax.reload();
             $('.success_alert').fadeOut();
-            }, 3000 ); 
+            }, 3000 );
             $(".loader").addClass('hide');
 			Swal.fire({
 				position: 'top-center',
@@ -542,8 +542,8 @@ $.ajax({
 				timer: 1500
 				})
 
-            $("#ajaxform")[0].reset();    
-                
+            $("#ajaxform")[0].reset();
+
         },
         error: function(response) {
             $(".loader").addClass('hide');
