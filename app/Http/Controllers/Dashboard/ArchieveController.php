@@ -100,20 +100,9 @@ class ArchieveController extends Controller
 
     public function Linence_auto_complete(Request $request){
         $emp_data = $request['term'];
-      
-        // $licArchive= ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
-        // ->where('type','licArchive')
-        // ->select('*',DB::raw("CONCAT(name , '( أرشيف رخص البناء)' )AS label"))->get();
-        // $licFileArchive= ArchiveLicense::where('name', 'like', '%' . $emp_data . '%')
-        // ->where('type','licFileArchive')
-        // ->select('*',DB::raw("CONCAT(name , '(أرشيف ملف الترخيص)' )AS label"))->get();
         $users = User::where('name', 'like', '%' . $emp_data . '%')
         ->select('*',DB::raw("CONCAT(name)AS label"))->get();
-
-        // $names =$licArchive->merge($users)->merge($licFileArchive);
-
         return response()->json($users);
-    
     }
     public function store_lince_archive(Request $request){
         $archive = ArchiveLicense::where('id',$request->ArchiveID)->first();

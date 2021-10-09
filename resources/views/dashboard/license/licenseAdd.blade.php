@@ -70,7 +70,7 @@
                                                          اسم المشترك
                                                     </span>
                                                 </div>
-                                                <input type="text" id="formDataNameAR" class="form-control alphaFeild ac" placeholder="اسم المشترك" name="formDataNameAR">
+                                                <input type="text" id="formDataNameAR" class="form-control alphaFeild ac cust" placeholder="اسم المشترك" name="formDataNameAR">
                                                 <input type="hidden" id="fromname" name="formname" value="formData">
                                                 <input type="hidden" id="pk_i_id" name="pk_i_id" value="">
                                             </div>
@@ -84,7 +84,7 @@
                                                         رقم الرخصة
                                                     </span>
                                                 </div>
-                                                <input type="text" id="formDataNameAR" class="form-control alphaFeild ac" placeholder="رقم الرخصة" name="formDataNameAR">
+                                                <input type="text" id="Lince_num" class="form-control alphaFeild ac" placeholder="رقم الرخصة" name="Lince_num">
                                             </div>
                                         </div>
                                     </div>
@@ -98,6 +98,9 @@
                                                 </div>
                                         <select name="archive_type" id="archive_type" class="form-control">
                                             <option value="">-- اختر --</option>
+                                            @foreach($licenseExtention as $extention)
+                                                <option value="{{$extention->name}}">{{$extention->name}}</option>
+                                            @endforeach
                                         </select>
                                         <div class="input-group-append" onclick="QuickAdd(999,'archive_type','الغاية من الاستعمال')" style="cursor:pointer">
                                             <span class="input-group-text input-group-text2">
@@ -115,7 +118,7 @@
                                                         رقم الدفتر
                                                     </span>
                                                 </div>
-                                                <input type="text" id="formDataNameAR" class="form-control alphaFeild ac" placeholder="رقم الدفتر" name="formDataNameAR">
+                                                <input type="text" id="notebookNum" class="form-control alphaFeild ac" placeholder="رقم الدفتر" name="notebookNum">
                                             </div>
                                         </div>
                                     </div>
@@ -127,7 +130,7 @@
                                                         عدد الطوابق
                                                     </span>
                                                 </div>
-                                                <input type="text" id="formDataNameAR" class="form-control alphaFeild ac" placeholder="عدد الطوابق" name="formDataNameAR">
+                                                <input type="text" id="floorCount" class="form-control alphaFeild ac" placeholder="عدد الطوابق" name="floorCount">
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +178,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                         </div>
-                                                        <input type="text" id="buldingLicNo" class="form-control" placeholder="رقم القطعة طابو"  name="buldingLicNoList" >
+                                                        <input type="text" id="taboNum" class="form-control" placeholder="رقم القطعة طابو"  name="taboNum" >
                                                     </div>
                                                 </div>
                                             </td>
@@ -184,7 +187,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                         </div>
-                                                        <input type="text" id="buldingLicNo" class="form-control" placeholder="رقم الحوض"  name="buldingLicNoList" >
+                                                        <input type="text" id="pelvisNum" class="form-control" placeholder="رقم الحوض"  name="pelvisNum" >
                                                     </div>
                                                 </div>
                                             </td>
@@ -193,7 +196,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                         </div>
-                                                        <input type="text" id="buldingLicNo" class="form-control" placeholder="المساحة المرخصة"  name="buldingLicNoList" >
+                                                        <input type="text" id="licensedSpace" class="form-control" placeholder="المساحة المرخصة"  name="licensedSpace" >
                                                     </div>
                                                 </div>
                                             </td>
@@ -202,7 +205,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                         </div>
-                                                        <input type="text" id="buldingLicNo" class="form-control" placeholder="تاريخ الترخيص"  name="buldingLicNoList" >
+                                                        <input type="text" id="licensedData" class="form-control" placeholder="تاريخ الترخيص"  name="licensedData" >
                                                     </div>
                                                 </div>
                                             </td>
@@ -211,7 +214,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                         </div>
-                                                        <input type="text" id="buldingLicNo" class="form-control" placeholder="مساحة الأرض"  name="buldingLicNoList" >
+                                                        <input type="text" id="LandArea" class="form-control" placeholder="مساحة الأرض"  name="LandArea" >
                                                     </div>
                                                 </div>
                                             </td>
@@ -220,7 +223,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                         </div>
-                                                        <input type="text" id="buldingLicNo" class="form-control" placeholder="اوصاف البناء"  name="buldingLicNoList" >
+                                                        <input type="text" id="buldingDesc" class="form-control" placeholder="اوصاف البناء"  name="buldingDesc" >
                                                     </div>
                                                 </div>
                                             </td>
@@ -229,7 +232,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                         </div>
-                                                        <input type="text" id="buldingLicNo" class="form-control" placeholder="ملاحظات"  name="buldingLicNoList" >
+                                                        <input type="text" id="Notes" class="form-control" placeholder="ملاحظات"  name="Notes" >
                                                     </div>
                                                 </div>
                                             </td>
@@ -306,6 +309,50 @@
 </div>  
 @section('script')
 <script>
+
+$('#formDataaa').submit(function(e) {
+    $(".loader").removeClass('hide');
+
+       e.preventDefault();
+       let formData = new FormData(this);
+
+       $.ajax({
+          type:'POST',
+          url: "store_license",
+           data: formData,
+           contentType: false,
+           processData: false,
+           success: (response) => {
+            $(".loader").addClass('hide');
+            $('.wtbl').DataTable().ajax.reload();
+             if (response) {
+                Swal.fire({
+				position: 'top-center',
+				icon: 'success',
+				title: '{{trans('admin.data_added')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
+               this.reset();
+             }
+              
+           },
+           error: function(response){
+            $(".loader").addClass('hide');
+
+            Swal.fire({
+				position: 'top-center',
+				icon: 'error',
+				title: '{{trans('admin.error_save')}}',
+				showConfirmButton: false,
+				timer: 1500
+				})
+
+           }
+       });
+  });
+
+
     $( function(){
         var table = $('.wtbl').DataTable({
                         dom: 'Bfltip',
@@ -375,7 +422,7 @@ $.ajaxSetup({
   $( function() {
       
     $( ".cust_auto" ).autocomplete({
-		source: 'archive_auto_complete',
+		source: 'Linence_auto_complete',
 		minLength: 1,
 		
         select: function( event, ui ) {
@@ -389,7 +436,7 @@ $.ajaxSetup({
 });
 $( function() {
     $( ".cust" ).autocomplete({
-		source: 'archive_auto_complete',
+		source: 'Linence_auto_complete',
 		minLength: 1,
 		
         select: function( event, ui ) {
@@ -398,6 +445,7 @@ $( function() {
             $('#customerName').val(ui.item.name);
             $('#customername').val(ui.item.name);
             $('#customerType').val(ui.item.model);
+            $('#formDataNameAR').val(ui.item.id);
            }
 	    });
     });

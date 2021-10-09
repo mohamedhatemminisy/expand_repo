@@ -42,6 +42,7 @@ Route::group([
         Route::get('emp_info_all', 'EmployeeController@emp_info_all')->name('emp_info_all');
         
         Route::get('license', 'LicenseController@index')->name('license');
+        Route::post('store_license', 'LicenseController@store_license')->name('store_license');
 
 
         Route::get('volunteer', 'VolunteerController@index')->name('volunteer');

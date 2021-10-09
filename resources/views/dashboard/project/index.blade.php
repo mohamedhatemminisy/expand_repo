@@ -131,7 +131,7 @@
                             </div>
 
                             <div class="row">
-                            <div class="col-lg-12 col-md-12 pr-s-12" style="padding-left: 27px;">
+                            <!-- <div class="col-lg-12 col-md-12 pr-s-12" style="padding-left: 27px;">
                                 <div class="form-group user_subscriber">
                                     <div class="input-group w-s-87 mt-s-6" style="width: 100% !important;">
                                         <div class="input-group-prepend">
@@ -147,7 +147,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group col-md-1 mb-2 hide">
                                 <i class="fas fa-users fa-lg" onclick="show();" style="    margin-left: 14px; color: #1e9ff2;margin-top: 15px;"></i>
                             </div>
@@ -214,10 +214,10 @@
 
                                     </tbody>
                                     <tbody id="userList">
-                                        {{-- <tr>
+                                         <!-- <tr>
                                             <td ></td>
                                             <td class="col-md-3">
-                                                <input  class="form-control" >
+                                                <input  class="form-control cust" >
                                                 </td>
                                             <td class="col-md-3" >
                                                 <input class="form-control"  >
@@ -227,7 +227,7 @@
                                             </td>
                                             <td>
                                             </td>
-                                        </tr> --}}
+                                        </tr>  -->
                                     </tbody>
                                 </table>
                             </div>
@@ -478,6 +478,24 @@ $('.reset-data').click(function(event){
 	$("#msgStatic").html("(0)");
 });
 $( function() {
+
+    $( ".cust" ).autocomplete({
+		source: 'Linence_auto_complete',
+		minLength: 1,
+		
+        select: function( event, ui ) {
+            console.log(ui.item);
+            $('#customerid').val(ui.item.id);
+            $('#customerName').val(ui.item.name);
+            $('#customername').val(ui.item.name);
+            $('#customerType').val(ui.item.model);
+           }
+	});
+
+
+
+
+
     $( ".ac" ).autocomplete({
 		source: 'project_auto_complete',
 		minLength: 1,
@@ -707,9 +725,13 @@ $.ajax({
       let dateEnd = $("input[name=dateEnd]").val();
       var pinc6 = $('#pinc6').find(":selected").val();
       var Department = $('#Department').find(":selected").val();
-      var subscribers = $("#subscribers :selected").map(function(i, el) {
-    return $(el).val();
-}).get();
+//       var subscribers = $("#subscribers :selected").map(function(i, el) {
+//     return $(el).val();
+// }).get();
+    //   var newSubscribers = $("input[name=subscribers]").val();
+      var newSubscribers = $("input[name='subscribers[]']")
+              .map(function(){return $(this).val();}).get();
+
       let Projectcost = $("input[name=Projectcost]").val();
       var CurrencyID = $('#CurrencyID').find(":selected").val();
       var _token ='{{csrf_token()}}';
@@ -734,7 +756,7 @@ $.ajax({
             dateEnd:dateEnd,
             pinc6:pinc6,
             Department:Department,
-            subscribers:subscribers,
+            subscribers:newSubscribers,
             Projectcost:Projectcost,
             CurrencyID:CurrencyID,
             _token: _token ,
@@ -818,19 +840,31 @@ $.ajax({
                   +'<td  >'
                   + '</td>'
                   + '<td class="col-md-3">'
-                  +      ' <input  class="form-control" >'
+                  +      ' <input  class="form-control cust"  id="sub_name" name="sub_name[]" >'
                   +     ' </td>'
                   +  '<td class="col-md-3" >'
-                  +     '<input class="form-control"  >'
+                  +     '<input class="form-control" id="sub_phone" name="sub_phone[]" disabled="disabled" >'
                   +        '</td>'
                   + '<td class="col-md-3" >'
-                  +  ' <input  class="form-control" >'
+                  +  ' <input  class="form-control" id="sub_id" name="sub_id[]" disabled="disabled">'
                   + '</td>'
+                  +'<input type="hidden" id="subscribers" name="subscribers[]" value="">'
                   +'<td onclick="$(this).parent().remove()" >'
                   +'  <i class="fa fa-trash" id="plusElement1" style="padding-top:10px;position: relative;left: 3%;cursor: pointer;  color:#1E9FF2;font-size: 15pt; "></i>'
                   + '</td>'
-                +' </tr>'
-            );
+                +' </tr>')
+                $( ".cust" ).autocomplete({
+                    source: 'Linence_auto_complete',
+                    minLength: 1,
+                    select: function( event, ui ) {
+                        console.log(ui.item);
+                        $('#subscribers').val(ui.item.id);
+                        $('#sub_name').val(ui.item.name);
+                        $('#sub_phone').val(ui.item.phone_one);
+                        $('#sub_id').val(ui.item.national_id);
+                    }
+                });
+
         });
 });
 

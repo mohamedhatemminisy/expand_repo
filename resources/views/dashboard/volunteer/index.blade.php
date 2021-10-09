@@ -715,14 +715,13 @@ function SavePer(){
 						else {
 							$(".alert-success").hide();
 							$(".alert-danger").show();
-							$("#errMsg").text(data.status.msg)
+							$("#errMsg").text(data.status.msg);
 						}
 						$(".loader").addClass('hide');
 					},
 					error:function(){
 						$(".alert-success").hide();
 						$(".alert-danger").show();
-						$("#errMsg").text(data.status.msg)
 						$(".loader").addClass('hide');
 					},
 					cache: false,
