@@ -83,6 +83,7 @@
                                                 <img id="userProfileImg" src="https://db.expand.ps/images/user.png" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
                                                 <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
                                                 <input type="hidden" id="userimgpath" name="userimgpath">
+                                                <meta name="csrf-token" content="{{ csrf_token() }}" />
                                             </div>
 
                                         </div>
