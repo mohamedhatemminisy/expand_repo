@@ -510,51 +510,8 @@ $( function() {
 		
         select: function( event, ui ) {
             let subscribe_id = (ui.item.id)
+            update(subscribe_id);
             
-            $.ajax({
-            type: 'get', // the method (could be GET btw)
-            url: "subscribe_info",
-
-                data: {
-                    subscribe_id: subscribe_id,
-                },
-                success:function(response){
-                $('#subscriber_id').val(response.info.id);
-                $('#formDataNameAR').val(response.info.name);
-                $('#formDataNationalID').val(response.info.national_id);
-                $('#formDataMobileNo1').val(response.info.phone_one);
-                $('#formDataMobileNo2').val(response.info.phone_two);
-                $('#formDataCutomerNo').val(response.info.cutomer_num);
-                $('#formDataEmailAddress').val(response.info.email);
-                $('#formDataBussniessName').val(response.info.bussniess_name);
-                $("#certListCnt").html("("+response.ArchiveCount+")");
-                $("#licListCnt").html("("+response.ArchiveJobLicCount+")");
-               
-                drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive,
-                response.outArchiveCount,response.inArchiveCount,response.otherArchiveCount
-                ,response.licFileArchiveCount
-                ,response.licArchiveCount,response.copyToCount,response.linkToCount);
-                drawTableJoblic(response.ArchiveJobLic);
-                $("select#formDataProfessionID option")
-                    .each(function() { this.selected = (this.text == response.job_title); 
-                });
-                $("select#formDataIndustryID option")
-                    .each(function() { this.selected = (this.text == response.group); 
-                });
-                $('#username').val(response.info.username);
-                $('#AddressDetails').val(response.address.details);
-                $('#Note').val(response.address.notes);
-                $("select#CityID option")
-                    .each(function() { this.selected = (this.text == response.city); 
-                });
-                $("select#area_data option")
-                    .each(function() { this.selected = (this.text == response.area); 
-                });
-                $("select#region_data option")
-                    .each(function() { this.selected = (this.text == response.region); 
-                });
-                },
-            });
         }
 	});
 } );
@@ -564,53 +521,50 @@ function update($id)
 {
     
     let subscribe_id = $id;
-            console.log(subscribe_id);
-            $.ajax({
-            type: 'get', // the method (could be GET btw)
-            url: "subscribe_info",
-            data: {
-                subscribe_id: subscribe_id,
-            },
-            success:function(response){
-                console.log(response);
-            $('#subscriber_id').val(response.info.id);
-            $('#formDataNameAR').val(response.info.name);
-            $('#formDataNationalID').val(response.info.national_id);
-            $('#formDataMobileNo1').val(response.info.phone_one);
-            $('#formDataMobileNo2').val(response.info.phone_two);
-            $('#formDataCutomerNo').val(response.info.cutomer_num);
-            $('#formDataEmailAddress').val(response.info.email);
-            $('#formDataBussniessName').val(response.info.bussniess_name);
-            $("#certListCnt").html(response.ArchiveCount);
-            $("#licListCnt").html("("+response.ArchiveJobLicCount+")");
-            drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive);
-            drawTableJoblic(response.ArchiveJobLic);
-            $("select#formDataProfessionID option")
-                 .each(function() { this.selected = (this.text == response.job_title); 
-            });
-            $("select#formDataIndustryID option")
-                 .each(function() { this.selected = (this.text == response.group); 
-            });
-            $('#username').val(response.info.username);
-            $('#AddressDetails').val(response.address.details);
-            $('#Note').val(response.address.notes);
-            $("select#CityID option")
-                 .each(function() { this.selected = (this.text == response.city); 
-            });
-            
-            $("select#area_data option")
-                 .each(function() { this.selected = (this.text == response.area); 
-            });
-                        console.log( response.region);
+    $.ajax({
+    type: 'get', // the method (could be GET btw)
+    url: "subscribe_info",
 
-            $("select#region_data option")
-                 .each(function() { this.selected = (this.text == response.region); 
-            });
-
+        data: {
+            subscribe_id: subscribe_id,
+        },
+        success:function(response){
+        $('#subscriber_id').val(response.info.id);
+        $('#formDataNameAR').val(response.info.name);
+        $('#formDataNationalID').val(response.info.national_id);
+        $('#formDataMobileNo1').val(response.info.phone_one);
+        $('#formDataMobileNo2').val(response.info.phone_two);
+        $('#formDataCutomerNo').val(response.info.cutomer_num);
+        $('#formDataEmailAddress').val(response.info.email);
+        $('#formDataBussniessName').val(response.info.bussniess_name);
+        $("#certListCnt").html("("+response.ArchiveCount+")");
+        $("#licListCnt").html("("+response.ArchiveJobLicCount+")");
         
-
-			},
-			});
+        drawTablesArchive(response.Archive,response.copyTo,response.ArchiveLic,response.jalArchive,
+        response.outArchiveCount,response.inArchiveCount,response.otherArchiveCount
+        ,response.licFileArchiveCount
+        ,response.licArchiveCount,response.copyToCount,response.linkToCount);
+        drawTableJoblic(response.ArchiveJobLic);
+        $("select#formDataProfessionID option")
+            .each(function() { this.selected = (this.text == response.job_title); 
+        });
+        $("select#formDataIndustryID option")
+            .each(function() { this.selected = (this.text == response.group); 
+        });
+        $('#username').val(response.info.username);
+        $('#AddressDetails').val(response.address.details);
+        $('#Note').val(response.address.notes);
+        $("select#CityID option")
+            .each(function() { this.selected = (this.text == response.city); 
+        });
+        $("select#area_data option")
+            .each(function() { this.selected = (this.text == response.area); 
+        });
+        $("select#region_data option")
+            .each(function() { this.selected = (this.text == response.region); 
+        });
+        },
+    });
 }
 
 $("#CityID").change(function () {

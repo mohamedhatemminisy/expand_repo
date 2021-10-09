@@ -51,6 +51,7 @@ return [
     'agenda_archieve'   =>  'archive of meeting ',
     'agenda_report'   =>  'report archive meeting',
 
+    'jobLic_report'   =>  'report of job license',
     'reports'   =>  'reports ',
     'report_archive'   =>  'report of archives ',
     'title_name'   =>  'title  ',

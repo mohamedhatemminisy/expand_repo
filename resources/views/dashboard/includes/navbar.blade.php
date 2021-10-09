@@ -79,8 +79,20 @@
           </ul>
         </li>
         @endcan
+        @can('subscribers')
+        <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><span>
+          {{trans('admin.subscribers')}}</span></a>
+          <ul class="dropdown-menu">
 
-
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('subscribers')}}" data-toggle="dropdown">{{trans('admin.subscribers')}}</a>
+            </li>
+            <li data-menu="">
+              <a class="dropdown-item" href="{{route('license')}}" data-toggle="dropdown">اضافة رخص بناء</a>
+            </li>
+          </ul>
+        </li>
+        @endcan
         @can('assets')
         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><span>
         {{trans('admin.assets')}}</span></a>
@@ -113,15 +125,7 @@
           </ul>
         </li>
         @endcan
-
-        @can('subscribers')
-        <li class="dropdown nav-item" data-menu="dropdown">
-          <a class="dropdown-toggle nav-link" href="{{route('subscribers')}}">
-            <span>{{trans('admin.subscribers')}}</span>
-          </a>
-        </li>
-        @endcan
-
+        
         @can('archieve')
         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><span>
         {{trans('admin.archieve')}}</span></a>
@@ -208,6 +212,9 @@
                 <a class="dropdown-item" href="{{route('agenda_report')}}" data-toggle="dropdown">{{trans('archive.agenda_report')}}</a>
               </li>
               @endcan
+              <li data-menu="">
+                <a class="dropdown-item" href="{{route('jobLicReport')}}" data-toggle="dropdown">{{trans('archive.jobLic_report')}}</a>
+              </li>
             </ul>
         </li>
       @endcan
