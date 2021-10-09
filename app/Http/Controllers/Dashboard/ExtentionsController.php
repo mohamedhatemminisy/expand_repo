@@ -28,6 +28,7 @@ use App\Models\LicenseType;
 use App\Models\CraftType;
 use App\Models\LicenseRating;
 use App\Models\LimitNumber;
+use App\Models\LicenseExtention;
 use App\Models\AgendaExtention;
 
 use App\Http\Requests\ExtentionRequest;
@@ -163,6 +164,11 @@ class ExtentionsController extends Controller
             $data['pj_i_id'] = $request->pk_i_id;
             return response()->json($data);
         }
+        elseif($request->pk_i_id == '999'){
+            $data['data'] = LicenseExtention::get();
+            $data['pj_i_id'] = $request->pk_i_id;
+            return response()->json($data);
+        }
 
     }
 
@@ -267,6 +273,10 @@ class ExtentionsController extends Controller
         }
         elseif($request->fk_i_constant_id == '99'){
             $data = AgendaExtention::findOrFail($request->pk_i_id)->delete();
+            return response()->json($data);
+        }
+        elseif($request->fk_i_constant_id == '999'){
+            $data = LicenseExtention::findOrFail($request->pk_i_id)->delete();
             return response()->json($data);
         }
 
@@ -690,6 +700,21 @@ class ExtentionsController extends Controller
                 $job->save();
             }else{
                 $job = AgendaExtention::find($request->fk_i_constantdet_id1);
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }
+            if ($job) {
+                return response()->json($job);
+            }
+            return response()->json(['error'=>$validator->errors()->all()]);
+        }
+        elseif($request->fk_i_constant_id1 == '999'){
+            if($request->fk_i_constantdet_id1 == null){
+                $job = new LicenseExtention();
+                $job->name = $request->s_name_ar1;
+                $job->save();
+            }else{
+                $job = LicenseExtention::find($request->fk_i_constantdet_id1);
                 $job->name = $request->s_name_ar1;
                 $job->save();
             }

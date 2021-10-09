@@ -83,6 +83,7 @@
                                                 <img id="userProfileImg" src="https://db.expand.ps/images/user.png" style="max-height: 100px; cursor:pointer" onclick="document.getElementById('imgPic').click(); return false">
                                                 <input type="file" class="form-control-file" id="imgPic" name="imgPic" style="display: none" onchange="doUploadPic()" aria-invalid="false">
                                                 <input type="hidden" id="userimgpath" name="userimgpath">
+                                                <meta name="csrf-token" content="{{ csrf_token() }}" />
                                             </div>
 
                                         </div>
@@ -714,14 +715,13 @@ function SavePer(){
 						else {
 							$(".alert-success").hide();
 							$(".alert-danger").show();
-							$("#errMsg").text(data.status.msg)
+							$("#errMsg").text(data.status.msg);
 						}
 						$(".loader").addClass('hide');
 					},
 					error:function(){
 						$(".alert-success").hide();
 						$(".alert-danger").show();
-						$("#errMsg").text(data.status.msg)
 						$(".loader").addClass('hide');
 					},
 					cache: false,

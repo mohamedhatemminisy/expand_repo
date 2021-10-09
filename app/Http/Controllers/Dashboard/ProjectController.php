@@ -39,7 +39,6 @@ class ProjectController extends Controller
     }
 
     public function store_project (ProjectRequest $request){
-
         if($request->project_id == null){
             $project = new Project();
             $address = new Address();
