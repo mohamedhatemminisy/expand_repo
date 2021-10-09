@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
-use App\Models\volunteer;
+use App\Models\Volunteer;
 use App\Models\Address;
 use App\Models\Role;
 use App\Models\LicenseType;
